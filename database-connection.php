@@ -3,11 +3,11 @@
 <head></head>
 
 <!-- Stage 1 -->
-<?php //phpinfo(); ?>
+<?php phpinfo(); ?>
 
 <!-- Stage 2 -->
 <?php
-
+/*
 $result = insertToDatabase();
 function insertToDatabase()
 {
