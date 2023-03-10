@@ -4,6 +4,23 @@ body {
     font-family: 'Alegreya Sans', sans-serif;
 }
 
+.navbar {
+  background-color: #F2F2F2;
+  height: 51px;
+}
+
+.navbar .navbar-nav {
+  text-align: right;
+}
+
+.navbar .navbar-brand img { 
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+  top: 0px;
+}
+
 /* Sticky footer position and size
 -------------------------------------------------- */
 html {
@@ -28,7 +45,7 @@ body {
       margin-bottom: 700px;
     }
     .footer {
-      height: 700px;
+      height: 300px;
     }
 }
 

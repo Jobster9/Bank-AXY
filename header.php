@@ -15,26 +15,31 @@
 
 <body class="bgColor">
 	<header>
-			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
 				<div class="container">
-					<a class="navbar-brand" href="/MyPHPProject/index.php">AXY Bank</a>
+					<a class="navbar-brand" href="/SQLserver-connection/index.php"><img alt="Bank Logo" src="/SQLserver-connection/BankLogoCropped.jpeg" ></img></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 							aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
+                    <div class="navbar-collapse collapse d-sm-incline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav mr-auto">
+                            <li>As-salamu alaykum Staff</li>
+                        </ul>
+                    </div>
 					<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-						<ul class="navbar-nav flex-grow-1">
+						<ul class="navbar-nav ml-auto">
 							<li class="nav-item">
-								<a class="nav-link text-dark" href="/MyPHPProject/">
-									<img border="0" alt="User Icon" src="/MyPHPProject/Icons/home-icon.png" width="30" height="30">
-								</a>
+								<a class="nav-link text-dark" href="/MyPHPProject/User/Login.php">View Profile</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark" href="/MyPHPProject/User/Login.php">User Login</a>
+								<a class="nav-link text-dark" href="/MyPHPProject/Admin/LoginAdmin.php">Logout</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" href="/MyPHPProject/Admin/LoginAdmin.php">Admin Login</a>
-							</li>
+                            <li class="nav-item">
+                                <button type="button">
+                                    Test
+                                </button>
+                            </li>
 						</ul>
 					</div>
 				</div>
