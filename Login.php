@@ -87,19 +87,11 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
+/*
 button:hover{
 	background: #6d44b8;
 }
+*/
 .login label{
 	color: black;
-}
-
-#chk:checked ~ .login{
-	transform: translateY(-500px);
-}
-#chk:checked ~ .login label{
-	transform: scale(1);	
-}
-#chk:checked ~ .signup label{
-	transform: scale(.6);
 }
