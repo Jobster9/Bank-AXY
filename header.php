@@ -29,19 +29,34 @@
                     </div>
 					<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 						<ul class="navbar-nav ml-auto">
-							<li class="nav-item">
-								<a class="nav-link text-dark" href="/MyPHPProject/User/Login.php">View Profile</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" href="/MyPHPProject/Admin/LoginAdmin.php">Logout</a>
-							</li>
                             <li class="nav-item">
-                                <button type="button">
-                                    Test
+                                <button class="button button1" type="button">
+                                    <a class="nav-link text-dark" href="">View Profile</a>
                                 </button>
                             </li>
+							<li class="nav-item">
+                                <button class="button button2" type="button">
+								    <a class="nav-link text-dark" href="">Logout</a>
+                                </button>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 	</header>
+
+    <style>
+        .button1 {
+            background-color: #F2B705;
+            border: none;
+            height: 51px;
+            width: 125px;
+        }
+
+        .button2 {
+            background-color: #DDDDDD;
+            border: none;
+            height: 51px;
+            width: 125px;
+        }
+    </style>

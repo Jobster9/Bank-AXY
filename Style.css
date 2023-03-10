@@ -9,16 +9,12 @@ body {
   height: 51px;
 }
 
-.navbar .navbar-nav {
-  text-align: right;
-}
-
 .navbar .navbar-brand img { 
-  height: 50px;
+  height: 45px;
   position: absolute;
-  left: 50%;
+  left: 45%;
   margin-left: -25px;
-  top: 0px;
+  top: 3px;
 }
 
 /* Sticky footer position and size
