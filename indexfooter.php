@@ -6,7 +6,6 @@
     </div>
 </footer>
 
-
 <style>
 body{
 margin:0;
