@@ -3,19 +3,19 @@
 <head></head>
 
 <!-- Stage 1 -->
-<?php //phpinfo(); ?>
+<?php phpinfo(); ?>
 
 <!-- Stage 2 -->
 <?php
-
+/*
 $result = insertToDatabase();
 function insertToDatabase()
 {
     $status = true;
     // Set up connection parameters
-    $serverName = "DESKTOP-AVCNUEK"; // Change to your server name
+    $serverName = "LAPTOP-B9IKBMD8"; // Change to your server name
     $connectionInfo = array(
-        "Database" => "testdatabase",
+        "Database" => "mydatabase",
     );
     // Connect to database
     $conn = sqlsrv_connect($serverName, $connectionInfo);
