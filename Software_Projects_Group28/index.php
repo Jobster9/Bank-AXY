@@ -46,7 +46,7 @@ include "config.php";
       <nav id="navbar" class="navbar">
         <ul>
 
-          <li><a class="getstarted scrollto" href="\Software_Projects_Group28_V4\user\login.php">&nbsp Login &nbsp</a></li>
+          <li><a class="getstarted scrollto" href="\user\login.php">&nbsp Login &nbsp</a></li>
         </ul>
       </nav><!-- .navbar -->
 
