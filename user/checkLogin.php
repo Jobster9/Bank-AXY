@@ -8,7 +8,7 @@ function verifyUsers()
     }
 
     // Specify your database credentials here
-    $host = 'DESKTOP-AVCNUEK';
+    $host = 'DESKTOP-AVCNUEK'; //ABDULNAZIR , 
     $dbname = 'BankAXY';
 
 
