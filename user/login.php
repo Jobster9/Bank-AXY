@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+include "./config.php";
 
 include_once("checkLogin.php");
 
@@ -18,34 +18,30 @@ if (isset($_POST['submit'])) {
         $allField = FALSE;
     }
     
-    if ($allField == True) {
+    if ($allField ==  True) {
+    
         $array_User = verifyUsers();
-        
-        if (!empty($array_User)) {
-            if ($array_User[0]) {
-                $User_ID = $array_User[0][0];
-                $Role = $array_User[0][1];
-                $Password = $array_User[0][5];
+        print_r($array_User);
 
-                if($Role == "Staff"){
-                    header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
-                    exit(); 
-                }
-                elseif($Role == "Admin"){
-                    header("Location: ../user/AdminData/Dashboard.php?User_ID=".$array_User[0][0]); 
-                    exit(); 
-                }
-                else{
-                    header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$array_User[0][0]); 
-                    exit();                    
-                }
-            }
+        if (!empty($array_User)) {            
+            $User_ID = $array_User[0][0];
+            $Role = $array_User[0][1];
+            $Password = $array_User[0][5];
         }
-        else {
-            $invalidMesg = "Invalid User ID or Password!";
+            if($Role == "Staff"){
+                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
+            }
+            if($Role == "Admin"){
+                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$array_User[0][0]); 
+            }
+            if($Role == "Head Office"){
+                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$array_User[0][0]);                    
+            }
+    }
+    else {
+        $invalidMesg = "Invalid User ID or Password!";
         }   
     }
-}
 ?>
 
 
@@ -99,7 +95,7 @@ if (isset($_POST['submit'])) {
                         <div class="card-body">
                             <div class="brand-wrapper">
                                 <img src="../assets/img/Logo.svg" alt="logo" class="logo">
-                                <p><?php echo BANKNAME ?></p>
+                                <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Sign into your account</p>
 
