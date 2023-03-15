@@ -1,5 +1,4 @@
 <?php
-include "../connection.php";
 
 session_start();
 
@@ -162,7 +161,7 @@ session_start();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Transfer Money</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
                 </div>
 
 
@@ -182,7 +181,7 @@ session_start();
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#01be32'></i></span>
                                         </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Account No..." aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
                                                 <i class='bx bx-info-circle' style="color: #01be32;"></i>
@@ -192,21 +191,34 @@ session_start();
                                     <p id="AcError" style="color: #ff203a; margin: top 10px;"></p>
 
 
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt'></i></span>
+                                        </div>
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
 
+                                    </div>
+                                    <p id="AmountError" style="color: #ff203a;"></p>
 
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-rupee'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Amount..." aria-describedby="inputGroup-sizing-default">
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #ff203a;"></p>
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Pay Money</button>
+
+
+
+
+
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
 
                                     </div>
                                 </div>
