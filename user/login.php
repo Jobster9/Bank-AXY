@@ -24,9 +24,9 @@ if (isset($_POST['submit'])) {
         print_r($array_User);
 
         if (!empty($array_User)) {            
-            $User_ID = $array_User[0][0];
-            $Role = $array_User[0][1];
-            $Password = $array_User[0][5];
+            $User_ID = $array_User[0]["User_ID"];
+            $Role = $array_User[0]["User_Role"];
+            $Password = $array_User[0]["Password"];
         }
             if($Role == "Staff"){
                 header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
         }   
     }
 ?>
+
 
 
 <!DOCTYPE html>
