@@ -159,15 +159,15 @@
                             <tbody>
 
                                         <tr>
-                                            <td>/td>
+                                            <td></td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="m-r-10"><a style="font-size: 13px; background-color:" class="btn btn-circle text-white"> <?php
-                                                                                                                                                                                            $name = $row['Name'];
-                                                                                                                                                                                            $pices = explode(" ", $name);
-                                                                                                                                                                                            echo substr($pices[0], 0, 1);
-                                                                                                                                                                                            echo substr($pices[1], 0, 1);
-                                                                                                                                                                                            ?></a>
+                                                    $name = $row['Name'];
+                                                    $pices = explode(" ", $name);
+                                                    echo substr($pices[0], 0, 1);
+                                                    echo substr($pices[1], 0, 1);
+                                                    ?></a>
                                                     </div>
                                                     <div class="">
                                                         <h4 class="m-b-0 font-16"></h4>
