@@ -1,6 +1,6 @@
 <?php
 
-include "../config.php";
+include "./config.php";
 
 include_once("checkLogin.php");
 
@@ -8,32 +8,42 @@ $User_ID_Error = $User_Password_Error = $invalidMesg = "";
 $allField = True;
 
 if (isset($_POST['submit'])) {
-    if ($_POST["User_ID"] == "") {
+    if ($_POST["User_ID"]=="") {
         $User_ID_Error = "User ID is required";
         $allField = FALSE;
-    }
-
-    if ($_POST["Password"] == null) {
+    } 
+      
+    if ($_POST["Password"]==null) {
         $User_Password_Error = "Password is required";
         $allField = FALSE;
     }
-
-    if ($allField == True) {
+    
+    if ($allField ==  True) {
+    
         $array_User = verifyUsers();
+        print_r($array_User);
 
-        if (!empty($array_User)) {
-            if ($array_User[0]) {
-                $User_ID = $array_User[0][0];
-                $Password = $array_User[0][4];
-                header("Location: ../user/UserData/Dashboard.php");
-                exit();
-            }
-        } else {
-            $invalidMesg = "Invalid User ID or Password!";
+        if (!empty($array_User)) {            
+            $User_ID = $array_User[0][0];
+            $Role = $array_User[0][1];
+            $Password = $array_User[0][5];
         }
+            if($Role == "Staff"){
+                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
+            }
+            if($Role == "Admin"){
+                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$array_User[0][0]); 
+            }
+            if($Role == "Head Office"){
+                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$array_User[0][0]);                    
+            }
     }
-}
+    else {
+        $invalidMesg = "Invalid User ID or Password!";
+        }   
+    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +95,7 @@ if (isset($_POST['submit'])) {
                         <div class="card-body">
                             <div class="brand-wrapper">
                                 <img src="../assets/img/Logo.svg" alt="logo" class="logo">
-                                <p><?php echo BANKNAME ?></p>
+                                <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Sign into your account</p>
 
