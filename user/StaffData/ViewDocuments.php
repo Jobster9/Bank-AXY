@@ -1,4 +1,7 @@
-    <?php include "header.php" ?>
+<?php include "header.php"; 
+include "GetDocuments.php";
+$user = getUsers ();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -284,23 +287,25 @@
             <th>Document Criticality</th>
             <th>Owner ID</th>
             <th>Creation Date & Time</th>
-            <th>File Location</th>
+            <th>View</th>            
 
 
         </tr>
     </thead>
     <tbody>
-
+                                <?php
+                                    for ($i=0; $i<count($user); $i++):
+                                ?>
         <tr class="active-row">
-            <td>Melissa</td>
-            <td>5150</td>
-            <td>5150</td>
-            <td>5150</td>
-            <td>5150</td>
-            <td>5150</td>
-            <td>5150</td>
-
+            <td><?php echo $user[$i]['Document_ID']?></td>
+            <td><?php echo $user[$i]['Document_Name']?></td>
+            <td><?php echo $user[$i]['Document_Type']?></td>
+            <td><?php echo $user[$i]['Document_Criticality']?></td>
+            <td><?php echo $user[$i]['Owner_ID']?></td>
+            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
+            <td><a href="ViewFile.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?>">View</a></td>
         </tr>
+                                    <?php endfor;?>
         <!-- and so on... -->
     </tbody>
 </table>
