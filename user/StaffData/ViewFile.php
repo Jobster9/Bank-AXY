@@ -41,7 +41,7 @@ $user = getUsers ();
                     </div>
                     <div class="col-sm-2"></div>
 
-
+<iframe src="temp.pdf" height="100%" width="750"></iframe>
 
                 </div>
 

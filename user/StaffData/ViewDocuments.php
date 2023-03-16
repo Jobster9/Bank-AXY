@@ -305,6 +305,10 @@ $user = getUsers ();
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
             <td><a href="ViewFile.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?>">View</a></td>
         </tr>
+
+
+
+
                                     <?php endfor;?>
         <!-- and so on... -->
     </tbody>
