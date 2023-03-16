@@ -34,26 +34,17 @@
                 </li>
 
                 <li class="menuHover">
-                    <a href="T_history.php" id="TransactionHistory" class="nav-link text-left" role="button">
+                    <a href="ViewDocuments.php" id="ViewDocuments" class="nav-link text-left" role="button">
                         <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> View Documents
-                    </a>
-                </li>
-                <li class="menuHover">
-                    <a href="T_history.php" id="TransactionHistory" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Customers
-                    </a>
-                </li>
-                <li class="menuHover">
-                    <a href="T_history.php" id="TransactionHistory" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> View Profile
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="../logout.php">
+                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>
+
 
             </ul>
 

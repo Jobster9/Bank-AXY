@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 
 ?>
@@ -36,7 +36,7 @@ session_start();
 
     <style>
         .btn-pay {
-            background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
             color: #fdfdfd;
             font-weight: bold;
             box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
@@ -51,7 +51,7 @@ session_start();
         }
 
         .card {
-            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(39, 10, 226, 1) 0%, rgba(164, 12, 251, 1) 100.2%);
+            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
         }
 
         /* The Modal (background) */
@@ -163,9 +163,14 @@ session_start();
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
                     <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
                 </div>
-
-
             </div>
+
+
+
+
+
+
+
 
             <div class="col-md-12">
                 <div class="row">
@@ -175,40 +180,56 @@ session_start();
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
+<div class="container">
+  <div class="card">
+    <h3>Upload Files</h3>
+    <div class="drop_box">
+      <header>
+        <h4>Select File here</h4>
+      </header>
+      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
+      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+      <button class="btn">Choose File</button>
+    </div>
+
+  </div>
+</div>
+
+
                                 <!-- Customer Account Number -->
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#01be32'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
-                                                <i class='bx bx-info-circle' style="color: #01be32;"></i>
+                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
                                             </span>
                                         </span>
                                     </div>
-                                    <p id="AcError" style="color: #ff203a; margin: top 10px;"></p>
+                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
 
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
-                                    <p id="AmountError" style="color: #ff203a;"></p>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
 
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
-                                    <p id="AmountError" style="color: #ff203a;"></p>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
