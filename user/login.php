@@ -1,5 +1,5 @@
 <?php
-
+include_once("../config.php");
 include_once("checkLogin.php");
 
 $User_ID_Error = $User_Password_Error = $invalidMesg = "";
@@ -28,17 +28,16 @@ if (isset($_POST['submit'])) {
             $Password = $array_User[0]["Password"];
         }
 
-            if($Role == "Staff"){
-                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$_SESSION['User_ID']); 
-            }
-            if($Role == "Admin"){
-                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$_SESSION['User_ID']); 
-            }
-            if($Role == "Head Office"){
-                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$_SESSION['User_ID']);                    
-            }
-    }
-    else {
+        if ($Role == "Staff") {
+            header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+        if ($Role == "Admin") {
+            header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+        if ($Role == "Head Office") {
+            header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+    } else {
 
         $invalidMesg = "Invalid User ID or Password!";
     }
@@ -106,7 +105,7 @@ if (isset($_POST['submit'])) {
 
                                 <?php if (isset($_GET['error'])) { ?>
 
-                                                                        <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
                                 <?php } ?>
 
@@ -142,11 +141,11 @@ if (isset($_POST['submit'])) {
     <script src="../assets/js/showHidePass.js"></script>
     <script>
         <?php if (isset($_GET['error'])) { ?>
-                                                swal({
-                                                    title: "Account Alert!",
-                                                    text: "<?php echo $_GET['error'] ?>",
-                                                    icon: "error",
-                                                });
+                                                    swal({
+                                                        title: "Account Alert!",
+                                                        text: "<?php echo $_GET['error'] ?>",
+                                                        icon: "error",
+                                                    });
 
 
         <?php } ?>
