@@ -210,7 +210,7 @@
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
                 </div>
             </div>
 
@@ -278,18 +278,28 @@
 <table class="styled-table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Points</th>
+            <th>Document ID</th>
+            <th>Document Name</th>
+            <th>Document Type</th>
+            <th>Document Criticality</th>
+            <th>Owner ID</th>
+            <th>Creation Date & Time</th>
+            <th>File Location</th>
+
+
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Dom</td>
-            <td>6000</td>
-        </tr>
+
         <tr class="active-row">
             <td>Melissa</td>
             <td>5150</td>
+            <td>5150</td>
+            <td>5150</td>
+            <td>5150</td>
+            <td>5150</td>
+            <td>5150</td>
+
         </tr>
         <!-- and so on... -->
     </tbody>
