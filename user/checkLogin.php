@@ -1,10 +1,11 @@
 
 <?php
-include("../config.php");
 
 
-function verifyUsers($pdo)
+
+function verifyUsers()
 {
+    include("../DB config.php");
     session_start();
     if (!isset($_POST['User_ID']) or !isset($_POST['Password'])) {
         return; // <-- return null;  
