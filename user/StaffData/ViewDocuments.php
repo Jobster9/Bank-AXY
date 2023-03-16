@@ -281,7 +281,6 @@ $user = getUsers ();
 <table class="styled-table">
     <thead>
         <tr>
-            <th>Document ID</th>
             <th>Document Name</th>
             <th>Document Type</th>
             <th>Document Criticality</th>
@@ -298,7 +297,6 @@ $user = getUsers ();
 
                                 ?>
         <tr class="active-row">
-            <td><?php echo $user[$i]['Document_ID']?></td>
             <td><?php echo $user[$i]['Document_Name']?></td>
             <td><?php echo $user[$i]['Document_Type']?></td>
             <td><?php echo $user[$i]['Document_Criticality']?></td>
