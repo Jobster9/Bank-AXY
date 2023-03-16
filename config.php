@@ -1,7 +1,7 @@
 <?php
 
 // Specify your database credentials here
-$host = 'DESKTOP-AVCNUEK';
+$host = 'EMILYSPC\MSSQLSERVER1';
 $dbname = 'BankAXY';
 
 // Create a new PDO connection object
