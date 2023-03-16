@@ -302,7 +302,7 @@ $user = getUsers ();
             <td><?php echo $user[$i]['Document_Criticality']?></td>
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>"> View</a></td>
+            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
         </tr>
 
 

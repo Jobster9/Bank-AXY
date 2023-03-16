@@ -15,7 +15,9 @@ $filename =  $user[$i]['File_Location'];
 
 header('content-Type: application/pdf');
 
-echo $filename
+echo $filename;
+
+
 
 ?>
 
