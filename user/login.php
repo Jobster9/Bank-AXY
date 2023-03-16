@@ -8,40 +8,39 @@ $User_ID_Error = $User_Password_Error = $invalidMesg = "";
 $allField = True;
 
 if (isset($_POST['submit'])) {
-    if ($_POST["User_ID"]=="") {
+    if ($_POST["User_ID"] == "") {
         $User_ID_Error = "User ID is required";
         $allField = FALSE;
-    } 
-      
-    if ($_POST["Password"]==null) {
+    }
+
+    if ($_POST["Password"] == null) {
         $User_Password_Error = "Password is required";
         $allField = FALSE;
     }
-    
-    if ($allField ==  True) {
-    
-        $array_User = verifyUsers();
-        print_r($array_User);
 
-        if (!empty($array_User)) {            
-            $User_ID = $array_User[0][0];
-            $Role = $array_User[0][1];
-            $Password = $array_User[0][5];
+    if ($allField == True) {
+
+        $array_User = verifyUsers();
+
+        if (!empty($array_User)) {
+            $User_ID = $array_User[0]["User_ID"];
+
+            $Role = $array_User[0]["User_Role"];
+            $Password = $array_User[0]["Password"];
         }
-            if($Role == "Staff"){
-                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
-            }
-            if($Role == "Admin"){
-                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$array_User[0][0]); 
-            }
-            if($Role == "Head Office"){
-                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$array_User[0][0]);                    
-            }
-    }
-    else {
+        if ($Role == "Staff") {
+            header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+        if ($Role == "Admin") {
+            header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+        if ($Role == "Head Office") {
+            header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        }
+    } else {
         $invalidMesg = "Invalid User ID or Password!";
-        }   
     }
+}
 ?>
 
 
@@ -104,7 +103,7 @@ if (isset($_POST['submit'])) {
 
                                 <?php if (isset($_GET['error'])) { ?>
 
-                                        <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                                <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
                                 <?php } ?>
 
@@ -140,11 +139,11 @@ if (isset($_POST['submit'])) {
     <script src="../assets/js/showHidePass.js"></script>
     <script>
         <?php if (isset($_GET['error'])) { ?>
-                swal({
-                    title: "Account Alert!",
-                    text: "<?php echo $_GET['error'] ?>",
-                    icon: "error",
-                });
+                        swal({
+                            title: "Account Alert!",
+                            text: "<?php echo $_GET['error'] ?>",
+                            icon: "error",
+                        });
 
 
         <?php } ?>
