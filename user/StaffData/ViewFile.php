@@ -1,9 +1,5 @@
 <?php include "header.php"; 
-
-
-$File_location = $_GET['File_Location'];
-
-
+include "GetDocuments.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +40,7 @@ $File_location = $_GET['File_Location'];
                     </div>
                     <div class="col-sm-2"></div>
 
-<iframe src="<?php echo $File_location ?>" height="100%" width="750"></iframe>
+<iframe src="temp.pdf" height="100%" width="750"></iframe>
 
                 </div>
 
