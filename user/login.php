@@ -1,7 +1,5 @@
 <?php
 
-include "./config.php";
-
 include_once("checkLogin.php");
 
 $User_ID_Error = $User_Password_Error = $invalidMesg = "";
@@ -20,7 +18,7 @@ if (isset($_POST['submit'])) {
 
     if ($allField == True) {
 
-        $array_User = verifyUsers($pdo);
+        $array_User = verifyUsers();
 
         if (!empty($array_User)) {
             $User_ID = $array_User[0]["User_ID"];
@@ -103,7 +101,7 @@ if (isset($_POST['submit'])) {
 
                                 <?php if (isset($_GET['error'])) { ?>
 
-                                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                                                        <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
                                 <?php } ?>
 
@@ -139,11 +137,11 @@ if (isset($_POST['submit'])) {
     <script src="../assets/js/showHidePass.js"></script>
     <script>
         <?php if (isset($_GET['error'])) { ?>
-                            swal({
-                                title: "Account Alert!",
-                                text: "<?php echo $_GET['error'] ?>",
-                                icon: "error",
-                            });
+                                                swal({
+                                                    title: "Account Alert!",
+                                                    text: "<?php echo $_GET['error'] ?>",
+                                                    icon: "error",
+                                                });
 
 
         <?php } ?>
