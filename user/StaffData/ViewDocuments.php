@@ -231,52 +231,6 @@
 
 
 
-                                <!-- Customer Account Number -->
-                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
-                                    <div class="input-group mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
-                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
-                                            <span class="input-group-text bg-transparent">
-                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
-
-
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
-
-                                    </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
-
-                                    <!-- Amount -->
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
-
-                                    </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-
-
-
-
-
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
-
-                                    </div>
                                 </div>
 
                             </div>
