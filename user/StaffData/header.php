@@ -1,6 +1,10 @@
 <?php include "../../config.php"; 
     session_start();
 
+
+
+
+
 ?>
 <div id="wrapper ribbon ribbon-top-right">
     <div class="overlay"></div>
@@ -80,7 +84,7 @@
                             <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum ". $_SESSION['User_ID'] ?></h1>
 
 
-                            <!-- <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -160,15 +164,7 @@
                         </li> -->
 
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img id="HeaderProfile" hidden class="img-profile rounded-circle">
-                                <span id="HeaderProfileTag" class="btn btn-circle text-white" style="font-size: 13px; background-color: <?php echo $_SESSION['ProfileColor'] ?>;"><?php echo strtoupper($_SESSION['ProfileText']) ?></span>
-                            </a>
 
-
-                        </li>
 
                     </ul>
 

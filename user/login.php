@@ -21,9 +21,9 @@ if (isset($_POST['submit'])) {
     if ($allField ==  True) {
     
         $array_User = verifyUsers();
-
         if (!empty($array_User)) {            
             $User_ID = $array_User[0]["User_ID"];
+
             $Role = $array_User[0]["User_Role"];
             $Password = $array_User[0]["Password"];
         }

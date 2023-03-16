@@ -1,9 +1,4 @@
-<?php
-
-
-
-
-?>
+    <?php include "header.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,16 +39,18 @@
         }
 
         .btn-pay:hover {
-            background-image: linear-gradient(to right, #42c16d 0%, #33e6c7 100%);
-
-
+            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
 
         }
 
         .card {
             background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
         }
-
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  
+}
         /* The Modal (background) */
         .customodal {
             display: none;
@@ -146,13 +143,65 @@
             align-items: center;
             margin-top: 20%;
         }
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted #a3a3a3;
+  border-radius: 5px;
+}
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #cc0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid #010101;
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+
     </style>
 
 
 </head>
 
 <body>
-    <?php include "header.php" ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
@@ -171,7 +220,6 @@
 
 
 
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-2"></div>
@@ -180,9 +228,37 @@
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
+
+<script>
+const dropArea = document.querySelector(".drop_box"),
+  button = dropArea.querySelector("button"),
+  dragText = dropArea.querySelector("header"),
+  input = dropArea.querySelector("input");
+let file;
+var filename;
+
+button.onclick = () => {
+  input.click();
+};
+
+input.addEventListener("change", function (e) {
+  var fileName = e.target.files[0].name;
+  let filedata = `
+    <form action="" method="post">
+    <div class="form">
+    <h4>${fileName}</h4>
+    <input type="email" placeholder="Enter email upload file">
+    <button class="btn">Upload</button>
+    </div>
+    </form>`;
+  dropArea.innerHTML = filedata;
+});
+
+</script>
+
 <div class="container">
   <div class="card">
-    <h3>Upload Files</h3>
+
     <div class="drop_box">
       <header>
         <h4>Select File here</h4>
