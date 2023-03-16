@@ -5,7 +5,7 @@
 
 function verifyUsers()
 {
-    include("../config.php");
+    include("../DB config.php");
     session_start();
     if (!isset($_POST['User_ID']) or !isset($_POST['Password'])) {
         return; // <-- return null;  
