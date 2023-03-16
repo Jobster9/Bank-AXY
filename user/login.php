@@ -21,21 +21,20 @@ if (isset($_POST['submit'])) {
     if ($allField ==  True) {
     
         $array_User = verifyUsers();
-        print_r($array_User);
-
         if (!empty($array_User)) {            
-            $User_ID = $array_User[0][0];
-            $Role = $array_User[0][1];
-            $Password = $array_User[0][5];
+            $User_ID = $array_User[0]["User_ID"];
+
+            $Role = $array_User[0]["User_Role"];
+            $Password = $array_User[0]["Password"];
         }
             if($Role == "Staff"){
-                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$array_User[0][0]); 
+                header("Location: ../user/StaffData/Dashboard.php?User_ID=".$_SESSION['User_ID']); 
             }
             if($Role == "Admin"){
-                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$array_User[0][0]); 
+                header("Location: ../user/AdminData/Dashboard.php?User_ID=".$_SESSION['User_ID']); 
             }
             if($Role == "Head Office"){
-                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$array_User[0][0]);                    
+                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=".$_SESSION['User_ID']);                    
             }
     }
     else {
@@ -43,6 +42,7 @@ if (isset($_POST['submit'])) {
         }   
     }
 ?>
+
 
 
 <!DOCTYPE html>
