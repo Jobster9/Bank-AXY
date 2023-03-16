@@ -3,14 +3,14 @@
 function getUsers (){
 
     // Specify your database credentials here
-    $host = 'ABDULNAZIR';
+    $host = 'PLAYING-MINECRA';
     $dbname = 'BankAXY';
 
 
     // Create a new PDO connection object
     $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
 
-    $stmt = $pdo->prepare('SELECT * FROM Document_Archive');
+    $stmt = $pdo->prepare('SELECT * FROM Documents');
 
     $result = $stmt->execute();
 
