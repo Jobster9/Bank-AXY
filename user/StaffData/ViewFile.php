@@ -1,7 +1,8 @@
 <?php include "header.php"; 
+include "GetDocuments.php";
+$user = getUsers ();
 
-
-$File_location = $_GET['File_Location'];
+$i = $_GET['File_Location'];
 
 
 ?>
@@ -44,7 +45,7 @@ $File_location = $_GET['File_Location'];
                     </div>
                     <div class="col-sm-2"></div>
 
-<iframe src="<?php echo $File_location ?>" height="100%" width="750"></iframe>
+<iframe src="<?php $user[$i]['File_Location'] ?>" height="100%" width="750"></iframe>
 
                 </div>
 

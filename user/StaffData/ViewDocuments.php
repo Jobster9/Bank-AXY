@@ -295,6 +295,7 @@ $user = getUsers ();
     <tbody>
                                 <?php
                                     for ($i=0; $i<count($user); $i++):
+
                                 ?>
         <tr class="active-row">
             <td><?php echo $user[$i]['Document_ID']?></td>
@@ -303,7 +304,7 @@ $user = getUsers ();
             <td><?php echo $user[$i]['Document_Criticality']?></td>
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo $user[$i]['File_Location']; ?>">View</a></td>
+            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>"> View</a></td>
         </tr>
 
 
