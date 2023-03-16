@@ -1,19 +1,15 @@
 
 <?php
-function verifyUsers()
+include("../config.php");
+
+
+function verifyUsers($pdo)
 {
     session_start();
     if (!isset($_POST['User_ID']) or !isset($_POST['Password'])) {
         return; // <-- return null;  
     }
 
-    // Specify your database credentials here
-    $host = 'DESKTOP-AVCNUEK';
-    $dbname = 'BankAXY';
-
-
-    // Create a new PDO connection object
-    $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
 
     $stmt = $pdo->prepare('SELECT * FROM Bank_Employees WHERE User_ID=:User_ID AND Password=:Password');
     $stmt->bindParam(':User_ID', $_POST['User_ID'], PDO::PARAM_STR);
