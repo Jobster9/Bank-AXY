@@ -1,4 +1,5 @@
-    <?php include "header.php" ?>
+    <?php include("header.php");
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -229,6 +230,20 @@
                                 <h5 class="card-title light mb-4 "></h5>
 
 
+<div class="container">
+  <div class="card">
+
+    <div class="drop_box">
+      <header>
+        <h4>Select File here</h4>
+      </header>
+      <p>Files Supported: PDF</p>
+      <input type="file" hidden accept=".pdf" id="fileID" style="display:none;">
+      <button class="btn">Choose File</button>
+    </div>
+
+  </div>
+</div>
 <script>
 const dropArea = document.querySelector(".drop_box"),
   button = dropArea.querySelector("button"),
@@ -244,82 +259,64 @@ button.onclick = () => {
 input.addEventListener("change", function (e) {
   var fileName = e.target.files[0].name;
   let filedata = `
+  <!-- Document Upload Form-->
+                      
+<div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
     <form action="" method="post">
-    <div class="form">
-    <h4>${fileName}</h4>
-    <input type="email" placeholder="Enter email upload file">
-    <button class="btn">Upload</button>
-    </div>
-    </form>`;
-  dropArea.innerHTML = filedata;
-});
-
-</script>
-
-<div class="container">
-  <div class="card">
-
-    <div class="drop_box">
-      <header>
-        <h4>Select File here</h4>
-      </header>
-      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
-      <button class="btn">Choose File</button>
-    </div>
-
-  </div>
-</div>
-
-
-                                <!-- Customer Account Number -->
-                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
+        <div class="form">
+        <h4><b>Document Name</b></h4>
+        <p class="">Please ensure this follows the correct formatting: "CustomerName-Category-DocumentNumber.pdf"</p>
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" disabled id="DocName" class="form-control gray_bg light" aria-label="Default" placeholder="${fileName}" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
                                             </span>
                                         </span>
                                     </div>
-                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
-
-
+                                    <p id="DocNameError" style="color: #FFCC00; margin: top 10px;"></p>
+                                    <h4><b>Document Category</b></h4>
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
-
+                                        <select id="DocCategory" class="form-control gray_bg light" aria-label="Default" name="Document Type:" aria-describedby="inputGroup-sizing-default">
+                                        <option value=${"LOANS_DEP"}>Loans</option>
+                                        <option value=${"MORTGAGES_DEP"}>Mortgages</option>
+                                        <option value=${"ADMIN_DEP"}>Administration</option>
+                                        <option value=${"ACCOUNTS_DEP"}>Accounts</option>
+                                        </select>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
-
-                                    <!-- Amount -->
+                                    <p id="TypeError" style="color: #FFCC00;"></p>
+                                    <h4 class=""><b>Document Criticality</b></h4>
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
-
+                                        <select id="DocCriticality" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default"">
+                                        <option value=${"CRIT_HIGH"}>High</option>
+                                        <option value=${"CRIT_MEDIUM"}>Medium</option>
+                                        <option value=${"CRIT_LOW"}>Low</option>
+                                        </select>
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
 
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-
-
-
-
 
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
+                                        <button class="btn" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
 
                                     </div>
                                 </div>
-
+    </div>
+    </form>`
+                                dropArea.innerHTML = filedata;
+                                
+});
+</script>
                             </div>
                         </div>
                     </div>
@@ -363,7 +360,8 @@ input.addEventListener("change", function (e) {
 
 
     <script>
-        $('#bar').click(function() {
+
+    $('#bar').click(function() {
             $(this).toggleClass('open');
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
