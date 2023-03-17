@@ -274,17 +274,12 @@ input.addEventListener("change", function (e) {
 
                                 <!-- Customer Account Number -->
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
-                                    <div class="input-group mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
-                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
-                                            <span class="input-group-text bg-transparent">
-                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
-                                            </span>
-                                        </span>
-                                    </div>
+
+
+
+
+
+
                                     <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
 
 
