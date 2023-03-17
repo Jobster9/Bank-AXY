@@ -12,7 +12,7 @@
     <!-- Sidebar -->
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
         <div class="simplebar-content" style="padding: 0px;">
-            <a class="sidebar-brand" href="../../index.php">
+            <a class="sidebar-brand" href="../../index.php" style ="font-size: 25px">
                 <span class="align-middle"><?php echo BANKNAME ?></span>
 
             </a>
@@ -24,7 +24,7 @@
                     </li> -->
                 <li class="menuHover">
 
-                    <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
                         <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
                     </a>
                 </li>
@@ -32,19 +32,19 @@
 
 
                 <li class="menuHover box-icon">
-                    <a href="UploadDocuments.php" id="UploadDocuments" class="nav-link text-left" role="button">
+                    <a href="UploadDocuments.php" id="UploadDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
                         <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> Upload Documents
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a href="ViewDocuments.php" id="ViewDocuments" class="nav-link text-left" role="button">
+                    <a href="ViewDocuments.php" id="ViewDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
                         <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> View Documents
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>">
+                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>
