@@ -1,24 +1,6 @@
-<?php
-include "../connection.php";
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
-}
-$username = $_SESSION['username'];
-// $query = "SELECT * FROM customer_detail JOIN login ON customer_detail.Account_No = login.AccountNo WHERE login.Username = '$username'";
-// $result = mysqli_query($conn, $query);
-
-// if (mysqli_num_rows($result) > 0) {
-
-//     while ($row = mysqli_fetch_assoc($result)) {
-
-
-
-//     }
-//   }
-
+<?php include "header.php"; 
+include "GetDocuments.php";
+$user = getUsers ();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +34,7 @@ $username = $_SESSION['username'];
 
     <style>
         .btn-pay {
-            background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
             color: #fdfdfd;
             font-weight: bold;
             box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
@@ -60,16 +42,18 @@ $username = $_SESSION['username'];
         }
 
         .btn-pay:hover {
-            background-image: linear-gradient(to right, #42c16d 0%, #33e6c7 100%);
-
-
+            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
 
         }
 
         .card {
-            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(39, 10, 226, 1) 0%, rgba(164, 12, 251, 1) 100.2%);
+            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
         }
-
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  
+}
         /* The Modal (background) */
         .customodal {
             display: none;
@@ -162,13 +146,65 @@ $username = $_SESSION['username'];
             align-items: center;
             margin-top: 20%;
         }
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted #a3a3a3;
+  border-radius: 5px;
+}
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #cc0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid #010101;
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+
     </style>
 
 
 </head>
 
 <body>
-    <?php include "header.php" ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
@@ -177,11 +213,15 @@ $username = $_SESSION['username'];
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Transfer Money</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
                 </div>
-
-
             </div>
+
+
+
+
+
+
 
             <div class="col-md-12">
                 <div class="row">
@@ -191,39 +231,90 @@ $username = $_SESSION['username'];
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-                                <!-- Customer Account Number -->
-                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
-                                    <div class="input-group mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#01be32'></i></span>
-                                        </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Account No..." aria-describedby="inputGroup-sizing-default">
-                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
-                                            <span class="input-group-text bg-transparent">
-                                                <i class='bx bx-info-circle' style="color: #01be32;"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <p id="AcError" style="color: #ff203a; margin: top 10px;"></p>
+
+<style>
+    .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
 
 
 
-                                    <!-- Amount -->
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-rupee'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Amount..." aria-describedby="inputGroup-sizing-default">
 
-                                    </div>
-                                    <p id="AmountError" style="color: #ff203a;"></p>
+.styled-table thead tr {
+    background-color: #0032A0;
+    color: #ffffff;
+    text-align: left;
+}
 
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
 
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Pay Money</button>
 
-                                    </div>
+.styled-table tbody tr {
+    border-bottom: 1px solid #0032A0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0032A0;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
+.styled-table {
+    margin: 25px auto;
+}
+</style>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Document Name</th>
+            <th>Document Type</th>
+            <th>Document Criticality</th>
+            <th>Owner ID</th>
+            <th>Creation Date & Time</th>
+            <th>View</th>            
+
+
+        </tr>
+    </thead>
+    <tbody>
+                                <?php
+                                    for ($i=0; $i<count($user); $i++):
+
+                                ?>
+        <tr class="active-row">
+            <td><?php echo $user[$i]['Document_Name']?></td>
+            <td><?php echo $user[$i]['Document_Type']?></td>
+            <td><?php echo $user[$i]['Document_Criticality']?></td>
+            <td><?php echo $user[$i]['Owner_ID']?></td>
+            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
+            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+        </tr>
+
+
+
+
+                                    <?php endfor;?>
+        <!-- and so on... -->
+    </tbody>
+</table>
+
+
+
                                 </div>
 
                             </div>
