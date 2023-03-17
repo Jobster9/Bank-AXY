@@ -1,5 +1,5 @@
 <?php
-include("../config.php");
+
 function getDocuments ()
 {
     /*$db = new SQLITE3('C:\\xampp\\BankAXY Database\\BankAXY.db');
@@ -11,15 +11,20 @@ function getDocuments ()
         $arrayResult [] = $row; 
     }
     return $arrayResult;*/
+    
+    $host = 'EMILYSPC\MSSQLSERVER1';
+    $dbname = 'BankAXY';
+
+    $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
 
     $stmt = $pdo->prepare('SELECT * FROM Documents');
     $stmt->bindParam(':Document_ID', $_POST['Document_ID'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Type', $_POST['Document_Type'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Criticality', $_POST['Document_Criticality'], PDO::PARAM_STR);
-    $stmt->bindParam(':Owner_ID', $_POST['Owner_ID'], PDO::PARAM_STR);
-    $stmt->bindParam(':Creation_Date_Time', $_POST['Creation_Date_Time'], PDO::PARAM_STR);
-    $stmt->bindParam(':File_Location', $_POST['File_Location'], PDO::PARAM_STR);
+    $stmt->bindParam(':Owner_ID', $_POST['Document_Name'], PDO::PARAM_STR);
+    $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
+    $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
 
     $result = $stmt->execute();
 
