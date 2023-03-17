@@ -1,7 +1,6 @@
-<?php include "header.php"; 
-include "GetStaff.php";
-$user = getUsers ();
-?>
+    <?php include "header.php";
+    $User_ID = $_GET['User_ID'];
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +212,7 @@ $user = getUsers ();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Staff here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Confirm Deletion of: <?php echo $User_ID ?></h1>
                 </div>
             </div>
 
@@ -232,94 +231,53 @@ $user = getUsers ();
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+
+                                <!-- Customer Account Number -->
+                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
+                                    <div class="input-group mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
+                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
+                                            <span class="input-group-text bg-transparent">
+                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <!-- Amount -->
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
 
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
 
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
 
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Last Active</th>
-            <th>Branch</th>            
-            <th>Department</th>   
-            <th>Update</th>  
-            <th>Delete</th>             
-        </tr>
-    </thead>
-    <tbody>
-                                <?php
-                                    for ($i=0; $i<count($user); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['User_ID']?></td>
-            <?php $Staff_ID = $user[$i]['User_ID'];?>
-            <td><?php echo $user[$i]['First_Name']?></td>
-            <td><?php echo $user[$i]['Last_Name']?></td>
-            <td><?php echo $user[$i]['Email']?></td>
-            <td><?php echo $user[$i]['Last_Active']?></td>
-            <td><?php echo $user[$i]['Branch']?></td>
-            <td><?php echo $user[$i]['Department']?></td>
-            <td><a href="DeleteStaff.php?User_ID=<?php echo ['User_ID'] ?>">Update</a></td>   
-            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
-        </tr>
-
-
-
-
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
-
-
-
+                                    </div>
                                 </div>
 
                             </div>
