@@ -263,8 +263,8 @@ input.addEventListener("change", function (e) {
       <header>
         <h4>Select File here</h4>
       </header>
-      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+      <p>Files Supported: PDF</p>
+      <input type="file" hidden accept=".pdf" id="fileID" style="display:none;">
       <button class="btn">Choose File</button>
     </div>
 
@@ -272,30 +272,30 @@ input.addEventListener("change", function (e) {
 </div>
 
 
-                                <!-- Customer Account Number -->
+                                <!-- Document Upload Form-->
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" id="DocName" class="form-control gray_bg light" aria-label="Default" placeholder="Document Name" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
                                             </span>
                                         </span>
                                     </div>
-                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
-
+                                    <p id="DocNameError" style="color: #FFCC00; margin: top 10px;"></p>
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
+                                        <input id="DocType" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <p id="TypeError" style="color: #FFCC00;"></p>
 
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
@@ -363,6 +363,30 @@ input.addEventListener("change", function (e) {
 
 
     <script>
+
+const dropArea = document.querySelector(".drop_box"),
+  button = dropArea.querySelector("button"),
+  dragText = dropArea.querySelector("header"),
+  input = dropArea.querySelector("input");
+let file;
+var filename;
+
+button.onclick = () => {
+  input.click();
+};
+
+input.addEventListener("change", function (e) {
+  var fileName = e.target.files[0].name;
+  let filedata = `
+    <form action="" method="post">
+    <div class="form">
+    <h4>${fileName}</h4>
+    
+    <button class="btn">Upload</button>
+    </div>
+    </form>`;
+  dropArea.innerHTML = filedata;
+});
         $('#bar').click(function() {
             $(this).toggleClass('open');
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
