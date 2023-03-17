@@ -22,7 +22,6 @@ function getDocuments ()
     $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Type', $_POST['Document_Type'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Criticality', $_POST['Document_Criticality'], PDO::PARAM_STR);
-    $stmt->bindParam(':Owner_ID', $_POST['Document_Name'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
     $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
 
