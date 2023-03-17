@@ -1,5 +1,6 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
+include "UpdateDocumentSQL.php";
 
 $user = getUsers ();
 
@@ -336,9 +337,13 @@ if (isset($_POST['submit'])) {
 
     if ($allField == True) {
 
-      echo $_POST["DocumentName"];
-      echo $_POST["DocumentType"];
-      echo $_POST["DocumentCriticality"];
+$name = $_POST["DocumentName"];
+$tpye = $_POST["DocumentType"];
+
+$criticality = $_POST["DocumentCriticality"];
+
+     //   Update($name, $type, $criticality);
+
 }
 }
 
