@@ -32,14 +32,20 @@
 
 
                 <li class="menuHover box-icon">
-                    <a href="UploadDocuments.php" id="UploadDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> Upload Documents
+                    <a href="ViewStaff.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Staff
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a href="ViewDocuments.php" id="ViewDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> View Documents
+                    <a href="CreateStaff.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Staff
+                    </a>
+                </li>
+
+                <li class="menuHover">
+                    <a href="AuditTrail.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Audit Trails
                     </a>
                 </li>
 

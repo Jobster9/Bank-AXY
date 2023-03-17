@@ -2,7 +2,7 @@
 
 function getUsers (){
 
-    // Specify your database credentials here
+    // Create a new PDO connection object
     include("../../DB config.php");
 
     $stmt = $pdo->prepare('SELECT * FROM Documents');
