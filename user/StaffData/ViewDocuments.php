@@ -1,41 +1,6 @@
 <?php
 
-function getDocuments ()
-{
-    /*$db = new SQLITE3('C:\\xampp\\BankAXY Database\\BankAXY.db');
-    $sql = "SELECT * FROM Documents";
-    $stmt = $db->prepare($sql);
-    $result = $stmt->execute();
 
-    while ($row = $result->fetchArray()){ 
-        $arrayResult [] = $row; 
-    }
-    return $arrayResult;*/
-    
-    $host = 'EMILYSPC\MSSQLSERVER1';
-    $dbname = 'BankAXY';
-
-    $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
-
-    $stmt = $pdo->prepare('SELECT * FROM Documents');
-    $stmt->bindParam(':Document_ID', $_POST['Document_ID'], PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Type', $_POST['Document_Type'], PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Criticality', $_POST['Document_Criticality'], PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Name', $_POST['Document_Name'], PDO::PARAM_STR);
-
-    $result = $stmt->execute();
-
-    $rows_array = [];
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $rows_array[] = $row;
-    }
-
-    return $rows_array;
-}
-
-$documents = getDocuments();
 
 
 ?>
@@ -92,39 +57,43 @@ $documents = getDocuments();
 
                         </div>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="text-center mb-4 ">View Documents</h1>
 
-                                
-                                <table class="table table-striped">
-                                    <thead class="table-light">
-                                        <td>Document ID</td>
-                                        <td>Document Name</td>
-                                        <td>Document Type</td>
-                                        <td>Document Criticality</td>
-                                        <td>Owner ID</td>
-                                        <td>Creation Date Time</td>
-                                        <td>File Location</td>
-                                    </thead>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p>Document ID</p>
+                                        <p>Document Name</p>
+                                        <p>Document Type</p>
+                                        <p>Document Criticality</p>
+                                        <p>Owner ID</p>
+                                        <p>Creation Date Time</p>
+                                        <p>File Location</p>
+                                    </div>
 
-                                    <?php
-                                        for ($i=0; $i<count($user); $i++):
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $documents[$i]['Document_ID']?></td>
-                                        <td><?php echo $documents[$i]['Document_Name']?></td>
-                                        <td><?php echo $documents[$i]['Document_Type']?></td>
-                                        <td><?php echo $documents[$i]['Document_Criticality']?></td>
-                                        <td><?php echo $documents[$i]['Owner_ID']?></td>
-                                        <td><?php echo $documents[$i]['Creation_Date_Time']?></td>
-                                        <td><?php echo $documents[$i]['File_Location']?></td>
-                                    </tr>
-                                    <?php endfor;?>
+                                    <div>
+                                        <p>:</p>
+                                        <p>:</p>
+                                        <p>:</p>
+                                        <p>:</p>
+                                        <p>:</p>
+                                        <p>:</p>
+                                        <p>:</p>
+                                    </div>
 
-                        
-                                </table> 
+                                    <div>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                        <p><?php echo "-" ?></p>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
