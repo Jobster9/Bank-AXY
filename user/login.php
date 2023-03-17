@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 
             $Role = $array_User[0]["User_Role"];
             $Password = $array_User[0]["Password"];
-        }
+        
 
         if ($Role == "Staff") {
             session_start();
@@ -51,6 +51,11 @@ if (isset($_POST['submit'])) {
 
             header("Location: ../user/HeadOfficeData/Dashboard.php");
         }
+        } else {
+            $invalidMesg = "Invalid User ID or Password!";
+        }
+
+
     } else {
 
         $invalidMesg = "Invalid User ID or Password!";
