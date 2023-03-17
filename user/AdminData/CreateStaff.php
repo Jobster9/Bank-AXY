@@ -1,7 +1,4 @@
-<?php include "header.php"; 
-include "GetDocuments.php";
-$user = getUsers ();
-?>
+    <?php include "header.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +210,7 @@ $user = getUsers ();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
                 </div>
             </div>
 
@@ -232,89 +229,95 @@ $user = getUsers ();
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+<script>
+const dropArea = document.querySelector(".drop_box"),
+  button = dropArea.querySelector("button"),
+  dragText = dropArea.querySelector("header"),
+  input = dropArea.querySelector("input");
+let file;
+var filename;
+
+button.onclick = () => {
+  input.click();
+};
+
+input.addEventListener("change", function (e) {
+  var fileName = e.target.files[0].name;
+  let filedata = `
+    <form action="" method="post">
+    <div class="form">
+    <h4>${fileName}</h4>
+    <input type="email" placeholder="Enter email upload file">
+    <button class="btn">Upload</button>
+    </div>
+    </form>`;
+  dropArea.innerHTML = filedata;
+});
+
+</script>
+
+<div class="container">
+  <div class="card">
+
+    <div class="drop_box">
+      <header>
+        <h4>Select File here</h4>
+      </header>
+      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
+      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+      <button class="btn">Choose File</button>
+    </div>
+
+  </div>
+</div>
+
+
+                                <!-- Customer Account Number -->
+                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
+                                    <div class="input-group mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
+                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
+                                            <span class="input-group-text bg-transparent">
+                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <!-- Amount -->
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
 
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
 
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
 
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Document Name</th>
-            <th>Document Type</th>
-            <th>Document Criticality</th>
-            <th>Owner ID</th>
-            <th>Creation Date & Time</th>
-            <th>View</th>            
-
-
-        </tr>
-    </thead>
-    <tbody>
-                                <?php
-                                    for ($i=0; $i<count($user); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name']?></td>
-            <td><?php echo $user[$i]['Document_Type']?></td>
-            <td><?php echo $user[$i]['Document_Criticality']?></td>
-            <td><?php echo $user[$i]['Owner_ID']?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-        </tr>
-
-
-
-
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
-
-
-
+                                    </div>
                                 </div>
 
                             </div>
