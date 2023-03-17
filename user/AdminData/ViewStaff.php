@@ -281,14 +281,15 @@ $user = getUsers ();
 <table class="styled-table">
     <thead>
         <tr>
-            <th>Document Name</th>
-            <th>Document Type</th>
-            <th>Document Criticality</th>
-            <th>Owner ID</th>
-            <th>Creation Date & Time</th>
-            <th>View</th>            
-
-
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Last Active</th>
+            <th>Branch</th>            
+            <th>Department</th>   
+            <th>Update</th>  
+            <th>Delete</th>             
         </tr>
     </thead>
     <tbody>
@@ -297,12 +298,16 @@ $user = getUsers ();
 
                                 ?>
         <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name']?></td>
-            <td><?php echo $user[$i]['Document_Type']?></td>
-            <td><?php echo $user[$i]['Document_Criticality']?></td>
-            <td><?php echo $user[$i]['Owner_ID']?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+            <td><?php echo $user[$i]['User_ID']?></td>
+            <td><?php echo $user[$i]['First_Name']?></td>
+            <td><?php echo $user[$i]['Last_Name']?></td>
+            <td><?php echo $user[$i]['Email']?></td>
+            <td><?php echo $user[$i]['Last_Active']?></td>
+            <td><?php echo $user[$i]['Branch']?></td>
+            <td><?php echo $user[$i]['Department']?></td>
+
+            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer">Update</a></td>
+            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer">Delete</a></td>            
         </tr>
 
 
