@@ -19,4 +19,10 @@ define("LOANS_DEP", "Loans");
 define("MORTGAGES_DEP", "Mortgage Advice");
 define("ADMIN_DEP", "Administration");
 define("ACCOUNTS_DEP", "Accounts");
+
+//criticality
+define("CRIT_HIGH", "High");
+define("CRIT_MEDIUM", "Medium");
+define("CRIT_LOW", "Low");
+
 ?>
