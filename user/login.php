@@ -45,11 +45,7 @@ if (isset($_POST['submit'])) {
             header("Location: ../user/AdminData/Dashboard.php");
         }
         if ($Role == "Head Office") {
-            session_start();
-            $_SESSION['uname'] = $User_ID;
-            $_SESSION['urole'] = $Role;
-
-            header("Location: ../user/HeadOfficeData/Dashboard.php");
+            header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['uname']);
         }
         } else {
             $invalidMesg = "Invalid User ID or Password!";
