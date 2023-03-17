@@ -1,7 +1,10 @@
-<?php include "header.php"; 
-include "GetStaff.php";
-$user = getUsers ();
-?>
+    <?php include "header.php";
+
+    // Create a new PDO connection object
+    include("DeleteUserDetails.php");
+
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,10 +216,9 @@ $user = getUsers ();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Staff here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Confirm Deletion of: <?php echo $User_ID ?></h1>
                 </div>
             </div>
-
 
 
 
@@ -230,100 +232,23 @@ $user = getUsers ();
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+                   <small> <h3 class="h3 mb-0 light" style="text-align: center;">User ID: <?php echo $rows_array[0][3] ?></h3>/<small> 
 
 
 
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Last Active</th>
-            <th>Branch</th>            
-            <th>Department</th>   
-            <th>Update</th>  
-            <th>Delete</th>             
-        </tr>
-    </thead>
-    <tbody>
-                                <?php
-                                    for ($i=0; $i<count($user); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['User_ID']?></td>
-            <?php $Staff_ID = $user[$i]['User_ID'];?>
-            <td><?php echo $user[$i]['First_Name']?></td>
-            <td><?php echo $user[$i]['Last_Name']?></td>
-            <td><?php echo $user[$i]['Email']?></td>
-            <td><?php echo $user[$i]['Last_Active']?></td>
-            <td><?php echo $user[$i]['Branch']?></td>
-            <td><?php echo $user[$i]['Department']?></td>
-
-
-            <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
-
-            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
-
-        </tr>
 
 
 
 
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
 
 
 
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
+
+                                    </div>
                                 </div>
 
                             </div>
