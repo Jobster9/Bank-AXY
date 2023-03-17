@@ -1,5 +1,7 @@
 <?php
 
+include_once("../../sessions.php");
+
 
 
 
@@ -50,7 +52,18 @@
 
 <body>
 
-    <?php include "header.php" ?>
+    <?php 
+
+
+ 
+    
+
+    include "header.php";
+
+    $user = $_SESSION['uname'];
+    $role = $_SESSION['urole'];
+    
+    ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->

@@ -1,6 +1,17 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
+include_once("../../sessions.php");
+
 $user = getUsers ();
+
+
+
+$uname = $_SESSION['uname'];
+$role = $_SESSION['urole'];
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -294,7 +305,9 @@ $user = getUsers ();
     <tbody>
                                 <?php
                                     for ($i=0; $i<count($user); $i++):
-
+//if ($user[$i]['Document_Criticality'] == "High" and $uname == $user[$i]['Owner_ID']) 
+//{
+    //use to linit who can see files based on criticality and user id or user role
                                 ?>
         <tr class="active-row">
             <td><?php echo $user[$i]['Document_Name']?></td>
@@ -304,11 +317,9 @@ $user = getUsers ();
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
             <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
         </tr>
-
-
-
-
-                                    <?php endfor;?>
+<?php //}
+                                     
+                                endfor;?>
         <!-- and so on... -->
     </tbody>
 </table>
