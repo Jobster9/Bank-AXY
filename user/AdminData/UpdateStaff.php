@@ -1,6 +1,69 @@
-<?php include "header.php"; 
-include "GetStaff.php";
-$user = getUsers ();
+<?php 
+include "header.php" ;
+
+$User_ID = $_GET['User_ID'];
+$User_ID_Error = $User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Password_Error = $invalidMesg = "";
+$allField = True;
+$staff = GetStaffMember($User_ID);
+
+if (isset($_POST['submit'])) {
+    if ($_POST["User_ID"] == "") 
+    {
+        $User_ID_Error = "User ID is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["First_Name"] == "") 
+    {
+        $User_ID_Error = "First Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Last_Name"] == "") 
+    {
+        $User_ID_Error = "Last Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Email"] == "") 
+    {
+        $User_ID_Error = "Email is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Password"] == null) 
+    {
+        $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
+
+
+    if ($allField == True) 
+    {
+        $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
+        $stmt= $pdo->prepare($sql);
+        $stmt->execute([First_Name, Last_Name, Email, Password, Username]);
+        
+    } 
+}
+
+function getStaffMember ($User_ID){
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '".$User_ID."'");
+
+    $result = $stmt->execute();
+
+    $rows_array = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $rows_array[] = $row;
+    }
+
+    return $rows_array;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -213,7 +276,7 @@ $user = getUsers ();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Staff here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff:</h1>
                 </div>
             </div>
 
@@ -232,95 +295,57 @@ $user = getUsers ();
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
 
 
-
-
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Last Active</th>
-            <th>Branch</th>            
-            <th>Department</th>   
-            <th>Update</th>  
-            <th>Delete</th>             
-        </tr>
-    </thead>
-    <tbody>
-                                <?php
-                                    for ($i=0; $i<count($user); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['User_ID']?></td>
-            <td><?php echo $user[$i]['First_Name']?></td>
-            <td><?php echo $user[$i]['Last_Name']?></td>
-            <td><?php echo $user[$i]['Email']?></td>
-            <td><?php echo $user[$i]['Last_Active']?></td>
-            <td><?php echo $user[$i]['Branch']?></td>
-            <td><?php echo $user[$i]['Department']?></td>
-
-            <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer">Delete</a></td>            
-        </tr>
+                        
 
 
 
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
 
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
+                                <?php if (isset($_GET['error'])) { ?>
 
+                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
+                                <?php } ?>
 
+                                <div class="form-group">
+                                    <label for="username" class="sr-only">Username</label>
+                                    <input type="text" name="User_ID" id="Username" class="form-control" placeholder=<?php echo $staff[0]['User_ID'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="first_name" class="sr-only">First Name</label>
+                                    <input type="text" name="First_Name" id="First_Name" class="form-control" placeholder=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="last_name" class="sr-only">Last Name</label>
+                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" placeholder=<?php echo $staff[0]['Last_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input type="text" name="Email" id="Email" class="form-control" placeholder=<?php echo $staff[0]['Email'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" name="Password" id="password" class="form-control" placeholder="***********" required>
+                                    <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
+                                </div>
+                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
+                                <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
+                            </form>
 
                             </div>
                         </div>
