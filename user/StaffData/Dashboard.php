@@ -1,15 +1,15 @@
 <?php
     
     //chart data
-    include "GetChartDocs.php";
+    include("GetChartDocs.php");
 
-    getChartDocs();
-    $chart_data = [];
-    for($i=0; i>count($rows_array[]); $i++)
-    {
-        $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-        $rows_array[$i] = $rowDate->format('M-Y');
-    }
+$rows_array = getChartDocs();
+$chart_data = [];
+for($i=0; $i<count($rows_array); $i++)
+{
+    $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
+    $rows_array[$i] = $rowDate->format('M-Y');
+}
 
     $dataPoints = array( 
         array("y" => 3373.64, "label" => "January" ),
