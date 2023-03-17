@@ -1,7 +1,7 @@
 <?php
 include_once("../config.php");
 include_once("checkLogin.php");
-include_once("../sessions.php");
+include_once("sessions.php");
 
 $User_ID_Error = $User_Password_Error = $invalidMesg = "";
 $allField = True;
@@ -32,16 +32,24 @@ if (isset($_POST['submit'])) {
         if ($Role == "Staff") {
             session_start();
             $_SESSION['uname'] = $User_ID;
-            $_SESSION['urole'] = $role;
+            $_SESSION['urole'] = $Role;
 
 
             header("Location: ../user/StaffData/Dashboard.php");
         }
         if ($Role == "Admin") {
-            header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $_SESSION['uname']);
+            session_start();
+            $_SESSION['uname'] = $User_ID;
+            $_SESSION['urole'] = $Role;
+
+            header("Location: ../user/AdminData/Dashboard.php");
         }
         if ($Role == "Head Office") {
-            header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['uname']);
+            session_start();
+            $_SESSION['uname'] = $User_ID;
+            $_SESSION['urole'] = $Role;
+
+            header("Location: ../user/HeadOfficeData/Dashboard.php");
         }
     } else {
 

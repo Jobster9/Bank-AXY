@@ -1,6 +1,20 @@
 <?php include "../../config.php"; 
-    session_start();
+include_once "../sessions.php";
 
+$path = "../login.php";
+
+session_start();
+
+$user = $_SESSION['uname'];
+
+
+if(!isset($_SESSION['uname'])){
+    session_unset();
+    session_destroy();
+    header("Location:".$path);
+}
+
+checkSession($path);
 
 
 
@@ -44,7 +58,7 @@
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
+                    <a class="nav-link text-left" role="button" href="<?php echo '../Logout.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>
@@ -81,7 +95,7 @@
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum ". $_SESSION['User_ID'] ?></h1>
+                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum ". $user ?></h1>
 
 
                             <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">

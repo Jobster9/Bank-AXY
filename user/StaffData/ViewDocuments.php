@@ -1,6 +1,5 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
-include_once("../../sessions.php");
 
 $user = getUsers ();
 

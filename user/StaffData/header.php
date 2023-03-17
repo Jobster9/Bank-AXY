@@ -1,5 +1,5 @@
 <?php include "../../config.php"; 
-include_once "../../sessions.php";
+include_once "../sessions.php";
 
 $path = "../login.php";
 
@@ -56,7 +56,7 @@ checkSession($path);
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
+                    <a class="nav-link text-left" role="button" href="<?php echo '../Logout.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>

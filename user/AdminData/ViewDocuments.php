@@ -1,6 +1,10 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
 $user = getUsers ();
+
+$uname = $_SESSION['uname'];
+$role = $_SESSION['urole'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
