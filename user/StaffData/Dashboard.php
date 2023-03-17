@@ -1,5 +1,30 @@
 <?php
+    
+    //chart data
+    include "GetChartDocs.php";
 
+    getChartDocs();
+    $chart_data = [];
+    for($i=0; i>count($rows_array[]); $i++)
+    {
+        $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
+        $rows_array[$i] = $rowDate->format('M-Y');
+    }
+
+    $dataPoints = array( 
+        array("y" => 3373.64, "label" => "January" ),
+        array("y" => 2435.94, "label" => "February" ),
+        array("y" => 1842.55, "label" => "March" ),
+        array("y" => 1828.55, "label" => "April" ),
+        array("y" => 1039.99, "label" => "May" ),
+        array("y" => 765.215, "label" => "June" ),
+        array("y" => 612.453, "label" => "July" ),
+        array("y" => 612.453, "label" => "August" ),
+        array("y" => 612.453, "label" => "September" ),
+        array("y" => 612.453, "label" => "October" ),
+        array("y" => 612.453, "label" => "November" ),
+        array("y" => 612.453, "label" => "December" )
+    );
 
 
 
@@ -35,6 +60,39 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
+
+    <!--bar charts-->
+    <script>
+        window.onload = function() {
+
+        CanvasJS.addColorSet("BankAXY",
+            [//colorSet Array
+            "#03258C",
+            "#F2B705"                
+            ]);
+        
+        var chart = new CanvasJS.Chart("chartContainer", {
+            backgroundColor: "#F2F2F2",
+            colorSet: "BankAXY",
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "Files uploaded in the past year"
+            },
+            axisY: {
+                title: "files uploaded"
+            },
+            data: [{
+                type: "column",
+                yValueFormatString: "#,##0.## files",
+                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chart.render();
+        
+        }
+    </script>
+
     <style>
         @media only screen and (min-width:992px) {
             #credit {
@@ -68,9 +126,12 @@
                 </div>
             </div>
 
+            <!--chart here-->
+            <div id="chartContainer" style="height: 300px; width: 50%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
         </div>
-
+        
     </div>
 
     <?php include "footer.php" ?>
