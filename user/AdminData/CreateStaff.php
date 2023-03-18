@@ -1,4 +1,5 @@
-    <?php include "header.php" ?>
+    <?php include "header.php";
+    include "CreateStaffSQL.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,15 +231,60 @@
 
 
 
+<?php
+$errorpwd = "";
+$allFields = "yes";
+if (isset($_POST['submit'])){
+    
+    
+    if($_POST['fname']==""){
+        $errorpwd = "First name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['lname']==""){
+        $errorpwd= "Last name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['email']==""){
+        $errorpwd= "Email is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['password']==""){
+        $errorpwd= "Password is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['branch']==""){
+        $errorpwd= "Branch is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['department']==""){
+        $errorpwd= "Department is mandatory";
+        $allFields = "no";
+    }
+
+    if($allFields == "yes"){
+
+        CreateStaff();
+    }
 
 
+}
+
+
+?>
+
+
+
+                                
                                 <!-- Customer Account Number -->
+
+                                <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="First Name:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="fname" type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="First Name:" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
@@ -252,7 +298,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -262,7 +308,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -272,7 +318,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -281,7 +327,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="branch" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -291,7 +337,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="department" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -304,10 +350,11 @@
 
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Create</button>
+                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
                                     </div>
                                 </div>
+                                </form>
 
                             </div>
                         </div>
