@@ -2,6 +2,10 @@
 include "GetAdmin.php";
 $user = getUsers ();
 ?>
+
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 

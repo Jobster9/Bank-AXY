@@ -12,6 +12,9 @@ $role = $_SESSION['urole'];
 
 
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
