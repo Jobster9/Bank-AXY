@@ -1,6 +1,16 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
+
 $user = getUsers ();
+
+$i = $_GET['File_Location'];
+
+$uname = $_SESSION['uname'];
+$role = $_SESSION['urole'];
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,7 +182,6 @@ $user = getUsers ();
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -213,7 +222,7 @@ $user = getUsers ();
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
                 </div>
             </div>
 
@@ -233,17 +242,10 @@ $user = getUsers ();
 
 
 <style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+form { 
+margin: 0 auto; 
+width:800px;
 }
-
-
-
 
 
 .styled-table thead tr {
@@ -277,6 +279,8 @@ $user = getUsers ();
 .styled-table {
     margin: 25px auto;
 }
+
+
 </style>
 <table class="styled-table">
     <thead>
@@ -285,35 +289,96 @@ $user = getUsers ();
             <th>Document Type</th>
             <th>Document Criticality</th>
             <th>Owner ID</th>
-            <th>Creation Date & Time</th>
-            <th>Update</th>            
-            <th>View</th>            
+            <th>Creation Date & Time</th>          
 
 
         </tr>
     </thead>
     <tbody>
-                                <?php
-                                    for ($i=0; $i<count($user); $i++):
 
-                                ?>
         <tr class="active-row">
             <td><?php echo $user[$i]['Document_Name']?></td>
             <td><?php echo $user[$i]['Document_Type']?></td>
             <td><?php echo $user[$i]['Document_Criticality']?></td>
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+
+
         </tr>
+        
 
-
-
-
-                                    <?php endfor;?>
         <!-- and so on... -->
     </tbody>
 </table>
+
+
+<?php
+
+$allField = TRUE;
+
+
+if (isset($_POST['submit'])) {
+    if ($_POST["DocumentName"] == "") {
+       // $User_ID_Error = "User ID is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["DocumentType"] == null) {
+       // $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["DocumentCriticality"] == null) {
+        // $User_Password_Error = "Password is required";
+         $allField = FALSE;
+     }
+
+
+    if ($allField == True) {
+
+$name = $_POST["DocumentName"];
+$tpye = $_POST["DocumentType"];
+
+$criticality = $_POST["DocumentCriticality"];
+
+     //   Update($name, $type, $criticality);
+
+}
+}
+
+
+
+?>
+
+<form class="styled-table">
+
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Document Name</label>
+    <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
+  </div>  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Document Type</label>
+    <select class="form-control" name="DocumentType"    >
+        <option selected="selected"><?php echo $user[$i]['Document_Type'] ?></option>
+        <option value="volvo">Loans</option>
+        <option value="saab">mortgage</option>
+    </select>
+  </div>  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Document Criticality</label>
+    <select class="form-control" name="DocumentCriticality">
+    <option selected="selected"><?php echo $user[$i]['Document_Criticality'] ?></option>
+        <option value="volvo">Low</option>
+        <option value="saab">Medium</option>
+        <option value="fiat">High</option>
+    </select>
+  </div>  
+  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-pay btn-lg btn-block"></input>
+  
+
+        <!-- and so on... -->
+</form>
 
 
 
