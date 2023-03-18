@@ -1,40 +1,80 @@
-<?php
+<?php 
+include "header.php" ;
 
-//chart data
-include("header.php");
-include("GetChartDocs.php");
+$User_ID = $_GET['User_ID'];
+$User_ID_Error = $User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Password_Error = $invalidMesg = "";
+$allField = True;
+$staff = GetStaffMember($User_ID);
 
-/*$rows_array = getChartDocs();
-$chart_data = [];
-for($i=0; $i<count($rows_array); $i++)
-{
-$rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-$rows_array[$i] = $rowDate->format('M-Y');
-}*/
+if (isset($_POST['submit'])) {
+    if ($_POST["User_ID"] == "") 
+    {
+        $User_ID_Error = "User ID is required";
+        $allField = FALSE;
+    }
 
-$dataPoints = array(
-    array("y" => 3373.64, "label" => "January"),
-    array("y" => 2435.94, "label" => "February"),
-    array("y" => 1842.55, "label" => "March"),
-    array("y" => 1828.55, "label" => "April"),
-    array("y" => 1039.99, "label" => "May"),
-    array("y" => 765.215, "label" => "June"),
-    array("y" => 612.453, "label" => "July"),
-    array("y" => 612.453, "label" => "August"),
-    array("y" => 612.453, "label" => "September"),
-    array("y" => 612.453, "label" => "October"),
-    array("y" => 612.453, "label" => "November"),
-    array("y" => 612.453, "label" => "December")
-);
+    if ($_POST["First_Name"] == "") 
+    {
+        $User_ID_Error = "First Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Last_Name"] == "") 
+    {
+        $User_ID_Error = "Last Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Email"] == "") 
+    {
+        $User_ID_Error = "Email is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Password"] == null) 
+    {
+        $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
+
+
+    if ($allField == True) 
+    {
+        $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
+        $stmt= $pdo->prepare($sql);
+        $stmt->execute([First_Name, Last_Name, Email, Password, Username]);
+        
+    } 
+}
+
+function getStaffMember ($User_ID){
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '".$User_ID."'");
+
+    $result = $stmt->execute();
+
+    $rows_array = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $rows_array[] = $row;
+    }
+
+    return $rows_array;
+}
+
+
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+
+    <title>Transfer</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -50,58 +90,11 @@ $dataPoints = array(
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-    <!--bar charts-->
-<script>
-    window.onload = function() {
-
-    CanvasJS.addColorSet("BankAXY",
-        [//colorSet Array
-        "#03258C",
-        "#F2B705"                
-        ]);
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-        backgroundColor: "transparent",
-        colorSet: "BankAXY",
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: "Files uploaded in the past year"
-        },
-        axisY: {
-            title: "files uploaded"
-        },
-        data: [{
-            type: "column",
-            yValueFormatString: "#,##0.## files",
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
-    });
-    chart.render();
-
-    }
-</script>
-
-
-    <style>
-        @media only screen and (min-width:992px) {
-            #credit {
-                display: block;
-                box-sizing: border-box;
-                height: 181px;
-                width: 363px;
-            }
-        }
-    </style>
 
     <style>
         .btn-pay {
@@ -268,12 +261,6 @@ $dataPoints = array(
   padding: 12px 20px;
   border-radius: 4px;
 }
-@media screen and (min-width: 368px) {
-  .modal.show .modal-dialog {
-    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
-    margin-left: auto;
-  }
-}
 
 
     </style>
@@ -282,23 +269,23 @@ $dataPoints = array(
 </head>
 
 <body>
-
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4">
+    <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>
-                        Generate Report</a> -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff:</h1>
                 </div>
             </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+
+
+
 
             <div class="col-md-12">
                 <div class="row">
@@ -308,9 +295,72 @@ $dataPoints = array(
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-            <!--chart here-->
-            <div id="chartContainer" style="height: 450px; width: 85%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+
+                        
+
+
+
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+
+                                <?php if (isset($_GET['error'])) { ?>
+
+                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+
+                                <?php } ?>
+
+                                <div class="form-group">
+                                    <label for="username" class="sr-only">Username</label>
+                                    <input type="text" name="User_ID" id="Username" class="form-control" value=<?php echo $staff[0]['User_ID'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="first_name" class="sr-only">First Name</label>
+                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="last_name" class="sr-only">Last Name</label>
+                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" name="Password" id="password" class="form-control" value="***********" required>
+                                    <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
+                                </div>
+                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
+                                <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
 
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
@@ -321,27 +371,23 @@ $dataPoints = array(
         </div>
 
     </div>
-
-        </div>
-        
-    </div>
+    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
+
+
     <!-- Wraper Ends Here -->
-
-
-
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/dashboard.js"></script>
+    <script src="../UserData/js/transfer.js"></script>
 
 
     <script>
@@ -351,9 +397,6 @@ $dataPoints = array(
 
         });
     </script>
-
-
-
 
 </body>
 
