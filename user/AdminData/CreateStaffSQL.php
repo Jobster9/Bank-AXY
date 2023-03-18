@@ -7,11 +7,11 @@ function CreateStaff (){
 
     date_default_timezone_set('Europe/London');
 
-    $stmt = $pdo->prepare('INSERT INTO Bank_Employees (User_ID, User_Role, First_Name, Last_Name, Email, Password, Last_Active, Branch, Department) VALUES (:userID, :role, :fname, :lname, :email, :password, :active, :branch, :department)');
+    $stmt = $pdo->prepare('INSERT INTO Bank_Employees (User_ID, User_Role, First_Name, Last_Name, Email, Password, Last_Active, Branch, Department) VALUES (:User_ID, :role, :fname, :lname, :email, :password, :active, :branch, :department)');
 
     $rand = rand(100, 999);
 
-    
+
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -22,10 +22,10 @@ function CreateStaff (){
     $active = date('d/m/Y H:i');
 
     $role = "Staff";
-    $User_ID = strtoupper(substr($fname, 0 ,1) . substr($lname, 0, 1). "001_". $rand);
+    $UserID = strtoupper(substr($fname, 0 ,1) . substr($lname, 0, 1). "001". $rand);
 
 
-    $stmt->bindParam(':userID', $User_ID, SQLITE3_TEXT); 
+    $stmt->bindParam(':User_ID', $User_ID, SQLITE3_TEXT); 
     $stmt->bindParam(':role', $role, SQLITE3_TEXT);
     $stmt->bindParam(':fname', $fname, SQLITE3_TEXT);
     $stmt->bindParam(':lname', $lname, SQLITE3_TEXT);
@@ -46,3 +46,4 @@ function CreateStaff (){
 
 
 ?>
+
