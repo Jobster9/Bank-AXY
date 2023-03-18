@@ -25,7 +25,8 @@ function CreateStaff (){
     $UserID = strtoupper(substr($fname, 0 ,1) . substr($lname, 0, 1). "001". $rand);
 
 
-    $stmt->bindParam(':User_ID', $User_ID, SQLITE3_TEXT); 
+    $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
+
     $stmt->bindParam(':role', $role, SQLITE3_TEXT);
     $stmt->bindParam(':fname', $fname, SQLITE3_TEXT);
     $stmt->bindParam(':lname', $lname, SQLITE3_TEXT);
