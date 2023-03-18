@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $User_ID_Error = "User ID is required";
         $allField = FALSE;
     }
-
     if ($_POST["First_Name"] == "") 
     {
         $User_ID_Error = "First Name is required";
@@ -40,11 +39,20 @@ if (isset($_POST['submit'])) {
 
     if ($allField == True) 
     {
-        $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute([First_Name, Last_Name, Email, Password, Username]);
-        
-    } 
+
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare('UPDATE Bank_Employees (First_Name, Last_Name, Email, Password) VALUES (:First_Name, :Last_Name, :Email, :Password)');
+
+    $stmt->bindParam(':First_Name', $_POST["First_Name"], PDO::PARAM_STR);
+    $stmt->bindParam(':Last_Name', $_POST["Last_Name"], PDO::PARAM_STR);
+    $stmt->bindParam(':Email', $_POST["Email"], PDO::PARAM_STR);
+    $stmt->bindParam(':Password', $_POST["Password"], PDO::PARAM_STR);
+
+
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+    }
 }
 
 function getStaffMember ($User_ID){
@@ -277,7 +285,7 @@ function getStaffMember ($User_ID){
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff: <?php echo $staff[0]['User_ID'] ?></h1>
                 </div>
             </div>
 
@@ -311,22 +319,17 @@ function getStaffMember ($User_ID){
 
                                 <?php } ?>
 
-                                <div class="form-group">
-                                    <label for="username" class="sr-only">Username</label>
-                                    <input type="text" name="User_ID" id="Username" class="form-control" value=<?php echo $staff[0]['User_ID'] ?> required>
-                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
-                                    <p id="alert1" style="color: red;"></p>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="first_name" class="sr-only">First Name</label>
-                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <h3>First Name</h3><input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="last_name" class="sr-only">Last Name</label>
+                                    <h3>Last Name</h3><label for="last_name" class="sr-only">Last Name</label>
                                     <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
@@ -334,14 +337,14 @@ function getStaffMember ($User_ID){
 
                                 <div class="form-group">
                                     <label for="email" class="sr-only">Email</label>
-                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
+                                    <h3>Email</h3><input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group mb-4">
                                     <label for="password" class="sr-only">Password</label>
-                                    <input type="password" name="Password" id="password" class="form-control" value="***********" required>
+                                    <h3>Password</h3><input type="password" name="Password" id="password" class="form-control" value="***********" required>
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
                                 <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
@@ -352,7 +355,6 @@ function getStaffMember ($User_ID){
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
-
 
 
                 </div>

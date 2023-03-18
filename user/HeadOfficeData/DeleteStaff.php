@@ -7,7 +7,7 @@
 if (isset($_POST['delete'])){
     include("../../DB config.php");
     $User_ID = $_GET['User_ID'];
-    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
+    $stmt = $pdo->prepare('DELETE FROM Bank_Employees WHERE User_ID = "$User_ID"');
     $stmt->execute([$User_ID]);
     // redirect to viewstaff.php
 }
