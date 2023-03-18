@@ -155,7 +155,7 @@
   border-radius: 5px;
 }
 .drop_box h4 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   color: #2e2e2e;
 }
@@ -163,7 +163,7 @@
 .drop_box p {
   margin-top: 10px;
   margin-bottom: 20px;
-  font-size: 12px;
+  font-size: 15px;
   color: #a3a3a3;
 }
 
@@ -198,7 +198,6 @@
 
     </style>
 
-
 </head>
 
 <body>
@@ -210,15 +209,9 @@
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document</h1>
                 </div>
             </div>
-
-
-
-
-
-
 
             <div class="col-md-12">
                 <div class="row">
@@ -229,105 +222,59 @@
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<script>
-const dropArea = document.querySelector(".drop_box"),
-  button = dropArea.querySelector("button"),
-  dragText = dropArea.querySelector("header"),
-  input = dropArea.querySelector("input");
-let file;
-var filename;
-
-button.onclick = () => {
-  input.click();
-};
-
-input.addEventListener("change", function (e) {
-  var fileName = e.target.files[0].name;
-  let filedata = `
-    <form action="" method="post">
-    <div class="form">
-    <h4>${fileName}</h4>
-    <input type="email" placeholder="Enter email upload file">
-    <button class="btn">Upload</button>
-    </div>
-    </form>`;
-  dropArea.innerHTML = filedata;
-});
-
-</script>
 
 <div class="container">
   <div class="card">
-
     <div class="drop_box">
-      <header>
+    <header>
         <h4>Select File here</h4>
       </header>
-      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
-      <button class="btn">Choose File</button>
-    </div>
-
+      <p>Files Supported:PDF</p>
+  <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
+      <form method="post" enctype="multipart/form-data">
+  <div class="form-group mb-1 mt-5">
+  <!-- <button class="btn" onclick="document.getElementById('file-upload').click()">Choose File</button> -->
+<input type="file" class="form-control-file" accept=".pdf" id="file-upload" onchange="showInputs()">
   </div>
+  <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
+  <p>Please ensure the filename follows the standardized convention: 
+    <br>"CustomerName-Category-DocumentNumber.pdf".
+    <br> If you are unsure about the convention, please refer to the <a>guide</a>.
+  </p>
+    <label for="doc-name">Document Name:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+        <input type="text" class="form-control" id="doc-name" name="doc-name" placeholder="Document Name">
+  </div>
+  </div>
+  <div class="form-group" id="doc-category-group" style="display:none">
+    <label for="doc-category">Document Category:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+    <select class="form-control" id="doc-category" name="doc-category">
+      <option value=<?php LOANS_DEP ?>>Loans</option>
+      <option value=<?php MORTGAGES_DEP ?>>Mortgages</option>
+      <option value=<?php ADMIN_DEP ?>>Administration</option>
+      <option value=<?php ACCOUNTS_DEP ?>>Accounts</option>
+    </select>
+</div>
+</div>
+<div class="form-group" id="doc-criticality-group" style="display:none">
+    <label for="doc-category">Document Criticality:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+    <select class="form-control" id="doc-category" name="doc-category">
+      <option value=<?php CRIT_HIGH ?>>High</option>
+      <option value=<?php CRIT_MEDIUM ?>>Medium</option>
+      <option value=<?php CRIT_LOW ?>>Low</option>
+    </select>
+</div>
+<button type="submit" class="btn mb-1 mt-5">Upload File</button>
+  </div>
+</form>
+</div>
 </div>
 
-
-                                <!-- Customer Account Number -->
-                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
-
-
-
-
-
-
-                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
-
-
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
-
-                                    </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
-
-                                    <!-- Amount -->
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
-
-                                    </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-
-
-
-
-
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2"></div>
-
-
-
-                </div>
-
-
-            </div>
-
-        </div>
 
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
@@ -343,18 +290,12 @@ input.addEventListener("change", function (e) {
     <?php include "footer.php" ?>
 
 
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/transfer.js"></script>
 
 
     <script>
@@ -362,8 +303,89 @@ input.addEventListener("change", function (e) {
             $(this).toggleClass('open');
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
-        });
-    </script>
+        }); 
+
+function showInputs() {
+  var fileUpload = document.getElementById("file-upload");
+  var docNameGroup = document.getElementById("doc-name-group");
+  var docCategoryGroup = document.getElementById("doc-category-group");
+  var docCriticalityGroup = document.getElementById("doc-criticality-group");
+  
+  if (fileUpload.value) {
+    docNameGroup.style.display = "block";
+    docCategoryGroup.style.display = "block";
+    docCriticalityGroup.style.display = "block";
+
+    var fileName = fileUpload.value.split("\\").pop();
+    var docNameInput = document.getElementById("doc-name");
+    docNameInput.value = fileName;
+  }
+}
+</script>
+<?php
+if (isset($_POST['submit'])) {
+    $result = UploadDocument();
+    if ($result) {
+        echo "File uploaded successfully!";
+    } else {
+        echo "File not uploaded";
+    }
+}
+
+function UploadDocument()
+{
+    include("../../DB config");
+    // Get the form data
+    $docName = $_POST['docName'];
+    $docCategory = $_POST['docCategory'];
+    $docCriticality = $_POST['docCriticality'];
+
+    //Get the user data 
+    $OwnerID = $_SESSION['USER_ID'];
+
+    // Get the uploaded file
+    $file = $_FILES['file'];
+    $fileName = $file['name'];
+    $fileType = $file['type'];
+    $fileSize = $file['size'];
+    $fileTempName = $file['tmp_name'];
+    echo ($fileTempName);
+
+    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        echo ("File upload error");
+    }
+    // Read the file content
+    $fileContent = file_get_contents($fileTempName);
+
+    // Convert the string of bytes to a binary format that SQL Server can recognize
+    $file_binary = pack('H*', bin2hex($file_contents));
+
+    // Prepare the SQL statement
+    $sql = "INSERT INTO dbo.Documents (Document_ID,Document_Name,Document_Type,Document_Criticality,Owner_ID,Creation_Date_Time,File_Location)
+            VALUES (NEWID(), ?, ?, ?, ?, GETDATE(), ?)";
+
+    // Bind the parameters to the statement
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(2, $docName, PDO::PARAM_STR);
+    $stmt->bindParam(3, $docCategory, PDO::PARAM_STR);
+    $stmt->bindParam(4, $docCriticality, PDO::PARAM_STR);
+    $stmt->bindParam(5, $OwnerID, PDO::PARAM_STR);
+    $stmt->bindParam(7, $file_binary, PDO::PARAM_LOB);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Check if the insertion was successful
+    if ($stmt->rowCount() > 0) {
+        echo "File uploaded successfully!";
+        return true;
+    } else {
+        echo "File upload failed!";
+        return false;
+    }
+}
+
+?>
 
 </body>
 
