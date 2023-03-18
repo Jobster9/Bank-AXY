@@ -1,11 +1,8 @@
-<?php
-
-function getUsers (){
-
-    // Create a new PDO connection object
+<?php 
+     // Create a new PDO connection object
     include("../../DB config.php");
-
-    $stmt = $pdo->prepare('SELECT * FROM Documents');
+    $User_ID = $_GET['User_ID'];
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '$User_ID'");
 
     $result = $stmt->execute();
 
@@ -15,7 +12,5 @@ function getUsers (){
     }
 
     return $rows_array;
-}
-
 
 ?>

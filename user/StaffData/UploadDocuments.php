@@ -1,5 +1,4 @@
-    <?php include("header.php");
-    ?>
+    <?php include "header.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -223,6 +222,7 @@
                                 <h5 class="card-title light mb-4 "></h5>
 
 
+
 <div class="container">
   <div class="card">
     <div class="drop_box">
@@ -275,6 +275,7 @@
 </div>
 </div>
 
+
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
                 <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
@@ -298,8 +299,7 @@
 
 
     <script>
-
-    $('#bar').click(function() {
+        $('#bar').click(function() {
             $(this).toggleClass('open');
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 

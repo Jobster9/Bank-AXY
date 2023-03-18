@@ -2,15 +2,10 @@
 
 function getUsers (){
 
-    // Specify your database credentials here
-    $host = 'ABDULNAZIR';
-    $dbname = 'BankAXY';
-
-
     // Create a new PDO connection object
-    $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
+    include("../../DB config.php");
 
-    $stmt = $pdo->prepare('SELECT * FROM Documents');
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_Role = 'Staff'");
 
     $result = $stmt->execute();
 

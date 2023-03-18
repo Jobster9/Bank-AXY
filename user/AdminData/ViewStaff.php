@@ -1,39 +1,16 @@
-<?php
-    
-    //chart data
-    include("GetChartDocs.php");
-
-$rows_array = getChartDocs();
-$chart_data = [];
-for($i=0; $i<count($rows_array); $i++)
-{
-    $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-    $rows_array[$i] = $rowDate->format('M-Y');
-}
-
-    $dataPoints = array( 
-        array("y" => 3373.64, "label" => "January" ),
-        array("y" => 2435.94, "label" => "February" ),
-        array("y" => 1842.55, "label" => "March" ),
-        array("y" => 1828.55, "label" => "April" ),
-        array("y" => 1039.99, "label" => "May" ),
-        array("y" => 765.215, "label" => "June" ),
-        array("y" => 612.453, "label" => "July" ),
-        array("y" => 612.453, "label" => "August" ),
-        array("y" => 612.453, "label" => "September" ),
-        array("y" => 612.453, "label" => "October" ),
-        array("y" => 612.453, "label" => "November" ),
-        array("y" => 612.453, "label" => "December" )
-    );
+<?php include "header.php"; 
+include "GetStaff.php";
+$user = getUsers ();
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+
+    <title>Transfer</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -49,58 +26,11 @@ for($i=0; $i<count($rows_array); $i++)
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-    <!--bar charts-->
-<script>
-    window.onload = function() {
-
-    CanvasJS.addColorSet("BankAXY",
-        [//colorSet Array
-        "#03258C",
-        "#F2B705"                
-        ]);
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-        backgroundColor: "transparent",
-        colorSet: "BankAXY",
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: "Files uploaded in the past year"
-        },
-        axisY: {
-            title: "files uploaded"
-        },
-        data: [{
-            type: "column",
-            yValueFormatString: "#,##0.## files",
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
-    });
-    chart.render();
-
-    }
-</script>
-
-
-    <style>
-        @media only screen and (min-width:992px) {
-            #credit {
-                display: block;
-                box-sizing: border-box;
-                height: 181px;
-                width: 363px;
-            }
-        }
-    </style>
 
     <style>
         .btn-pay {
@@ -267,12 +197,6 @@ for($i=0; $i<count($rows_array); $i++)
   padding: 12px 20px;
   border-radius: 4px;
 }
-@media screen and (min-width: 368px) {
-  .modal.show .modal-dialog {
-    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
-    margin-left: auto;
-  }
-}
 
 
     </style>
@@ -281,24 +205,23 @@ for($i=0; $i<count($rows_array); $i++)
 </head>
 
 <body>
-
-    <?php include "header.php" ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4">
+    <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>
-                        Generate Report</a> -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Staff here:</h1>
                 </div>
             </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+
+
+
 
             <div class="col-md-12">
                 <div class="row">
@@ -308,9 +231,114 @@ for($i=0; $i<count($rows_array); $i++)
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-            <!--chart here-->
-            <div id="chartContainer" style="height: 450px; width: 85%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<style>
+    .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+.styled-table thead tr {
+    background-color: #0032A0;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #0032A0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0032A0;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
+.styled-table {
+    margin: 25px auto;
+}
+</style>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Last Active</th>
+            <th>Branch</th>            
+            <th>Department</th>   
+            <th>Update</th>  
+            <th>Delete</th>             
+        </tr>
+    </thead>
+    <tbody>
+                                <?php
+                                    for ($i=0; $i<count($user); $i++):
+
+                                ?>
+        <tr class="active-row">
+            <td><?php echo $user[$i]['User_ID']?></td>
+            <?php $Staff_ID = $user[$i]['User_ID'];?>
+            <td><?php echo $user[$i]['First_Name']?></td>
+            <td><?php echo $user[$i]['Last_Name']?></td>
+            <td><?php echo $user[$i]['Email']?></td>
+            <td><?php echo $user[$i]['Last_Active']?></td>
+            <td><?php echo $user[$i]['Branch']?></td>
+            <td><?php echo $user[$i]['Department']?></td>
+
+
+            <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
+
+            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+
+        </tr>
+
+
+
+
+                                    <?php endfor;?>
+        <!-- and so on... -->
+    </tbody>
+</table>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
 
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
@@ -321,27 +349,23 @@ for($i=0; $i<count($rows_array); $i++)
         </div>
 
     </div>
-
-        </div>
-        
-    </div>
+    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
+
+
     <!-- Wraper Ends Here -->
-
-
-
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/dashboard.js"></script>
+    <script src="../UserData/js/transfer.js"></script>
 
 
     <script>
@@ -351,9 +375,6 @@ for($i=0; $i<count($rows_array); $i++)
 
         });
     </script>
-
-
-
 
 </body>
 
