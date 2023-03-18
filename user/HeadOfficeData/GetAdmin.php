@@ -5,7 +5,7 @@ function getUsers (){
     // Create a new PDO connection object
     include("../../DB config.php");
 
-    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_Role = 'Staff'");
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_Role = 'Admin'");
 
     $result = $stmt->execute();
 
