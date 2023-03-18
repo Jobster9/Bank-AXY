@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function getChartDocs (){
 
     // Specify your database credentials here
