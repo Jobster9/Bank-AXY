@@ -1,30 +1,31 @@
 <?php
-    
-    //chart data
-    include("GetChartDocs.php");
 
-$rows_array = getChartDocs();
+//chart data
+include("header.php");
+include("GetChartDocs.php");
+
+/*$rows_array = getChartDocs();
 $chart_data = [];
 for($i=0; $i<count($rows_array); $i++)
 {
-    $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-    $rows_array[$i] = $rowDate->format('M-Y');
-}
+$rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
+$rows_array[$i] = $rowDate->format('M-Y');
+}*/
 
-    $dataPoints = array( 
-        array("y" => 3373.64, "label" => "January" ),
-        array("y" => 2435.94, "label" => "February" ),
-        array("y" => 1842.55, "label" => "March" ),
-        array("y" => 1828.55, "label" => "April" ),
-        array("y" => 1039.99, "label" => "May" ),
-        array("y" => 765.215, "label" => "June" ),
-        array("y" => 612.453, "label" => "July" ),
-        array("y" => 612.453, "label" => "August" ),
-        array("y" => 612.453, "label" => "September" ),
-        array("y" => 612.453, "label" => "October" ),
-        array("y" => 612.453, "label" => "November" ),
-        array("y" => 612.453, "label" => "December" )
-    );
+$dataPoints = array(
+    array("y" => 3373.64, "label" => "January"),
+    array("y" => 2435.94, "label" => "February"),
+    array("y" => 1842.55, "label" => "March"),
+    array("y" => 1828.55, "label" => "April"),
+    array("y" => 1039.99, "label" => "May"),
+    array("y" => 765.215, "label" => "June"),
+    array("y" => 612.453, "label" => "July"),
+    array("y" => 612.453, "label" => "August"),
+    array("y" => 612.453, "label" => "September"),
+    array("y" => 612.453, "label" => "October"),
+    array("y" => 612.453, "label" => "November"),
+    array("y" => 612.453, "label" => "December")
+);
 ?>
 <!doctype html>
 <html lang="en">
@@ -282,7 +283,6 @@ for($i=0; $i<count($rows_array); $i++)
 
 <body>
 
-    <?php include "header.php" ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
