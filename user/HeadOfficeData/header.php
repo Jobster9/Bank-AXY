@@ -1,11 +1,18 @@
-<?php include "../../config.php"; ?>
+<?php include "../../config.php"; 
+    session_start();
+
+
+
+
+
+?>
 <div id="wrapper ribbon ribbon-top-right">
     <div class="overlay"></div>
 
     <!-- Sidebar -->
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
         <div class="simplebar-content" style="padding: 0px;">
-            <a class="sidebar-brand" href="../../index.php">
+            <a class="sidebar-brand" href="../../index.php" style ="font-size: 25px">
                 <span class="align-middle"><?php echo BANKNAME ?></span>
 
             </a>
@@ -17,94 +24,37 @@
                     </li> -->
                 <li class="menuHover">
 
-                    <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
                         <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
                     </a>
                 </li>
 
-                <li class="menuHover">
-                    <a href="Transfer.php" id="Transfer" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bx-transfer ico"></i> Transfer
-                    </a>
-                </li>
+
 
                 <li class="menuHover box-icon">
-                    <a href="saving.php" id="Saving" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> Saving
+                    <a href="ViewStaff.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Staff
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a href="T_history.php" id="TransactionHistory" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Transaction History
+                    <a href="CreateStaff.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Staff
                     </a>
                 </li>
-
-                <li class="has-sub menuHover">
-                    <a class="nav-link collapsed text-left" href="#collapseExample2" role="button" data-toggle="collapse">
-                        <i class="flaticon-user"></i> <i class="bx bx-user-circle Profile ico"></i> Profile
-                    </a>
-                    <div class="collapse menu mega-dropdown" id="collapseExample2">
-                        <div class="dropmenu" aria-labelledby="navbarDropdown">
-                            <div class="container-fluid ">
-                                <div class="row">
-                                    <div class="col-lg-12 px-2">
-                                        <div class="submenu-box">
-                                            <ul class="list-unstyled m-0">
-                                                <li><a id="Profile" class="" href="profile.php">Profile</a></li>
-                                                <li><a id="SecureAccount" href="secureAccount.php">Secure Account</a></li>
-                                                <!-- <li><a href="">Contact Us</a></li> -->
-                                                <!-- <li><a href="">Feedback</a></li> -->
-                                                <!-- <li><a href="">Help</a></li> -->
-                                                <!-- <li><a href="">ReactJS</a></li> -->
-                                                <!-- <li><a href="">Asp.net</a></li> -->
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-
 
                 <li class="menuHover">
-                    <a href="cards.php" id="Cards" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-credit-card ico"></i>Cards
+                    <a href="AuditTrail.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Audit Trails
                     </a>
                 </li>
 
-                <!-- <li class="sidebar-header">
-                        tools and component
-                    </li> -->
-
-                <li class="menuHover box-icon">
-                    <a href="../../pages/insurance.php" id="Insurance" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-dollar-circle ico"></i>Insurance
-                    </a>
-                </li>
-
-                <li class="menuHover box-icon">
-                    <a href="../../pages/loans.php" id="Loans" class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bxs-coin ico"></i> Loans
-                    </a>
-                </li>
-
-                <!-- <li class="sidebar-header">
-                        tools and component
-                    </li> -->
-                <!-- <li id="Setting" class="menuHover">
-                    <a class="nav-link text-left" role="button">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-cog ico"></i> Setting
-                    </a>
-                </li> -->
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="../logout.php">
+                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>
+
 
             </ul>
 
@@ -137,10 +87,10 @@
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo BANKNAME ?></h1>
+                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum ". $_SESSION['User_ID'] ?></h1>
 
 
-                            <!-- <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -220,15 +170,7 @@
                         </li> -->
 
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img id="HeaderProfile" hidden class="img-profile rounded-circle">
-                                <span id="HeaderProfileTag" class="btn btn-circle text-white" style="font-size: 13px; background-color: <?php echo $_SESSION['ProfileColor'] ?>;"><?php echo strtoupper($_SESSION['ProfileText']) ?></span>
-                            </a>
 
-
-                        </li>
 
                     </ul>
 
