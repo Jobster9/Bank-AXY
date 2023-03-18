@@ -267,6 +267,12 @@ for($i=0; $i<count($rows_array); $i++)
   padding: 12px 20px;
   border-radius: 4px;
 }
+@media screen and (min-width: 368px) {
+  .modal.show .modal-dialog {
+    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
+    margin-left: auto;
+  }
+}
 
 
     </style>
@@ -303,7 +309,7 @@ for($i=0; $i<count($rows_array); $i++)
                                 <h5 class="card-title light mb-4 "></h5>
 
             <!--chart here-->
-            <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+            <div id="chartContainer" style="height: 450px; width: 85%;"></div>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
