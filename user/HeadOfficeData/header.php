@@ -6,6 +6,9 @@
 
 
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <div id="wrapper ribbon ribbon-top-right">
     <div class="overlay"></div>
 

@@ -1,8 +1,10 @@
     <?php include "header.php";
     include "CreateStaffSQL.php";?>
+    <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

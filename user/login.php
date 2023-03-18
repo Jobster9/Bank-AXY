@@ -49,7 +49,9 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 
 <!DOCTYPE html>
 <html lang="en">

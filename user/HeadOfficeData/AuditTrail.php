@@ -2,6 +2,9 @@
 include "GetAuditTrails.php";
 $auditTrail = GetAuditTrails();
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 

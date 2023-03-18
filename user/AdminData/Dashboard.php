@@ -27,6 +27,9 @@ $dataPoints = array(
     array("y" => 612.453, "label" => "December")
 );
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!doctype html>
 <html lang="en">
 

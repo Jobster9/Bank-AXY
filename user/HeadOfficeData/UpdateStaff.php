@@ -66,6 +66,9 @@ function getStaffMember ($User_ID){
 
 
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 

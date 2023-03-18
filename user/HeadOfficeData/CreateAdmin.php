@@ -1,6 +1,9 @@
     <?php include "header.php" ;
         include "CreateAdminSQL.php";?>
         ?>
+        <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
