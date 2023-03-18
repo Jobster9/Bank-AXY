@@ -64,6 +64,7 @@ function getStaffMember ($User_ID){
     return $rows_array;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -312,35 +313,35 @@ function getStaffMember ($User_ID){
 
                                 <div class="form-group">
                                     <label for="username" class="sr-only">Username</label>
-                                    <input type="text" name="User_ID" id="Username" class="form-control" placeholder=<?php echo $staff[0]['User_ID'] ?> required>
+                                    <input type="text" name="User_ID" id="Username" class="form-control" value=<?php echo $staff[0]['User_ID'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="first_name" class="sr-only">First Name</label>
-                                    <input type="text" name="First_Name" id="First_Name" class="form-control" placeholder=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="last_name" class="sr-only">Last Name</label>
-                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" placeholder=<?php echo $staff[0]['Last_Name'] ?> required>
+                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email" class="sr-only">Email</label>
-                                    <input type="text" name="Email" id="Email" class="form-control" placeholder=<?php echo $staff[0]['Email'] ?> required>
+                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group mb-4">
                                     <label for="password" class="sr-only">Password</label>
-                                    <input type="password" name="Password" id="password" class="form-control" placeholder="***********" required>
+                                    <input type="password" name="Password" id="password" class="form-control" value="***********" required>
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
                                 <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
