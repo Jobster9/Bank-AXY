@@ -32,14 +32,14 @@
 
 
                 <li class="menuHover box-icon">
-                    <a href="ViewStaff.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Staff
+                    <a href="ViewAdmin.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Admin
                     </a>
                 </li>
 
                 <li class="menuHover">
-                    <a href="CreateStaff.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Staff
+                    <a href="CreateAdmin.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Admin
                     </a>
                 </li>
 
