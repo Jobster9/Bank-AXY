@@ -1,6 +1,7 @@
 <?php
-session_start();
-function getChartDocs (){
+
+function getChartDocs()
+{
 
     // Specify your database credentials here
     include("../../DB config.php");
@@ -16,4 +17,3 @@ function getChartDocs (){
 
     return $rows_array;
 }
-

@@ -2,7 +2,7 @@
 
 // Specify your database credentials here
 
-$host = 'ABDULNAZIR';
+$host = 'DESKTOP-AVCNUEK';
 
 
 $dbname = 'BankAXY';
