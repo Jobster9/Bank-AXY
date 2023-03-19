@@ -1,6 +1,10 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
+include "AccessControl.php";
+
 $user = getUsers ();
+$document = "";
+
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -22,6 +26,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.css">
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.min.css">
@@ -35,6 +41,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <style>
+        .alert {
+            display: none;
+        }
+    </style>
+
+
+    
     <style>
         .btn-pay {
             background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -177,20 +194,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   text-decoration: none;
   background-color: #cc0000;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   outline: none;
   transition: 0.3s;
 }
 
-.btn:hover{
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #005af0;
-  padding: 10px 20px;
-  border: none;
-  outline: 1px solid #010101;
-}
 .form input {
   margin: 10px 0;
   width: 100%;
@@ -201,7 +210,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   border-radius: 4px;
 }
 
-
+.btn {
+    float: right;
+    Margin-top: -5px
+}
     </style>
 
 
@@ -219,6 +231,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
                 </div>
             </div>
+            
 
 
 
@@ -283,6 +296,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </style>
 <table class="styled-table">
     <thead>
+
+    </div>
         <tr>
             <th>Document Name</th>
             <th>Document Type</th>
@@ -307,16 +322,29 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
             <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
+
+<?php 
+$Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_ID']);
+if ($Access != null){
+?>
             <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
         </tr>
+<?php } else { 
+    ?>
 
 
 
+    
+    <td><a href="RequestAccess.php?File_Location=<?php echo$i ?>">View</a>
+</td>
+
+    <?php } ?>
 
                                     <?php endfor;?>
         <!-- and so on... -->
     </tbody>
 </table>
+
 
 
 
@@ -370,6 +398,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
         });
+
+        function alert (i){
+                $('.alert').show();
+        };
+
     </script>
 
 </body>
