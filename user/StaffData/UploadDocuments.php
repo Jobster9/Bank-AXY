@@ -228,13 +228,16 @@
     <div class="drop_box">
     <header>
         <h4>Select File here</h4>
+        <h1><?php /* if (isset($_POST['submit'])) {
+         echo ("submit active");
+         } */?></h1>
       </header>
       <p>Files Supported:PDF</p>
   <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
   <div class="form-group mb-1 mt-5">
   <!-- <button class="btn" onclick="document.getElementById('file-upload').click()">Choose File</button> -->
-<input type="file" class="form-control-file" accept=".pdf" id="file-upload" onchange="showInputs()">
+<input type="file" class="form-control-file" accept=".pdf" id="file-upload" name="uploaded-file" onchange="showInputs()">
   </div>
   <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
   <p>Please ensure the filename follows the standardized convention: 
@@ -252,10 +255,10 @@
     <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
     <select class="form-control" id="doc-category" name="doc-category">
-      <option value=<?php LOANS_DEP ?>>Loans</option>
-      <option value=<?php MORTGAGES_DEP ?>>Mortgages</option>
-      <option value=<?php ADMIN_DEP ?>>Administration</option>
-      <option value=<?php ACCOUNTS_DEP ?>>Accounts</option>
+      <option value="<?php echo LOANS_DEP ?>">Loans</option>
+      <option value="<?php echo MORTGAGES_DEP ?>">Mortgages</option>
+      <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+      <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
     </select>
 </div>
 </div>
@@ -263,13 +266,13 @@
     <label for="doc-category">Document Criticality:</label>
     <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-    <select class="form-control" id="doc-category" name="doc-category">
-      <option value=<?php CRIT_HIGH ?>>High</option>
-      <option value=<?php CRIT_MEDIUM ?>>Medium</option>
-      <option value=<?php CRIT_LOW ?>>Low</option>
+    <select class="form-control" id="doc-criticality" name="doc-criticality">
+      <option value="<? echo CRIT_HIGH ?>">High</option>
+      <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
+      <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
 </div>
-<button type="submit" class="btn mb-1 mt-5">Upload File</button>
+<button type="submit" name="submit" class="btn mb-1 mt-5">Upload File</button>
   </div>
 </form>
 </div>
@@ -322,70 +325,6 @@ function showInputs() {
   }
 }
 </script>
-<?php
-if (isset($_POST['submit'])) {
-    $result = UploadDocument();
-    if ($result) {
-        echo "File uploaded successfully!";
-    } else {
-        echo "File not uploaded";
-    }
-}
-
-function UploadDocument()
-{
-    include("../../DB config");
-    // Get the form data
-    $docName = $_POST['docName'];
-    $docCategory = $_POST['docCategory'];
-    $docCriticality = $_POST['docCriticality'];
-
-    //Get the user data 
-    $OwnerID = $_SESSION['USER_ID'];
-
-    // Get the uploaded file
-    $file = $_FILES['file'];
-    $fileName = $file['name'];
-    $fileType = $file['type'];
-    $fileSize = $file['size'];
-    $fileTempName = $file['tmp_name'];
-    echo ($fileTempName);
-
-    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-        echo ("File upload error");
-    }
-    // Read the file content
-    $fileContent = file_get_contents($fileTempName);
-
-    // Convert the string of bytes to a binary format that SQL Server can recognize
-    $file_binary = pack('H*', bin2hex($file_contents));
-
-    // Prepare the SQL statement
-    $sql = "INSERT INTO dbo.Documents (Document_ID,Document_Name,Document_Type,Document_Criticality,Owner_ID,Creation_Date_Time,File_Location)
-            VALUES (NEWID(), ?, ?, ?, ?, GETDATE(), ?)";
-
-    // Bind the parameters to the statement
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(2, $docName, PDO::PARAM_STR);
-    $stmt->bindParam(3, $docCategory, PDO::PARAM_STR);
-    $stmt->bindParam(4, $docCriticality, PDO::PARAM_STR);
-    $stmt->bindParam(5, $OwnerID, PDO::PARAM_STR);
-    $stmt->bindParam(7, $file_binary, PDO::PARAM_LOB);
-
-    // Execute the statement
-    $stmt->execute();
-
-    // Check if the insertion was successful
-    if ($stmt->rowCount() > 0) {
-        echo "File uploaded successfully!";
-        return true;
-    } else {
-        echo "File upload failed!";
-        return false;
-    }
-}
-
-?>
 
 </body>
 
