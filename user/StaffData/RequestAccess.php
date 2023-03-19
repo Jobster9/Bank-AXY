@@ -243,7 +243,6 @@ $rand = rand(100, 999);
 $userID = $user[$i]["Owner_ID"];
 $documentID =  $user[$i]["Document_ID"];
 $requestID = $rand;     //change this to what Access_Request_ID should be
-$departmentarray = getDepartment($userID);
 
 $department = "1";  // Change this to get the correct department
 $datetime = date('d/m/Y H:i');
@@ -281,14 +280,31 @@ window.location.href = 'ViewDocuments.php';
                         <div class="card-body">
                             <h5 class="card-title light mb-4 "></h5>
 
-                <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to access: <?php echo $user[$i]["Document_Name"] ?></h3> 
 
-                                    <form method="post">
+                                <?php if ($i == "Requested") { ?>
+                                    <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested access for this document</h3> 
+
            
-                                <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                    <input type="submit" value="Request Access" name="submit" style="margin-bottom: 10%;" class="btn btn-pay btn-lg btn-block">
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
-</form>
+
+                                    <form action="ViewDocuments.php">
+                                    <input type="submit" value="Go Back" class="btn btn-pay btn-lg btn-block" style="margin-bottom: 10%;"/>
+                                    </form>
+
+                                    <?php } else { ?>
+                                        <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to access: <?php echo $user[$i]["Document_Name"] ?></h3> 
+
+           
+<div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+
+
+                                        <form method="post">
+
+                                    <input type="submit" value="Request Access" name="submit" style="margin-bottom: 10%;" class="btn btn-pay btn-lg btn-block">
+                                    </form>
+
+                                    <?php } ?>
 
                                 </div>
                             </div>

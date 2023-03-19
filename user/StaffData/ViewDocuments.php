@@ -325,16 +325,20 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <?php 
 $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_ID']);
-if ($Access != null){
+$RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_ID']);
+if ($RequestAccess != null){
 ?>
-            <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+    <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+
         </tr>
-<?php } else { 
+<?php } else if ($Access != null) { 
     ?>
+                <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
 
 
-    
+    <?php } else { ?>
+
     <td><a href="RequestAccess.php?File_Location=<?php echo$i ?>">View</a>
 </td>
 
