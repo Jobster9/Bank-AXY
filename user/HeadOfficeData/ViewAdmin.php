@@ -1,7 +1,8 @@
 <?php include "header.php"; 
-include "GetAuditTrails.php";
-$auditTrail = GetAuditTrails();
+include "GetAdmin.php";
+$user = getUsers ();
 ?>
+
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -13,7 +14,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Audit Trails</title>
+    <title>Transfer</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -216,7 +217,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Admin here:</h1>
                 </div>
             </div>
 
@@ -284,26 +285,37 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <table class="styled-table">
     <thead>
         <tr>
-            <th>Audit ID</th>
             <th>User ID</th>
-            <th>Document ID</th>
-            <th>Date & Time</th>
-            <th>Action</th>         
-
-
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Last Active</th>
+            <th>Branch</th>            
+            <th>Department</th>   
+            <th>Update</th>  
+            <th>Delete</th>             
         </tr>
     </thead>
     <tbody>
                                 <?php
-                                    for ($i=0; $i<count($auditTrail); $i++):
+                                    for ($i=0; $i<count($user); $i++):
 
                                 ?>
         <tr class="active-row">
-            <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
-            <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
+            <td><?php echo $user[$i]['User_ID']?></td>
+            <?php $Staff_ID = $user[$i]['User_ID'];?>
+            <td><?php echo $user[$i]['First_Name']?></td>
+            <td><?php echo $user[$i]['Last_Name']?></td>
+            <td><?php echo $user[$i]['Email']?></td>
+            <td><?php echo $user[$i]['Last_Active']?></td>
+            <td><?php echo $user[$i]['Branch']?></td>
+            <td><?php echo $user[$i]['Department']?></td>
+
+
+            <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
+
+            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+
         </tr>
 
 
@@ -371,5 +383,3 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </body>
 
 </html>
-
-

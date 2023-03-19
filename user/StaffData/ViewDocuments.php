@@ -2,6 +2,9 @@
 include "GetDocuments.php";
 $user = getUsers ();
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -286,6 +289,7 @@ $user = getUsers ();
             <th>Document Criticality</th>
             <th>Owner ID</th>
             <th>Creation Date & Time</th>
+            <th>Update</th>            
             <th>View</th>            
 
 
@@ -302,6 +306,7 @@ $user = getUsers ();
             <td><?php echo $user[$i]['Document_Criticality']?></td>
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
+            <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
             <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
         </tr>
 

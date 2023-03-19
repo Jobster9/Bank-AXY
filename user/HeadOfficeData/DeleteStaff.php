@@ -1,7 +1,19 @@
-<?php include "header.php"; 
-include "GetAuditTrails.php";
-$auditTrail = GetAuditTrails();
-?>
+    <?php include "header.php";
+
+    // Create a new PDO connection object
+    include("DeleteUserDetails.php");
+
+
+if (isset($_POST['delete'])){
+    include("../../DB config.php");
+    $User_ID = $_GET['User_ID'];
+    $stmt = $pdo->prepare('DELETE FROM Bank_Employees WHERE User_ID = "$User_ID"');
+    $stmt->execute([$User_ID]);
+    // redirect to viewstaff.php
+}
+
+
+    ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -13,7 +25,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Audit Trails</title>
+    <title>Transfer</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -216,10 +228,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Confirm Deletion of: <?php echo $User_ID ?></h1>
                 </div>
             </div>
-
 
 
 
@@ -233,89 +244,24 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+                                        <form method="post">
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">First Name: <?php echo $rows_array[0]["First_Name"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Name: <?php echo $rows_array[0]["Last_Name"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
 
 
 
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Audit ID</th>
-            <th>User ID</th>
-            <th>Document ID</th>
-            <th>Date & Time</th>
-            <th>Action</th>         
-
-
-        </tr>
-    </thead>
-    <tbody>
-                                <?php
-                                    for ($i=0; $i<count($auditTrail); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
-            <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
-        </tr>
 
 
 
-
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
-
-
-
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <button type="submit" value="delete" name ="delete" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
+</form>
+                                    </div>
                                 </div>
 
                             </div>
@@ -371,5 +317,3 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </body>
 
 </html>
-
-
