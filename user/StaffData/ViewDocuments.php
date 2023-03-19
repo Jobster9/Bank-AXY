@@ -1,6 +1,5 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
-include "AcessControl.php";
 $user = getUsers ();
 ?>
 <script>
@@ -308,11 +307,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <td><?php echo $user[$i]['Owner_ID']?></td>
             <td><?php echo $user[$i]['Creation_Date_Time']?></td>
             <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
-            <?php if ($user = "4") { ?>
             <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-
-
-            <?php   } ?>
         </tr>
 
 
