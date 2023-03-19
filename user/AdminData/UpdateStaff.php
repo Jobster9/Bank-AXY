@@ -1,58 +1,57 @@
-<?php 
-include "header.php" ;
-
+<?php
+include "header.php";
+$action = "";
+$validated = false;
+$updateButton = "Validate";
 $User_ID = $_GET['User_ID'];
-$User_ID_Error = $User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Password_Error = $invalidMesg = "";
+$User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Password_Error = $invalidMesg = "";
 $allField = True;
 $staff = GetStaffMember($User_ID);
 
 if (isset($_POST['submit'])) {
-    if ($_POST["User_ID"] == "") 
-    {
-        $User_ID_Error = "User ID is required";
-        $allField = FALSE;
-    }
 
-    if ($_POST["First_Name"] == "") 
-    {
+    if ($_POST["First_Name"] == "") {
         $User_ID_Error = "First Name is required";
         $allField = FALSE;
     }
 
-    if ($_POST["Last_Name"] == "") 
-    {
+    if ($_POST["Last_Name"] == "") {
         $User_ID_Error = "Last Name is required";
         $allField = FALSE;
     }
 
-    if ($_POST["Email"] == "") 
-    {
+    if ($_POST["Email"] == "") {
         $User_ID_Error = "Email is required";
         $allField = FALSE;
     }
 
-    if ($_POST["Password"] == null) 
-    {
+    if ($_POST["Password"] == null) {
         $User_Password_Error = "Password is required";
         $allField = FALSE;
     }
 
 
-    if ($allField == True) 
-    {
-        $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute([First_Name, Last_Name, Email, Password, Username]);
-        
-    } 
+    if ($allField == True) {
+        $Firstname = $_POST["First_Name"];
+        $Lastname = $_POST["Last_Name"];
+        $Email = $_POST["Email"];
+        $Password = $_POST["Password"];
+        $result = updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID);
+        if ($result) {
+            $action = "ViewStaff.php?updated=true";
+            $updateButton = "Update";
+            $validated = true;
+        }
+    }
 }
 
-function getStaffMember ($User_ID){
+function getStaffMember($User_ID)
+{
 
     // Create a new PDO connection object
     include("../../DB config.php");
 
-    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '".$User_ID."'");
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '" . $User_ID . "'");
 
     $result = $stmt->execute();
 
@@ -62,6 +61,20 @@ function getStaffMember ($User_ID){
     }
 
     return $rows_array;
+}
+
+function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
+{
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
+
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([$Firstname, $Lastname, $Email, $Password, $User_ID]);
+    return $result;
+
 }
 
 ?>
@@ -293,7 +306,7 @@ function getStaffMember ($User_ID){
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
+                                <h3 class="h3 mb-2 light" style="text-align: center;"><?php echo $User_ID ?></h3>
 
 
 
@@ -302,48 +315,54 @@ function getStaffMember ($User_ID){
 
 
 
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                            <form action="<?php echo $action ?>" method="POST">
 
                                 <?php if (isset($_GET['error'])) { ?>
 
-                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                                                                                                                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
                                 <?php } ?>
 
                                 <div class="form-group">
-                                    <label for="username" class="sr-only">Username</label>
-                                    <input type="text" name="User_ID" id="Username" class="form-control" placeholder=<?php echo $staff[0]['User_ID'] ?> required>
-                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
-                                    <p id="alert1" style="color: red;"></p>
+                                <label for="first_name" class="">First Name</label>
+                                <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="first_name" class="sr-only">First Name</label>
-                                    <input type="text" name="First_Name" id="First_Name" class="form-control" placeholder=<?php echo $staff[0]['First_Name'] ?> required>
                                     <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
+    
 
                                 <div class="form-group">
-                                    <label for="last_name" class="sr-only">Last Name</label>
-                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" placeholder=<?php echo $staff[0]['Last_Name'] ?> required>
+                                <label for="last_name" class="">Last Name</label>
+                                <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>                              
+                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
+                                </div>
                                     <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email" class="sr-only">Email</label>
-                                    <input type="text" name="Email" id="Email" class="form-control" placeholder=<?php echo $staff[0]['Email'] ?> required>
+                                <label for="email" class="">Email</label>
+                                <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
+                                </div>
                                     <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label for="password" class="sr-only">Password</label>
-                                    <input type="password" name="Password" id="password" class="form-control" placeholder="***********" required>
+                                <label for="password" class="">Password</label>
+                                <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+                                    <input type="password" name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
+                                </div>
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
-                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
+                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
                             </form>
 

@@ -232,21 +232,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-                   <small> <h3 class="h3 mb-0 light" style="text-align: center;">User ID: <?php echo $rows_array[0][3] ?></h3>/<small> 
-
-
-
-
-
-
-
-
-
-
-
+                    <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
+    <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
+                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
 
                                     </div>
                                 </div>
