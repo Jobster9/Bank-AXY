@@ -8,7 +8,24 @@ if (empty($_SESSION['User_ID'])) {
     exit;
 }
 
+echo '<script>
+var timer = null;
+document.addEventListener("mousemove", function() {
+    if (timer) {
+        clearTimeout(timer);
+    }
+    timer = setTimeout(function() {
+        destroySession();
+    }, 120000);
+});
 
+function destroySession() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/BankAXY/user/logout.php", true);
+    xhttp.send();
+    window.location.href = "/BankAXY/user/login.php";
+}
+</script>';
 
 ?>
 <script>
