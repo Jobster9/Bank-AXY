@@ -1,78 +1,69 @@
 <?php
+error_reporting(E_ERROR);
 include_once("../config.php");
 include_once("checkLogin.php");
-
 $User_ID_Error = $User_Password_Error = $invalidMesg = "";
 $allField = True;
+$recaptcha_response = $_POST['g-recaptcha-response'];
+$secret_key = '6LfWeRQlAAAAANkUBSkSLlVPzGzZDwySUzbpoxpl';
+$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response=".$recaptcha_response);
+$response_data = json_decode($response);
 
-if (isset($_POST['submit'])) {
-    if ($_POST["User_ID"] == "") {
-        $User_ID_Error = "User ID is required";
-        $allField = FALSE;
-    }
-
-    if ($_POST["Password"] == null) {
-        $User_Password_Error = "Password is required";
-        $allField = FALSE;
-    }
-
-
-    if ($allField == True) {
-
-        $array_User = verifyUsers();
-
-        if (!empty($array_User)) {
-            $User_ID = $array_User[0]["User_ID"];
-
-            $Role = $array_User[0]["User_Role"];
-            $Password = $array_User[0]["Password"];
-        
-
-        if ($Role == "Staff") {
-            header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+    if (isset($_POST['submit'])) {
+if($response_data->success){        
+        if ($_POST["User_ID"] == "") {
+            $User_ID_Error = "User ID is required";
+            $allField = FALSE;
         }
-        if ($Role == "Admin") {
-            header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        if ($_POST["Password"] == null) {
+            $User_Password_Error = "Password is required";
+            $allField = FALSE;
         }
-        if ($Role == "Head Office") {
-            header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+        if ($allField == True) {
+            $array_User = verifyUsers();
+            if (!empty($array_User)) {
+                $User_ID = $array_User[0]["User_ID"];
+                $Role = $array_User[0]["User_Role"];
+                $Password = $array_User[0]["Password"];
+            if ($Role == "Staff") {
+                header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+            }
+            if ($Role == "Admin") {
+                header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+            }
+            if ($Role == "Head Office") {
+                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
+            }
+        } else{
+            $invalidMesg = "Invalid User ID or Password!";
         }
-
-    } else{
-        $invalidMesg = "Invalid User ID or Password!";
-
+        } else {
+            $invalidMesg = "Invalid User ID or Password!";
+        }
     }
-    } else {
-
-        $invalidMesg = "Invalid User ID or Password!";
-    }
+else{
+            $invalidMesg = "Verification not completed!";    
+}    
 }
-?>
 
+?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <!-- Favicons -->
     <link href="../assets/img/favicon-32x32.png" rel="icon">
     <link href="../assets/img/apple-icon-180x180.png" rel="apple-touch-icon">
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/login.css">
-
-    <!-- Extra CSS for external module -->
     <style>
         .swal-button {
             padding: 7px 19px;
@@ -81,16 +72,42 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             font-size: 12px;
             color: white;
         }
-
         .swal-button:hover {
             opacity: 0.8;
             background-color: transparent;
         }
     </style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+var timeoutID;
+
+// Start the timer on page load
+function startTimer() {
+  timeoutID = window.setTimeout(redirectToIndex, 300000); // 2 minutes = 120,000 milliseconds
+}
+
+// Reset the timer on user activity
+function resetTimer() {
+  window.clearTimeout(timeoutID);
+  startTimer();
+}
+
+// Redirect to the index page
+function redirectToIndex() {
+  window.location.href = "http://localhost/BankAXY/index.php";
+}
+
+// Set up event listeners for user activity
+document.addEventListener("mousemove", resetTimer);
+document.addEventListener("keypress", resetTimer);
+document.addEventListener("click", resetTimer);
+
+// Start the timer when the page has finished loading
+window.addEventListener("load", startTimer);
+</script>
 
 
 </head>
-
 <body>
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="container">
@@ -106,16 +123,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Sign into your account</p>
-
-                            <!-- Login Form -->
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-
                                 <?php if (isset($_GET['error'])) { ?>
-
-                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
-
+                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
                                 <?php } ?>
-
                                 <div class="form-group">
                                     <label for="username" class="sr-only">Username</label>
                                     <input type="text" name="User_ID" id="Username" class="form-control" placeholder="Username" required>
@@ -127,10 +138,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <input type="password" name="Password" id="password" class="form-control" placeholder="***********" required>
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="6LfWeRQlAAAAAK97iBXQTSYfVe8wEBSx8tq2bDph"></div>
                                 <input name="submit" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Login">
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
                             </form>
-
                             <nav class="login-card-footer-nav">
                                 <a href="../pages/terms.php">Terms of use.</a>
                                 <a href="../pages/privacypolicy.php">Privacy policy</a>
@@ -148,22 +159,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../assets/js/showHidePass.js"></script>
     <script>
         <?php if (isset($_GET['error'])) { ?>
-                                                    swal({
-                                                        title: "Account Alert!",
-                                                        text: "<?php echo $_GET['error'] ?>",
-                                                        icon: "error",
-                                                    });
-
-
+        swal({
+            title: "Account Alert!",
+            text: "<?php echo $_GET['error'] ?>",
+            icon: "error",
+        });
         <?php } ?>
     </script>
     <script>
         $(document).ready(function() {
             $('input[type=\'password\']').showHidePassword();
-
-            // $('#OldPassword').showHidePassword();
         });
     </script>
 </body>
-
 </html>
