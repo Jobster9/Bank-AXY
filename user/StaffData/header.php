@@ -3,6 +3,11 @@ session_start();
 
 
 
+if (empty($_SESSION['User_ID'])) {
+    header('Location: /BankAXY/user/login.php');
+    exit;
+}
+
 
 
 ?>
@@ -47,7 +52,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
+                    <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>
