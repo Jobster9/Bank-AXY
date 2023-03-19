@@ -255,13 +255,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
 
-
-
-
-
-
-
-                                <form method="post">
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
                                         <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
 
