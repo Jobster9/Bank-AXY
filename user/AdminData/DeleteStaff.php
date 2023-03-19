@@ -234,9 +234,14 @@
                                 <h5 class="card-title light mb-4 "></h5>
                     <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
     <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
+                                <form method="post">
+                                    <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
 
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
+                                    </div>
+                                    </form>
+                                    <div id="backButton" class="d-grid col-sm-4 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
                                     </div>
                                 </div>
@@ -282,7 +287,26 @@
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
+<?php if (isset($_POST['submit'])) {
+    $result = deleteStaffMember($User_ID);
+    if ($result) {
+        header('Location: viewCustomer.php?deleted=true');
+    }
+}
+function deleteStaffMember($User_ID)
+{
 
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '" . $User_ID . "'");
+
+    $result = $stmt->execute();
+
+    return $result;
+}
+
+?>
     <script>
         $('#bar').click(function() {
             $(this).toggleClass('open');

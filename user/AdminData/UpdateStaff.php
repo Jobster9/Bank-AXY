@@ -36,11 +36,13 @@ if (isset($_POST['submit'])) {
         $Lastname = $_POST["Last_Name"];
         $Email = $_POST["Email"];
         $Password = $_POST["Password"];
-        $result = updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID);
-        if ($result) {
-            $action = "ViewStaff.php?updated=true";
-            $updateButton = "Update";
-            $validated = true;
+        if ($action = " ") {
+            $result = updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID);
+            if ($result) {
+                $action = "ViewStaff.php?updated=true";
+                $updateButton = "Update";
+                $validated = true;
+            }
         }
     }
 }
@@ -319,7 +321,7 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
 
                                 <?php if (isset($_GET['error'])) { ?>
 
-                                                                                                                                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                                                                                                                                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
 
                                 <?php } ?>
 
@@ -365,7 +367,10 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
                                 <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
                             </form>
+                            <div id="backButton" class="d-grid col-sm-3 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
+                                    </div>
                             </div>
                         </div>
                     </div>

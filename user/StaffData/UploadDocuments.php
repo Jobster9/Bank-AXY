@@ -237,7 +237,7 @@
       <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
   <div class="form-group mb-1 mt-5">
   <!-- <button class="btn" onclick="document.getElementById('file-upload').click()">Choose File</button> -->
-<input type="file" class="form-control-file" accept=".pdf" id="file-upload" name="uploaded-file" onchange="showInputs()">
+<input type="file" class="form-control-file" accept=".pdf" id="file-upload" name="uploaded-file" onchange="showInputs()" required>
   </div>
   <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
   <p>Please ensure the filename follows the standardized convention: 
@@ -247,7 +247,7 @@
     <label for="doc-name">Document Name:</label>
     <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-        <input type="text" class="form-control" id="doc-name" name="doc-name" placeholder="Document Name">
+        <input type="text" class="form-control" id="doc-name" name="doc-name" placeholder="Document Name" required>
   </div>
   </div>
   <div class="form-group" id="doc-category-group" style="display:none">
