@@ -244,7 +244,7 @@ $userID = $user[$i]["Owner_ID"];
 $documentID =  $user[$i]["Document_ID"];
 $requestID = $rand;     //change this to what Access_Request_ID should be
 
-$department = "1";  // Change this to get the correct department
+$department = $rand . "1";  // Change this to get the correct department
 $datetime = date('d/m/Y H:i');
 
 
