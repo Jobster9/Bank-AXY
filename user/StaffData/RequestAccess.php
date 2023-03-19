@@ -231,13 +231,41 @@ $i = $_GET['File_Location'];
 if (isset($_POST['submit'])){
 
 //sql for request access
+include("../../DB config.php");
 
+
+date_default_timezone_set('Europe/London');
+
+$stmt = $pdo->prepare('INSERT INTO Access_Control_Request (Access_Request_ID, User_ID, Document_ID, Department, Request_Date_Time) VALUES (:requestID, :userID, :documentID, :department, :dateTime)');
+
+$rand = rand(100, 999);
+
+$userID = $user[$i]["Owner_ID"];
+$documentID =  $user[$i]["Document_ID"];
+$requestID = $rand;     //change this to what Access_Request_ID should be
+$departmentarray = getDepartment($userID);
+
+$department = "1";  // Change this to get the correct department
+$datetime = date('d/m/Y H:i');
+
+
+
+$stmt->bindParam(':requestID', $requestID, SQLITE3_TEXT);
+$stmt->bindParam(':userID', $userID, SQLITE3_TEXT);
+$stmt->bindParam(':documentID', $documentID, SQLITE3_TEXT);
+$stmt->bindParam(':department', $department, SQLITE3_TEXT);
+$stmt->bindParam(':dateTime', $datetime, SQLITE3_TEXT);
+
+
+$stmt->execute();
 
 ?>
 <script type="text/javascript">
 window.location.href = 'ViewDocuments.php';
 </script>
+
 <?php
+
 }
 
 
