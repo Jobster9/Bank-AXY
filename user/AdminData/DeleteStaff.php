@@ -4,13 +4,13 @@
     include("DeleteUserDetails.php");
 
 
-if (isset($_POST['delete'])){
-    include("../../DB config.php");
-    $User_ID = $_GET['User_ID'];
-    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
-    $stmt->execute([$User_ID]);
-    // redirect to viewstaff.php
-}
+    if (isset($_POST['delete'])) {
+        include("../../DB config.php");
+        $User_ID = $_GET['User_ID'];
+        $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
+        $stmt->execute([$User_ID]);
+        // redirect to viewstaff.php
+    }
 
 
     ?>
@@ -255,16 +255,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
 
+                                    <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
 
-
-
-
-
-
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="submit" value="delete" name ="delete" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
-</form>
+                                    </div>
+                                    </form>
+                                    <div id="backButton" class="d-grid col-sm-4 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
                                     </div>
                                 </div>
@@ -310,7 +307,26 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
+<?php if (isset($_POST['submit'])) {
+    $result = deleteStaffMember($User_ID);
+    if ($result) {
+        header('Location: viewCustomer.php?deleted=true');
+    }
+}
+function deleteStaffMember($User_ID)
+{
 
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '" . $User_ID . "'");
+
+    $result = $stmt->execute();
+
+    return $result;
+}
+
+?>
     <script>
         $('#bar').click(function() {
             $(this).toggleClass('open');
