@@ -1,6 +1,8 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
+include "GetChartDocs.php";
 $user = getUsers ();
+$docs = getChartDocs();
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -221,7 +223,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             </div>
 
 
-
+            <form method="post" style="margin:auto">
+                <label>Search</label>
+                <input type="text" name="search">
+                <input type="submit" name="">
+            </form>
 
 
 
@@ -375,3 +381,50 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </body>
 
 </html>
+
+<?php
+    $host = 'LAPTOP-B9IKBMD8';
+    $dbname = 'BankAXY';
+    $con = new PDO("sqlsrv:Server=$host;Database=$dbname",$_SESSION['User_ID'],'password123');
+
+    if(isset($_POST["submit"])) 
+    {
+        $str = $_POST["search"];
+        $sth = $con->prepare("SELECT * FROM `search` WHERE Document_Name = '$str'");
+
+        $sth->setFetchMode(PDO:: FETCH_OBJ);
+        $sth->execute();
+
+        if($docs = $sth->fetch())
+        {
+            ?>
+            <br><br><br>
+            <table class="styled-table">
+                <tr>
+                    <th>Document Name</th>
+                    <th>Document Type</th>
+                    <th>Document Criticality</th>
+                    <th>Owner ID</th>
+                    <th>Creation Date & Time</th>
+                    <th>Update</th>
+                    <th>View</th>
+                </tr>
+                <tr>
+                    <td><?php echo $docs->Document_Name; ?></td>
+                    <td><?php echo $docs->Document_Type; ?></td>
+                    <td><?php echo $docs->Document_Criticality; ?></td>
+                    <td><?php echo $docs->Owner_ID; ?></td>
+                    <td><?php echo $docs->Creation_Date_Time; ?></td>
+                    <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
+                    <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                </tr>
+            </table>
+        <?php
+        }
+        
+        else {
+            echo "Document does not exist";
+        }
+
+    }
+?>
