@@ -244,6 +244,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
+
+                    <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
+    <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
+
                                         <form method="post">
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">First Name: <?php echo $rows_array[0]["First_Name"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Name: <?php echo $rows_array[0]["Last_Name"] ?></h3><small> 
@@ -261,6 +265,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
                                         <button type="submit" value="delete" name ="delete" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
 </form>
+
                                     </div>
                                 </div>
 

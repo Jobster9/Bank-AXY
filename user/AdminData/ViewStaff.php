@@ -1,6 +1,6 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetStaff.php";
-$user = getUsers ();
+$user = getUsers();
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -281,6 +281,24 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     margin: 25px auto;
 }
 </style>
+<?php if (isset($_GET['updated'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                        The user has been successfully updated.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['deleted'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                The user has been deleted.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+<?php endif; ?>            
+
 <table class="styled-table">
     <thead>
         <tr>
@@ -297,30 +315,30 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
                                 <?php
-                                    for ($i=0; $i<count($user); $i++):
+                                for ($i = 0; $i < count($user); $i++):
 
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['User_ID']?></td>
-            <?php $Staff_ID = $user[$i]['User_ID'];?>
-            <td><?php echo $user[$i]['First_Name']?></td>
-            <td><?php echo $user[$i]['Last_Name']?></td>
-            <td><?php echo $user[$i]['Email']?></td>
-            <td><?php echo $user[$i]['Last_Active']?></td>
-            <td><?php echo $user[$i]['Branch']?></td>
-            <td><?php echo $user[$i]['Department']?></td>
-
-
-            <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
-
-            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
-
-        </tr>
+                                    ?>
+                            <tr class="active-row">
+                                <td><?php echo $user[$i]['User_ID'] ?></td>
+                                <?php $Staff_ID = $user[$i]['User_ID']; ?>
+                                <td><?php echo $user[$i]['First_Name'] ?></td>
+                                <td><?php echo $user[$i]['Last_Name'] ?></td>
+                                <td><?php echo $user[$i]['Email'] ?></td>
+                                <td><?php echo $user[$i]['Last_Active'] ?></td>
+                                <td><?php echo $user[$i]['Branch'] ?></td>
+                                <td><?php echo $user[$i]['Department'] ?></td>
 
 
+                                <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
+
+                                <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+
+                            </tr>
 
 
-                                    <?php endfor;?>
+
+
+                                    <?php endfor; ?>
         <!-- and so on... -->
     </tbody>
 </table>
