@@ -1,8 +1,7 @@
-<?php include "header.php"; 
-include "GetAuditTrails.php";
-$auditTrail = GetAuditTrails();
-?>
-<script>
+    <?php include "header.php" ;
+        include "CreateAdminSQL.php";?>
+        ?>
+        <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Audit Trails</title>
+    <title>Transfer</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -216,7 +215,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Create Admin:</h1>
                 </div>
             </div>
 
@@ -235,88 +234,132 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<style>
-    .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
 
-
-
-
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-</style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Audit ID</th>
-            <th>User ID</th>
-            <th>Document ID</th>
-            <th>Date & Time</th>
-            <th>Action</th>         
-
-
-        </tr>
-    </thead>
-    <tbody>
                                 <?php
-                                    for ($i=0; $i<count($auditTrail); $i++):
+$errorpwd = "";
+$allFields = "yes";
+if (isset($_POST['submit'])){
+    
+    
+    if($_POST['fname']==""){
+        $errorpwd = "First name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['lname']==""){
+        $errorpwd= "Last name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['email']==""){
+        $errorpwd= "Email is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['password']==""){
+        $errorpwd= "Password is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['branch']==""){
+        $errorpwd= "Branch is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['department']==""){
+        $errorpwd= "Department is mandatory";
+        $allFields = "no";
+    }
 
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
-            <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
-        </tr>
+    if($allFields == "yes"){
+
+        CreateAdmin();
+    }
+
+
+}
+
+
+?>
+
+
+<form method="post">
+
+                                <!-- Customer Account Number -->
+                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
+                                    <div class="input-group mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input type="text" name="fname" class="form-control gray_bg light" aria-label="Default" placeholder="First Name:" aria-describedby="inputGroup-sizing-default">
+                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
+                                            <span class="input-group-text bg-transparent">
+                                                <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="branch" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <!-- Amount -->
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="department" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
 
 
-                                    <?php endfor;?>
-        <!-- and so on... -->
-    </tbody>
-</table>
 
 
+                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                    <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
+                                    </div>
                                 </div>
+
+                                </form>
+
 
                             </div>
                         </div>
@@ -371,5 +414,3 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </body>
 
 </html>
-
-

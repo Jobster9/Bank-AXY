@@ -10,6 +10,7 @@ $staff = GetStaffMember($User_ID);
 
 if (isset($_POST['submit'])) {
 
+
     if ($_POST["First_Name"] == "") {
         $User_ID_Error = "First Name is required";
         $allField = FALSE;
@@ -31,6 +32,7 @@ if (isset($_POST['submit'])) {
     }
 
 
+
     if ($allField == True) {
         $Firstname = $_POST["First_Name"];
         $Lastname = $_POST["Last_Name"];
@@ -42,6 +44,8 @@ if (isset($_POST['submit'])) {
             $updateButton = "Update";
             $validated = true;
         }
+
+
     }
 }
 
@@ -63,6 +67,7 @@ function getStaffMember($User_ID)
     return $rows_array;
 }
 
+
 function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
 {
 
@@ -77,7 +82,11 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
 
 }
 
+
 ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -289,7 +298,7 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Staff: <?php echo $staff[0]['User_ID'] ?></h1>
                 </div>
             </div>
 
@@ -323,43 +332,51 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
 
                                 <?php } ?>
 
+
                                 <div class="form-group">
                                 <label for="first_name" class="">First Name</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                 </div>
+
                                     <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
     
 
                                 <div class="form-group">
+
                                 <label for="last_name" class="">Last Name</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>                              
                                     <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                 </div>
+
                                     <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group">
+
                                 <label for="email" class="">Email</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                 </div>
+
                                     <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
 
                                 <div class="form-group mb-4">
+
                                 <label for="password" class="">Password</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="password" name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
                                 </div>
+
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
                                 <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
@@ -370,7 +387,6 @@ function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
-
 
 
                 </div>

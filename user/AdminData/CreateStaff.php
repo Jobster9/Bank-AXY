@@ -1,7 +1,10 @@
-    <?php include "header.php" ?>
+    <?php include "header.php";
+    include "CreateStaffSQL.php";?>
+    <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -210,7 +213,7 @@
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Create Staff:</h1>
                 </div>
             </div>
 
@@ -229,56 +232,61 @@
                                 <h5 class="card-title light mb-4 "></h5>
 
 
-<script>
-const dropArea = document.querySelector(".drop_box"),
-  button = dropArea.querySelector("button"),
-  dragText = dropArea.querySelector("header"),
-  input = dropArea.querySelector("input");
-let file;
-var filename;
 
-button.onclick = () => {
-  input.click();
-};
+<?php
+$errorpwd = "";
+$allFields = "yes";
+if (isset($_POST['submit'])){
+    
+    
+    if($_POST['fname']==""){
+        $errorpwd = "First name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['lname']==""){
+        $errorpwd= "Last name is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['email']==""){
+        $errorpwd= "Email is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['password']==""){
+        $errorpwd= "Password is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['branch']==""){
+        $errorpwd= "Branch is mandatory";
+        $allFields = "no";
+    }
+    if($_POST['department']==""){
+        $errorpwd= "Department is mandatory";
+        $allFields = "no";
+    }
 
-input.addEventListener("change", function (e) {
-  var fileName = e.target.files[0].name;
-  let filedata = `
-    <form action="" method="post">
-    <div class="form">
-    <h4>${fileName}</h4>
-    <input type="email" placeholder="Enter email upload file">
-    <button class="btn">Upload</button>
-    </div>
-    </form>`;
-  dropArea.innerHTML = filedata;
-});
+    if($allFields == "yes"){
 
-</script>
-
-<div class="container">
-  <div class="card">
-
-    <div class="drop_box">
-      <header>
-        <h4>Select File here</h4>
-      </header>
-      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-      <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
-      <button class="btn">Choose File</button>
-    </div>
-
-  </div>
-</div>
+        CreateStaff();
+    }
 
 
+}
+
+
+?>
+
+
+
+                                
                                 <!-- Customer Account Number -->
+
+                                <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="User ID:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="fname" type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="First Name:" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
                                             <span class="input-group-text bg-transparent">
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
@@ -292,7 +300,36 @@ input.addEventListener("change", function (e) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Type:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
+
+                                    </div>
+                                    <p id="AmountError" style="color: #FFCC00;"></p>
+
+                                    <div class="input-group mb-1 mt-5">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        </div>
+                                        <input name="branch" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -302,7 +339,7 @@ input.addEventListener("change", function (e) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Document Criticality:" aria-describedby="inputGroup-sizing-default">
+                                        <input name="department" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
 
                                     </div>
                                     <p id="AmountError" style="color: #FFCC00;"></p>
@@ -315,10 +352,11 @@ input.addEventListener("change", function (e) {
 
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Upload</button>
+                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
                                     </div>
                                 </div>
+                                </form>
 
                             </div>
                         </div>
