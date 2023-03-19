@@ -23,7 +23,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Transfer</title>
+    <title>Update Documents</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
