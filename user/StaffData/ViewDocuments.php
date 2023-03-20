@@ -1,8 +1,6 @@
 <?php include "header.php"; 
 include "GetDocuments.php";
-include "GetChartDocs.php";
 $user = getUsers ();
-$docs = getChartDocs();
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -223,11 +221,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             </div>
 
 
-            <form method="post" style="margin:auto">
-                <label>Search</label>
-                <input type="text" name="search">
-                <input type="submit" name="">
-            </form>
+            <p id="Search" style="margin:auto; width:75%"></p>
+
+            <div class="dropdown">
+                <button class="dropbtn">Filter</button>
+                <div class="dropdown-content">
+                    <button onclick="searchByName()" style="width:100%">Name</button>
+                    <button onclick="searchByType()" style="width:100%">Type</button>
+                    <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                </div>
+            </div>
 
 
 
@@ -286,8 +289,54 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .styled-table {
     margin: 25px auto;
 }
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 25%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  margin: auto;
+}
+.dropbtn {
+  background-color: #021E73;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #03258C;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03258C;}
 </style>
-<table class="styled-table">
+<table class="styled-table" id="myTable">
     <thead>
         <tr>
             <th>Document Name</th>
@@ -378,53 +427,85 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         });
     </script>
 
+    <!--search bar script-->
+    <script>
+        function myFunction1() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+    <script>
+        function myFunction2() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+    <script>
+        function myFunction3() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+
+    <script>
+        function searchByName() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+    <script>
+        function searchByType() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+    <script>
+        function searchByCriticality() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+
 </body>
 
 </html>
 
-<?php
-    $host = 'LAPTOP-B9IKBMD8';
-    $dbname = 'BankAXY';
-    $con = new PDO("sqlsrv:Server=$host;Database=$dbname",$_SESSION['User_ID'],'password123');
-
-    if(isset($_POST["submit"])) 
-    {
-        $str = $_POST["search"];
-        $sth = $con->prepare("SELECT * FROM `search` WHERE Document_Name = '$str'");
-
-        $sth->setFetchMode(PDO:: FETCH_OBJ);
-        $sth->execute();
-
-        if($docs = $sth->fetch())
-        {
-            ?>
-            <br><br><br>
-            <table class="styled-table">
-                <tr>
-                    <th>Document Name</th>
-                    <th>Document Type</th>
-                    <th>Document Criticality</th>
-                    <th>Owner ID</th>
-                    <th>Creation Date & Time</th>
-                    <th>Update</th>
-                    <th>View</th>
-                </tr>
-                <tr>
-                    <td><?php echo $docs->Document_Name; ?></td>
-                    <td><?php echo $docs->Document_Type; ?></td>
-                    <td><?php echo $docs->Document_Criticality; ?></td>
-                    <td><?php echo $docs->Owner_ID; ?></td>
-                    <td><?php echo $docs->Creation_Date_Time; ?></td>
-                    <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
-                    <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-                </tr>
-            </table>
-        <?php
-        }
-        
-        else {
-            echo "Document does not exist";
-        }
-
-    }
-?>
