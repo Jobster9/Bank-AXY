@@ -301,7 +301,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         <tr class="active-row">
             <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
             <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_ID']?></td>
+            <td><?php echo $auditTrail[$i]['Document_Name']?></td>
             <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
             <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
         </tr>
