@@ -1,9 +1,15 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetDocuments.php";
+
+include "GetChartDocs.php";
+$user = getUsers();
+$docs = getChartDocs();
+
 include "AccessControl.php";
 
-$user = getUsers ();
+$user = getUsers();
 $document = "";
+
 
 ?>
 <script>
@@ -17,7 +23,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Transfer</title>
+    <title>View Documents</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -234,7 +240,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             
 
 
+            <p id="Search" style="margin:auto; width:75%"></p>
 
+            <div class="dropdown">
+                <button class="dropbtn">Filter</button>
+                <div class="dropdown-content">
+                    <button onclick="searchByName()" style="width:100%">Name</button>
+                    <button onclick="searchByType()" style="width:100%">Type</button>
+                    <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                </div>
+            </div>
 
 
 
@@ -293,8 +308,54 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .styled-table {
     margin: 25px auto;
 }
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 25%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  margin: auto;
+}
+.dropbtn {
+  background-color: #021E73;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #03258C;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03258C;}
 </style>
-<table class="styled-table">
+<table class="styled-table" id="myTable">
     <thead>
 
     </div>
@@ -312,39 +373,39 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
                                 <?php
-                                    for ($i=0; $i<count($user); $i++):
+                                for ($i = 0; $i < count($user); $i++):
 
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name']?></td>
-            <td><?php echo $user[$i]['Document_Type']?></td>
-            <td><?php echo $user[$i]['Document_Criticality']?></td>
-            <td><?php echo $user[$i]['Owner_ID']?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
-            <td><a href="UpdateDocument.php?File_Location=<?php echo$i ?>"> Update</a></td>
+                                    ?>
+                    <tr class="active-row">
+                        <td><?php echo $user[$i]['Document_Name'] ?></td>
+                        <td><?php echo $user[$i]['Document_Type'] ?></td>
+                        <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+                        <td><?php echo $user[$i]['Owner_ID'] ?></td>
+                        <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+                        <td><a href="UpdateDocument.php?File_Location=<?php echo $i?>&Document_ID=<?php echo $user[$i]['Document_ID']?>"> Update</a></td>
 
-<?php 
-$Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_ID']);
-$RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_ID']);
-if ($RequestAccess != null){
-?>
-    <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+            <?php
+            $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+            $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+            if ($RequestAccess != null) {
+                ?>
+                            <td><a href="RequestAccess.php?File_Location=Requested">View</a>
 
-        </tr>
-<?php } else if ($Access != null) { 
-    ?>
-                <td><a href="ViewFile.php?File_Location=<?php echo$i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                </tr>
+            <?php } else if ($Access != null) {
+                ?>
+                                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
 
 
-    <?php } else { ?>
+                <?php } else { ?>
 
-    <td><a href="RequestAccess.php?File_Location=<?php echo$i ?>">View</a>
-</td>
+                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
+                                    </td>
 
-    <?php } ?>
+                <?php } ?>
 
-                                    <?php endfor;?>
+                                    <?php endfor; ?>
         <!-- and so on... -->
     </tbody>
 </table>
@@ -409,6 +470,128 @@ if ($RequestAccess != null){
 
     </script>
 
+    <!--search bar script-->
+    <script>
+        function myFunction1() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+    <script>
+        function myFunction2() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+    <script>
+        function myFunction3() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+    </script>
+
+
+<?php
+
+
+if (isset($_POST["submit"])) {
+    include("../../DB config.php");
+    $str = $_POST["search"];
+    $sth = $pdo->prepare("SELECT * FROM `search` WHERE Document_Name = '$str'");
+
+    $sth->setFetchMode(PDO::FETCH_OBJ);
+    $sth->execute();
+
+    if ($docs = $sth->fetch()) {
+        ?>
+                                    <br><br><br>
+                                    <table class="styled-table">
+                                        <tr>
+                                            <th>Document Name</th>
+                                            <th>Document Type</th>
+                                            <th>Document Criticality</th>
+                                            <th>Owner ID</th>
+                                            <th>Creation Date & Time</th>
+                                            <th>Update</th>
+                                            <th>View</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo $docs->Document_Name; ?></td>
+                                            <td><?php echo $docs->Document_Type; ?></td>
+                                            <td><?php echo $docs->Document_Criticality; ?></td>
+                                            <td><?php echo $docs->Owner_ID; ?></td>
+                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
+                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
+                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                        </tr>
+                                    </table>
+                                <?php
+    } else {
+        echo "Document does not exist";
+    }
+
+}
+?>
+
+    <script>
+        function searchByName() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+    <script>
+        function searchByType() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+    <script>
+        function searchByCriticality() {
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search for documents" title="type in a document">';
+        }
+    </script>
+
 </body>
 
 </html>
+

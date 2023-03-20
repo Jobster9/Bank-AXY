@@ -13,7 +13,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Transfer</title>
+    <title>View Staff</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -282,21 +282,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 }
 </style>
 <?php if (isset($_GET['updated'])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                        The user has been successfully updated.
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                        The user has been successfully updated.
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
 <?php endif; ?>
 
 <?php if (isset($_GET['deleted'])): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                The user has been deleted.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                The user has been deleted.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
 <?php endif; ?>            
 
 <table class="styled-table">
@@ -318,22 +318,22 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 for ($i = 0; $i < count($user); $i++):
 
                                     ?>
-                            <tr class="active-row">
-                                <td><?php echo $user[$i]['User_ID'] ?></td>
-                                <?php $Staff_ID = $user[$i]['User_ID']; ?>
-                                <td><?php echo $user[$i]['First_Name'] ?></td>
-                                <td><?php echo $user[$i]['Last_Name'] ?></td>
-                                <td><?php echo $user[$i]['Email'] ?></td>
-                                <td><?php echo $user[$i]['Last_Active'] ?></td>
-                                <td><?php echo $user[$i]['Branch'] ?></td>
-                                <td><?php echo $user[$i]['Department'] ?></td>
+                                                            <tr class="active-row">
+                                                                <td><?php echo $user[$i]['User_ID'] ?></td>
+                                                                <?php $Staff_ID = $user[$i]['User_ID']; ?>
+                                                                <td><?php echo $user[$i]['First_Name'] ?></td>
+                                                                <td><?php echo $user[$i]['Last_Name'] ?></td>
+                                                                <td><?php echo $user[$i]['Email'] ?></td>
+                                                                <td><?php echo $user[$i]['Last_Active'] ?></td>
+                                                                <td><?php echo $user[$i]['Branch'] ?></td>
+                                                                <td><?php echo $user[$i]['Department'] ?></td>
 
 
-                                <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
+                                                                <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
 
-                                <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+                                                                <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
 
-                            </tr>
+                                                            </tr>
 
 
 

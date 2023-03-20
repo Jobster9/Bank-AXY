@@ -2,8 +2,29 @@
     session_start();
 
 
+if (empty($_SESSION['User_ID'])) {
+    header('Location: /BankAXY/user/login.php');
+    exit;
+}
 
+echo '<script>
+var timer = null;
+document.addEventListener("mousemove", function() {
+    if (timer) {
+        clearTimeout(timer);
+    }
+    timer = setTimeout(function() {
+        destroySession();
+    }, 120000);
+});
 
+function destroySession() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/BankAXY/user/logout.php", true);
+    xhttp.send();
+    window.location.href = "/BankAXY/user/login.php";
+}
+</script>';
 
 ?>
 <script>
@@ -53,7 +74,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 </li>
 
                 <li class="menuHover">
-                    <a class="nav-link text-left" role="button" href="<?php echo '../../index.php'; ?>" style ="font-size: 23px">
+                    <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
                         <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
                     </a>
                 </li>

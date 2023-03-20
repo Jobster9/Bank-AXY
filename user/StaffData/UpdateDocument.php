@@ -23,7 +23,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Transfer</title>
+    <title>Update Documents</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -339,21 +339,40 @@ if (isset($_POST['submit'])) {
 
     if ($allField == True) {
 
-$name = $_POST["DocumentName"];
-$tpye = $_POST["DocumentType"];
+        $name = $_POST["DocumentName"];
+        $type = $_POST["DocumentType"];
+        $criticality = $_POST["DocumentCriticality"];
+        $Document_ID = $_GET['Document_ID'];
 
-$criticality = $_POST["DocumentCriticality"];
+        $result = updateDocument($name, $type, $criticality, $Document_ID);
+            if ($result) {
+                $action = "ViewDocuments.php?updated=true";
+                $updateButton = "Update";
+                $validated = true;
+            }
 
-     //   Update($name, $type, $criticality);
-
+    }
 }
+
+function updateDocument($name, $type, $criticality, $Document_ID)
+{
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
+
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([$name, $type, $criticality, $Document_ID]);
+    return $result;
+
 }
 
 
 
 ?>
 
-<form class="styled-table">
+<form class="styled-table" >
 
 
 <div class="form-group">
