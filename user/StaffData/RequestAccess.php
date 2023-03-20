@@ -223,47 +223,47 @@ border-radius: 4px;
 
 <?php
 
-$user = getUsers ();
+$user = getUsers();
 
 $i = $_GET['File_Location'];
 
 
-if (isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
-//sql for request access
-include("../../DB config.php");
-
-
-date_default_timezone_set('Europe/London');
-
-$stmt = $pdo->prepare('INSERT INTO Access_Control_Request (Access_Request_ID, User_ID, Document_ID, Department, Request_Date_Time) VALUES (:requestID, :userID, :documentID, :department, :dateTime)');
-
-$rand = rand(100, 999);
-
-$userID = $user[$i]["Owner_ID"];
-$documentID =  $user[$i]["Document_ID"];
-$requestID = $rand;     //change this to what Access_Request_ID should be
-
-$department = $rand . "1";  // Change this to get the correct department
-$datetime = date('d/m/Y H:i');
+    //sql for request access
+    include("../../DB config.php");
 
 
+    date_default_timezone_set('Europe/London');
 
-$stmt->bindParam(':requestID', $requestID, SQLITE3_TEXT);
-$stmt->bindParam(':userID', $userID, SQLITE3_TEXT);
-$stmt->bindParam(':documentID', $documentID, SQLITE3_TEXT);
-$stmt->bindParam(':department', $department, SQLITE3_TEXT);
-$stmt->bindParam(':dateTime', $datetime, SQLITE3_TEXT);
+    $stmt = $pdo->prepare('INSERT INTO Access_Control_Request (Access_Request_ID, User_ID, Document_Name, Department, Request_Date_Time) VALUES (?,?,?,?,?)');
+
+    $rand = rand(100, 999);
+
+    $userID = $user[$i]["Owner_ID"];
+    $documentName = $user[$i]["Document_Name"];
+    $requestID = $rand; //change this to what Access_Request_ID should be
+
+    $department = $rand . "1"; // Change this to get the correct department
+    $datetime = date('d/m/Y H:i');
 
 
-$stmt->execute();
 
-?>
-<script type="text/javascript">
-window.location.href = 'ViewDocuments.php';
-</script>
+    $stmt->bindParam(1, $requestID, SQLITE3_TEXT);
+    $stmt->bindParam(2, $userID, SQLITE3_TEXT);
+    $stmt->bindParam(3, $documentName, SQLITE3_TEXT);
+    $stmt->bindParam(4, $department, SQLITE3_TEXT);
+    $stmt->bindParam(5, $datetime, SQLITE3_TEXT);
 
-<?php
+
+    $stmt->execute();
+
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'ViewDocuments.php';
+    </script>
+
+    <?php
 
 }
 
@@ -282,27 +282,27 @@ window.location.href = 'ViewDocuments.php';
 
 
                                 <?php if ($i == "Requested") { ?>
-                                    <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested access for this document</h3> 
+                                        <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested access for this document</h3> 
 
            
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                        <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
-                                    <form action="ViewDocuments.php">
-                                    <input type="submit" value="Go Back" class="btn btn-pay btn-lg btn-block" style="margin-bottom: 10%;"/>
-                                    </form>
+                                        <form action="ViewDocuments.php">
+                                        <input type="submit" value="Go Back" class="btn btn-pay btn-lg btn-block" style="margin-bottom: 10%;"/>
+                                        </form>
 
                                     <?php } else { ?>
-                                        <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to access: <?php echo $user[$i]["Document_Name"] ?></h3> 
+                                            <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to access: <?php echo $user[$i]["Document_Name"] ?></h3> 
 
            
-<div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
-                                        <form method="post">
+                                            <form method="post">
 
-                                    <input type="submit" value="Request Access" name="submit" style="margin-bottom: 10%;" class="btn btn-pay btn-lg btn-block">
-                                    </form>
+                                        <input type="submit" value="Request Access" name="submit" style="margin-bottom: 10%;" class="btn btn-pay btn-lg btn-block">
+                                        </form>
 
                                     <?php } ?>
 
