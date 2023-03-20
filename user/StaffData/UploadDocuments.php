@@ -246,7 +246,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   <p>Please ensure the filename follows the standardized convention: 
     <br>"CustomerName-Category-DocumentNumber.pdf".
     <br> If you are unsure about the convention, please refer to the <a>guide</a>.
-                                    <a href="temp.pdf#toolbar=0" target="_blank" rel="noopener noreferrer">Document Namming Convention</a>
+                                    <a href="temp.pdf#toolbar=0" target="_blank" rel="noopener noreferrer">Document Naming Convention</a>
   </p>
     <label for="doc-name">Document Name:</label>
     <div class="input-group-prepend">
