@@ -9,6 +9,23 @@ $secret_key = '6LfWeRQlAAAAANkUBSkSLlVPzGzZDwySUzbpoxpl';
 $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response=".$recaptcha_response);
 $response_data = json_decode($response);
 
+function updateLastActive($Last_Active, $User_ID)
+{
+
+    // Create a new PDO connection object
+    include("../DB config.php");
+
+    $sql = "UPDATE Bank_employees SET Last_Active=? WHERE User_ID=?";
+
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([$Last_Active, $User_ID]);
+    return $result;
+
+}
+
+
+
+
     if (isset($_POST['submit'])) {
 if($response_data->success){        
         if ($_POST["User_ID"] == "") {
@@ -25,6 +42,13 @@ if($response_data->success){
                 $User_ID = $array_User[0]["User_ID"];
                 $Role = $array_User[0]["User_Role"];
                 $Password = $array_User[0]["Password"];
+
+                date_default_timezone_set('Europe/London');
+
+                $Last_Active = date('d/m/Y H:i');
+
+                updateLastActive($Last_Active ,$User_ID);
+
             if ($Role == "Staff") {
                 header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $_SESSION['User_ID']);
             }
