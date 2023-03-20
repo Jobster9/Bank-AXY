@@ -382,7 +382,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <td><?php echo $user[$i]['Document_Criticality'] ?></td>
                         <td><?php echo $user[$i]['Owner_ID'] ?></td>
                         <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-                        <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
+                        <td><a href="UpdateDocument.php?File_Location=<?php echo $i?>&Document_ID=<?php echo $user[$i]['Document_ID']?>"> Update</a></td>
 
             <?php
             $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
