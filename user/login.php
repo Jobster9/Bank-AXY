@@ -83,13 +83,7 @@ var timeoutID;
 
 // Start the timer on page load
 function startTimer() {
-  timeoutID = window.setTimeout(redirectToIndex, 300000); // 2 minutes = 120,000 milliseconds
-}
-
-// Reset the timer on user activity
-function resetTimer() {
-  window.clearTimeout(timeoutID);
-  startTimer();
+  timeoutID = window.setTimeout(redirectToIndex, 300000); // 5 minutes = 300,000 milliseconds
 }
 
 // Redirect to the index page
@@ -97,14 +91,10 @@ function redirectToIndex() {
   window.location.href = "http://localhost/BankAXY/index.php";
 }
 
-// Set up event listeners for user activity
-document.addEventListener("mousemove", resetTimer);
-document.addEventListener("keypress", resetTimer);
-document.addEventListener("click", resetTimer);
-
 // Start the timer when the page has finished loading
 window.addEventListener("load", startTimer);
 </script>
+
 
 
 </head>
@@ -143,6 +133,8 @@ window.addEventListener("load", startTimer);
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
                             </form>
                             <nav class="login-card-footer-nav">
+                                <p><h13>By logging in you agree to the Terms of use and Privacy  Policy.</h13></p>
+
                                 <a href="../pages/terms.php">Terms of use.</a>
                                 <a href="../pages/privacypolicy.php">Privacy policy</a>
                             </nav>
