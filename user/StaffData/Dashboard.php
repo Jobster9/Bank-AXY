@@ -4,7 +4,11 @@
 include("header.php");
 include("GetChartDocs.php");
 $latest_creation_date_time = getLatestCreationDateTime();
-echo "The latest creation date and time is: " . $latest_creation_date_time;
+$monthlydocuments = monthlydocuments();
+
+$lowdocuments = lowdocuments();
+$mediumdocuments = mediumdocuments();
+$highdocuments = highdocuments();
 /*
 $chart_data = [];
 for($i=0; $i<count($rows_array); $i++)
@@ -260,21 +264,80 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">Debited this Month</h5>
+                                <h5 class="card-title mb-4">Documents Created this Month</h5>
                                 <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
                                 <div class="mb-1">
                                     <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-                                    <span class="text-muted">Since last Month</span>
+                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
-
                 </div>
             </div>
+                    <div class="col-md-12 mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Documents Created this Month</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
+
+
+<body>
+    <canvas id="pieChart" width="400" height="400"></canvas>
+    <script>
+        // Define the data for the pie chart
+        var data = {
+            labels: ['Low Criticality Documents', 'Medium Criticality Documents', 'High Criticality Documents'],
+            datasets: [{
+                label: 'Number of Documents',
+                data: [<?php echo $lowdocuments; ?>, <?php echo $mediumdocuments; ?>, <?php echo $highdocuments; ?>],
+                backgroundColor: [
+                    '#0047AB', // Dark Blue for Low Criticality Documents
+                    '#0066CC', // Medium Blue for Medium Criticality Documents
+                    '#FFCC00' // Yellow for High Criticality Documents
+                ]
+            }]
+        };
+
+        // Create the pie chart
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Number of Documents by Criticality Level',
+                    fontSize: 20
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 14,
+                        fontColor: '#333'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <!-- column -->
             <div class="col-md-12 mt-4">
                 <div class="card">
