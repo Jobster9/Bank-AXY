@@ -1,9 +1,7 @@
 <?php include "header.php";
 include "GetDocuments.php";
 
-include "GetChartDocs.php";
 $user = getUsers();
-$docs = getChartDocs();
 
 include "AccessControl.php";
 
