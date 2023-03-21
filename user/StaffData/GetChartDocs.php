@@ -1,19 +1,29 @@
 <?php
 
-function getChartDocs()
-{
 
-    // Specify your database credentials here
+function getLatestCreationDateTime() {
     include("../../DB config.php");
+    $User_ID = $_GET['User_ID'];
+    $stmt = $pdo->prepare("SELECT TOP 1 Creation_Date_Time FROM Documents WHERE Owner_ID = '$User_ID' ORDER BY CONVERT(DATETIME, Creation_Date_Time, 109) DESC");
 
-    $stmt = $pdo->prepare('SELECT * FROM Documents WHERE Owner_ID = :User_ID');
-    $stmt->bindParam(':User_ID', $_SESSION['User_ID'], PDO::PARAM_STR);
     $result = $stmt->execute();
 
-    $rows_array = [];
+    $latest_creation_date_time = null;
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $rows_array[] = $row;
+        $latest_creation_date_time = $row['Creation_Date_Time'];
     }
 
-    return $rows_array;
+    return $latest_creation_date_time;
 }
+
+
+
+
+
+
+
+
+
+
+?>
+
