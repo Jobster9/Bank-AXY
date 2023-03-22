@@ -9,90 +9,35 @@ $secret_key = '6LfWeRQlAAAAANkUBSkSLlVPzGzZDwySUzbpoxpl';
 $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response=".$recaptcha_response);
 $response_data = json_decode($response);
 
-function updateLastActive($Last_Active, $User_ID)
-{
+$User_ID = $_GET['User_ID'];
+$Role = $_GET['Role'];
+$Authentication = $_GET['AuthCode'];
 
-    // Create a new PDO connection object
-    include("../DB config.php");
+echo $Authentication . " This is authentication code (remove this for client just here so we can log in)";
 
-    $sql = "UPDATE Bank_employees SET Last_Active=? WHERE User_ID=?";
-
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([$Last_Active, $User_ID]);
-    return $result;
-
-}
-
-Function EmailAuthentication(){
-
-    $AuthCode = rand(10000, 99999);
- 
-    $to_email = "dwasda17@gmail.com"; //email that you want to send to
-    $subject = "Bank AXY Authentication Code";
-    $body = $AuthCode;
-    $headers = "From: sender\'s email";
-         
-    if (mail($to_email, $subject, $body, $headers)) {
-        echo "Email successfully sent to $to_email...";
-    } else {
-        echo "Email sending failed...";
-    }
-    
- 
- 
- return $AuthCode;
-
-}
+$AuthError = "";
 
 
+if (isset($_POST['submit'])) {
 
-    if (isset($_POST['submit'])) {
-if($response_data->success){        
-        if ($_POST["User_ID"] == "") {
-            $User_ID_Error = "User ID is required";
-            $allField = FALSE;
-        }
-        if ($_POST["Password"] == null) {
-            $User_Password_Error = "Password is required";
-            $allField = FALSE;
-        }
-        if ($allField == True) {
-            $array_User = verifyUsers();
-            if (!empty($array_User)) {
-                $User_ID = $array_User[0]["User_ID"];
-                $Role = $array_User[0]["User_Role"];
-                $Password = $array_User[0]["Password"];
-                $Email = $array_User[0]['Email'];
-
-                date_default_timezone_set('Europe/London');
-
-                $Last_Active = date('d/m/Y H:i');
-
-                updateLastActive($Last_Active ,$User_ID);
-
-                $AuthCode = EmailAuthentication();
+if ($Authentication == $_POST["AuthCode"]){
 
             if ($Role == "Staff") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
+                header("Location: ../user/StaffData/Dashboard.php?User_ID=" . $User_ID);
             }
             if ($Role == "Admin") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
+                header("Location: ../user/AdminData/Dashboard.php?User_ID=" . $User_ID);
             }
             if ($Role == "Head Office") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
-
+                header("Location: ../user/HeadOfficeData/Dashboard.php?User_ID=" . $User_ID);
             }
-        } else{
-            $invalidMesg = "Invalid User ID or Password!";
-        }
         } else {
-            $invalidMesg = "Invalid User ID or Password!";
+
+            $AuthError = $Authentication;
         }
-    }
-else{
-            $invalidMesg = "Verification not completed!";    
-}    
-}
+
+    }    
+
 
 ?>
 <script>
@@ -160,32 +105,20 @@ window.addEventListener("load", startTimer);
                                 <img src="../assets/img/Logo.svg" alt="logo" class="logo">
                                 <p><?php echo BANKNAME ?></p>                             
                             </div>
-                            <p class="login-card-description">Sign into your account</p>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                            <p class="login-card-description">Please enter the authentication code sent to your email</p>
+                            <form method="POST">
                                 <?php if (isset($_GET['error'])) { ?>
                                     <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
                                 <?php } ?>
                                 <div class="form-group">
-                                    <label for="username" class="sr-only">Username</label>
-                                    <input type="text" name="User_ID" id="Username" class="form-control" placeholder="Username" required>
-                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
+                                    <input type="text" name="AuthCode" id="AuthCode" class="form-control" placeholder="Authentication Code" required>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label for="password" class="sr-only">Password</label>
-                                    <input type="password" name="Password" id="password" class="form-control" placeholder="***********" required>
-                                    <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
                                 </div>
-                                <div class="g-recaptcha" data-sitekey="6LfWeRQlAAAAAK97iBXQTSYfVe8wEBSx8tq2bDph"></div>
-                                <input name="submit" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Login">
-                                <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
+                                <input name="submit" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Submit">
+                                <span class="text-danger"><h2><?php echo $AuthError; ?></h2></span>   
                             </form>
-                            <nav class="login-card-footer-nav">
-                                <p><h13>By logging in you agree to the Terms of use and Privacy  Policy.</h13></p>
-
-                                <a href="../pages/terms.php">Terms of use.</a>
-                                <a href="../pages/privacypolicy.php">Privacy policy</a>
-                            </nav>
                         </div>
                     </div>
                 </div>

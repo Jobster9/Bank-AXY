@@ -8,7 +8,7 @@ if (empty($_SESSION['User_ID'])) {
     exit;
 }
 
-echo '<script>
+echo '<script>get
 var timer = null;
 document.addEventListener("mousemove", function() {
     if (timer) {
