@@ -339,21 +339,31 @@ function passwordCheck ($password)
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
 
                                     <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input name="branch" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
-                                        <span class="text-danger"><?php echo $errorbranch; ?></span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                    </div>
+                                    <select name="branch" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <option value="">Select branch</option>
+                                        <option value="branch1">Kuala Lumpur</option>
+                                        <option value="branch2">Kuching</option>
+                                    </select>
+                                    <span class="text-danger"><?php echo $errorbranch; ?></span>
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
 
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input name="department" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
-                                        <span class="text-danger"><?php echo $errordep; ?></span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                    </div>
+                                    <select name="department" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <option value="">Select department</option>
+                                        <option value="branch1">Accounts</option>
+                                        <option value="branch2">Administration</option>
+                                        <option value="branch3">Loans</option>
+                                        <option value="branch4">Mortgage Advice</option>
+                                    </select>
+                                    <span class="text-danger"><?php echo $errordep; ?></span>
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
 

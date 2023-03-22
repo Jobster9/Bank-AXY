@@ -13,8 +13,5 @@
 
     return $rows_array;
 
-
-
-
     
 ?>

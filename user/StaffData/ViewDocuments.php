@@ -1,9 +1,7 @@
 <?php include "header.php";
 include "GetDocuments.php";
 
-include "GetChartDocs.php";
 $user = getUsers();
-$docs = getChartDocs();
 
 include "AccessControl.php";
 
@@ -577,17 +575,17 @@ if (isset($_POST["submit"])) {
 
     <script>
         function searchByName() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Search for documents" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Search By Name" title="type in a document">';
         }
     </script>
     <script>
         function searchByType() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Search for documents" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Search By Type" title="type in a document">';
         }
     </script>
     <script>
         function searchByCriticality() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search for documents" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search By Criticality" title="type in a document">';
         }
     </script>
 
