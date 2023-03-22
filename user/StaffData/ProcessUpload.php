@@ -248,6 +248,7 @@ if (isset($_POST['submit'])) {
         <h2 style=""><?php echo $FileError ?></h2>
         <h2 style=""><?php echo $TypeError ?></h2>
         <h2 style=""><?php echo $SizeError ?></h2>
+        <h2 style=""><?php echo $SQLError ?></h2>
       </header>   
 </div>
 </div>
@@ -333,10 +334,13 @@ function UploadDocument($FileError, $TypeError, $SizeError)
     $stmt->bindParam(5, $file_contents, PDO::PARAM_LOB, 0, PDO::SQLSRV_ENCODING_BINARY);
     // Execute the statement
     $stmt->execute();
+
     // Check if the insertion was successful
     if ($stmt->rowCount() > 0) {
         return true;
     } else {
+        $error = $stmt->errorInfo();
+        $SQLerror = "SQL error: " . $error[2];
         return false;
     }
 }

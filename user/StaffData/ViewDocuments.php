@@ -351,9 +351,26 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .dropdown:hover .dropbtn {background-color: #03258C;}
 </style>
+
+<?php if (isset($_GET['updated'])): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                    The document has been successfully updated.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['deleted'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                    The document has been deleted.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+<?php endif; ?> 
 <table class="styled-table" id="myTable">
     <thead>
-
     </div>
         <tr>
             <th>Document Name</th>
@@ -368,46 +385,40 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         </tr>
     </thead>
     <tbody>
-                                <?php
-                                for ($i = 0; $i < count($user); $i++):
+<?php
+for ($i = 0; $i < count($user); $i++):
 
-                                    ?>
-                            <tr class="active-row">
-                                <td><?php echo $user[$i]['Document_Name'] ?></td>
-                                <td><?php echo $user[$i]['Document_Type'] ?></td>
-                                <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-                                <td><?php echo $user[$i]['Owner_ID'] ?></td>
-                                <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-                                <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
+    ?>
+                <tr class="active-row">
+                    <td><?php echo $user[$i]['Document_Name'] ?></td>
+                    <td><?php echo $user[$i]['Document_Type'] ?></td>
+                    <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+                    <td><?php echo $user[$i]['Owner_ID'] ?></td>
+                    <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+                    <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
 
-                            <?php
-                            $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-                            $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-                            if ($RequestAccess != null) {
-                                ?>
-                                                            <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                <?php
+                $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                if ($RequestAccess != null) {
+                    ?>
+                                    <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                                </tr>
+                <?php } else if ($Access != null) {
+                    ?>
+                                                      <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
-                                                                </tr>
-                            <?php } else if ($Access != null) {
-                                ?>
-                                                                                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                    <?php } else { ?>
 
+                                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
+                                                        </td>
 
+                    <?php } ?>
 
-                                <?php } else { ?>
+<?php endfor; ?>
 
-                                                                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
-                                                                                    </td>
-
-                                <?php } ?>
-
-                                    <?php endfor; ?>
-        <!-- and so on... -->
     </tbody>
 </table>
-
-
-
 
                                 </div>
 
@@ -464,11 +475,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 $('.alert').show();
         };
 
-    </script>
 
-    <!--search bar script-->
-    <script>
-        function myFunction1() {
+
+    //search bar script
+        function nameFilter() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
@@ -486,9 +496,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 }       
             }
         }
-    </script>
-    <script>
-        function myFunction2() {
+        function typeFilter() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
@@ -506,9 +514,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 }       
             }
         }
-    </script>
-    <script>
-        function myFunction3() {
+        function critFilter() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
@@ -542,28 +548,28 @@ if (isset($_POST["submit"])) {
 
     if ($docs = $sth->fetch()) {
         ?>
-                                                    <br><br><br>
-                                                    <table class="styled-table">
-                                                        <tr>
-                                                            <th>Document Name</th>
-                                                            <th>Document Type</th>
-                                                            <th>Document Criticality</th>
-                                                            <th>Owner ID</th>
-                                                            <th>Creation Date & Time</th>
-                                                            <th>Update</th>
-                                                            <th>View</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><?php echo $docs->Document_Name; ?></td>
-                                                            <td><?php echo $docs->Document_Type; ?></td>
-                                                            <td><?php echo $docs->Document_Criticality; ?></td>
-                                                            <td><?php echo $docs->Owner_ID; ?></td>
-                                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
-                                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
-                                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-                                                        </tr>
-                                                    </table>
-                                                <?php
+                                    <br><br><br>
+                                    <table class="styled-table">
+                                        <tr>
+                                            <th>Document Name</th>
+                                            <th>Document Type</th>
+                                            <th>Document Criticality</th>
+                                            <th>Owner ID</th>
+                                            <th>Creation Date & Time</th>
+                                            <th>Update</th>
+                                            <th>View</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo $docs->Document_Name; ?></td>
+                                            <td><?php echo $docs->Document_Type; ?></td>
+                                            <td><?php echo $docs->Document_Criticality; ?></td>
+                                            <td><?php echo $docs->Owner_ID; ?></td>
+                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
+                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
+                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                        </tr>
+                                    </table>
+                                <?php
     } else {
         echo "Document does not exist";
     }
@@ -573,17 +579,17 @@ if (isset($_POST["submit"])) {
 
     <script>
         function searchByName() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Search By Name" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document">';
         }
     </script>
     <script>
         function searchByType() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Search By Type" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="typeFilter()" placeholder="Search By Type" title="type in a document">';
         }
     </script>
     <script>
         function searchByCriticality() {
-            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="myFunction3()" placeholder="Search By Criticality" title="type in a document">';
+            document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="critFilter()" placeholder="Search By Criticality" title="type in a document">';
         }
     </script>
 
