@@ -1,11 +1,9 @@
 <?php include "header.php";
 include "GetDocuments.php";
-
-$user = getUsers();
-
 include "AccessControl.php";
 
-$user = getUsers();
+$user = getDocuments();
+
 $document = "";
 
 
@@ -374,34 +372,34 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 for ($i = 0; $i < count($user); $i++):
 
                                     ?>
-                    <tr class="active-row">
-                        <td><?php echo $user[$i]['Document_Name'] ?></td>
-                        <td><?php echo $user[$i]['Document_Type'] ?></td>
-                        <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-                        <td><?php echo $user[$i]['Owner_ID'] ?></td>
-                        <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-                        <td><a href="UpdateDocument.php?File_Location=<?php echo $i?>&Document_ID=<?php echo $user[$i]['Document_ID']?>"> Update</a></td>
+                            <tr class="active-row">
+                                <td><?php echo $user[$i]['Document_Name'] ?></td>
+                                <td><?php echo $user[$i]['Document_Type'] ?></td>
+                                <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+                                <td><?php echo $user[$i]['Owner_ID'] ?></td>
+                                <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+                                <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
 
-            <?php
-            $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-            $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-            if ($RequestAccess != null) {
-                ?>
-                            <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                            <?php
+                            $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                            $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                            if ($RequestAccess != null) {
+                                ?>
+                                                            <td><a href="RequestAccess.php?File_Location=Requested">View</a>
 
-                                </tr>
-            <?php } else if ($Access != null) {
-                ?>
-                                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                                                </tr>
+                            <?php } else if ($Access != null) {
+                                ?>
+                                                                                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
 
 
-                <?php } else { ?>
+                                <?php } else { ?>
 
-                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
-                                    </td>
+                                                                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
+                                                                                    </td>
 
-                <?php } ?>
+                                <?php } ?>
 
                                     <?php endfor; ?>
         <!-- and so on... -->
@@ -544,28 +542,28 @@ if (isset($_POST["submit"])) {
 
     if ($docs = $sth->fetch()) {
         ?>
-                                    <br><br><br>
-                                    <table class="styled-table">
-                                        <tr>
-                                            <th>Document Name</th>
-                                            <th>Document Type</th>
-                                            <th>Document Criticality</th>
-                                            <th>Owner ID</th>
-                                            <th>Creation Date & Time</th>
-                                            <th>Update</th>
-                                            <th>View</th>
-                                        </tr>
-                                        <tr>
-                                            <td><?php echo $docs->Document_Name; ?></td>
-                                            <td><?php echo $docs->Document_Type; ?></td>
-                                            <td><?php echo $docs->Document_Criticality; ?></td>
-                                            <td><?php echo $docs->Owner_ID; ?></td>
-                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
-                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
-                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-                                        </tr>
-                                    </table>
-                                <?php
+                                                    <br><br><br>
+                                                    <table class="styled-table">
+                                                        <tr>
+                                                            <th>Document Name</th>
+                                                            <th>Document Type</th>
+                                                            <th>Document Criticality</th>
+                                                            <th>Owner ID</th>
+                                                            <th>Creation Date & Time</th>
+                                                            <th>Update</th>
+                                                            <th>View</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><?php echo $docs->Document_Name; ?></td>
+                                                            <td><?php echo $docs->Document_Type; ?></td>
+                                                            <td><?php echo $docs->Document_Criticality; ?></td>
+                                                            <td><?php echo $docs->Owner_ID; ?></td>
+                                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
+                                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
+                                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                                        </tr>
+                                                    </table>
+                                                <?php
     } else {
         echo "Document does not exist";
     }

@@ -1,6 +1,7 @@
 <?php
 
-function getUsers (){
+function getDocuments()
+{
 
     // Create a new PDO connection object
     include("../../DB config.php");

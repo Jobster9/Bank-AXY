@@ -1,15 +1,11 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetDocuments.php";
 
-$user = getUsers ();
+$user = getDocuments();
 
 $i = $_GET['File_Location'];
 
-$uname = $_SESSION['uname'];
-$role = $_SESSION['urole'];
-
-
-
+$uname = $_SESSION['User_ID'];
 
 ?>
 <script>
@@ -300,11 +296,11 @@ width:800px;
     <tbody>
 
         <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name']?></td>
-            <td><?php echo $user[$i]['Document_Type']?></td>
-            <td><?php echo $user[$i]['Document_Criticality']?></td>
-            <td><?php echo $user[$i]['Owner_ID']?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
+            <td><?php echo $user[$i]['Document_Name'] ?></td>
+            <td><?php echo $user[$i]['Document_Type'] ?></td>
+            <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+            <td><?php echo $user[$i]['Owner_ID'] ?></td>
+            <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
 
 
         </tr>
@@ -322,19 +318,19 @@ $allField = TRUE;
 
 if (isset($_POST['submit'])) {
     if ($_POST["DocumentName"] == "") {
-       // $User_ID_Error = "User ID is required";
+        // $User_ID_Error = "User ID is required";
         $allField = FALSE;
     }
 
     if ($_POST["DocumentType"] == null) {
-       // $User_Password_Error = "Password is required";
+        // $User_Password_Error = "Password is required";
         $allField = FALSE;
     }
 
     if ($_POST["DocumentCriticality"] == null) {
         // $User_Password_Error = "Password is required";
-         $allField = FALSE;
-     }
+        $allField = FALSE;
+    }
 
 
     if ($allField == True) {
@@ -345,11 +341,11 @@ if (isset($_POST['submit'])) {
         $Document_ID = $_GET['Document_ID'];
 
         $result = updateDocument($name, $type, $criticality, $Document_ID);
-            if ($result) {
-                $action = "ViewDocuments.php?updated=true";
-                $updateButton = "Update";
-                $validated = true;
-            }
+        if ($result) {
+            $action = "ViewDocuments.php?updated=true";
+            $updateButton = "Update";
+            $validated = true;
+        }
 
     }
 }
@@ -372,7 +368,7 @@ function updateDocument($name, $type, $criticality, $Document_ID)
 
 ?>
 
-<form class="styled-table" >
+<form class="styled-table" Method="POST">
 
 
 <div class="form-group">
@@ -383,25 +379,29 @@ function updateDocument($name, $type, $criticality, $Document_ID)
     <label for="exampleInputEmail1">Document Type</label>
     <select class="form-control" name="DocumentType"    >
         <option selected="selected"><?php echo $user[$i]['Document_Type'] ?></option>
-        <option value="volvo">Loans</option>
-        <option value="saab">mortgage</option>
+        <option value="<?php echo LOANS_DEP ?>">Loans</option>
+      <option value="<?php echo MORTGAGES_DEP ?>">Mortgages</option>
+      <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+      <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
     </select>
   </div>  
   <div class="form-group">
     <label for="exampleInputEmail1">Document Criticality</label>
     <select class="form-control" name="DocumentCriticality">
     <option selected="selected"><?php echo $user[$i]['Document_Criticality'] ?></option>
-        <option value="volvo">Low</option>
-        <option value="saab">Medium</option>
-        <option value="fiat">High</option>
+      <option value="<?php echo CRIT_HIGH ?>">High</option>
+      <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
+      <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
   </div>  
+  <div id="backButton" class="d-grid col-sm-5 mx-auto">
   <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-pay btn-lg btn-block"></input>
-  
-
-        <!-- and so on... -->
+</div>
 </form>
+<div id="backButton" class="d-grid col-sm-3 mx-auto">
+                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
+                                    </div>
 
 
                                 </div>

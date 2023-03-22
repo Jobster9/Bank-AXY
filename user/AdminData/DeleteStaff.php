@@ -5,11 +5,11 @@
 
 
     /*if (isset($_POST['delete'])) {
-        include("../../DB config.php");
-        $User_ID = $_GET['User_ID'];
-        $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
-        $stmt->execute([$User_ID]);
-        // redirect to viewstaff.php
+    include("../../DB config.php");
+    $User_ID = $_GET['User_ID'];
+    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
+    $stmt->execute([$User_ID]);
+    // redirect to viewstaff.php
     }*/
 
 
@@ -258,9 +258,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
                                         <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
-
+                                        
                                     </div>
-
+                                    </div>
+                                    
                                     </form>
                                     <div id="backButton" class="d-grid col-sm-4 mx-auto">
                                         <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
@@ -268,7 +269,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     </div>
                                 </div>
 
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
@@ -309,24 +309,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
-<?php 
+<?php
 if (isset($_POST['submit'])) {
     $result = deleteStaffMember($User_ID);
     deleteStaffMember($User_ID);
     if ($result) {
-        //header('Location: viewCustomer.php?deleted=true');
+        //header('Location: ViewStaff.php?deleted=true');
     }
 }
 function deleteStaffMember($User_ID)
 {
-
     // Create a new PDO connection object
     include("../../DB config.php");
-
-    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '" . $User_ID . "'");
-
+    $stmt = $pdo->prepare("DELETE FROM dbo.Bank_Employees WHERE User_ID = ?");
+    $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
     $result = $stmt->execute();
-
     return $result;
 }
 
