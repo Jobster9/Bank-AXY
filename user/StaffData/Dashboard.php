@@ -7,8 +7,14 @@ $latest_creation_date_time = getLatestCreationDateTime();
 $monthlydocuments = monthlydocuments();
 
 $lowdocuments = lowdocuments();
+
 $mediumdocuments = mediumdocuments();
 $highdocuments = highdocuments();
+echo $lowdocuments;
+echo $mediumdocuments;
+echo $highdocuments;
+
+
 /*
 $chart_data = [];
 for($i=0; $i<count($rows_array); $i++)
@@ -279,56 +285,48 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">Documents Created this Month</h5>
+                                <h5 class="card-title mb-4">Documents Created this Month According to Criticality</h5>
                                 <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
                                 <div class="mb-1">
                                     <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
 
 
-<body>
-    <canvas id="pieChart" width="400" height="400"></canvas>
-    <script>
-        // Define the data for the pie chart
-        var data = {
-            labels: ['Low Criticality Documents', 'Medium Criticality Documents', 'High Criticality Documents'],
-            datasets: [{
-                label: 'Number of Documents',
-                data: [<?php echo $lowdocuments; ?>, <?php echo $mediumdocuments; ?>, <?php echo $highdocuments; ?>],
-                backgroundColor: [
-                    '#0047AB', // Dark Blue for Low Criticality Documents
-                    '#0066CC', // Medium Blue for Medium Criticality Documents
-                    '#FFCC00' // Yellow for High Criticality Documents
-                ]
-            }]
-        };
 
-        // Create the pie chart
-        var ctx = document.getElementById('pieChart').getContext('2d');
-        var pieChart = new Chart(ctx, {
-            type: 'pie',
-            data: data,
-            options: {
-                title: {
-                    display: true,
-                    text: 'Number of Documents by Criticality Level',
-                    fontSize: 20
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        fontSize: 14,
-                        fontColor: '#333'
-                    }
-                }
-            }
-        });
-    </script>
-</body>
+<style>
+#chartContainer {
+    background-color: rgba(0,0,0,0);
+}
+</style>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    var low = <?php echo $lowdocuments; ?>;
+    var medium = <?php echo $mediumdocuments; ?>;
+    var high = <?php echo $highdocuments; ?>;
+window.onload = function () {
+var chart = new CanvasJS.Chart("chartContainer", {
+animationEnabled: true,
+data: [{
+    type: "doughnut",
+    startAngle: 60,
+    indexLabelFontSize: 17,
+    indexLabel: "{label} - {y}",
+    toolTipContent: "<b>{label}:</b> {y}",
+    dataPoints: [
+        { y: low, label: "Low" },
+        { y: medium, label: "Medium" },
+        { y: high, label: "High" },
+    ]
+}]
 
 
+});
+chart.render();
 
+}
+</script>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 
                                 </div>
@@ -338,66 +336,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </div>
                 </div>
             </div>
-            <!-- column -->
-            <div class="col-md-12 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-md-flex align-items-center">
-                            <div>
-                                <h4 class="card-title">Transaction History</h4>
-                                <h5 class="card-subtitle">Overview of recent transaction</h5>
-                            </div>
-                            <div class="ml-auto">
-                                <a href="T_history.php" class="btn btn-info" role="button">View More</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table v-middle">
-                            <thead>
-                                <tr class="bg-light">
-                                    <th class="border-top-0">Sr.No</th>
-                                    <th class="border-top-0">Name</th>
-                                    <th class="border-top-0">Account No</th>
-                                    <th class="border-top-0">Date</th>
-                                    <th class="border-top-0">Amount</th>
-                                    <th class="border-top-0">Status</th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-  </div>
-                                                    <div class="">
-                                                        <h4 class="m-b-0 font-16"><?php echo " " ?></h4>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><?php echo " " ?></td>
-                                            <td><?php echo " " ?></td>
-                                            <td>
-                                                <label class="label label-danger"><?php echo " " ?></label>
-                                            </td>
-                                            <td>
-
-                                                <span class="Status">
-
-                                            </td>
-
-                                        </tr>
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
+         
 
 
     <?php include "footer.php" ?>
