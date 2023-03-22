@@ -3,7 +3,9 @@
 // Specify your database credentials here
 
 
-$host = 'DESKTOP-AVCNUEK';
+$host = 'LAPTOP-B9IKBMD8';
+
+
 
 $dbname = 'BankAXY';
 
@@ -11,5 +13,3 @@ $dbname = 'BankAXY';
 $pdo = new PDO("sqlsrv:Server=$host;Database=$dbname");
 
 // EMILYSPC\MSSQLSERVER1
-//JOBYSPC\DESKTOP-AVCNUEK
-//ABDULSPC\ABDULNAZIR
