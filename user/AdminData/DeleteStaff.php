@@ -258,9 +258,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
                                         <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
-</div>
+                                        
                                     </div>
-
+                                    </div>
+                                    
                                     </form>
                                     <div id="backButton" class="d-grid col-sm-4 mx-auto">
                                         <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
