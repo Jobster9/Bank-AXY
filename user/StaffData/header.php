@@ -3,7 +3,7 @@ session_start();
 
 
 
-if (empty($_SESSION['User_ID'])) {
+if (!isset($_SESSION['User_ID'])) {
     header('Location: /BankAXY/user/login.php');
     exit;
 }
@@ -141,7 +141,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <!-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -179,19 +179,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <a href="#" class="text-muted">Show all notifications</a>
                                 </div>
                             </div>
-                        </li> -->
-                        <!-- Nav Item - Messages -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " href="#" role="button">
-                                <i class="fas fa-envelope"></i>
-                                
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li> -->
-
-                        <!-- Nav Item - User Information -->
-
-
+                        </li> 
                     </ul>
 
                 </nav>
