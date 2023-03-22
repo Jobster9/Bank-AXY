@@ -10,9 +10,6 @@ $lowdocuments = lowdocuments();
 
 $mediumdocuments = mediumdocuments();
 $highdocuments = highdocuments();
-echo $lowdocuments;
-echo $mediumdocuments;
-echo $highdocuments;
 
 
 /*
@@ -292,7 +289,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-
 <style>
 #chartContainer {
     background-color: rgba(0,0,0,0);
@@ -305,24 +301,22 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     var high = <?php echo $highdocuments; ?>;
 window.onload = function () {
 var chart = new CanvasJS.Chart("chartContainer", {
-animationEnabled: true,
-data: [{
-    type: "doughnut",
-    startAngle: 60,
-    indexLabelFontSize: 17,
-    indexLabel: "{label} - {y}",
-    toolTipContent: "<b>{label}:</b> {y}",
-    dataPoints: [
-        { y: low, label: "Low" },
-        { y: medium, label: "Medium" },
-        { y: high, label: "High" },
-    ]
-}]
-
-
+    animationEnabled: true,
+    backgroundColor: "rgba(0,0,0,0)",
+    data: [{
+        type: "doughnut",
+        startAngle: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} - {y}",
+        toolTipContent: "<b>{label}:</b> {y}",
+        dataPoints: [
+            { y: low, label: "Low" },
+            { y: medium, label: "Medium" },
+            { y: high, label: "High" },
+        ]
+    }]
 });
 chart.render();
-
 }
 </script>
 
