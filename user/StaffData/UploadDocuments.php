@@ -268,7 +268,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
     <select class="form-control" id="doc-criticality" name="doc-criticality">
-      <option value="<? echo CRIT_HIGH ?>">High</option>
+      <option value="<?php echo CRIT_HIGH ?>">High</option>
       <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
       <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
