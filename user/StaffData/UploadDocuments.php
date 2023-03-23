@@ -231,9 +231,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <div class="drop_box">
     <header>
         <h4>Select File here</h4>
-        <h1><?php /* if (isset($_POST['submit'])) {
-         echo ("submit active");
-         } */?></h1>
       </header>
       <p>Files Supported:PDF</p>
   <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">

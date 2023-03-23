@@ -1,4 +1,4 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetAuditTrails.php";
 $auditTrail = GetAuditTrails();
 ?>
@@ -201,42 +201,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   border-radius: 4px;
 }
 
-
-    </style>
-
-
-</head>
-
-<body>
-    <!-- End of Topbar -->
-
-    <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4 dark_bg light">
-        <div class="row">
-            <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
-                </div>
-            </div>
-
-
-
-
-
-
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
-
-
-<style>
-    .styled-table {
+.styled-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -280,7 +245,38 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .styled-table {
     margin: 25px auto;
 }
-</style>
+    </style>
+
+
+</head>
+
+<body>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid px-lg-4 dark_bg light">
+        <div class="row">
+            <div class="col-md-12 mt-lg-4 mt-4">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title light mb-4 "></h5>
+
 <table class="styled-table">
     <thead>
         <tr>
@@ -289,33 +285,20 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>Document ID</th>
             <th>Date & Time</th>
             <th>Action</th>         
-
-
         </tr>
     </thead>
     <tbody>
-                                <?php
-                                    for ($i=0; $i<count($auditTrail); $i++):
-
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
-            <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_Name']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
-        </tr>
-
-
-
-
-                                    <?php endfor;?>
-        <!-- and so on... -->
+<?php for ($i = 0; $i < count($auditTrail); $i++): ?>
+                <tr class="active-row">
+                    <td><?php echo $auditTrail[$i]['Audit_ID'] ?></td>
+                    <td><?php echo $auditTrail[$i]['User_ID'] ?></td>
+                    <td><?php echo $auditTrail[$i]['Document_Name'] ?></td>
+                    <td><?php echo $auditTrail[$i]['Audit_Date_Time'] ?></td>
+                    <td><?php echo $auditTrail[$i]['Audit_Action'] ?></td>
+                </tr>
+<?php endfor; ?>
     </tbody>
 </table>
-
-
-
                                 </div>
 
                             </div>

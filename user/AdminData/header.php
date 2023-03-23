@@ -1,10 +1,10 @@
-<?php include "../../config.php"; 
-    session_start();
+<?php include "../../config.php";
+session_start();
 
 
 
 
-if (empty($_SESSION['User_ID'])) {
+if (!isset($_SESSION['User_ID'])) {
     header('Location: /BankAXY/user/login.php');
     exit;
 }
@@ -113,23 +113,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum ". $_SESSION['User_ID'] ?></h1>
-
-
-                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div> -->
+                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
                         </div>
                     </form>
 
                     <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown  d-sm-none">
 
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3">
@@ -147,7 +135,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <!-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -185,19 +173,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <a href="#" class="text-muted">Show all notifications</a>
                                 </div>
                             </div>
-                        </li> -->
-                        <!-- Nav Item - Messages -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " href="#" role="button">
-                                <i class="fas fa-envelope"></i>
-                                
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li> -->
-
-                        <!-- Nav Item - User Information -->
-
-
+                        </li> 
                     </ul>
-
                 </nav>

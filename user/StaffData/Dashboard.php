@@ -3,8 +3,13 @@
 //chart data
 include("header.php");
 include("GetChartDocs.php");
+$latest_creation_date_time = getLatestCreationDateTime();
+$monthlydocuments = monthlydocuments();
 
-/*$rows_array = getChartDocs();
+$lowdocuments = lowdocuments();
+$mediumdocuments = mediumdocuments();
+$highdocuments = highdocuments();
+/*
 $chart_data = [];
 for($i=0; $i<count($rows_array); $i++)
 {
@@ -12,20 +17,6 @@ $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
 $rows_array[$i] = $rowDate->format('M-Y');
 }*/
 
-$dataPoints = array(
-    array("y" => 3373.64, "label" => "January"),
-    array("y" => 2435.94, "label" => "February"),
-    array("y" => 1842.55, "label" => "March"),
-    array("y" => 1828.55, "label" => "April"),
-    array("y" => 1039.99, "label" => "May"),
-    array("y" => 765.215, "label" => "June"),
-    array("y" => 612.453, "label" => "July"),
-    array("y" => 612.453, "label" => "August"),
-    array("y" => 612.453, "label" => "September"),
-    array("y" => 612.453, "label" => "October"),
-    array("y" => 612.453, "label" => "November"),
-    array("y" => 612.453, "label" => "December")
-);
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -62,49 +53,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
-    <!--bar charts-->
-<script>
-    window.onload = function() {
-
-    CanvasJS.addColorSet("BankAXY",
-        [//colorSet Array
-        "#03258C",
-        "#F2B705"                
-        ]);
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-        backgroundColor: "transparent",
-        colorSet: "BankAXY",
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: "Files uploaded in the past year"
-        },
-        axisY: {
-            title: "files uploaded"
-        },
-        data: [{
-            type: "column",
-            yValueFormatString: "#,##0.## files",
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
-    });
-    chart.render();
-
-    }
-</script>
-
-
-    <style>
-        @media only screen and (min-width:992px) {
-            #credit {
-                display: block;
-                box-sizing: border-box;
-                height: 181px;
-                width: 363px;
-            }
-        }
-    </style>
+   
 
     <style>
         .btn-pay {
@@ -286,7 +235,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <body>
 
-    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4">
@@ -299,35 +247,158 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         Generate Report</a> -->
                 </div>
             </div>
+ 
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 ">Latest Document Creation</h5>
+                                <h1 id="CreditDisplay" class="display-5 mt-1 mb-3 text-success"></h1>
+                                <div class="mb-1">
+                                    <span id="CreditLastM" class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
+                                    <span class="text-muted"><?php echo $latest_creation_date_time ?></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Documents Created this Month</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                    <div class="col-md-12 mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Documents Created this Month</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+
+
+
+<body>
+    <canvas id="pieChart" width="400" height="400"></canvas>
+    <script>
+        // Define the data for the pie chart
+        var data = {
+            labels: ['Low Criticality Documents', 'Medium Criticality Documents', 'High Criticality Documents'],
+            datasets: [{
+                label: 'Number of Documents',
+                data: [<?php echo $lowdocuments; ?>, <?php echo $mediumdocuments; ?>, <?php echo $highdocuments; ?>],
+                backgroundColor: [
+                    '#0047AB', // Dark Blue for Low Criticality Documents
+                    '#0066CC', // Medium Blue for Medium Criticality Documents
+                    '#FFCC00' // Yellow for High Criticality Documents
+                ]
+            }]
+        };
+
+        // Create the pie chart
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                title: {
+                    display: true,
+                    text: 'Number of Documents by Criticality Level',
+                    fontSize: 20
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        fontSize: 14,
+                        fontColor: '#333'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+            <div class="col-md-12 mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <div>
+                                <h4 class="card-title">Transaction History</h4>
+                                <h5 class="card-subtitle">Overview of recent transaction</h5>
+                            </div>
+                            <div class="ml-auto">
+                                <a href="T_history.php" class="btn btn-info" role="button">View More</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table v-middle">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th class="border-top-0">Sr.No</th>
+                                    <th class="border-top-0">Name</th>
+                                    <th class="border-top-0">Account No</th>
+                                    <th class="border-top-0">Date</th>
+                                    <th class="border-top-0">Amount</th>
+                                    <th class="border-top-0">Status</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+  </div>
+                                                    <div class="">
+                                                        <h4 class="m-b-0 font-16"><?php echo " " ?></h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><?php echo " " ?></td>
+                                            <td><?php echo " " ?></td>
+                                            <td>
+                                                <label class="label label-danger"><?php echo " " ?></label>
+                                            </td>
+                                            <td>
+
+                                                <span class="Status">
+
+                                            </td>
+
+                                        </tr>
+
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
 
-            <!--chart here-->
-            <div id="chartContainer" style="height: 450px; width: 85%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
-            <div class="modal-dialog loadingModal modal-lg">
-                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
-                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
-                </div>
-            </div>
         </div>
 
     </div>
 
-        </div>
-        
-    </div>
 
     <?php include "footer.php" ?>
     <!-- Wraper Ends Here -->

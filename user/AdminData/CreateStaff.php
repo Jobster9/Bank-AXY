@@ -234,21 +234,22 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 <?php
-$errorpwd = "";
+$errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = "";
 $allFields = "yes";
+
 if (isset($_POST['submit'])){
     
-    
+    $strongPassword = passwordCheck($_POST['password']);
     if($_POST['fname']==""){
-        $errorpwd = "First name is mandatory";
+        $errorfname = "First name is mandatory";
         $allFields = "no";
     }
     if($_POST['lname']==""){
-        $errorpwd= "Last name is mandatory";
+        $errorlname= "Last name is mandatory";
         $allFields = "no";
     }
     if($_POST['email']==""){
-        $errorpwd= "Email is mandatory";
+        $erroremail= "Email is mandatory";
         $allFields = "no";
     }
     if($_POST['password']==""){
@@ -256,11 +257,15 @@ if (isset($_POST['submit'])){
         $allFields = "no";
     }
     if($_POST['branch']==""){
-        $errorpwd= "Branch is mandatory";
+        $errorbranch= "Branch is mandatory";
         $allFields = "no";
     }
     if($_POST['department']==""){
-        $errorpwd= "Department is mandatory";
+        $errordep= "Department is mandatory";
+        $allFields = "no";
+    }
+    if($strongPassword==0){
+        $errorpwd= "Password is not strong enough";
         $allFields = "no";
     }
 
@@ -269,7 +274,14 @@ if (isset($_POST['submit'])){
         CreateStaff();
     }
 
+}
 
+function passwordCheck ($password)
+{
+    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+    $passwordCheck = preg_match($password_regex, $password);
+
+    return $passwordCheck;
 }
 
 
@@ -292,8 +304,9 @@ if (isset($_POST['submit'])){
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
                                             </span>
                                         </span>
+                                        <span class="text-danger"><?php echo $errorfname; ?></span>
                                     </div>
-                                    <p id="AcError" style="color: #FFCC00; margin: top 10px;"></p>
+                                    <p id="errorpwd" style="color: #FFCC00; margin: top 10px;"></p>
 
 
                                     <div class="input-group mb-1 mt-5">
@@ -301,9 +314,9 @@ if (isset($_POST['submit'])){
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
-
+                                        <span class="text-danger"><?php echo $errorlname; ?></span>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
 
 
                                     <div class="input-group mb-1 mt-5">
@@ -311,9 +324,9 @@ if (isset($_POST['submit'])){
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
-
+                                        <span class="text-danger"><?php echo $erroremail; ?></span>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
 
 
                                     <div class="input-group mb-1 mt-5">
@@ -321,28 +334,38 @@ if (isset($_POST['submit'])){
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
-
+                                        <span class="text-danger"><?php echo $errorpwd; ?></span>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
 
                                     <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input name="branch" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Branch:" aria-describedby="inputGroup-sizing-default">
-
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <select name="branch" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <option value="">Select branch</option>
+                                        <option value="branch1">Kuala Lumpur</option>
+                                        <option value="branch2">Kuching</option>
+                                    </select>
+                                    <span class="text-danger"><?php echo $errorbranch; ?></span>
+                                    </div>
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
 
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
-                                        </div>
-                                        <input name="department" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Department:" aria-describedby="inputGroup-sizing-default">
-
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                     </div>
-                                    <p id="AmountError" style="color: #FFCC00;"></p>
+                                    <select name="department" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <option value="">Select department</option>
+                                        <option value="branch1">Accounts</option>
+                                        <option value="branch2">Administration</option>
+                                        <option value="branch3">Loans</option>
+                                        <option value="branch4">Mortgage Advice</option>
+                                    </select>
+                                    <span class="text-danger"><?php echo $errordep; ?></span>
+                                    </div>
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
@@ -354,6 +377,9 @@ if (isset($_POST['submit'])){
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
                                         <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
+                                    </div>
+                                    <div class="alert alert-success" role="alert">
+                                        Staff successfully created
                                     </div>
                                 </div>
                                 </form>

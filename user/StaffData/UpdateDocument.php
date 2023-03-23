@@ -1,15 +1,11 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetDocuments.php";
 
-$user = getUsers ();
-
+$user = getDocuments();
+$errorMessage = "";
 $i = $_GET['File_Location'];
 
-$uname = $_SESSION['uname'];
-$role = $_SESSION['urole'];
-
-
-
+$uname = $_SESSION['User_ID'];
 
 ?>
 <script>
@@ -210,41 +206,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   border-radius: 4px;
 }
 
-
-    </style>
-
-
-</head>
-
-<body>
-    <!-- End of Topbar -->
-
-    <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4 dark_bg light">
-        <div class="row">
-            <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
-                </div>
-            </div>
-
-
-
-
-
-
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
-
-
-<style>
 form { 
 margin: 0 auto; 
 width:800px;
@@ -283,8 +244,71 @@ width:800px;
     margin: 25px auto;
 }
 
-
 </style>
+
+<?php
+
+$allField = TRUE;
+
+
+if (isset($_POST['submit'])) {
+    if ($_POST["DocumentName"] == "") {
+        // $User_ID_Error = "User ID is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["DocumentType"] == null) {
+        // $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["DocumentCriticality"] == null) {
+        // $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
+
+
+    if ($allField == True) {
+
+        $name = $_POST["DocumentName"];
+        $type = $_POST["DocumentType"];
+        $criticality = $_POST["DocumentCriticality"];
+        $Document_ID = $_GET['Document_ID'];
+
+        $result = updateDocument($name, $type, $criticality, $Document_ID);
+        if ($result) {
+            echo ("<script>location.href = 'ViewDocuments.php?updated=true';</script>");
+        }
+
+    }
+}
+
+?>
+</head>
+
+<body>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid px-lg-4 dark_bg light">
+        <div class="row">
+            <div class="col-md-12 mt-lg-4 mt-4">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title light mb-4 "></h5>
+
+
+
 <table class="styled-table">
     <thead>
         <tr>
@@ -300,62 +324,18 @@ width:800px;
     <tbody>
 
         <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name']?></td>
-            <td><?php echo $user[$i]['Document_Type']?></td>
-            <td><?php echo $user[$i]['Document_Criticality']?></td>
-            <td><?php echo $user[$i]['Owner_ID']?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time']?></td>
+            <td><?php echo $user[$i]['Document_Name'] ?></td>
+            <td><?php echo $user[$i]['Document_Type'] ?></td>
+            <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+            <td><?php echo $user[$i]['Owner_ID'] ?></td>
+            <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
 
 
         </tr>
-        
-
-        <!-- and so on... -->
     </tbody>
 </table>
 
-
-<?php
-
-$allField = TRUE;
-
-
-if (isset($_POST['submit'])) {
-    if ($_POST["DocumentName"] == "") {
-       // $User_ID_Error = "User ID is required";
-        $allField = FALSE;
-    }
-
-    if ($_POST["DocumentType"] == null) {
-       // $User_Password_Error = "Password is required";
-        $allField = FALSE;
-    }
-
-    if ($_POST["DocumentCriticality"] == null) {
-        // $User_Password_Error = "Password is required";
-         $allField = FALSE;
-     }
-
-
-    if ($allField == True) {
-
-$name = $_POST["DocumentName"];
-$tpye = $_POST["DocumentType"];
-
-$criticality = $_POST["DocumentCriticality"];
-
-     //   Update($name, $type, $criticality);
-
-}
-}
-
-
-
-?>
-
-<form class="styled-table">
-
-
+<form class="styled-table" Method="POST">
 <div class="form-group">
     <label for="exampleInputEmail1">Document Name</label>
     <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
@@ -364,25 +344,29 @@ $criticality = $_POST["DocumentCriticality"];
     <label for="exampleInputEmail1">Document Type</label>
     <select class="form-control" name="DocumentType"    >
         <option selected="selected"><?php echo $user[$i]['Document_Type'] ?></option>
-        <option value="volvo">Loans</option>
-        <option value="saab">mortgage</option>
+        <option value="<?php echo LOANS_DEP ?>">Loans</option>
+      <option value="<?php echo MORTGAGES_DEP ?>">Mortgages</option>
+      <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+      <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
     </select>
   </div>  
   <div class="form-group">
     <label for="exampleInputEmail1">Document Criticality</label>
     <select class="form-control" name="DocumentCriticality">
     <option selected="selected"><?php echo $user[$i]['Document_Criticality'] ?></option>
-        <option value="volvo">Low</option>
-        <option value="saab">Medium</option>
-        <option value="fiat">High</option>
+      <option value="<?php echo CRIT_HIGH ?>">High</option>
+      <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
+      <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
   </div>  
+  <div id="backButton" class="d-grid col-sm-5 mx-auto">
   <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-pay btn-lg btn-block"></input>
-  
-
-        <!-- and so on... -->
+</div>
 </form>
+<div id="backButton" class="d-grid col-sm-3 mx-auto">
+                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
+                                    </div>
 
 
                                 </div>
@@ -436,6 +420,25 @@ $criticality = $_POST["DocumentCriticality"];
 
         });
     </script>
+    <?php
+    function updateDocument($name, $type, $criticality, $Document_ID)
+    {
+
+        // Create a new PDO connection object
+        include("../../DB config.php");
+
+        $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
+
+        $stmt = $pdo->prepare($sql);
+        $result = $stmt->execute([$name, $type, $criticality, $Document_ID]);
+
+        if (!$result) {
+            $error = $stmt->errorInfo();
+            $errorMessage = "SQL error: " . $error[2];
+        }
+        return $result;
+
+    } ?>
 
 </body>
 
