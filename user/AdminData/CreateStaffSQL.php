@@ -1,69 +1,69 @@
-<?php
-function CreateStaff()
-{
+    <?php
+    function CreateStaff()
+    {
 
-    // Create a new PDO connection object
-    include("../../DB config.php");
+        // Create a new PDO connection object
+        include("../../DB config.php");
 
-    date_default_timezone_set('Europe/London');
+        date_default_timezone_set('Europe/London');
 
-    $stmt = $pdo->prepare('INSERT INTO Bank_Employees (User_ID, User_Role, First_Name, Last_Name, Email, Password, Last_Active, Branch, Department) VALUES (:User_ID, :role, :fname, :lname, :email, :password, :active, :branch, :department)');
+        $stmt = $pdo->prepare('INSERT INTO Bank_Employees (User_ID, User_Role, First_Name, Last_Name, Email, Password, Last_Active, Branch, Department) VALUES (:User_ID, :role, :fname, :lname, :email, :password, :active, :branch, :department)');
 
-    $rand = rand(100, 999);
-
-
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $branch = $_POST['branch'];
-    $department = $_POST['department'];
-
-    $active = date('d/m/Y H:i');
-
-    $role = "Staff";
-    $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001" . $rand);
+        $rand = rand(100, 999);
 
 
-    $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $branch = $_POST['branch'];
+        $department = $_POST['department'];
 
-    $stmt->bindParam(':role', $role, PDO::PARAM_STR);
-    $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
-    $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-    $stmt->bindParam(':active', $active, PDO::PARAM_STR);
-    $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
-    $stmt->bindParam(':department', $department, PDO::PARAM_STR);
+        $active = date('d/m/Y H:i');
+
+        $role = "Staff";
+        $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001" . $rand);
 
 
-    $stmt->execute();
+        $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
 
-    return "yes";
+        $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':active', $active, PDO::PARAM_STR);
+        $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
+        $stmt->bindParam(':department', $department, PDO::PARAM_STR);
 
-}
 
-function checkDuplicateEmail($email)
-{
+        $stmt->execute();
 
-    // Create a new PDO connection object
-    include("../../DB config.php");
+        return "yes";
 
-    $sql = "SELECT Email FROM dbo.Bank_Employees WHERE Email= ?";
+    }
 
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([$email]);
+    function checkDuplicateEmail($email)
+    {
 
-    return $result;
-}
+        // Create a new PDO connection object
+        include("../../DB config.php");
 
-function passwordCheck($password)
-{
-    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
-    $passwordCheck = preg_match($password_regex, $password);
+        $sql = "SELECT Email FROM dbo.Bank_Employees WHERE Email= ?";
 
-    return $passwordCheck;
-}
+        $stmt = $pdo->prepare($sql);
+        $result = $stmt->execute([$email]);
 
-?>
+        return $result;
+    }
+
+    function passwordCheck($password)
+    {
+        $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+        $passwordCheck = preg_match($password_regex, $password);
+
+        return $passwordCheck;
+    }
+
+    ?>
 

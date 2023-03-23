@@ -49,7 +49,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <li class="menuHover">
 
                     <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
+                        <i class="fas fa-chart-line"></i> Dashboard
                     </a>
                 </li>
 
@@ -57,25 +57,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                 <li class="menuHover box-icon">
                     <a href="ViewAdmin.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Admin
+                        <i class="fas fa-users"></i> View Admin
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="CreateAdmin.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Admin
+                        <i class="fas fa-user-plus"></i> Create Admin
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="AuditTrail.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Audit Trails
+                        <i class="far fa-clipboard"></i> Audit Trails
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
-                        <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
+                        <i class="fas fa-door-open"></i> Logout
                     </a>
                 </li>
 

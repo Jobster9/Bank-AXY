@@ -1,10 +1,14 @@
 <?php
-
 //chart data
 include("header.php");
 include("GetChartDocs.php");
+$latest_creation_date_time = getLatestCreationDateTime();
+$monthlydocuments = monthlydocuments();
 
-/*$rows_array = getChartDocs();
+$lowdocuments = lowdocuments();
+
+
+/*
 $chart_data = [];
 for($i=0; $i<count($rows_array); $i++)
 {
@@ -12,20 +16,6 @@ $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
 $rows_array[$i] = $rowDate->format('M-Y');
 }*/
 
-$dataPoints = array(
-    array("y" => 3373.64, "label" => "January"),
-    array("y" => 2435.94, "label" => "February"),
-    array("y" => 1842.55, "label" => "March"),
-    array("y" => 1828.55, "label" => "April"),
-    array("y" => 1039.99, "label" => "May"),
-    array("y" => 765.215, "label" => "June"),
-    array("y" => 612.453, "label" => "July"),
-    array("y" => 612.453, "label" => "August"),
-    array("y" => 612.453, "label" => "September"),
-    array("y" => 612.453, "label" => "October"),
-    array("y" => 612.453, "label" => "November"),
-    array("y" => 612.453, "label" => "December")
-);
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -61,6 +51,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
+
+
 
     <!--bar charts-->
 <script>
@@ -105,6 +97,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             }
         }
     </style>
+
 
     <style>
         .btn-pay {
@@ -286,7 +279,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <body>
 
-    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4">
@@ -299,35 +291,88 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         Generate Report</a> -->
                 </div>
             </div>
+ 
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 ">Number of Inactive Staff in your Branch</h5>
+                                <h1 id="CreditDisplay" class="display-5 mt-1 mb-3 text-success"></h1>
+                                <div class="mb-1">
+                                    <span id="CreditLastM" class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
+                                    <span class="text-muted"><?php echo $latest_creation_date_time ?></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Number of Staff in your Branch</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
+                    <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
+                                <h5 class="card-title mb-4">Number of Staff in Departments in your Branch</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
-            <!--chart here-->
-            <div id="chartContainer" style="height: 450px; width: 85%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
-            <div class="modal-dialog loadingModal modal-lg">
-                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
-                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
+
+<style>
+#chartContainer {
+    background-color: rgba(0,0,0,0);
+}
+</style>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    var low = <?php echo $lowdocuments[0]; ?>;
+    var medium = <?php echo $lowdocuments[1]; ?>;
+    var high = <?php echo $lowdocuments[2]; ?>;
+window.onload = function () {
+var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    backgroundColor: "rgba(0,0,0,0)",
+    data: [{
+        type: "doughnut",
+        startAngle: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} - {y}",
+        toolTipContent: "<b>{label}:</b> {y}",
+        dataPoints: [
+            { y: low, label: "Accounts" },
+            { y: medium, label: "Loans" },
+            { y: high, label: "Mortgage Advice" },
+        ]
+    }]
+});
+chart.render();
+}
+</script>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+         
 
-    </div>
-
-        </div>
-        
-    </div>
 
     <?php include "footer.php" ?>
     <!-- Wraper Ends Here -->
