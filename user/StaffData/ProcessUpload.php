@@ -7,6 +7,7 @@ $UploadMessage = "";
 $FileError = "";
 $TypeError = "";
 $SizeError = "";
+$SQLError = "";
 if (isset($_POST['submit'])) {
     $result = UploadDocument($FileError, $TypeError, $SizeError);
     if ($result) {
