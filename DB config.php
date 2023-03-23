@@ -3,7 +3,7 @@
 // Specify your database credentials here
 
 
-$host = 'PLAYING-MINECRA';
+$host = 'EMILYSPC\MSSQLSERVER1';
 
 
 
