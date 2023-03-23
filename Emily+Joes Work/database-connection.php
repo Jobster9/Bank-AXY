@@ -56,3 +56,4 @@ function insertToDatabase()
     ;
 } ?> </h1>
 </body>
+*/

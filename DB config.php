@@ -3,7 +3,7 @@
 // Specify your database credentials here
 
 
-$host = 'ABDULNAZIR';
+$host = 'PLAYING-MINECRA';
 
 
 $dbname = 'BankAXY';

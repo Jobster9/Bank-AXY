@@ -1,6 +1,6 @@
 <?php  
 include "GetDocuments.php";
-$user = getUsers ();
+$user = getDocuments ();
 
 $i = $_GET['File_Location'];
 
