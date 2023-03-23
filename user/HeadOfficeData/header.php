@@ -90,9 +90,59 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!-- /#sidebar-wrapper -->
 
 
+
+
+
+
     <!-- Page Content -->
     <div id="page-content-wrapper">
+<style>
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #1e0063;
+  color: #fff;
+  padding: 10px 0;
+}
+
+header h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
+        </div>
+    </header>
+</body>
+</html>
 
         <div id="content">
 
