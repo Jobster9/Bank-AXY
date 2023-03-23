@@ -32,6 +32,8 @@ function destroySession() {
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="wrapper ribbon ribbon-top-right">
     <div class="overlay"></div>
 
@@ -51,7 +53,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <li class="menuHover">
 
                     <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
+                        <i class="fas fa-chart-line"></i> Dashboard
                     </a>
                 </li>
 
@@ -59,25 +61,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                 <li class="menuHover box-icon">
                     <a href="ViewStaff.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Staff
+                        <i class="fas fa-users"></i> View Staff
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="CreateStaff.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Staff
+                        <i class="fas fa-user-plus"></i> Create Staff
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="AuditTrail.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Audit Trails
+                        <i class="far fa-clipboard"></i> Audit Trails
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
-                        <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
+                        <i class="fas fa-door-open"></i> Logout
                     </a>
                 </li>
 
