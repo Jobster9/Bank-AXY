@@ -13,6 +13,7 @@ $User_ID = $_GET['User_ID'];
 $Role = $_GET['Role'];
 $Authentication = $_GET['AuthCode'];
 
+
 echo $Authentication . " This is authentication code (remove this for client just here so we can log in)";
 
 $AuthError = "";
