@@ -3,7 +3,6 @@
 // Specify your database credentials here
 
 
-$host = 'PLAYING-MINECRA';
 
 
 $dbname = 'BankAXY';

@@ -404,7 +404,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>Creation Date & Time</th>
             <th>Update</th>            
             <th>View</th>            
-
+            <th>Delete</th>  
 
         </tr>
     </thead>
@@ -439,6 +439,8 @@ for ($i = 0; $i < count($user); $i++):
                                                         </td>
 
                     <?php } ?>
+                    <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
+                
 
 <?php endfor; ?>
 
