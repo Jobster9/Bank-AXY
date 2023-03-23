@@ -5,9 +5,6 @@
 
 
 
-$host = 'DESKTOP-AVCNUEK';
-
-
 $dbname = 'BankAXY';
 
 // Create a new PDO connection object

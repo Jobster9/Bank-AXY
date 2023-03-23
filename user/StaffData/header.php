@@ -1,16 +1,13 @@
 <?php include("../../config.php");
 session_start();
 
-Function GetUserID(){
-    return $_SESSION['User_ID'];
-}
 
 if (!isset($_SESSION['User_ID'])) {
     header('Location: /BankAXY/user/login.php');
     exit;
 }
 
-echo '<script>
+echo '<script>get
 var timer = null;
 document.addEventListener("mousemove", function() {
     if (timer) {
@@ -21,6 +18,10 @@ document.addEventListener("mousemove", function() {
     }, 120000);
 });
 
+window.onbeforeunload = function() {
+    destroySession();
+};
+
 function destroySession() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "/BankAXY/user/logout.php", true);
@@ -29,7 +30,13 @@ function destroySession() {
 }
 </script>';
 
+
 ?>
+
+
+
+
+
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -89,7 +96,63 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
     <!-- Page Content -->
+
+
+
+
+
+
+
+
     <div id="page-content-wrapper">
+<style>
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #1e0063;
+  color: #fff;
+  padding: 10px 0;
+}
+
+header h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
+        </div>
+    </header>
+</body>
+</html>
+
 
 
         <div id="content">
@@ -97,6 +160,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="container-fluid p-0 px-lg-0 px-md-0">
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light my-navbar">
+
+
+
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
