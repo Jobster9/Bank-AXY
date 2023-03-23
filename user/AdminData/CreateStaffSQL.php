@@ -1,6 +1,8 @@
+
 <?php
 function CreateStaff()
 {
+
 
     // Create a new PDO connection object
     include("../../DB config.php");
