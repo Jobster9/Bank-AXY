@@ -27,10 +27,10 @@ Function EmailAuthentication(){
 
     $AuthCode = rand(10000, 99999);
  
-    $to_email = "dwasda17@gmail.com"; //email that you want to send to
+    $to_email =  $array_User[0]["Email"]; //email that you want to send to
     $subject = "Bank AXY Authentication Code";
-    $body = $AuthCode;
-    $headers = "From: sender\'s email";
+    $body = "Your Authentication code is " . $AuthCode;
+    $headers = "From: Bank AXY";
          
     if (mail($to_email, $subject, $body, $headers)) {
         echo "Email successfully sent to $to_email...";
