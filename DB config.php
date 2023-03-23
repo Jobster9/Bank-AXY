@@ -3,6 +3,7 @@
 // Specify your database credentials here
 
 
+<<<<<<< HEAD
 $host = 'EMILYSPC\MSSQLSERVER1';
 =======
 
