@@ -33,7 +33,7 @@ if ($Authentication == $_POST["AuthCode"]){
             }
         } else {
 
-            $AuthError = $Authentication;
+            $AuthError = "Incorrect authentication code";
         }
 
     }    
