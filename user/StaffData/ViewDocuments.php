@@ -602,6 +602,9 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
+
+
+
     <script>
         function searchByName() {
             document.getElementById("Search").innerHTML = '<input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document">';
