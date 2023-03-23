@@ -435,6 +435,7 @@ for ($i = 0; $i < count($user); $i++):
                     <td><?php echo $user[$i]['Owner_ID'] ?></td>
                     <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
                     <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
+                    <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
 
                 <?php
                     $userID = GetUserID();
@@ -454,7 +455,6 @@ for ($i = 0; $i < count($user); $i++):
                                                         </td>
 
                     <?php } ?>
-                    <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
                 
 
 <?php endfor; ?>
