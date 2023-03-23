@@ -422,8 +422,9 @@ for ($i = 0; $i < count($user); $i++):
                     <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
 
                 <?php
-                $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-                $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                    $userID = GetUserID();
+                $Access = GetAccessControl($userID, $user[$i]['Document_Name']);
+                $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
                 if ($RequestAccess != null) {
                     ?>
                                     <td><a href="RequestAccess.php?File_Location=Requested">View</a>

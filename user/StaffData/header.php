@@ -1,7 +1,9 @@
 <?php include("../../config.php");
 session_start();
 
-
+Function GetUserID(){
+    return $_SESSION['User_ID'];
+}
 
 if (!isset($_SESSION['User_ID'])) {
     header('Location: /BankAXY/user/login.php');
