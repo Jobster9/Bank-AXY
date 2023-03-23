@@ -1,25 +1,7 @@
-<?php
-include "../connection.php";
-
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
-}
-$username = $_SESSION['username'];
-// $query = "SELECT * FROM customer_detail JOIN login ON customer_detail.Account_No = login.AccountNo WHERE login.Username = '$username'";
-// $result = mysqli_query($conn, $query);
-
-// if (mysqli_num_rows($result) > 0) {
-
-//     while ($row = mysqli_fetch_assoc($result)) {
-
-
-
-//     }
-//   }
-
-?>
+    <?php include "header.php" ?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +10,7 @@ $username = $_SESSION['username'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Transfer</title>
+    <title>Upload Documents</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -52,7 +34,7 @@ $username = $_SESSION['username'];
 
     <style>
         .btn-pay {
-            background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
             color: #fdfdfd;
             font-weight: bold;
             box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
@@ -60,16 +42,18 @@ $username = $_SESSION['username'];
         }
 
         .btn-pay:hover {
-            background-image: linear-gradient(to right, #42c16d 0%, #33e6c7 100%);
-
-
+            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
 
         }
 
         .card {
-            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(39, 10, 226, 1) 0%, rgba(164, 12, 251, 1) 100.2%);
+            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
         }
-
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  
+}
         /* The Modal (background) */
         .customodal {
             display: none;
@@ -162,13 +146,64 @@ $username = $_SESSION['username'];
             align-items: center;
             margin-top: 20%;
         }
-    </style>
 
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted #a3a3a3;
+  border-radius: 5px;
+}
+.drop_box h4 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #a3a3a3;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #cc0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid #010101;
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+
+    </style>
 
 </head>
 
 <body>
-    <?php include "header.php" ?>
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
@@ -177,10 +212,8 @@ $username = $_SESSION['username'];
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Transfer Money</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Upload Document</h1>
                 </div>
-
-
             </div>
 
             <div class="col-md-12">
@@ -191,54 +224,61 @@ $username = $_SESSION['username'];
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-                                <!-- Customer Account Number -->
-                                <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
-                                    <div class="input-group mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#01be32'></i></span>
-                                        </div>
-                                        <input type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Account No..." aria-describedby="inputGroup-sizing-default">
-                                        <span id="info" hidden class="input-group-append bg-white border-left-0">
-                                            <span class="input-group-text bg-transparent">
-                                                <i class='bx bx-info-circle' style="color: #01be32;"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <p id="AcError" style="color: #ff203a; margin: top 10px;"></p>
 
 
+<div class="container">
+  <div class="card">
+    <div class="drop_box">
+    <header>
+        <h4>Select File here</h4>
+      </header>
+      <p>Files Supported:PDF</p>
+  <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
+      <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
+  <div class="form-group mb-1 mt-5">
+  <!-- <button class="btn" onclick="document.getElementById('file-upload').click()">Choose File</button> -->
+<input type="file" class="form-control-file" accept=".pdf" id="file-upload" name="uploaded-file" onchange="showInputs()" required>
+  </div>
+  <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
+  <p>Please ensure the filename follows the standardized convention: 
+    <br>"CustomerName-Category-DocumentNumber.pdf".
+    <br> If you are unsure about the convention, please refer to the <a>guide</a>.
+                                    <a href="temp.pdf#toolbar=0" target="_blank" rel="noopener noreferrer">Document Naming Convention</a>
+  </p>
+    <label for="doc-name">Document Name:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+        <input type="text" class="form-control" id="doc-name" name="doc-name" placeholder="Document Name" required>
+  </div>
+  </div>
+  <div class="form-group" id="doc-category-group" style="display:none">
+    <label for="doc-category">Document Category:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+    <select class="form-control" id="doc-category" name="doc-category">
+      <option value="<?php echo LOANS_DEP ?>">Loans</option>
+      <option value="<?php echo MORTGAGES_DEP ?>">Mortgages</option>
+      <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+      <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
+    </select>
+</div>
+</div>
+<div class="form-group" id="doc-criticality-group" style="display:none">
+    <label for="doc-category">Document Criticality:</label>
+    <div class="input-group-prepend">
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+    <select class="form-control" id="doc-criticality" name="doc-criticality">
+      <option value="<?php echo CRIT_HIGH ?>">High</option>
+      <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
+      <option value="<?php echo CRIT_LOW ?>">Low</option>
+    </select>
+</div>
+<button type="submit" name="submit" class="btn mb-1 mt-5">Upload File</button>
+  </div>
+</form>
+</div>
+</div>
 
-
-                                    <!-- Amount -->
-                                    <div class="input-group mb-1 mt-5">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-rupee'></i></span>
-                                        </div>
-                                        <input id="Amount" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Enter Amount..." aria-describedby="inputGroup-sizing-default">
-
-                                    </div>
-                                    <p id="AmountError" style="color: #ff203a;"></p>
-
-                                    <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-
-                                        <button type="button" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Pay Money</button>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2"></div>
-
-
-
-                </div>
-
-
-            </div>
-
-        </div>
 
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
@@ -254,18 +294,12 @@ $username = $_SESSION['username'];
     <?php include "footer.php" ?>
 
 
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/transfer.js"></script>
 
 
     <script>
@@ -273,8 +307,25 @@ $username = $_SESSION['username'];
             $(this).toggleClass('open');
             $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
 
-        });
-    </script>
+        }); 
+
+function showInputs() {
+  var fileUpload = document.getElementById("file-upload");
+  var docNameGroup = document.getElementById("doc-name-group");
+  var docCategoryGroup = document.getElementById("doc-category-group");
+  var docCriticalityGroup = document.getElementById("doc-criticality-group");
+  
+  if (fileUpload.value) {
+    docNameGroup.style.display = "block";
+    docCategoryGroup.style.display = "block";
+    docCriticalityGroup.style.display = "block";
+
+    var fileName = fileUpload.value.split("\\").pop();
+    var docNameInput = document.getElementById("doc-name");
+    docNameInput.value = fileName;
+  }
+}
+</script>
 
 </body>
 

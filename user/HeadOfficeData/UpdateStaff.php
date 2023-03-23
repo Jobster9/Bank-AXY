@@ -1,37 +1,83 @@
-<?php
+<?php 
+include "header.php" ;
 
-//chart data
-include("header.php");
-include("GetChartDocs.php");
-$latest_creation_date_time = getLatestCreationDateTime();
-$monthlydocuments = monthlydocuments();
+$User_ID = $_GET['User_ID'];
+$User_ID_Error = $User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Password_Error = $invalidMesg = "";
+$allField = True;
+$staff = GetStaffMember($User_ID);
 
-$lowdocuments = lowdocuments();
+if (isset($_POST['submit'])) {
+    if ($_POST["User_ID"] == "") 
+    {
+        $User_ID_Error = "User ID is required";
+        $allField = FALSE;
+    }
 
-$mediumdocuments = mediumdocuments();
-$highdocuments = highdocuments();
+    if ($_POST["First_Name"] == "") 
+    {
+        $User_ID_Error = "First Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Last_Name"] == "") 
+    {
+        $User_ID_Error = "Last Name is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Email"] == "") 
+    {
+        $User_ID_Error = "Email is required";
+        $allField = FALSE;
+    }
+
+    if ($_POST["Password"] == null) 
+    {
+        $User_Password_Error = "Password is required";
+        $allField = FALSE;
+    }
 
 
-/*
-$chart_data = [];
-for($i=0; $i<count($rows_array); $i++)
-{
-$rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-$rows_array[$i] = $rowDate->format('M-Y');
-}*/
+    if ($allField == True) 
+    {
+        $sql = "UPDATE Bank_employees SET First_Name=?, Last_Name=?, Email=?, Password=? WHERE User_ID=?";
+        $stmt= $pdo->prepare($sql);
+        $stmt->execute([First_Name, Last_Name, Email, Password, Username]);
+        
+    } 
+}
+
+function getStaffMember ($User_ID){
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare("SELECT * FROM Bank_Employees WHERE User_ID = '".$User_ID."'");
+
+    $result = $stmt->execute();
+
+    $rows_array = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $rows_array[] = $row;
+    }
+
+    return $rows_array;
+}
+
 
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+
+    <title>Update</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -47,16 +93,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-   
 
     <style>
         .btn-pay {
@@ -223,12 +264,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   padding: 12px 20px;
   border-radius: 4px;
 }
-@media screen and (min-width: 368px) {
-  .modal.show .modal-dialog {
-    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
-    margin-left: auto;
-  }
-}
 
 
     </style>
@@ -237,118 +272,125 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </head>
 
 <body>
-
+    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4">
+    <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>
-                        Generate Report</a> -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Admin:</h1>
                 </div>
             </div>
- 
-                    <div class="col-sm-6">
+
+
+
+
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4 ">Latest Document Creation</h5>
-                                <h1 id="CreditDisplay" class="display-5 mt-1 mb-3 text-success"></h1>
-                                <div class="mb-1">
-                                    <span id="CreditLastM" class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted"><?php echo $latest_creation_date_time ?></span>
+                                <h5 class="card-title light mb-4 "></h5>
+
+
+
+
+
+                        
+
+
+
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+
+                                <?php if (isset($_GET['error'])) { ?>
+
+                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+
+                                <?php } ?>
+
+                                <div class="form-group">
+                                    <label for="username" class="sr-only">Username</label>
+                                    <input type="text" name="User_ID" id="Username" class="form-control" value=<?php echo $staff[0]['User_ID'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_ID_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="first_name" class="sr-only">First Name</label>
+                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="last_name" class="sr-only">Last Name</label>
+                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
+                                    <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
+                                    <p id="alert1" style="color: red;"></p>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" name="Password" id="password" class="form-control" value="***********" required>
+                                    <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
+                                </div>
+                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="Update">
+                                <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
+                            </form>
+
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Documents Created this Month</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
-                                <div class="mb-1">
-                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-2"></div>
 
-                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog loadingModal modal-lg">
+                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
+                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
                 </div>
             </div>
-                    <div class="col-md-12 mt-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Documents Created this Month According to Criticality</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
-                                <div class="mb-1">
-                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+        </div>
 
-
-
-<style>
-#chartContainer {
-    background-color: rgba(0,0,0,0);
-}
-</style>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    var low = <?php echo $lowdocuments; ?>;
-    var medium = <?php echo $mediumdocuments; ?>;
-    var high = <?php echo $highdocuments; ?>;
-window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    data: [{
-        type: "doughnut",
-        startAngle: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}",
-        toolTipContent: "<b>{label}:</b> {y}",
-        dataPoints: [
-            { y: low, label: "Low" },
-            { y: medium, label: "Medium" },
-            { y: high, label: "High" },
-        ]
-    }]
-});
-chart.render();
-}
-</script>
-
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-         
-
+    </div>
+    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
+
+
     <!-- Wraper Ends Here -->
-
-
-
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/dashboard.js"></script>
+    <script src="../UserData/js/transfer.js"></script>
 
 
     <script>
@@ -358,9 +400,6 @@ chart.render();
 
         });
     </script>
-
-
-
 
 </body>
 

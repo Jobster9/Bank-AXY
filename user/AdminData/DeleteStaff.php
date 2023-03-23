@@ -1,37 +1,31 @@
-<?php
+    <?php include "header.php";
 
-//chart data
-include("header.php");
-include("GetChartDocs.php");
-$latest_creation_date_time = getLatestCreationDateTime();
-$monthlydocuments = monthlydocuments();
-
-$lowdocuments = lowdocuments();
-
-$mediumdocuments = mediumdocuments();
-$highdocuments = highdocuments();
+    // Create a new PDO connection object
+    include("DeleteUserDetails.php");
 
 
-/*
-$chart_data = [];
-for($i=0; $i<count($rows_array); $i++)
-{
-$rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
-$rows_array[$i] = $rowDate->format('M-Y');
-}*/
+    /*if (isset($_POST['delete'])) {
+    include("../../DB config.php");
+    $User_ID = $_GET['User_ID'];
+    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
+    $stmt->execute([$User_ID]);
+    // redirect to viewstaff.php
+    }*/
 
-?>
-<script>
+
+    ?>
+    <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard</title>
+
+    <title>Delete Staff</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -47,16 +41,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-   
 
     <style>
         .btn-pay {
@@ -223,12 +212,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   padding: 12px 20px;
   border-radius: 4px;
 }
-@media screen and (min-width: 368px) {
-  .modal.show .modal-dialog {
-    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
-    margin-left: auto;
-  }
-}
 
 
     </style>
@@ -237,120 +220,114 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </head>
 
 <body>
-
+    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4">
+    <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>
-                        Generate Report</a> -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Confirm Deletion of: <?php echo $User_ID ?></h1>
                 </div>
             </div>
- 
-                    <div class="col-sm-6">
+
+
+
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4 ">Latest Document Creation</h5>
-                                <h1 id="CreditDisplay" class="display-5 mt-1 mb-3 text-success"></h1>
-                                <div class="mb-1">
-                                    <span id="CreditLastM" class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted"><?php echo $latest_creation_date_time ?></span>
-                                </div>
-                            </div>
-                        </div>
+                                <h5 class="card-title light mb-4 "></h5>
 
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Documents Created this Month</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
-                                <div class="mb-1">
-                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
-                                </div>
-                            </div>
-                        </div>
+                    <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
+    <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
 
+                                        <form method="post">
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">First Name: <?php echo $rows_array[0]["First_Name"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Name: <?php echo $rows_array[0]["Last_Name"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Email: <?php echo $rows_array[0]["Email"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
+
+                                    <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
+                                        
+                                    </div>
+                                    </div>
+                                    
+                                    </form>
+                                    <div id="backButton" class="d-grid col-sm-4 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+
+                                    </div>
+                                </div>
+
+                        </div>
                     </div>
+                    <div class="col-sm-2"></div>
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog loadingModal modal-lg">
+                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
+                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
                 </div>
             </div>
-                    <div class="col-md-12 mt-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Documents Created this Month According to Criticality</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
-                                <div class="mb-1">
-                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+        </div>
 
-
-
-<style>
-#chartContainer {
-    background-color: rgba(0,0,0,0);
-}
-</style>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    var low = <?php echo $lowdocuments; ?>;
-    var medium = <?php echo $mediumdocuments; ?>;
-    var high = <?php echo $highdocuments; ?>;
-window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    data: [{
-        type: "doughnut",
-        startAngle: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}",
-        toolTipContent: "<b>{label}:</b> {y}",
-        dataPoints: [
-            { y: low, label: "Low" },
-            { y: medium, label: "Medium" },
-            { y: high, label: "High" },
-        ]
-    }]
-});
-chart.render();
-}
-</script>
-
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-         
-
+    </div>
+    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
+
+
     <!-- Wraper Ends Here -->
-
-
-
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/dashboard.js"></script>
+    <script src="../UserData/js/transfer.js"></script>
 
+<?php
+if (isset($_POST['submit'])) {
+    $result = deleteStaffMember($User_ID);
+    deleteStaffMember($User_ID);
+    if ($result) {
+        //header('Location: ViewStaff.php?deleted=true');
+    }
+}
+function deleteStaffMember($User_ID)
+{
+    // Create a new PDO connection object
+    include("../../DB config.php");
+    $stmt = $pdo->prepare("DELETE FROM dbo.Bank_Employees WHERE User_ID = ?");
+    $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
+    $result = $stmt->execute();
+    return $result;
+}
 
+?>
     <script>
         $('#bar').click(function() {
             $(this).toggleClass('open');
@@ -358,9 +335,6 @@ chart.render();
 
         });
     </script>
-
-
-
 
 </body>
 

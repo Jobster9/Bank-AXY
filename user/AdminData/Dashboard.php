@@ -1,4 +1,25 @@
+<?php
+//chart data
+include("header.php");
+include("GetChartDocs.php");
+$latest_creation_date_time = getLatestCreationDateTime();
+$monthlydocuments = monthlydocuments();
 
+$lowdocuments = lowdocuments();
+
+
+/*
+$chart_data = [];
+for($i=0; $i<count($rows_array); $i++)
+{
+$rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
+$rows_array[$i] = $rowDate->format('M-Y');
+}*/
+
+?>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
 <!doctype html>
 <html lang="en">
 
@@ -30,23 +51,189 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
+
+   
+
     <style>
-        @media only screen and (min-width:992px) {
-            #credit {
-                display: block;
-                box-sizing: border-box;
-                height: 181px;
-                width: 363px;
+        .btn-pay {
+            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
+            color: #fdfdfd;
+            font-weight: bold;
+            box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
+            border-radius: 30px;
+        }
+
+        .btn-pay:hover {
+            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
+
+        }
+
+        .card {
+            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
+        }
+.card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  
+}
+        /* The Modal (background) */
+        .customodal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content (Image) */
+        .customodal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image (Image Text) - Same Width as the Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .customodal-content,
+        #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
             }
         }
+
+        /* The Close Button */
+        .closebtn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover,
+        .closebtn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+
+        .loadingModal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20%;
+        }
+
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px dotted #a3a3a3;
+  border-radius: 5px;
+}
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #cc0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+  outline: 1px solid #010101;
+}
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+@media screen and (min-width: 368px) {
+  .modal.show .modal-dialog {
+    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
+    margin-left: auto;
+  }
+}
+
+
     </style>
+
 
 </head>
 
 <body>
 
-    <?php include "header.php" ?>
-    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4">
@@ -59,143 +246,88 @@
                         Generate Report</a> -->
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-3">
+ 
+                    <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">Balance</h5>
-                                <h1 id="BalanceDisplay" class="display-5 mt-1 mb-3"></h1>
-                                <div class="mb-1">
-                                    <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted">Your Total Balance</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Saving</h5>
-                                <h1 id="SavingDisplay" class="display-5 mt-1 mb-3"></h1>
-                                <div class="mb-1">
-                                    <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted">Save Money Monthly</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4 ">Credited this Month</h5>
+                                <h5 class="card-title mb-4 ">Number of Inactive Staff in your Branch</h5>
                                 <h1 id="CreditDisplay" class="display-5 mt-1 mb-3 text-success"></h1>
                                 <div class="mb-1">
                                     <span id="CreditLastM" class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted">Since last Month</span>
+                                    <span class="text-muted"><?php echo $latest_creation_date_time ?></span>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">Debited this Month</h5>
+                                <h5 class="card-title mb-4">Number of Staff in your Branch</h5>
                                 <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
                                 <div class="mb-1">
                                     <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
-                                    <span class="text-muted">Since last Month</span>
+                                    <span class="text-muted"><?php echo $monthlydocuments ?></span>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
-
                 </div>
             </div>
+                    <div class="col-md-12 mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Number of Staff in Departments in your Branch</h5>
+                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <div class="mb-1">
+                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
-            <!-- column -->
-            <div class="col-md-12 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- title -->
-                        <div class="d-md-flex align-items-center">
-                            <div>
-                                <h4 class="card-title">Transaction History</h4>
-                                <h5 class="card-subtitle">Overview of recent transaction</h5>
-                            </div>
-                            <div class="ml-auto">
-                                <a href="T_history.php" class="btn btn-info" role="button">View More</a>
-                                <!-- <div class="dl">
-                                    <select class="custom-select">
-                                        <option value="0" selected="">Monthly</option>
-                                        <option value="1">Daily</option>
-                                        <option value="2">Weekly</option>
-                                        <option value="3">Yearly</option>
-                                    </select>
-                                </div> -->
+
+
+<style>
+#chartContainer {
+    background-color: rgba(0,0,0,0);
+}
+</style>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    var low = <?php echo $lowdocuments[0]; ?>;
+    var medium = <?php echo $lowdocuments[1]; ?>;
+    var high = <?php echo $lowdocuments[2]; ?>;
+window.onload = function () {
+var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    backgroundColor: "rgba(0,0,0,0)",
+    data: [{
+        type: "doughnut",
+        startAngle: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} - {y}",
+        toolTipContent: "<b>{label}:</b> {y}",
+        dataPoints: [
+            { y: low, label: "Accounts" },
+            { y: medium, label: "Loans" },
+            { y: high, label: "Mortgage Advice" },
+        ]
+    }]
+});
+chart.render();
+}
+</script>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+                                </div>
                             </div>
                         </div>
-                        <!-- title -->
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table v-middle">
-                            <thead>
-                                <tr class="bg-light">
-                                    <th class="border-top-0">Sr.No</th>
-                                    <th class="border-top-0">Name</th>
-                                    <th class="border-top-0">Account No</th>
-                                    <th class="border-top-0">Date</th>
-                                    <th class="border-top-0">Amount</th>
-                                    <th class="border-top-0">Status</th>
 
-
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                        <tr>
-                                            <td>/td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="m-r-10"><a style="font-size: 13px; background-color:" class="btn btn-circle text-white"> <?php
-                                                                                                                                                                                            $name = $row['Name'];
-                                                                                                                                                                                            $pices = explode(" ", $name);
-                                                                                                                                                                                            echo substr($pices[0], 0, 1);
-                                                                                                                                                                                            echo substr($pices[1], 0, 1);
-                                                                                                                                                                                            ?></a>
-                                                    </div>
-                                                    <div class="">
-                                                        <h4 class="m-b-0 font-16"></h4>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td></td>
-                                            <td><</td>
-                                            <td>
-                                                <label class="label label-danger"></label>
-                                            </td>
-                                            <td>
-
-                                            </td>
-
-                                        </tr>
-
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
+         
 
-
-        </div>
-
-    </div>
 
     <?php include "footer.php" ?>
     <!-- Wraper Ends Here -->
@@ -222,81 +354,6 @@
 
         });
     </script>
-
-    <script>
-        var ctx = document.getElementById('Credit').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: <?php echo json_encode($date); ?>,
-                datasets: [{
-                        label: '# Credited',
-                        data: <?php echo json_encode($credit); ?>,
-
-                        // We Have to compare array two array i.e Debit data and data for expected result
-                        backgroundColor: [
-                            'rgba(0, 179, 3, 0.2)',
-
-                        ],
-                        borderColor: 'rgb(0, 179, 3)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: '# Debited',
-                        data: <?php echo json_encode($debit); ?>,
-                        backgroundColor: [
-                            'rgba(245, 7, 31, 0.2)',
-
-                        ],
-                        borderColor: 'rgb(245, 7, 31)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-
-            options: {
-
-                // responsive: false,
-
-            }
-        });
-
-
-        var ctx = document.getElementById('Balance').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Credit', 'Debit'],
-                datasets: [{
-                        label: 'Cash Flow Chart',
-                        data: [<?php echo $CreditTotal ?>, <?php echo abs($DebitTotal) ?>],
-                        backgroundColor: [
-                            'rgba(0, 179, 3, 0.6)',
-                            'rgba(245, 7, 31, 0.6)',
-
-                        ],
-                        borderColor: [
-                            'rgba(0, 179, 3)',
-                            'rgba(245, 7, 31)',
-                        ],
-
-                        borderWidth: 2,
-                        barThickness: 70
-                    }
-
-                ]
-            },
-
-            options: {
-
-                // responsive: false,
-            }
-        });
-
-
-        // Send Bar Chart
-    </script>
-
 
 
 
