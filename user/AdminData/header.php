@@ -78,6 +78,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 </li>
 
                 <li class="menuHover">
+                    <a href="AccessControlPage.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="fas fa-fingerprint"></i> Access Control
+                    </a>
+                </li>
+
+                <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
                         <i class="fas fa-door-open"></i> Logout
                     </a>

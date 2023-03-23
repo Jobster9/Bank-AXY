@@ -285,11 +285,11 @@ if (isset($_POST['submit'])) {
 
 
 
-    $stmt->bindParam(1, $requestID, SQLITE3_TEXT);
-    $stmt->bindParam(2, $userID, SQLITE3_TEXT);
-    $stmt->bindParam(3, $documentName, SQLITE3_TEXT);
-    $stmt->bindParam(4, $department, SQLITE3_TEXT);
-    $stmt->bindParam(5, $datetime, SQLITE3_TEXT);
+    $stmt->bindParam(1, $requestID, PDO::PARAM_STR);
+    $stmt->bindParam(2, $userID, PDO::PARAM_STR);
+    $stmt->bindParam(3, $documentName, PDO::PARAM_STR);
+    $stmt->bindParam(4, $department, PDO::PARAM_STR);
+    $stmt->bindParam(5, $datetime, PDO::PARAM_STR);
 
 
     $stmt->execute();
