@@ -62,6 +62,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+
     <!--bar charts-->
 <script>
     window.onload = function() {

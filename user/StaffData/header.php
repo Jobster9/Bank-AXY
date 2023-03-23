@@ -51,7 +51,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <li class="menuHover">
 
                     <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
+                        <i class="fas fa-chart-line"></i> Dashboard
                     </a>
                 </li>
 
@@ -59,19 +59,19 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                 <li class="menuHover box-icon">
                     <a href="UploadDocuments.php" id="UploadDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> Upload Documents
+                        <i class="fas fa-file-upload"></i> Upload Documents
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="ViewDocuments.php" id="ViewDocuments" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> View Documents
+                        <i class="fas fa-file"></i> View Documents
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
-                        <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
+                        <i class="fas fa-door-open"></i> Logout
                     </a>
                 </li>
 

@@ -235,15 +235,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             </div>
             
 
+            <div class="search-filter-container">
+                <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document"></div>
 
-            <p id="Search" style="margin:auto; width:75%"></p>
-
-            <div class="dropdown">
-                <button class="dropbtn">Filter</button>
-                <div class="dropdown-content">
-                    <button onclick="searchByName()" style="width:100%">Name</button>
-                    <button onclick="searchByType()" style="width:100%">Type</button>
-                    <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Filter</button>
+                    <div class="dropdown-content">
+                        <button onclick="searchByName()" style="width:100%">Name</button>
+                        <button onclick="searchByType()" style="width:100%">Type</button>
+                        <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                    </div>
                 </div>
             </div>
 
@@ -326,7 +327,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .dropdown {
   position: relative;
   display: inline-block;
+  text-align: center;
   margin: auto;
+  margin-bottom: 12px;
 }
 
 .dropdown-content {
@@ -350,6 +353,27 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #03258C;}
+
+.Search {
+    margin: auto;
+}
+
+.search-filter-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
 </style>
 
 <?php if (isset($_GET['updated'])): ?>
