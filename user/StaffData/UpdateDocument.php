@@ -279,9 +279,10 @@ if (isset($_POST['submit'])) {
         if ($result) {
             echo ("<script>location.href = 'ViewDocuments.php?updated=true';</script>");
         }
-
     }
+
 }
+
 
 ?>
 </head>
@@ -438,7 +439,9 @@ if (isset($_POST['submit'])) {
         }
         return $result;
 
-    } ?>
+    }
+
+    ?>
 
 </body>
 

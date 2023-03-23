@@ -1,5 +1,5 @@
     <?php include "header.php";
-    include "CreateStaffSQL.php";?>
+    include "CreateStaffSQL.php"; ?>
     <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -201,6 +201,55 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     </style>
 
+<?php
+$errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = $duplicateEmail = "";
+$allFields = "yes";
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $Duplicate = checkDuplicateEmail($email);
+    $strongPassword = passwordCheck($_POST['password']);
+    if ($_POST['fname'] == "") {
+        $errorfname = "First name is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['lname'] == "") {
+        $errorlname = "Last name is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['email'] == "") {
+        $erroremail = "Email is mandatory";
+        $allFields = "no";
+    }
+    if ($Duplicate) {
+        $erroremail = "This email already exists";
+        $allFields = "no";
+    }
+    if ($_POST['password'] == "") {
+        $errorpwd = "Password is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['branch'] == "") {
+        $errorbranch = "Branch is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['department'] == "") {
+        $errordep = "Department is mandatory";
+        $allFields = "no";
+    }
+    if ($strongPassword == 0) {
+        $errorpwd = "Password is not strong enough";
+        $allFields = "no";
+    }
+
+    if ($allFields == "yes") {
+
+        CreateStaff();
+    }
+
+}
+
+?>
 
 </head>
 
@@ -216,13 +265,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <h1 class="h3 mb-0 light" style="text-align: center;">Create Staff:</h1>
                 </div>
             </div>
-
-
-
-
-
-
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-2"></div>
@@ -230,68 +272,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-
-<?php
-$errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = "";
-$allFields = "yes";
-
-if (isset($_POST['submit'])){
-    
-    $strongPassword = passwordCheck($_POST['password']);
-    if($_POST['fname']==""){
-        $errorfname = "First name is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['lname']==""){
-        $errorlname= "Last name is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['email']==""){
-        $erroremail= "Email is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['password']==""){
-        $errorpwd= "Password is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['branch']==""){
-        $errorbranch= "Branch is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['department']==""){
-        $errordep= "Department is mandatory";
-        $allFields = "no";
-    }
-    if($strongPassword==0){
-        $errorpwd= "Password is not strong enough";
-        $allFields = "no";
-    }
-
-    if($allFields == "yes"){
-
-        CreateStaff();
-    }
-
-}
-
-function passwordCheck ($password)
-{
-    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
-    $passwordCheck = preg_match($password_regex, $password);
-
-    return $passwordCheck;
-}
-
-
-?>
-
-
-
-                                
-                                <!-- Customer Account Number -->
-
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">

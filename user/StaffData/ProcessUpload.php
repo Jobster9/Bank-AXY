@@ -8,12 +8,52 @@ $FileError = "";
 $TypeError = "";
 $SizeError = "";
 $SQLError = "";
+$NameError = "";
+$UploadSuccess = true;
+
 if (isset($_POST['submit'])) {
-    $result = UploadDocument($FileError, $TypeError, $SizeError);
-    if ($result) {
-        $UploadMessage = "File uploaded successfully!";
-    } else {
+
+    // Get the uploaded file data
+    $file = $_FILES['uploaded-file'];
+    $filetype = $_FILES['uploaded-file']['type'];
+    $filesize = $_FILES['uploaded-file']['size'];
+
+    $DocName = $_POST['doc-name'];
+    $Duplicate = checkDuplicate($DocName);
+    $nameConvention = checkNameConvention($DocName);
+
+
+    if ($filetype !== 'application/pdf') {
+        $TypeError = "This filetype is not supported, ensure you are uploading a PDF.";
+        $UploadSuccess = false;
+    }
+    if ($filesize >= 1000000) {
+        $SizeError = "The filesize is too big, file cannot be greater than 1mb.";
+        //this is greater than 1mb which for average PDF file is +100 pages
+        $UploadSuccess = false;
+    }
+    if ($_FILES['uploaded-file']['error'] !== UPLOAD_ERR_OK) {
+        $FileError = "File upload error.";
+        $UploadSuccess = false;
+    }
+    // if (!$nameConvention) {
+    //     $UploadMessage = "File not uploaded";
+    //     $NameError = "The Document name does not match the agreed convention. Please refer back to the guide";
+    //     $UploadSuccess = false;
+    // }
+    if ($Duplicate) {
         $UploadMessage = "File not uploaded";
+        $NameError = $Duplicate;
+        //$NameError = "The Document name submitted is a duplicate name.";
+        $UploadSuccess = false;
+    }
+    if ($UploadSuccess) {
+        $result = UploadDocument($FileError, $TypeError, $SizeError, $DocName);
+        if ($result) {
+            $UploadMessage = "File uploaded successfully!";
+        } else {
+            $UploadMessage = "File not uploaded";
+        }
     }
 } ?>
 <!DOCTYPE html>
@@ -246,10 +286,11 @@ if (isset($_POST['submit'])) {
     <header> 
     <div style="text-align-center"> 
         <h2><?php echo $UploadMessage ?></h2>
-        <h2 style=""><?php echo $FileError ?></h2>
-        <h2 style=""><?php echo $TypeError ?></h2>
-        <h2 style=""><?php echo $SizeError ?></h2>
-        <h2 style=""><?php echo $SQLError ?></h2>
+        <h4 style="color: #E33900;"><br><?php echo $NameError ?></h4>
+        <h4 style="color: #E33900;"><br><?php echo $FileError ?></h4>
+        <h4 style="color: #E33900;"><br><?php echo $TypeError ?></h4>
+        <h4 style="color: #E33900;"><br><?php echo $SizeError ?></h4>
+        <h4 style="color: #E33900;"><br><?php echo $SQLError ?></h4>
       </header>   
 </div>
 </div>
@@ -290,36 +331,20 @@ if (isset($_POST['submit'])) {
 
 </html>
 <?php
-function UploadDocument($FileError, $TypeError, $SizeError)
+
+
+function UploadDocument($FileError, $TypeError, $SizeError, $docName)
 {
     include("../../DB config.php");
-    // Get the form data
-    $docName = $_POST['doc-name'];
+    // Get the rest of the form data
     $docCategory = $_POST['doc-category'];
     $docCriticality = $_POST['doc-criticality'];
 
     //Get the user data 
     $OwnerID = $_SESSION['User_ID'];
 
-    // Get the uploaded file
-    $file = $_FILES['uploaded-file'];
-    $filetype = $_FILES['uploaded-file']['type'];
-    $filesize = $_FILES['uploaded-file']['size'];
     $fileTempName = $_FILES['uploaded-file']['tmp_name'];
 
-
-    if ($filetype !== 'application/pdf') {
-        $TypeError = "This filetype is not supported";
-    }
-
-    if ($filesize >= 1000000) {
-        $SizeError = "The filesize is too big";
-        //this is greater than 1mb which for average PDF file is +100 pages
-    }
-
-    if ($_FILES['uploaded-file']['error'] !== UPLOAD_ERR_OK) {
-        $FileError = "File upload error";
-    }
     // Read the file content
     $file_contents = file_get_contents($fileTempName);
 
@@ -344,4 +369,32 @@ function UploadDocument($FileError, $TypeError, $SizeError)
         $SQLerror = "SQL error: " . $error[2];
         return false;
     }
+}
+function checkDuplicate($docName)
+{
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name= ?";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(1, $docName, PDO::PARAM_STR);
+    $result = $stmt->execute();
+    print_r($stmt);
+    print_r($result);
+    return $result;
+    // if ($result) {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+
+}
+function checkNameConvention($docName)
+{
+    $document_regex = "/^([A-Za-z])+-([A-Za-z])+-([A-Za-z])+(['.pdf'])+$/";
+    $nameCheck = preg_match($document_regex, $docName);
+
+    return $nameCheck;
 }
