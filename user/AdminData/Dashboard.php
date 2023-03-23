@@ -52,7 +52,52 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
-   
+
+
+    <!--bar charts-->
+<script>
+    window.onload = function() {
+
+    CanvasJS.addColorSet("BankAXY",
+        [//colorSet Array
+        "#03258C",
+        "#F2B705"                
+        ]);
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        backgroundColor: "transparent",
+        colorSet: "BankAXY",
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+            text: "Files uploaded in the past year"
+        },
+        axisY: {
+            title: "files uploaded"
+        },
+        data: [{
+            type: "column",
+            yValueFormatString: "#,##0.## files",
+            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        }]
+    });
+    chart.render();
+
+    }
+</script>
+
+
+    <style>
+        @media only screen and (min-width:992px) {
+            #credit {
+                display: block;
+                box-sizing: border-box;
+                height: 181px;
+                width: 363px;
+            }
+        }
+    </style>
+
 
     <style>
         .btn-pay {

@@ -1,4 +1,4 @@
-<?php 
+    <?php 
 function CreateStaff (){
 
     // Create a new PDO connection object
