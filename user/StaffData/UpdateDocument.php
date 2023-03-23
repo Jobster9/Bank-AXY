@@ -2,7 +2,7 @@
 include "GetDocuments.php";
 
 $user = getDocuments();
-
+$errorMessage = "";
 $i = $_GET['File_Location'];
 
 $uname = $_SESSION['User_ID'];
@@ -206,41 +206,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   border-radius: 4px;
 }
 
-
-    </style>
-
-
-</head>
-
-<body>
-    <!-- End of Topbar -->
-
-    <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4 dark_bg light">
-        <div class="row">
-            <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
-                </div>
-            </div>
-
-
-
-
-
-
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
-
-
-<style>
 form { 
 margin: 0 auto; 
 width:800px;
@@ -279,37 +244,7 @@ width:800px;
     margin: 25px auto;
 }
 
-
 </style>
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Document Name</th>
-            <th>Document Type</th>
-            <th>Document Criticality</th>
-            <th>Owner ID</th>
-            <th>Creation Date & Time</th>          
-
-
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name'] ?></td>
-            <td><?php echo $user[$i]['Document_Type'] ?></td>
-            <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-            <td><?php echo $user[$i]['Owner_ID'] ?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-
-
-        </tr>
-        
-
-        <!-- and so on... -->
-    </tbody>
-</table>
-
 
 <?php
 
@@ -342,35 +277,65 @@ if (isset($_POST['submit'])) {
 
         $result = updateDocument($name, $type, $criticality, $Document_ID);
         if ($result) {
-            $action = "ViewDocuments.php?updated=true";
-            $updateButton = "Update";
-            $validated = true;
+            echo ("<script>location.href = 'ViewDocuments.php?updated=true';</script>");
         }
 
     }
 }
 
-function updateDocument($name, $type, $criticality, $Document_ID)
-{
-
-    // Create a new PDO connection object
-    include("../../DB config.php");
-
-    $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
-
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([$name, $type, $criticality, $Document_ID]);
-    return $result;
-
-}
-
-
-
 ?>
+</head>
+
+<body>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid px-lg-4 dark_bg light">
+        <div class="row">
+            <div class="col-md-12 mt-lg-4 mt-4">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title light mb-4 "></h5>
+
+
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Document Name</th>
+            <th>Document Type</th>
+            <th>Document Criticality</th>
+            <th>Owner ID</th>
+            <th>Creation Date & Time</th>          
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr class="active-row">
+            <td><?php echo $user[$i]['Document_Name'] ?></td>
+            <td><?php echo $user[$i]['Document_Type'] ?></td>
+            <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+            <td><?php echo $user[$i]['Owner_ID'] ?></td>
+            <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+
+
+        </tr>
+    </tbody>
+</table>
 
 <form class="styled-table" Method="POST">
-
-
 <div class="form-group">
     <label for="exampleInputEmail1">Document Name</label>
     <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
@@ -455,6 +420,25 @@ function updateDocument($name, $type, $criticality, $Document_ID)
 
         });
     </script>
+    <?php
+    function updateDocument($name, $type, $criticality, $Document_ID)
+    {
+
+        // Create a new PDO connection object
+        include("../../DB config.php");
+
+        $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
+
+        $stmt = $pdo->prepare($sql);
+        $result = $stmt->execute([$name, $type, $criticality, $Document_ID]);
+
+        if (!$result) {
+            $error = $stmt->errorInfo();
+            $errorMessage = "SQL error: " . $error[2];
+        }
+        return $result;
+
+    } ?>
 
 </body>
 
