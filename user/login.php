@@ -23,11 +23,13 @@ function updateLastActive($Last_Active, $User_ID)
 
 }
 
-Function EmailAuthentication(){
+
+
+Function EmailAuthentication($Email){
 
     $AuthCode = rand(10000, 99999);
  
-    $to_email =  $array_User[0]["Email"]; //email that you want to send to
+    $to_email = $Email; //email that you want to send to
     $subject = "Bank AXY Authentication Code";
     $body = "Your Authentication code is " . $AuthCode;
     $headers = "From: Bank AXY";
@@ -62,7 +64,6 @@ if($response_data->success){
                 $User_ID = $array_User[0]["User_ID"];
                 $Role = $array_User[0]["User_Role"];
                 $Password = $array_User[0]["Password"];
-                $Email = $array_User[0]['Email'];
 
                 date_default_timezone_set('Europe/London');
 
@@ -70,7 +71,7 @@ if($response_data->success){
 
                 updateLastActive($Last_Active ,$User_ID);
 
-                $AuthCode = EmailAuthentication();
+                $AuthCode = EmailAuthentication($array_User[0]["Email"]);
 
             if ($Role == "Staff") {
                 header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
