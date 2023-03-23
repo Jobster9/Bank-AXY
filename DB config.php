@@ -3,9 +3,13 @@
 // Specify your database credentials here
 
 
+<<<<<<< HEAD
+$host = 'EMILYSPC\MSSQLSERVER1';
+=======
 
-$host = 'PLAYING-MINECRA';
+$host = 'LAPTOP-HPMFPH95';
 
+>>>>>>> main
 
 
 
