@@ -4,6 +4,9 @@ $user = getDocuments ();
 
 $i = $_GET['File_Location'];
 
+session_start();
+$User_ID = $_SESSION['User_ID'];
+
 function AudiTrail($User_ID, $Document_Name){
 
     // Create a new PDO connection object
