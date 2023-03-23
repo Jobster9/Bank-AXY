@@ -1,5 +1,6 @@
 <?php
 include "header.php";
+include "CreateStaffSQL.php";
 $action = "";
 $validated = false;
 $updateButton = "Validate";
@@ -8,30 +9,34 @@ $User_FirstName_Error = $User_LastName_Error = $User_Email_Error = $User_Passwor
 $allField = True;
 $staff = GetStaffMember($User_ID);
 
+
 if (isset($_POST['submit'])) {
 
+    $strongPassword = passwordCheck($_POST["Password"]);
 
     if ($_POST["First_Name"] == "") {
         $User_ID_Error = "First Name is required";
-        $allField = FALSE;
+        $allField = false;
     }
 
     if ($_POST["Last_Name"] == "") {
         $User_ID_Error = "Last Name is required";
-        $allField = FALSE;
+        $allField = false;
     }
 
     if ($_POST["Email"] == "") {
         $User_ID_Error = "Email is required";
-        $allField = FALSE;
+        $allField = false;
     }
 
     if ($_POST["Password"] == null) {
         $User_Password_Error = "Password is required";
-        $allField = FALSE;
+        $allField = false;
     }
-
-
+    if ($strongPassword == 0) {
+        $User_Password_Error = "Password is not strong enough";
+        $allFields = "no";
+    }
 
     if ($allField == True) {
         $Firstname = $_POST["First_Name"];
@@ -304,12 +309,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 </div>
             </div>
 
-
-
-
-
-
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-2"></div>
@@ -319,29 +318,14 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <h5 class="card-title light mb-4 "></h5>
                                 <h3 class="h3 mb-2 light" style="text-align: center;"><?php echo $User_ID ?></h3>
 
-
-
-
-                        
-
-
-
                             <form action="<?php echo $action ?>" method="POST">
-
-                                <?php if (isset($_GET['error'])) { ?>
-
-                                                                                                                                                                                                            <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
-
-                                <?php } ?>
-
 
                                 <div class="form-group">
                                 <label for="first_name" class="">First Name</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
-                                    <input type="text" name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
+                                    <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                 </div>
-
                                     <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
                                     <p id="alert1" style="color: red;"></p>
                                 </div>
@@ -352,7 +336,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <label for="last_name" class="">Last Name</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>                              
-                                    <input type="text" name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
+                                    <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                 </div>
 
                                     <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
@@ -364,7 +348,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <label for="email" class="">Email</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
-                                    <input type="text" name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
+                                    <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                 </div>
 
                                     <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
@@ -376,7 +360,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <label for="password" class="">Password</label>
                                 <div class="input-group-prepend">
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
-                                    <input type="password" name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
+                                    <input type="password" <?php echo ($validated) ? "disabled" : ""; ?> name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
                                 </div>
 
                                     <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
