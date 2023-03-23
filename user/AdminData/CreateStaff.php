@@ -344,8 +344,8 @@ function passwordCheck ($password)
                                     </div>
                                     <select name="branch" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select branch</option>
-                                        <option value="branch1">Kuala Lumpur</option>
-                                        <option value="branch2">Kuching</option>
+                                        <option value="<?php echo HEAD_OFFICE ?>">Kuala Lumpur</option>
+                                        <option value="<?php echo EAST_BRANCH ?>">Kuching</option>
                                     </select>
                                     <span class="text-danger"><?php echo $errorbranch; ?></span>
                                     </div>
@@ -358,10 +358,10 @@ function passwordCheck ($password)
                                     </div>
                                     <select name="department" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select department</option>
-                                        <option value="branch1">Accounts</option>
-                                        <option value="branch2">Administration</option>
-                                        <option value="branch3">Loans</option>
-                                        <option value="branch4">Mortgage Advice</option>
+                                        <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
+                                        <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+                                        <option value="<?php echo LOANS_DEP ?>">Loans</option>
+                                        <option value="<?php echo MORTGAGES_DEP ?>">Mortgage Advice</option>
                                     </select>
                                     <span class="text-danger"><?php echo $errordep; ?></span>
                                     </div>

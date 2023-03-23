@@ -26,14 +26,14 @@ function CreateStaff (){
 
     $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
 
-    $stmt->bindParam(':role', $role, SQLITE3_TEXT);
-    $stmt->bindParam(':fname', $fname, SQLITE3_TEXT);
-    $stmt->bindParam(':lname', $lname, SQLITE3_TEXT);
-    $stmt->bindParam(':email', $email, SQLITE3_TEXT);
-    $stmt->bindParam(':password', $password, SQLITE3_TEXT);
-    $stmt->bindParam(':active',  $active, SQLITE3_TEXT);
-    $stmt->bindParam(':branch',  $branch, SQLITE3_TEXT);
-    $stmt->bindParam(':department',  $department, SQLITE3_TEXT);
+    $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+    $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
+    $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+    $stmt->bindParam(':active',  $active, PDO::PARAM_STR);
+    $stmt->bindParam(':branch',  $branch, PDO::PARAM_STR);
+    $stmt->bindParam(':department',  $department, PDO::PARAM_STR);
 
 
     $stmt->execute();
