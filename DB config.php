@@ -3,7 +3,7 @@
 // Specify your database credentials here
 
 
-$host = 'EMILYSPC\MSSQLSERVER1';
+$host = 'ABDULNAZIR';
 
 
 
