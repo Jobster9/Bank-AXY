@@ -1,5 +1,8 @@
-    <?php 
-function CreateStaff (){
+
+<?php
+function CreateStaff()
+{
+
 
     // Create a new PDO connection object
     include("../../DB config.php");
@@ -21,7 +24,7 @@ function CreateStaff (){
     $active = date('d/m/Y H:i');
 
     $role = "Staff";
-    $UserID = strtoupper(substr($fname, 0 ,1) . substr($lname, 0, 1). "001". $rand);
+    $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001" . $rand);
 
 
     $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
@@ -31,9 +34,15 @@ function CreateStaff (){
     $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+
     $stmt->bindParam(':active',  $active, PDO::PARAM_STR);
     $stmt->bindParam(':branch',  $branch, PDO::PARAM_STR);
     $stmt->bindParam(':department',  $department, PDO::PARAM_STR);
+
+    $stmt->bindParam(':active', $active, PDO::PARAM_STR);
+    $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
+    $stmt->bindParam(':department', $department, PDO::PARAM_STR);
+
 
 
     $stmt->execute();
@@ -42,8 +51,27 @@ function CreateStaff (){
 
 }
 
+function checkDuplicateEmail($email)
+{
 
+    // Create a new PDO connection object
+    include("../../DB config.php");
 
+    $sql = "SELECT Email FROM dbo.Bank_Employees WHERE Email= ?";
+
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([$email]);
+
+    return $result;
+}
+
+function passwordCheck($password)
+{
+    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+    $passwordCheck = preg_match($password_regex, $password);
+
+    return $passwordCheck;
+}
 
 ?>
 

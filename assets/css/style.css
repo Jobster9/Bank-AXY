@@ -759,9 +759,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 5px;
   transition: 0.5s;
   color: #fff;
-  background: linear-gradient(45deg, #5846f9 0%, #7b27d8 100%);
+  background: linear-gradient(45deg, #010066 0%, #FFCC00 100%);
   position: relative;
 }
 .btn-custo:hover{
-  background: linear-gradient(180deg, #5846f9 0%, #7b27d8 100%);
+  background: linear-gradient(180deg, #010066 0%, #FFCC00 100%);
 }
