@@ -223,7 +223,7 @@ border-radius: 4px;
 
 <?php
 
-$user = getUsers();
+$user = getDocuments();
 
 $i = $_GET['File_Location'];
 
