@@ -4,7 +4,9 @@
 
 
 
+
 $host = 'DESKTOP-AVCNUEK';
+
 
 $dbname = 'BankAXY';
 

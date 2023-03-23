@@ -10,6 +10,7 @@ $SizeError = "";
 $SQLError = "";
 $NameError = "";
 $UploadSuccess = true;
+
 if (isset($_POST['submit'])) {
 
     // Get the uploaded file data
