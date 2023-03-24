@@ -2,6 +2,8 @@
 include "../StaffData/AccessControl.php";
 
 $access = GetAllAccessRequests();
+
+$access_ID = "";
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -14,7 +16,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Audit Trails</title>
+    <title>Access Control</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -260,7 +262,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control:</h1>
                 </div>
             </div>
 
@@ -292,8 +294,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <tr class="active-row">
                     <td><?php echo $access[$i]['User_ID'] ?></td>
                     <td><?php echo $access[$i]['Document_Name'] ?></td>
-                    <td></td>
-                    <td><a href="DenyAccess.php?User_ID=<?php echo $access[$i]['User_ID']; ?>">Deny</a></td>
+                    <form method="post">
+                        <td style="text-align:center;"><a href="AccessControlPage.php?access_ID=<?php echo $access_ID; ?>"><button type="submit" name="Grant">Grant</button></a></td>
+                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td>
+                    </form>
                 </tr>
 <?php endfor; ?>
     </tbody>
@@ -342,23 +346,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/transfer.js"></script>
 
     <?php
-    if (isset($_POST['submit'])) {
-        $result = denyAccess($User_ID);
-        denyAccess($User_ID);
-        if ($result) {
-            //header('Location: ViewStaff.php?deleted=true');
-        }
-    }
-    function denyAccess($User_ID)
+    if (isset($_POST['Deny']))
     {
-        // Create a new PDO connection object
-        include("../../DB config.php");
-        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE User_ID = ?");
-        $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
-        $result = $stmt->execute();
-        return $result;
+        deleteRecord($access_ID);
     }
-
+    function deleteRecord($access_ID) {
+        include("../../DB config.php");
+        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
+        $stmt->bindParam(':access_ID', $access_ID);
+        $stmt->execute();
+        return $stmt->rowCount();
+      }
     ?>
 
 

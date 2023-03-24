@@ -1,7 +1,7 @@
 body {
     position: relative;
     overflow-x: hidden;
-background: linear-gradient(180deg, #ffffff 0%, #dcdbdf 100%), center center no-repeat;
+    background: #f7f7fc;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -30,7 +30,7 @@ sidebar
     left: -50px;
     overflow-y: auto;
     overflow-x: hidden;
-background: linear-gradient(180deg, #120065 0%, #CC0001 100%), center center no-repeat;
+background: linear-gradient(180deg, #120065 0%, #f9ce1d 100%), center center no-repeat;
     background-size: cover;
     transition: all 0.5s ease;
 }
@@ -51,14 +51,14 @@ background: linear-gradient(180deg, #120065 0%, #CC0001 100%), center center no-
     font-size: 1.15rem;
     padding: 1.15rem 1.5rem;
     display: block;
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 
 .sidebar-header {
     text-transform: capitalize;
     padding: 1.5rem 1.5rem .375rem !important;
     font-size: 14px;
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 .navbar-nav>li>a,
 .submenu-box ul li a {
@@ -103,20 +103,20 @@ background: linear-gradient(180deg, #120065 0%, #CC0001 100%), center center no-
 
 
 .navbar-nav>li>a.active {
-    color: #FFFFFF !important;
+    color: #FFCC00 !important;
     font-weight: bold;
     background: linear-gradient(90deg, #CC0000 0%, #FFCC00 85%, transparent);
-    border-left: 4px solid #0000CC;
+    border-left: 4px solid #FFCC00;
 }
 
 .navbar-nav .has-sub>a.collapsed::after {
-    color: #FFFFFF;
+    color: #FFCC00;
     font-size: 10px;
     content: "\f078";
 }
 
 .navbar-nav .has-sub>a.collapsed::after {
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 
 .navbar-nav .has-sub>a::after {
@@ -156,7 +156,7 @@ background: linear-gradient(180deg, #120065 0%, #CC0001 100%), center center no-
 
 .nav-item .nav-link {
     display: block;
-    color: #FFFFFF !important;
+    color: #FFCC00 !important;
     text-transform: capitalize;
     text-decoration: none;
     padding: 6px 10px;
