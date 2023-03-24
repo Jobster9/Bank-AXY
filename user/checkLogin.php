@@ -12,9 +12,8 @@ function verifyUsers()
     }
 
 
-    $stmt = $pdo->prepare('SELECT * FROM Bank_Employees WHERE User_ID=:User_ID AND Password=:Password');
+    $stmt = $pdo->prepare('SELECT User_ID, Password, User_Role, Email, Department FROM Bank_Employees WHERE User_ID=:User_ID');
     $stmt->bindParam(':User_ID', $_POST['User_ID'], PDO::PARAM_STR);
-    $stmt->bindParam(':Password', $_POST['Password'], PDO::PARAM_STR);
 
 
     $_SESSION['User_ID'] = $_POST['User_ID'];

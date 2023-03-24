@@ -1,21 +1,13 @@
 <?php
-error_reporting(E_ERROR);
 include_once("../config.php");
-include_once("checkLogin.php");
-$User_ID_Error = $User_Password_Error = $invalidMesg = "";
-$allField = True;
-$recaptcha_response = $_POST['g-recaptcha-response'];
-$secret_key = '6LfWeRQlAAAAANkUBSkSLlVPzGzZDwySUzbpoxpl';
-$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response=".$recaptcha_response);
-$response_data = json_decode($response);
 
-$User_ID = $_GET['User_ID'];
-$Role = $_GET['Role'];
-$Authentication = $_GET['AuthCode'];
+session_start();
+$Authentication = $_SESSION['Auth_Code'];
+$User_ID = $_SESSION['User_ID'];
+$Role = $_SESSION['User_Role'];
 
 
 echo $Authentication . " This is authentication code (remove this for client just here so we can log in)";
-
 $AuthError = "";
 
 
