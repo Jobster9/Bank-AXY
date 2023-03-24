@@ -34,9 +34,9 @@ function CreateStaff()
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':password', $password, PDO::PARAM_STR);
 
-    $stmt->bindParam(':active',  $active, PDO::PARAM_STR);
-    $stmt->bindParam(':branch',  $branch, PDO::PARAM_STR);
-    $stmt->bindParam(':department',  $department, PDO::PARAM_STR);
+    $stmt->bindParam(':active', $active, PDO::PARAM_STR);
+    $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
+    $stmt->bindParam(':department', $department, PDO::PARAM_STR);
 
     $stmt->bindParam(':active', $active, PDO::PARAM_STR);
     $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
@@ -59,9 +59,17 @@ function checkDuplicateEmail($email)
     $sql = "SELECT Email FROM dbo.Bank_Employees WHERE Email= ?";
 
     $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([$email]);
-
-    return $result;
+    $stmt->bindParam(1, $email, PDO::PARAM_STR);
+    $result = $stmt->execute();
+    if ($result) {
+        $row = $stmt->fetch();
+        if ($row) {
+            $row['Email'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 function passwordCheck($password)
