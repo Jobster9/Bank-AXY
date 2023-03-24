@@ -9,6 +9,7 @@ $TypeError = "";
 $SizeError = "";
 $SQLError = "";
 $NameError = "";
+$DuplicateNameError = "";
 $UploadSuccess = true;
 
 if (isset($_POST['submit'])) {
@@ -36,15 +37,14 @@ if (isset($_POST['submit'])) {
         $FileError = "File upload error.";
         $UploadSuccess = false;
     }
-    // if (!$nameConvention) {
-    //     $UploadMessage = "File not uploaded";
-    //     $NameError = "The Document name does not match the agreed convention. Please refer back to the guide";
-    //     $UploadSuccess = false;
-    // }
+    if (!$nameConvention) {
+        $UploadMessage = "File not uploaded";
+        $NameError = "The Document name does not match the agreed convention. Please refer back to the guide";
+        $UploadSuccess = false;
+    }
     if ($Duplicate) {
         $UploadMessage = "File not uploaded";
-        $NameError = $Duplicate;
-        //$NameError = "The Document name submitted is a duplicate name.";
+        $DuplicateNameError = "The Document name submitted is a duplicate name.";
         $UploadSuccess = false;
     }
     if ($UploadSuccess) {
@@ -283,14 +283,15 @@ if (isset($_POST['submit'])) {
 <div class="container">
   <div class="card">
     <div class="drop_box">
-    <header> 
-    <div style="text-align-center"> 
+    <header style="color: #E33900;"> 
+    <div style="text-align-center color: #E33900;"> 
         <h2><?php echo $UploadMessage ?></h2>
-        <h4 style="color: #E33900;"><br><?php echo $NameError ?></h4>
-        <h4 style="color: #E33900;"><br><?php echo $FileError ?></h4>
-        <h4 style="color: #E33900;"><br><?php echo $TypeError ?></h4>
-        <h4 style="color: #E33900;"><br><?php echo $SizeError ?></h4>
-        <h4 style="color: #E33900;"><br><?php echo $SQLError ?></h4>
+        <h4><br><?php echo $NameError ?></h4>
+        <h4><br><?php echo $DuplicateNameError ?></h4>
+        <h4><br><?php echo $FileError ?></h4>
+        <h4><br><?php echo $TypeError ?></h4>
+        <h4><br><?php echo $SizeError ?></h4>
+        <h4><br><?php echo $SQLError ?></h4>
       </header>   
 </div>
 </div>
@@ -376,24 +377,24 @@ function checkDuplicate($docName)
     // Create a new PDO connection object
     include("../../DB config.php");
 
-    $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name= ?";
+    $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(1, $docName, PDO::PARAM_STR);
     $result = $stmt->execute();
-    print_r($stmt);
-    print_r($result);
-    return $result;
-    // if ($result) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-
+    if ($result) {
+        $row = $stmt->fetch();
+        if ($row) {
+            $row['Document_Name'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 function checkNameConvention($docName)
 {
-    $document_regex = "/^([A-Za-z])+-([A-Za-z])+-([A-Za-z])+(['.pdf'])+$/";
+    $document_regex = "/^([A-Za-z])+-([A-Za-z])+-([0-9])+(['.pdf'])+$/";
     $nameCheck = preg_match($document_regex, $docName);
 
     return $nameCheck;
