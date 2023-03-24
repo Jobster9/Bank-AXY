@@ -43,9 +43,12 @@ $allField = True;
 
             $array_User = verifyUsers();
             if (!empty($array_User)) {
+
+            if(password_verify($_POST['Password'], $array_User[0]['Password'])) { //This one will verify
+
+             
                 $User_ID = $array_User[0]["User_ID"];
                 $Role = $array_User[0]["User_Role"];
-                $Password = $array_User[0]["Password"];
                 $Department = $array_User[0]["Department"];
 
 
@@ -65,6 +68,9 @@ $allField = True;
 
             } else{
             $invalidMesg = "Invalid User ID or Password!";
+            }} else{
+                $invalidMesg = "Invalid User ID or Password!";
+
             }
     }
 else{
