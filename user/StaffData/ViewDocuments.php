@@ -235,15 +235,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             </div>
             
 
+            <div class="search-filter-container">
+                <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document"></div>
 
-            <p id="Search" style="margin:auto; width:75%"></p>
-
-            <div class="dropdown">
-                <button class="dropbtn">Filter</button>
-                <div class="dropdown-content">
-                    <button onclick="searchByName()" style="width:100%">Name</button>
-                    <button onclick="searchByType()" style="width:100%">Type</button>
-                    <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Filter</button>
+                    <div class="dropdown-content">
+                        <button onclick="searchByName()" style="width:100%">Name</button>
+                        <button onclick="searchByType()" style="width:100%">Type</button>
+                        <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                    </div>
                 </div>
             </div>
 
@@ -326,7 +327,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .dropdown {
   position: relative;
   display: inline-block;
+  text-align: center;
   margin: auto;
+  margin-bottom: 12px;
 }
 
 .dropdown-content {
@@ -350,6 +353,27 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #03258C;}
+
+.Search {
+    margin: auto;
+}
+
+.search-filter-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
 </style>
 
 <?php if (isset($_GET['updated'])): ?>
@@ -369,7 +393,22 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </button>
                 </div>
 <?php endif; ?> 
-<table class="styled-table" id="myTable">
+<div class="container" style="width: 50%;">
+		        Select Number of Rows
+				<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+			 		<select class  ="form-control" name="state" id="maxRows">
+						 <option value="<?php echo count($user) ?>">Show All Rows</option>
+						 <option value="5">5</option>
+						 <option value="10">10</option>
+						 <option value="15">15</option>
+						 <option value="20">20</option>
+						 <option value="50">50</option>
+						 <option value="100">100</option>
+						</select>
+			 		
+</div>
+</div>
+<table class="styled-table" id="table-id">
     <thead>
     </div>
         <tr>
@@ -379,10 +418,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>Owner ID</th>
             <th>Creation Date & Time</th>
             <th>Update</th>            
-            <th>View</th>            
-
+            <th>Delete</th>            
+            <th>View</th>  
 
         </tr>
+</div>
     </thead>
     <tbody>
 <?php
@@ -396,10 +436,12 @@ for ($i = 0; $i < count($user); $i++):
                     <td><?php echo $user[$i]['Owner_ID'] ?></td>
                     <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
                     <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
+                    <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
 
                 <?php
-                $Access = GetAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
-                $RequestAccess = GetRequestAccessControl($user[$i]['Owner_ID'], $user[$i]['Document_Name']);
+                    $userID = GetUserID();
+                $Access = GetAccessControl($userID, $user[$i]['Document_Name']);
+                $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
                 if ($RequestAccess != null) {
                     ?>
                                     <td><a href="RequestAccess.php?File_Location=Requested">View</a>
@@ -414,12 +456,184 @@ for ($i = 0; $i < count($user); $i++):
                                                         </td>
 
                     <?php } ?>
+                
 
 <?php endfor; ?>
 
     </tbody>
 </table>
+<div class='pagination-container' style="margin: 0px 155px;">
+		<nav>
+			<ul class="pagination">
+            
+            <li data-page="prev" >
+			<span> < <span class="sr-only">(current)</span></span>
+			 </li>
+				   <!--	Here the JS Function Will Add the Rows -->
+            <li data-page="next" id="prev">
+				<span> > <span class="sr-only">(current)</span></span>
+			</li>
+		 </ul>
+	</nav>
+</div>
 
+</div> <!-- 		End of Container -->
+
+<script>
+             getPagination('#table-id');
+					//getPagination('.table-class');
+					//getPagination('table');
+
+		  /*					PAGINATION 
+		  - on change max rows select options fade out all rows gt option value mx = 5
+		  - append pagination list as per numbers of rows / max rows option (20row/5= 4pages )
+		  - each pagination li on click -> fade out all tr gt max rows * li num and (5*pagenum 2 = 10 rows)
+		  - fade out all tr lt max rows * li num - max rows ((5*pagenum 2 = 10) - 5)
+		  - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
+		  */
+		 
+
+function getPagination(table) {
+  var lastPage = 1;
+
+  $('#maxRows')
+    .on('change', function(evt) {
+      //$('.paginationprev').html('');						// reset pagination
+
+     lastPage = 1;
+      $('.pagination')
+        .find('li')
+        .slice(1, -1)
+        .remove();
+      var trnum = 0; // reset tr counter
+      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+      if (maxRows == 5000) {
+        $('.pagination').hide();
+      } else {
+        $('.pagination').show();
+      }
+
+      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      $(table + ' tr:gt(0)').each(function() {
+        // each TR in  table and not the header
+        trnum++; // Start Counter
+        if (trnum > maxRows) {
+          // if tr number gt maxRows
+
+          $(this).hide(); // fade it out
+        }
+        if (trnum <= maxRows) {
+          $(this).show();
+        } // else fade in Important in case if it ..
+      }); //  was fade out to fade it in
+      if (totalRows > maxRows) {
+        // if tr total rows gt max rows option
+        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+        //	numbers of pages
+        for (var i = 1; i <= pagenum; ) {
+          // for each page append pagination li
+          $('.pagination #prev')
+            .before(
+              '<li data-page="' +
+                i +
+                '">\
+								  <span>' +
+                i++ +
+                '<span class="sr-only">(current)</span></span>\
+								</li>'
+            )
+            .show();
+        } // end for i
+      } // end if row count > max rows
+      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+      $('.pagination li').on('click', function(evt) {
+        // on click each page
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        var pageNum = $(this).attr('data-page'); // get it's number
+
+        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+        if (pageNum == 'prev') {
+          if (lastPage == 1) {
+            return;
+          }
+          pageNum = --lastPage;
+        }
+        if (pageNum == 'next') {
+          if (lastPage == $('.pagination li').length - 2) {
+            return;
+          }
+          pageNum = ++lastPage;
+        }
+
+        lastPage = pageNum;
+        var trIndex = 0; // reset tr counter
+        $('.pagination li').removeClass('active'); // remove active class from all li
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+        // $(this).addClass('active');					// add active class to the clicked
+	  	limitPagging();
+        $(table + ' tr:gt(0)').each(function() {
+          // each tr in table not the header
+          trIndex++; // tr index counter
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (
+            trIndex > maxRows * pageNum ||
+            trIndex <= maxRows * pageNum - maxRows
+          ) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          } //else fade in
+        }); // end of for each tr in table
+      }); // end of on click pagination list
+	  limitPagging();
+    })
+    .val(5)
+    .change();
+
+  // end of on select change
+
+  // END OF PAGINATION
+}
+
+function limitPagging(){
+	// alert($('.pagination li').length)
+
+	if($('.pagination li').length > 7 ){
+			if( $('.pagination li.active').attr('data-page') <= 3 ){
+			$('.pagination li:gt(5)').hide();
+			$('.pagination li:lt(5)').show();
+			$('.pagination [data-page="next"]').show();
+		}if ($('.pagination li.active').attr('data-page') > 3){
+			$('.pagination li:gt(0)').hide();
+			$('.pagination [data-page="next"]').show();
+			for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+				$('.pagination [data-page="'+i+'"]').show();
+
+			}
+
+		}
+	}
+}
+
+$(function() {
+  // Just to append id number for each row
+  $('table tr:eq(0)').prepend('<th> ID </th>');
+
+  var id = 0;
+
+  $('table tr:gt(0)').each(function() {
+    id++;
+    $(this).prepend('<td>' + id + '</td>');
+  });
+});
+
+//  Developed By Yasser Mas
+// yasser.mas2@gmail.com
+
+</script>
                                 </div>
 
                             </div>
@@ -482,10 +696,10 @@ for ($i = 0; $i < count($user); $i++):
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
+                td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -500,10 +714,10 @@ for ($i = 0; $i < count($user); $i++):
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
+                td = tr[i].getElementsByTagName("td")[2];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -518,10 +732,10 @@ for ($i = 0; $i < count($user); $i++):
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
+                td = tr[i].getElementsByTagName("td")[3];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

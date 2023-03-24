@@ -30,7 +30,7 @@ sidebar
     left: -50px;
     overflow-y: auto;
     overflow-x: hidden;
-    background: linear-gradient(90deg, #CC0000 0%, #000080 100%), url("https://images.unsplash.com/photo-1525838983331-f8bd3c000585?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80") center center no-repeat;
+background: linear-gradient(180deg, #120065 0%, #f9ce1d 100%), center center no-repeat;
     background-size: cover;
     transition: all 0.5s ease;
 }
@@ -51,14 +51,14 @@ sidebar
     font-size: 1.15rem;
     padding: 1.15rem 1.5rem;
     display: block;
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 
 .sidebar-header {
     text-transform: capitalize;
     padding: 1.5rem 1.5rem .375rem !important;
     font-size: 14px;
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 .navbar-nav>li>a,
 .submenu-box ul li a {
@@ -103,20 +103,20 @@ sidebar
 
 
 .navbar-nav>li>a.active {
-    color: #FFFFFF !important;
+    color: #FFCC00 !important;
     font-weight: bold;
-    background: linear-gradient(90deg, #CC0000 0%, #FFFFFF 85%, transparent);
-    border-left: 4px solid #0000CC;
+    background: linear-gradient(90deg, #CC0000 0%, #FFCC00 85%, transparent);
+    border-left: 4px solid #FFCC00;
 }
 
 .navbar-nav .has-sub>a.collapsed::after {
-    color: #FFFFFF;
+    color: #FFCC00;
     font-size: 10px;
     content: "\f078";
 }
 
 .navbar-nav .has-sub>a.collapsed::after {
-    color: #FFFFFF;
+    color: #FFCC00;
 }
 
 .navbar-nav .has-sub>a::after {
@@ -156,7 +156,7 @@ sidebar
 
 .nav-item .nav-link {
     display: block;
-    color: #FFFFFF !important;
+    color: #FFCC00 !important;
     text-transform: capitalize;
     text-decoration: none;
     padding: 6px 10px;
@@ -555,7 +555,7 @@ footer.footer ul {
     background: linear-gradient(90deg, rgba(59, 125, 221, .1), rgba(59, 125, 221, .0875) 50%, transparent); */
 
     font-weight: bold;
-    background: linear-gradient(90deg, rgba(11, 49, 239, 1) 0%, rgba(255, 255, 255, .0875) 85%, transparent);
+    background: linear-gradient(90deg, rgba(11, 49, 239, 1) 0%, rgba(249,206,29,255) 85%, transparent);
 
     cursor: pointer;
 

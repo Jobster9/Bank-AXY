@@ -223,12 +223,45 @@ border-radius: 4px;
 
 <?php
 
-$user = GetDocuments();
+$user = getDocuments();
+
 
 $i = $_GET['File_Location'];
 
 
+Function AuditTrail($User_ID, $Document_Name){
+
+   // Create a new PDO connection object
+   include("../../DB config.php");
+
+   date_default_timezone_set('Europe/London');
+
+   $stmt = $pdo->prepare('INSERT INTO Audit_Trail (User_ID, Document_Name, Audit_Date_Time, Audit_Action) VALUES (:User_ID, :Document_Name, :Audit_Date_Time, :Audit_Action)');
+
+   $rand = rand(100, 999);
+
+   
+   $Action = "REQUESTED_ACCESSED";
+
+   $dateString = date('d/m/Y H:i');
+   $date = DateTime::createFromFormat('d/m/Y H:i', $dateString);
+   $formattedDate = $date->format('M j Y g:iA');
+
+
+   $stmt->bindParam(':User_ID' ,$User_ID, PDO::PARAM_STR);
+   $stmt->bindParam(':Document_Name' , $Document_Name, SQLITE3_TEXT);
+   $stmt->bindParam(':Audit_Date_Time', $formattedDate, SQLITE3_TEXT);
+   $stmt->bindParam(':Audit_Action', $Action, SQLITE3_TEXT);
+
+
+   $stmt->execute();
+
+
+}
+
 if (isset($_POST['submit'])) {
+
+
 
     //sql for request access
     include("../../DB config.php");
@@ -240,20 +273,24 @@ if (isset($_POST['submit'])) {
 
     $rand = rand(100, 999);
 
-    $userID = $user[$i]["Owner_ID"];
+
+    $userID = GetUserID();
     $documentName = $user[$i]["Document_Name"];
     $requestID = $rand; //change this to what Access_Request_ID should be
+
+    AuditTrail($userID, $documentName);
+
 
     $department = $rand . "1"; // Change this to get the correct department
     $datetime = date('d/m/Y H:i');
 
 
 
-    $stmt->bindParam(1, $requestID, SQLITE3_TEXT);
-    $stmt->bindParam(2, $userID, SQLITE3_TEXT);
-    $stmt->bindParam(3, $documentName, SQLITE3_TEXT);
-    $stmt->bindParam(4, $department, SQLITE3_TEXT);
-    $stmt->bindParam(5, $datetime, SQLITE3_TEXT);
+    $stmt->bindParam(1, $requestID, PDO::PARAM_STR);
+    $stmt->bindParam(2, $userID, PDO::PARAM_STR);
+    $stmt->bindParam(3, $documentName, PDO::PARAM_STR);
+    $stmt->bindParam(4, $department, PDO::PARAM_STR);
+    $stmt->bindParam(5, $datetime, PDO::PARAM_STR);
 
 
     $stmt->execute();

@@ -2,10 +2,12 @@
     session_start();
 
 
-if (empty($_SESSION['User_ID'])) {
+if (!isset($_SESSION['User_ID'])) {
+    session_destroy(); // Destroy the session
     header('Location: /BankAXY/user/login.php');
     exit;
 }
+
 
 echo '<script>
 var timer = null;
@@ -49,7 +51,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <li class="menuHover">
 
                     <a href="Dashboard.php" id="Dashboard" class="nav-link text-left " role="button" aria-haspopup="true" aria-expanded="false" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i><i class="bx bxs-dashboard ico"></i> Dashboard
+                        <i class="fas fa-chart-line"></i> Dashboard
                     </a>
                 </li>
 
@@ -57,25 +59,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                 <li class="menuHover box-icon">
                     <a href="ViewAdmin.php" id="ViewStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bxs-coin-stack ico"></i> View Admin
+                        <i class="fas fa-users"></i> View Admin
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="CreateAdmin.php" id="CreateStaff" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Create Admin
+                        <i class="fas fa-user-plus"></i> Create Admin
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a href="AuditTrail.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
-                        <i class="flaticon-bar-chart-1"></i> <i class="bx bx-history ico"></i> Audit Trails
+                        <i class="far fa-clipboard"></i> Audit Trails
                     </a>
                 </li>
 
                 <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
-                        <i class="flaticon-map"></i><i class="bx bx-log-out ico"></i> Logout
+                        <i class="fas fa-door-open"></i> Logout
                     </a>
                 </li>
 
@@ -90,9 +92,59 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!-- /#sidebar-wrapper -->
 
 
+
+
+
+
     <!-- Page Content -->
     <div id="page-content-wrapper">
+<style>
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #1e0063;
+  color: #fff;
+  padding: 10px 0;
+}
+
+header h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
+        </div>
+    </header>
+</body>
+</html>
 
         <div id="content">
 

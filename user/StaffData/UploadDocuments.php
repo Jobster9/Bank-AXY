@@ -229,9 +229,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <div class="container">
   <div class="card">
     <div class="drop_box">
-    <header>
-        <h4>Select File here</h4>
-      </header>
+        <header>
+            <h4>Select File here</h4>
+        </header>
       <p>Files Supported:PDF</p>
   <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
       <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
@@ -330,3 +330,4 @@ function showInputs() {
 </body>
 
 </html>
+

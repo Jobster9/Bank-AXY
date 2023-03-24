@@ -396,13 +396,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+
+
+
+
+/* style.css */
+
+
+
+
+
+
+
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(45deg, #FF0000 0%, #000080 100%), url("../img/hero-bg.jpg") center center no-repeat;
+  background: linear-gradient(45deg, #FF0000 0%, #000080 100%) center center no-repeat;
   /* background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
   /* background: linear-gradient(to right, #2c3e50, #bdc3c7);  */
 
@@ -759,9 +772,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 5px;
   transition: 0.5s;
   color: #fff;
-  background: linear-gradient(45deg, #5846f9 0%, #7b27d8 100%);
+  background: linear-gradient(45deg, #010066 0%, #FFCC00 100%);
   position: relative;
 }
 .btn-custo:hover{
-  background: linear-gradient(180deg, #5846f9 0%, #7b27d8 100%);
+  background: linear-gradient(180deg, #010066 0%, #FFCC00 100%);
 }

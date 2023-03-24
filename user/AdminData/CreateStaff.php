@@ -1,5 +1,5 @@
     <?php include "header.php";
-    include "CreateStaffSQL.php";?>
+    include "CreateStaffSQL.php"; ?>
     <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -201,6 +201,57 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     </style>
 
+<?php
+$errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = $duplicateEmail = "";
+$allFields = "yes";
+$staffCreation = false;
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $Duplicate = checkDuplicateEmail($email);
+    $strongPassword = passwordCheck($_POST['password']);
+    if ($_POST['fname'] == "") {
+        $errorfname = "First name is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['lname'] == "") {
+        $errorlname = "Last name is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['email'] == "") {
+        $erroremail = "Email is mandatory";
+        $allFields = "no";
+    }
+    if ($Duplicate) {
+        $erroremail = "This email already exists";
+        $allFields = "no";
+    }
+    if ($_POST['password'] == "") {
+        $errorpwd = "Password is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['branch'] == "") {
+        $errorbranch = "Branch is mandatory";
+        $allFields = "no";
+    }
+    if ($_POST['department'] == "") {
+        $errordep = "Department is mandatory";
+        $allFields = "no";
+    }
+    if ($strongPassword == 0) {
+        $errorpwd = "Password is not strong enough";
+        $allFields = "no";
+    }
+
+    if ($allFields == "yes") {
+
+        CreateStaff();
+        $staffCreation = true;
+    }
+
+}
+
+?>
 
 </head>
 
@@ -216,13 +267,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <h1 class="h3 mb-0 light" style="text-align: center;">Create Staff:</h1>
                 </div>
             </div>
-
-
-
-
-
-
-
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-2"></div>
@@ -230,68 +274,14 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-
-<?php
-$errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = "";
-$allFields = "yes";
-
-if (isset($_POST['submit'])){
-    
-    $strongPassword = passwordCheck($_POST['password']);
-    if($_POST['fname']==""){
-        $errorfname = "First name is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['lname']==""){
-        $errorlname= "Last name is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['email']==""){
-        $erroremail= "Email is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['password']==""){
-        $errorpwd= "Password is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['branch']==""){
-        $errorbranch= "Branch is mandatory";
-        $allFields = "no";
-    }
-    if($_POST['department']==""){
-        $errordep= "Department is mandatory";
-        $allFields = "no";
-    }
-    if($strongPassword==0){
-        $errorpwd= "Password is not strong enough";
-        $allFields = "no";
-    }
-
-    if($allFields == "yes"){
-
-        CreateStaff();
-    }
-
-}
-
-function passwordCheck ($password)
-{
-    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
-    $passwordCheck = preg_match($password_regex, $password);
-
-    return $passwordCheck;
-}
-
-
-?>
-
-
-
-                                
-                                <!-- Customer Account Number -->
-
+                                <?php if ($staffCreation): ?>
+                                                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                    The staff member has been successfully created.
+                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+<?php endif; ?>
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
@@ -344,8 +334,8 @@ function passwordCheck ($password)
                                     </div>
                                     <select name="branch" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select branch</option>
-                                        <option value="branch1">Kuala Lumpur</option>
-                                        <option value="branch2">Kuching</option>
+                                        <option value="<?php echo HEAD_OFFICE ?>">Kuala Lumpur</option>
+                                        <option value="<?php echo EAST_BRANCH ?>">Kuching</option>
                                     </select>
                                     <span class="text-danger"><?php echo $errorbranch; ?></span>
                                     </div>
@@ -358,10 +348,10 @@ function passwordCheck ($password)
                                     </div>
                                     <select name="department" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select department</option>
-                                        <option value="branch1">Accounts</option>
-                                        <option value="branch2">Administration</option>
-                                        <option value="branch3">Loans</option>
-                                        <option value="branch4">Mortgage Advice</option>
+                                        <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
+                                        <option value="<?php echo ADMIN_DEP ?>">Administration</option>
+                                        <option value="<?php echo LOANS_DEP ?>">Loans</option>
+                                        <option value="<?php echo MORTGAGES_DEP ?>">Mortgage Advice</option>
                                     </select>
                                     <span class="text-danger"><?php echo $errordep; ?></span>
                                     </div>
@@ -377,9 +367,6 @@ function passwordCheck ($password)
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
                                         <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
-                                    </div>
-                                    <div class="alert alert-success" role="alert">
-                                        Staff successfully created
                                     </div>
                                 </div>
                                 </form>
