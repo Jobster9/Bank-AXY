@@ -35,10 +35,10 @@ if (isset($_POST['submit'])) {
     }
     if ($strongPassword == 0) {
         $User_Password_Error = "Password is not strong enough";
-        $allFields = "no";
+        $allFields = false;
     }
 
-    if ($allField == True) {
+    if ($allFields) {
         $Firstname = $_POST["First_Name"];
         $Lastname = $_POST["Last_Name"];
         $Email = $_POST["Email"];
@@ -315,7 +315,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <div class="col-sm-8">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title light mb-4 "></h5>
+                                <h5 class="card-title light mb-4"></h5>
                                 <h3 class="h3 mb-2 light" style="text-align: center;"><?php echo $User_ID ?></h3>
 
                             <form action="<?php echo $action ?>" method="POST">
@@ -326,8 +326,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                 </div>
-                                    <span class="text-danger"><h2><?php echo $User_FirstName_Error; ?></h2></span>
-                                    <p id="alert1" style="color: red;"></p>
+                                    <span class="text-danger"><p><?php echo $User_FirstName_Error; ?></p></span>
                                 </div>
     
 
@@ -339,8 +338,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                 </div>
 
-                                    <span class="text-danger"><h2><?php echo $User_LastName_Error; ?></h2></span>
-                                    <p id="alert1" style="color: red;"></p>
+                                    <span class="text-danger"><p><?php echo $User_LastName_Error; ?></h2></span>
                                 </div>
 
                                 <div class="form-group">
@@ -351,8 +349,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                 </div>
 
-                                    <span class="text-danger"><h2><?php echo $User_Email_Error; ?></h2></span>
-                                    <p id="alert1" style="color: red;"></p>
+                                    <span class="text-danger"><p><?php echo $User_Email_Error; ?></p></span>
                                 </div>
 
                                 <div class="form-group mb-4">
@@ -362,8 +359,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="password" <?php echo ($validated) ? "disabled" : ""; ?> name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
                                 </div>
-
-                                    <span class="text-danger"><h2><?php echo $User_Password_Error; ?></h2></span>
+                                    <span class="text-danger"><p><?php echo $User_Password_Error; ?></p></span>
                                 </div>
                                 <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   

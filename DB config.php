@@ -3,8 +3,8 @@
 // Specify your database credentials here
 
 
-$host = 'PLAYING-MINECRA';
 
+$host = 'DESKTOP-AVCNUEK';
 
 
 

@@ -314,7 +314,7 @@ if (isset($_POST['submit'])) {
     $result = deleteStaffMember($User_ID);
     deleteStaffMember($User_ID);
     if ($result) {
-        //header('Location: ViewStaff.php?deleted=true');
+        echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
     }
 }
 function deleteStaffMember($User_ID)
