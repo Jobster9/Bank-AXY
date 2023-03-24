@@ -46,5 +46,22 @@ function GetRequestAccessControl($user_id, $document_name)
     return $rows_array;
 }
 
+function GetAllAccessRequests()
+{
+    include("../../DB config.php");
+
+    $stmt = $pdo->prepare('SELECT * FROM Access_Control_Request');
+
+    $result = $stmt->execute();
+
+    $rows_array = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $rows_array[] = $row;
+    }
+
+    return $rows_array;
+
+}
+
 
 ?>
