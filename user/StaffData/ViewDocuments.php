@@ -448,16 +448,15 @@ for ($i = 0; $i < count($user); $i++):
                 $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
                 if ($RequestAccess != null) {
                     ?>
-                                    <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                        <td><a href="RequestAccess.php?File_Location=Requested">View</a>
                                 </tr>
                 <?php } else if ($Access != null) {
                     ?>
-                                                      <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                        <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
                     <?php } else { ?>
 
-                                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
-                                                        </td>
+                            <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a></td>
 
                     <?php } ?>
                 
