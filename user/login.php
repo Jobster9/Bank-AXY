@@ -46,6 +46,8 @@ $allField = True;
                 $User_ID = $array_User[0]["User_ID"];
                 $Role = $array_User[0]["User_Role"];
                 $Password = $array_User[0]["Password"];
+                $Department = $array_User[0]["Department"];
+
 
                 date_default_timezone_set('Europe/London');
 
@@ -57,6 +59,8 @@ $allField = True;
 
                 $_SESSION['Auth_Code'] = $AuthCode;
                 $_SESSION['User_Role'] = $Role;
+                $_SESSION['Department'] = $Department;
+
                 header("Location: LoginAuthentication.php");
 
             } else{

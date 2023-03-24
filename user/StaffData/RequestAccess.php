@@ -265,7 +265,6 @@ if (isset($_POST['submit'])) {
 
     $rand = rand(100, 999);
 
-
     $userID = GetUserID();
     $documentName = $user[$i]["Document_Name"];
     $requestID = $rand; //change this to what Access_Request_ID should be
@@ -273,7 +272,7 @@ if (isset($_POST['submit'])) {
     AuditTrail($userID, $documentName);
 
 
-    $department = $rand . "1"; // Change this to get the correct department
+    $department = GetDepartment();
     $datetime = date('d/m/Y H:i');
 
 
