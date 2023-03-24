@@ -14,7 +14,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Audit Trails</title>
+    <title>Access Control</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -260,7 +260,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control:</h1>
                 </div>
             </div>
 
@@ -289,11 +289,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
 <?php for ($i = 0; $i < count($access); $i++): ?>
+    <?php $access_ID = $access[$i]['Access_Request_ID']; ?>
+
                 <tr class="active-row">
                     <td><?php echo $access[$i]['User_ID'] ?></td>
                     <td><?php echo $access[$i]['Document_Name'] ?></td>
                     <td></td>
-                    <td><a href="DenyAccess.php?User_ID=<?php echo $access[$i]['User_ID']; ?>">Deny</a></td>
+                    <td><button onclick="denyAccess(<?php echo json_encode($access_ID); ?>)">Deny</button></td>
                 </tr>
 <?php endfor; ?>
     </tbody>
@@ -342,23 +344,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/transfer.js"></script>
 
     <?php
-    if (isset($_POST['submit'])) {
-        $result = denyAccess($User_ID);
-        denyAccess($User_ID);
-        if ($result) {
-            //header('Location: ViewStaff.php?deleted=true');
-        }
-    }
-    function denyAccess($User_ID)
-    {
-        // Create a new PDO connection object
+    function deleteRecord($access_ID) {
         include("../../DB config.php");
-        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE User_ID = ?");
-        $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
-        $result = $stmt->execute();
-        return $result;
-    }
-
+        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
+        $stmt->bindParam(':access_ID', $access_ID);
+        $stmt->execute();
+        return $stmt->rowCount();
+      }
     ?>
 
 
