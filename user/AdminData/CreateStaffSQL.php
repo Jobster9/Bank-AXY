@@ -34,9 +34,15 @@ function CreateStaff()
     $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+
+    $stmt->bindParam(':active',  $active, PDO::PARAM_STR);
+    $stmt->bindParam(':branch',  $branch, PDO::PARAM_STR);
+    $stmt->bindParam(':department',  $department, PDO::PARAM_STR);
+
     $stmt->bindParam(':active', $active, PDO::PARAM_STR);
     $stmt->bindParam(':branch', $branch, PDO::PARAM_STR);
     $stmt->bindParam(':department', $department, PDO::PARAM_STR);
+
 
 
     $stmt->execute();
