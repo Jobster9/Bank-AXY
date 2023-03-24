@@ -3,9 +3,6 @@
 // Create a new PDO connection object
 include("GetDocuments.php");
 
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -255,23 +252,18 @@ Function AuditTrail($User_ID, $Document_Name){
 
    $stmt->execute();
 
-
 }
 
 if (isset($_POST['submit'])) {
 
-
-
     //sql for request access
     include("../../DB config.php");
-
 
     date_default_timezone_set('Europe/London');
 
     $stmt = $pdo->prepare('INSERT INTO Access_Control_Request (Access_Request_ID, User_ID, Document_Name, Department, Request_Date_Time) VALUES (?,?,?,?,?)');
 
     $rand = rand(100, 999);
-
 
     $userID = GetUserID();
     $documentName = $user[$i]["Document_Name"];
@@ -280,7 +272,7 @@ if (isset($_POST['submit'])) {
     AuditTrail($userID, $documentName);
 
 
-    $department = $rand . "1"; // Change this to get the correct department
+    $department = GetDepartment();
     $datetime = date('d/m/Y H:i');
 
 
@@ -319,10 +311,7 @@ if (isset($_POST['submit'])) {
 
                                 <?php if ($i == "Requested") { ?>
                                         <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested access for this document</h3> 
-
-           
                                         <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-
 
                                         <form action="ViewDocuments.php">
                                         <input type="submit" value="Go Back" class="btn btn-pay btn-lg btn-block" style="margin-bottom: 10%;"/>
