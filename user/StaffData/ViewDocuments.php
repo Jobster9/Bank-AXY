@@ -412,7 +412,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 			 		
 </div>
 </div>
-<table class="styled-table" id="myTable">
+<table class="styled-table" id="table-id">
     <thead>
     </div>
         <tr>
@@ -484,7 +484,7 @@ for ($i = 0; $i < count($user); $i++):
 </div> <!-- 		End of Container -->
 
 <script>
-             getPagination('#myTable');
+             getPagination('#table-id');
 					//getPagination('.table-class');
 					//getPagination('table');
 
@@ -703,7 +703,7 @@ $(function() {
             table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
+                td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -721,7 +721,7 @@ $(function() {
             table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
+                td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -739,7 +739,7 @@ $(function() {
             table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[3];
+                td = tr[i].getElementsByTagName("td")[2];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
