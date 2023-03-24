@@ -204,6 +204,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <?php
 $errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = $duplicateEmail = "";
 $allFields = "yes";
+$staffCreation = false;
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -245,6 +246,7 @@ if (isset($_POST['submit'])) {
     if ($allFields == "yes") {
 
         CreateStaff();
+        $staffCreation = true;
     }
 
 }
@@ -272,6 +274,14 @@ if (isset($_POST['submit'])) {
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
+                                <?php if ($staffCreation): ?>
+                                                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                    The staff member has been successfully created.
+                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+<?php endif; ?>
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
@@ -357,9 +367,6 @@ if (isset($_POST['submit'])) {
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
                                         <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
 
-                                    </div>
-                                    <div class="alert alert-success" role="alert">
-                                        Staff successfully created
                                     </div>
                                 </div>
                                 </form>
