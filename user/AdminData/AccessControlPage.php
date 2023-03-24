@@ -1,19 +1,20 @@
-<?php
-include("header.php");
-include("../StaffData/AccessControl.php");
+<?php include "header.php";
+include "../StaffData/AccessControl.php";
 
+$access = GetAllAccessRequests();
 ?>
-
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Access Control</title>
+
+    <title>Audit Trails</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -29,28 +30,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-
-    <style>
-        @media only screen and (min-width:992px) {
-            #credit {
-                display: block;
-                box-sizing: border-box;
-                height: 181px;
-                width: 363px;
-            }
-        }
-    </style>
-
-
 
     <style>
         .btn-pay {
@@ -217,164 +201,177 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   padding: 12px 20px;
   border-radius: 4px;
 }
-@media screen and (min-width: 368px) {
-  .modal.show .modal-dialog {
-    max-width: calc(70% - 17rem); /* Subtract the width of the expanded navbar */
-    margin-left: auto;
-  }
-}
 
-    .styled-table {
+.styled-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .styled-table thead tr {
-        background-color: #0032A0;
-        color: #ffffff;
-        text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-    }
+}
 
 
-    .styled-table tbody tr {
-        border-bottom: 1px solid #0032A0;
-    }
 
-    .styled-table tbody tr:nth-of-type(even) {
-        background-color: white;
-    }
 
-    .styled-table tbody tr:last-of-type {
-        border-bottom: 2px solid #0032A0;
-    }
 
-    .styled-table tbody tr.active-row {
-        font-weight: bold;
-        color: black;
-    }
-    .styled-table {
-        margin: 25px auto;
-    }
-    #myInput {
-    background-image: url('/css/searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    width: 25%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-    margin: auto;
-    }
-    .dropbtn {
-    background-color: #021E73;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    }
+.styled-table thead tr {
+    background-color: #0032A0;
+    color: #ffffff;
+    text-align: left;
+}
 
-    .dropdown {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 12px;
-    }
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
 
-    .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    }
 
-    .dropdown-content a {
+.styled-table tbody tr {
+    border-bottom: 1px solid #0032A0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0032A0;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
     color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    }
-
-    .dropdown-content a:hover {background-color: #03258C;}
-
-    .dropdown:hover .dropdown-content {display: block;}
-
-    .dropdown:hover .dropbtn {background-color: #03258C;}
-
-    .Search {
-        margin: auto;
-    }
-
-    .search-filter-container{
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
-
-    #myInput {
-    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-    }
-
-</style>
+}
+.styled-table {
+    margin: 25px auto;
+}
+    </style>
 
 
 </head>
 
 <body>
+    <!-- End of Topbar -->
+
     <!-- Begin Page Content -->
-    <div class="container-fluid px-lg-4">
+    <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Access Control</h1>
-                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>
-                        Generate Report</a> -->
+                <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
                 </div>
             </div>
-            <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Document</th>
-                    <th>Access</th>
+
+
+
+
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title light mb-4 "></h5>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Document Name</th>
+            <th>Grant Access</th>
+            <th>Deny Access</th>        
+        </tr>
+    </thead>
+    <tbody>
+<?php for ($i = 0; $i < count($access); $i++): ?>
+                <tr class="active-row">
+                    <td><?php echo $access[$i]['User_ID'] ?></td>
+                    <td><?php echo $access[$i]['Document_Name'] ?></td>
+                    <td></td>
+                    <td><a href="DenyAccess.php?User_ID=<?php echo $access[$i]['User_ID']; ?>">Deny</a></td>
                 </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-            </table>
+<?php endfor; ?>
+    </tbody>
+</table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+
+
+
+                </div>
+
+
+            </div>
 
         </div>
 
-        <script>
-            $('#bar').click(function() {
-                $(this).toggleClass('open');
-                $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog loadingModal modal-lg">
+                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
+                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
+                </div>
+            </div>
+        </div>
 
-            });
-        </script>
+    </div>
+    <!-- End of Page Content -->
+
+    <?php include "footer.php" ?>
+
+
+    <!-- Wraper Ends Here -->
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../UserData/js/profileInfo.js"></script>
+    <script src="../UserData/js/transfer.js"></script>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $result = denyAccess($User_ID);
+        denyAccess($User_ID);
+        if ($result) {
+            //header('Location: ViewStaff.php?deleted=true');
+        }
+    }
+    function denyAccess($User_ID)
+    {
+        // Create a new PDO connection object
+        include("../../DB config.php");
+        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE User_ID = ?");
+        $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
+        $result = $stmt->execute();
+        return $result;
+    }
+
+    ?>
+
+
+    <script>
+        $('#bar').click(function() {
+            $(this).toggleClass('open');
+            $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled');
+
+        });
+    </script>
 
 </body>
 
-
 </html>
+
+

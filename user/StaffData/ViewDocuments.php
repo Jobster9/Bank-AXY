@@ -393,21 +393,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </button>
                 </div>
 <?php endif; ?> 
-<div class="container">
-		<h2>Select Number Of Rows</h2>
+<div class="container" style="width: 50%;">
+		        Select Number of Rows
 				<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
 			 		<select class  ="form-control" name="state" id="maxRows">
-						 <option value="5000">Show ALL Rows</option>
+						 <option value="<?php echo count($user) ?>">Show All Rows</option>
 						 <option value="5">5</option>
 						 <option value="10">10</option>
 						 <option value="15">15</option>
 						 <option value="20">20</option>
 						 <option value="50">50</option>
-						 <option value="70">70</option>
 						 <option value="100">100</option>
 						</select>
 			 		
-			  	</div>
+</div>
+</div>
 <table class="styled-table" id="table-id">
     <thead>
     </div>
@@ -418,10 +418,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>Owner ID</th>
             <th>Creation Date & Time</th>
             <th>Update</th>            
-            <th>View</th>            
-            <th>Delete</th>  
+            <th>Delete</th>            
+            <th>View</th>  
 
         </tr>
+</div>
     </thead>
     <tbody>
 <?php
@@ -461,20 +462,20 @@ for ($i = 0; $i < count($user); $i++):
 
     </tbody>
 </table>
-<div class='pagination-container' >
-				<nav>
-				  <ul class="pagination">
+<div class='pagination-container' style="margin: 0px 155px;">
+		<nav>
+			<ul class="pagination">
             
             <li data-page="prev" >
-								     <span> < <span class="sr-only">(current)</span></span>
-								    </li>
+			<span> < <span class="sr-only">(current)</span></span>
+			 </li>
 				   <!--	Here the JS Function Will Add the Rows -->
-        <li data-page="next" id="prev">
-								       <span> > <span class="sr-only">(current)</span></span>
-								    </li>
-				  </ul>
-				</nav>
-			</div>
+            <li data-page="next" id="prev">
+				<span> > <span class="sr-only">(current)</span></span>
+			</li>
+		 </ul>
+	</nav>
+</div>
 
 </div> <!-- 		End of Container -->
 
@@ -695,10 +696,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
+                td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -713,10 +714,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
+                td = tr[i].getElementsByTagName("td")[2];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -731,10 +732,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
+                td = tr[i].getElementsByTagName("td")[3];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
