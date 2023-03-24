@@ -40,6 +40,30 @@ if ($Authentication == $_POST["AuthCode"]){
     }    
 
 
+
+echo '<script>
+var timer = null;
+document.addEventListener("mousemove", function() {
+    if (timer) {
+        clearTimeout(timer);
+    }
+    timer = setTimeout(function() {
+        destroySession();
+    }, 120000);
+});
+
+window.onbeforeunload = function() {
+    destroySession();
+};
+
+function destroySession() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/BankAXY/user/logout.php", true);
+    xhttp.send();
+    window.location.href = "/BankAXY/user/login.php";
+}
+</script>';
+
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());

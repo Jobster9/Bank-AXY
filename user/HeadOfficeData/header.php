@@ -2,10 +2,12 @@
     session_start();
 
 
-if (empty($_SESSION['User_ID'])) {
+if (!isset($_SESSION['User_ID'])) {
+    session_destroy(); // Destroy the session
     header('Location: /BankAXY/user/login.php');
     exit;
 }
+
 
 echo '<script>
 var timer = null;
