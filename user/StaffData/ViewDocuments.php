@@ -418,8 +418,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>Owner ID</th>
             <th>Creation Date & Time</th>
             <th>Update</th>            
-            <th>View</th>            
-            <th>Delete</th>  
+            <th>Delete</th>            
+            <th>View</th>  
 
         </tr>
     </thead>
