@@ -2,8 +2,6 @@
 error_reporting(E_ERROR);
 include_once("../config.php");
 include_once("checkLogin.php");
-$User_ID_Error = $User_Password_Error = $invalidMesg = "";
-$allField = True;
 $recaptcha_response = $_POST['g-recaptcha-response'];
 $secret_key = '6LfWeRQlAAAAANkUBSkSLlVPzGzZDwySUzbpoxpl';
 $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response=".$recaptcha_response);
@@ -19,11 +17,8 @@ function updateLastActive($Last_Active, $User_ID)
 
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute([$Last_Active, $User_ID]);
-    return $result;
 
 }
-
-
 
 Function EmailAuthentication($Email){
 
@@ -34,27 +29,18 @@ Function EmailAuthentication($Email){
     $body = "Your Authentication code is " . $AuthCode;
     $headers = "From: Bank AXY";
          
-
-    
- mail($to_email, $subject, $body, $headers);
+    mail($to_email, $subject, $body, $headers);
 
  return $AuthCode;
 
 }
 
-
+$User_ID_Error = $User_Password_Error = $invalidMesg = "";
+$allField = True;
 
     if (isset($_POST['submit'])) {
-if($response_data->success){        
-        if ($_POST["User_ID"] == "") {
-            $User_ID_Error = "User ID is required";
-            $allField = FALSE;
-        }
-        if ($_POST["Password"] == null) {
-            $User_Password_Error = "Password is required";
-            $allField = FALSE;
-        }
-        if ($allField == True) {
+        if($response_data->success){        
+
             $array_User = verifyUsers();
             if (!empty($array_User)) {
                 $User_ID = $array_User[0]["User_ID"];
@@ -69,22 +55,13 @@ if($response_data->success){
 
                 $AuthCode = EmailAuthentication($array_User[0]["Email"]);
 
-            if ($Role == "Staff") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
-            }
-            if ($Role == "Admin") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
-            }
-            if ($Role == "Head Office") {
-                header("Location: LoginAuthentication.php?User_ID=" . $_SESSION['User_ID'] . "&Role=" . $Role . "&AuthCode=" . $AuthCode);
+                $_SESSION['Auth_Code'] = $AuthCode;
+                $_SESSION['User_Role'] = $Role;
+                header("Location: LoginAuthentication.php");
 
+            } else{
+            $invalidMesg = "Invalid User ID or Password!";
             }
-        } else{
-            $invalidMesg = "Invalid User ID or Password!";
-        }
-        } else {
-            $invalidMesg = "Invalid User ID or Password!";
-        }
     }
 else{
             $invalidMesg = "Verification not completed!";    
