@@ -2,6 +2,8 @@
 include "../StaffData/AccessControl.php";
 
 $access = GetAllAccessRequests();
+
+$access_ID = "";
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -289,13 +291,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
 <?php for ($i = 0; $i < count($access); $i++): ?>
-    <?php $access_ID = $access[$i]['Access_Request_ID']; ?>
-
                 <tr class="active-row">
                     <td><?php echo $access[$i]['User_ID'] ?></td>
                     <td><?php echo $access[$i]['Document_Name'] ?></td>
-                    <td></td>
-                    <td><button onclick="denyAccess(<?php echo json_encode($access_ID); ?>)">Deny</button></td>
+                    <form method="post">
+                        <td style="text-align:center;"><a href="AccessControlPage.php?access_ID=<?php echo $access_ID; ?>"><button type="submit" name="Grant">Grant</button></a></td>
+                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td>
+                    </form>
                 </tr>
 <?php endfor; ?>
     </tbody>
@@ -344,6 +346,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/transfer.js"></script>
 
     <?php
+    if (isset($_POST['Deny']))
+    {
+        deleteRecord($access_ID);
+    }
     function deleteRecord($access_ID) {
         include("../../DB config.php");
         $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
