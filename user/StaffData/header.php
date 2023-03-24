@@ -4,6 +4,9 @@ session_start();
 function GetUserID(){
     return $_SESSION['User_ID'];
 }
+function GetDepartment(){
+    return $_SESSION['Department'];
+}
 
 
 if (!isset($_SESSION['User_ID'])) {

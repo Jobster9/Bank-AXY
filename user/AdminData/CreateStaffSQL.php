@@ -16,9 +16,13 @@ function CreateStaff()
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
     $branch = $_POST['branch'];
     $department = $_POST['department'];
+    $password = $_POST['password'];
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+
 
     $active = date('d/m/Y H:i');
 
