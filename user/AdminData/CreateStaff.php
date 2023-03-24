@@ -202,7 +202,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </style>
 
 <?php
-include "CreateStaffSQL.php";
 $errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = $duplicateEmail = "";
 $allFields = "yes";
 
