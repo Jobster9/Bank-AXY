@@ -2,10 +2,10 @@
 include "GetDocuments.php";
 $user = getDocuments ();
 
-session_start();     
-$User_ID = $_SESSION['User_ID'];
-
 $i = $_GET['File_Location'];
+
+session_start();
+$User_ID = $_SESSION['User_ID'];
 
 function AudiTrail($User_ID, $Document_Name){
 
