@@ -311,7 +311,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
         toolTipContent: "<b>{label}:</b> {y}",
 dataPoints: [
   { y: low, label: "Low", color: "#010066" },
-  { y: medium, label: "Medium", color: "#CC0001" },
+  { y: medium, label: "Medium", color: "#806666" },
   { y: high, label: "High", color: "#FFCC00" },
 ]
 
