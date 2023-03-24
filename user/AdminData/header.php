@@ -3,8 +3,8 @@ session_start();
 
 
 
-
 if (!isset($_SESSION['User_ID'])) {
+    session_destroy(); // Destroy the session
     header('Location: /BankAXY/user/login.php');
     exit;
 }
