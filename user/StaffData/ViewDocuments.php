@@ -239,11 +239,15 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document"></div>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Filter</button>
-                    <div class="dropdown-content">
-                        <button onclick="searchByName()" style="width:100%">Name</button>
-                        <button onclick="searchByType()" style="width:100%">Type</button>
-                        <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                    <button class="btn dropbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+</button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                        <button class="dropdown-item"  onclick="searchByName()" style="width:100%">Name</button>
+                        <button class="dropdown-item"  onclick="searchByType()" style="width:100%">Type</button>
+                        <button class="dropdown-item" onclick="searchByCriticality()" style="width:100%">Criticality</button>
                     </div>
                 </div>
             </div>
@@ -332,7 +336,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   margin-bottom: 12px;
 }
 
-.dropdown-content {
+.dropdown-menu {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -341,16 +345,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-menu a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #03258C;}
+.dropdown-menu a:hover {background-color: #03258C;}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-menu {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #03258C;}
 
@@ -771,6 +775,7 @@ if (isset($_POST["submit"])) {
                                             <th>Owner ID</th>
                                             <th>Creation Date & Time</th>
                                             <th>Update</th>
+                                            <th>Delete</th>
                                             <th>View</th>
                                         </tr>
                                         <tr>
