@@ -3,9 +3,7 @@
 // Specify your database credentials here
 
 
-
-$host = 'LAPTOP-B9IKBMD8';
-
+$host = 'ABDULNAZIR';
 
 
 

@@ -1,6 +1,7 @@
 <?php include "header.php";
 include "GetAuditTrails.php";
 $auditTrail = GetAuditTrails();
+$branch = getBranch();
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -259,7 +260,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">View Audit Trails here for <?php echo $branch ?>:</h1>
+
+
                 </div>
             </div>
 

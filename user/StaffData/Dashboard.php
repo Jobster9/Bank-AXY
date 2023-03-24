@@ -309,11 +309,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
         indexLabelFontSize: 17,
         indexLabel: "{label} - {y}",
         toolTipContent: "<b>{label}:</b> {y}",
-        dataPoints: [
-            { y: low, label: "Low" },
-            { y: medium, label: "Medium" },
-            { y: high, label: "High" },
-        ]
+dataPoints: [
+  { y: low, label: "Low", color: "#010066" },
+  { y: medium, label: "Medium", color: "#CC0001" },
+  { y: high, label: "High", color: "#FFCC00" },
+]
+
     }]
 });
 chart.render();
