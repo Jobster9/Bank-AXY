@@ -106,19 +106,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-
-
-
-    <div id="page-content-wrapper">
 <style>
-
-body {
+    #ayo {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #000;
-
 }
 
 .container {
@@ -139,9 +133,12 @@ header h1 {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  color: #FFCC00;  
 }
-
 </style>
+
+
+    <div id="page-content-wrapper">
 
 <!DOCTYPE html>
 <html>
@@ -152,7 +149,9 @@ header h1 {
 <body>
     <header>
         <div class="container">
+            <div class="ayo">
             <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
+        </div>            
         </div>
     </header>
 </body>
@@ -176,9 +175,12 @@ header h1 {
                         <span></span>
                     </div>
 
-
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
+
+
+
+
                         <div class="input-group">
                             <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
 
