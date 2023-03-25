@@ -295,7 +295,7 @@ if (isset($_POST['submit'])) {
                                             </span>
                                         </span>
                                         <span class="text-danger"><?php echo $errorfname; ?></span>
-                                    </div>
+                                    </div>  
                                     <p id="errorpwd" style="color: #FFCC00; margin: top 10px;"></p>
 
 
