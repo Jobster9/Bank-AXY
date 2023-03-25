@@ -239,11 +239,15 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                 <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document"></div>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Filter</button>
-                    <div class="dropdown-content">
-                        <button onclick="searchByName()" style="width:100%">Name</button>
-                        <button onclick="searchByType()" style="width:100%">Type</button>
-                        <button onclick="searchByCriticality()" style="width:100%">Criticality</button>
+                    <button class="btn dropbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+</button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                        <button class="dropdown-item"  onclick="searchByName()" style="width:100%">Name</button>
+                        <button class="dropdown-item"  onclick="searchByType()" style="width:100%">Type</button>
+                        <button class="dropdown-item" onclick="searchByCriticality()" style="width:100%">Criticality</button>
                     </div>
                 </div>
             </div>
@@ -332,7 +336,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   margin-bottom: 12px;
 }
 
-.dropdown-content {
+.dropdown-menu {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -341,16 +345,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-menu a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #03258C;}
+.dropdown-menu a:hover {background-color: #03258C;}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-menu {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #03258C;}
 
@@ -393,21 +397,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </button>
                 </div>
 <?php endif; ?> 
-<div class="container">
-		<h2>Select Number Of Rows</h2>
+<div class="container" style="width: 50%;">
+		        Select Number of Rows
 				<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
 			 		<select class  ="form-control" name="state" id="maxRows">
-						 <option value="5000">Show ALL Rows</option>
+						 <option value="<?php echo count($user) ?>">Show All Rows</option>
 						 <option value="5">5</option>
 						 <option value="10">10</option>
 						 <option value="15">15</option>
 						 <option value="20">20</option>
 						 <option value="50">50</option>
-						 <option value="70">70</option>
 						 <option value="100">100</option>
 						</select>
 			 		
-			  	</div>
+</div>
+</div>
 <table class="styled-table" id="table-id">
     <thead>
     </div>
@@ -422,6 +426,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <th>View</th>  
 
         </tr>
+</div>
     </thead>
     <tbody>
 <?php
@@ -443,16 +448,15 @@ for ($i = 0; $i < count($user); $i++):
                 $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
                 if ($RequestAccess != null) {
                     ?>
-                                    <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                        <td><a href="RequestAccess.php?File_Location=Requested">View</a>
                                 </tr>
                 <?php } else if ($Access != null) {
                     ?>
-                                                      <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                        <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
                     <?php } else { ?>
 
-                                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a>
-                                                        </td>
+                            <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a></td>
 
                     <?php } ?>
                 
@@ -461,20 +465,20 @@ for ($i = 0; $i < count($user); $i++):
 
     </tbody>
 </table>
-<div class='pagination-container' >
-				<nav>
-				  <ul class="pagination">
+<div class='pagination-container' style="margin: 0px 155px;">
+		<nav>
+			<ul class="pagination">
             
             <li data-page="prev" >
-								     <span> < <span class="sr-only">(current)</span></span>
-								    </li>
+			<span> < <span class="sr-only">(current)</span></span>
+			 </li>
 				   <!--	Here the JS Function Will Add the Rows -->
-        <li data-page="next" id="prev">
-								       <span> > <span class="sr-only">(current)</span></span>
-								    </li>
-				  </ul>
-				</nav>
-			</div>
+            <li data-page="next" id="prev">
+				<span> > <span class="sr-only">(current)</span></span>
+			</li>
+		 </ul>
+	</nav>
+</div>
 
 </div> <!-- 		End of Container -->
 
@@ -695,10 +699,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
+                td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -713,10 +717,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
+                td = tr[i].getElementsByTagName("td")[2];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -731,10 +735,10 @@ $(function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
+            table = document.getElementById("table-id");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
+                td = tr[i].getElementsByTagName("td")[3];
                 if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -770,6 +774,7 @@ if (isset($_POST["submit"])) {
                                             <th>Owner ID</th>
                                             <th>Creation Date & Time</th>
                                             <th>Update</th>
+                                            <th>Delete</th>
                                             <th>View</th>
                                         </tr>
                                         <tr>

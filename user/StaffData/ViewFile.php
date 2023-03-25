@@ -15,16 +15,12 @@ function AudiTrail($User_ID, $Document_Name){
     date_default_timezone_set('Europe/London');
 
     $stmt = $pdo->prepare('INSERT INTO Audit_Trail (User_ID, Document_Name, Audit_Date_Time, Audit_Action) VALUES (:User_ID, :Document_Name, :Audit_Date_Time, :Audit_Action)');
-
-    $rand = rand(100, 999);
-
     
     $Action = "ACCESSED";
 
     $dateString = date('d/m/Y H:i');
     $date = DateTime::createFromFormat('d/m/Y H:i', $dateString);
     $formattedDate = $date->format('M j Y g:iA');
-
 
     $stmt->bindParam(':User_ID' ,$User_ID, PDO::PARAM_STR);
     $stmt->bindParam(':Document_Name' , $Document_Name, SQLITE3_TEXT);
