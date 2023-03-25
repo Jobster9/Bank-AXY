@@ -27,7 +27,6 @@ function destroySession() {
     window.location.href = "/BankAXY/user/login.php";
 }
 </script>';
-
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -96,46 +95,45 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-    <!-- Page Content -->
     <div id="page-content-wrapper">
-<style>
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #000;
-
-}
-
-.container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-header {
-  background-color: #1e0063;
-  color: #fff;
-  padding: 10px 0;
-}
-
-header h1 {
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
-</style>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1e0063;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #FFCC00;
+
+
+
+
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -145,7 +143,6 @@ header h1 {
     </header>
 </body>
 </html>
-
         <div id="content">
 
             <div class="container-fluid p-0 px-lg-0 px-md-0">
@@ -195,9 +192,7 @@ header h1 {
                                 </form>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <!-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -235,19 +230,10 @@ header h1 {
                                     <a href="#" class="text-muted">Show all notifications</a>
                                 </div>
                             </div>
-                        </li> -->
-                        <!-- Nav Item - Messages -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " href="#" role="button">
-                                <i class="fas fa-envelope"></i>
-                                
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li> -->
-
-                        <!-- Nav Item - User Information -->
-
-
+                        </li> 
                     </ul>
 
                 </nav>
+
+
+

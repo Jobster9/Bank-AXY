@@ -15,7 +15,6 @@ for($i=0; $i<count($rows_array); $i++)
 $rowDate = DateTime::createFromFormat('M-d-Y h:i:a', $rows_array[$i]);
 $rows_array[$i] = $rowDate->format('M-Y');
 }*/
-
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -275,46 +274,63 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </div>
                 </div>
             </div>
+
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Number of Staff in each Branch</h5>
                                 <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+
+
+<style>
+    #chartContainer {
+        background-color: rgba(0,0,0,0);    
+        position: relative;
+    }
+    canvas {
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script>
+        var low = <?php echo $lowdocuments1; ?>;
+        var medium = <?php echo $lowdocuments; ?>;
+    window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        backgroundColor: "rgba(0,0,0,0)",
+        data: [{
+            type: "doughnut",
+            startAngle: 60,
+            indexLabelFontSize: 17,
+            indexLabel: "{label} - {y}",
+            toolTipContent: "<b>{label}:</b> {y}",
+    dataPoints: [
+      { y: low, label: "Kuching", color: "#010066" },
+      { y: medium, label: "Kuala Lumpur", color: "#FFCC00" },
+    ]
+
+        }]
+    });
+    chart.render();
+    }
+    </script>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>                                
                                 <div class="mb-1">
                                     <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
 
 
-<style>
-#chartContainer {
-    background-color: rgba(0,0,0,0);
-}
-</style>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    var low = <?php echo $lowdocuments; ?>;
-    var medium = <?php echo $lowdocuments1; ?>;
-window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    data: [{
-        type: "doughnut",
-        startAngle: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}",
-        toolTipContent: "<b>{label}:</b> {y}",
-        dataPoints: [
-            { y: low, label: "Kuala Lumpur" },
-            { y: medium, label: "Kuching" },
-        ]
-    }]
-});
-chart.render();
-}
-</script>
 
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+
+
 
 
                                 </div>
@@ -325,7 +341,8 @@ chart.render();
                 </div>
             </div>
          
-         
+
+
 
 
     <?php include "footer.php" ?>
