@@ -289,38 +289,42 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
+
+
+
+
+
 <style>
 #chartContainer {
     background-color: rgba(0,0,0,0);
 }
 </style>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    var low = <?php echo $lowdocuments; ?>;
-    var medium = <?php echo $mediumdocuments; ?>;
-    var high = <?php echo $highdocuments; ?>;
-window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    data: [{
-        type: "doughnut",
-        startAngle: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}",
-        toolTipContent: "<b>{label}:</b> {y}",
-dataPoints: [
-  { y: low, label: "Low", color: "#010066" },
-  { y: medium, label: "Medium", color: "#806666" },
-  { y: high, label: "High", color: "#FFCC00" },
-]
+  <script>
+        var low = <?php echo $lowdocuments; ?>;
+        var medium = <?php echo $mediumdocuments; ?>;
+        var high = <?php echo $highdocuments; ?>;
+    window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        backgroundColor: "rgba(0,0,0,0)",
+        data: [{
+            type: "doughnut",
+            startAngle: 60,
+            indexLabelFontSize: 17,
+            indexLabel: "{label} - {y}",
+            toolTipContent: "<b>{label}:</b> {y}",
+    dataPoints: [
+      { y: low, label: "Low", color: "#010066" },
+      { y: medium, label: "Medium", color: "#806666" },
+      { y: high, label: "High", color: "#FFCC00" },
+    ]
 
-    }]
-});
-chart.render();
-}
-</script>
-
+        }]
+    });
+    chart.render();
+    }
+    </script>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 

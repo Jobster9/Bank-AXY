@@ -106,13 +106,19 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
+
+
+
+    <div id="page-content-wrapper">
 <style>
-    #ayo {
+
+body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #000;
+
 }
 
 .container {
@@ -135,10 +141,8 @@ header h1 {
   line-height: 1.5;
   color: #FFCC00;  
 }
+
 </style>
-
-
-    <div id="page-content-wrapper">
 
 <!DOCTYPE html>
 <html>
@@ -149,9 +153,7 @@ header h1 {
 <body>
     <header>
         <div class="container">
-            <div class="ayo">
             <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
-        </div>            
         </div>
     </header>
 </body>
