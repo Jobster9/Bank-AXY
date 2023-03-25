@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
 
     if ($filetype !== 'application/pdf') {
-        $TypeError = "This filetype is not supported, ensure you are uploading a PDF.";
+        $TypeError = "This filetype is not supported, ensure you are uploading a supported filetype.";
         $UploadSuccess = false;
     }
     if ($filesize >= 1000000) {

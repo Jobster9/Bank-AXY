@@ -181,6 +181,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -360,12 +361,12 @@ if (isset($_POST['submit'])) {
       <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
   </div>  
-  <div id="backButton" class="d-grid col-sm-5 mx-auto">
-  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-pay btn-lg btn-block"></input>
+  <div id="UpdateButton" class="d-grid col-sm-5 mx-auto">
+  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-lg btn-block"></input>
 </div>
 </form>
 <div id="backButton" class="d-grid col-sm-3 mx-auto">
-                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Back</button>
 
                                     </div>
 
