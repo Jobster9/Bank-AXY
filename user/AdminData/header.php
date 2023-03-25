@@ -169,8 +169,6 @@ header h1 {
                         <span></span>
                     </div>
 
-
-                    <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
                             <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
@@ -178,6 +176,10 @@ header h1 {
                     </form>
 
                     <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown  d-sm-none">
 
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3">
@@ -194,8 +196,8 @@ header h1 {
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown">
+                          <!-- Nav Item - Alerts -->
+                          <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -218,8 +220,7 @@ header h1 {
                                                     <line x1="12" y1="8" x2="12" y2="12"></line>
                                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                                 </svg>
-                                            </div>
-                                            <div class="col-10">
+                                                <div class="col-10">
                                                 <div class="text-dark">Update completed</div>
                                                 <div class="text-muted small mt-1">Restart server 12 to complete the
                                                     update.</div>
@@ -235,4 +236,5 @@ header h1 {
                             </div>
                         </li> 
                     </ul>
+
                 </nav>
