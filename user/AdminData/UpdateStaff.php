@@ -264,7 +264,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -361,11 +361,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 </div>
                                     <span class="text-danger"><p><?php echo $User_Password_Error; ?></p></span>
                                 </div>
-                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-pay btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
+                                <input name="submit" id="update" class="d-grid gap-2 mt-5 col-sm-3 mx-auto btn btn-lg btn-block" type="submit" value="<?php echo $updateButton ?>">
                                 <span class="text-danger"><h2><?php echo $invalidMesg; ?></h2></span>   
                             </form>
                             <div id="backButton" class="d-grid col-sm-3 mx-auto">
-                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Go Back</button>
 
                                     </div>
                             </div>
