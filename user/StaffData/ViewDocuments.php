@@ -431,7 +431,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <tbody>
 <?php
 for ($i = 0; $i < count($user); $i++):
-
+$ownerID = $user[$i]['Owner_ID'];
     ?>
                 <tr class="active-row">
                     <td><?php echo $user[$i]['Document_Name'] ?></td>
@@ -440,7 +440,25 @@ for ($i = 0; $i < count($user); $i++):
                     <td><?php echo $user[$i]['Owner_ID'] ?></td>
                     <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
                     <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
-                    <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
+
+                    <?php
+                    $userID = GetUserID();
+                $Access = GetDeletionControl($userID, $user[$i]['Document_Name']);
+                $RequestAccess = GetRequestDeletion($userID, $user[$i]['Document_Name']);
+                if ($RequestAccess != null) {
+                    ?>
+                        <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a>
+                                </tr>
+                <?php } else if ($Access != null) {
+                    ?>
+                        <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
+
+                    <?php } else { ?>
+
+                            <td><a href="RequestDeletion.php?File_Location=<?php echo $i ?>">Delete</a></td>
+
+                    <?php } ?>
+                    
 
                 <?php
                     $userID = GetUserID();
