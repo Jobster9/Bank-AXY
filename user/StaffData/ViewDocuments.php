@@ -443,15 +443,11 @@ $ownerID = $user[$i]['Owner_ID'];
 
                     <?php
                     $userID = GetUserID();
-                $Access = GetDeletionControl($userID, $user[$i]['Document_Name']);
                 $RequestAccess = GetRequestDeletion($userID, $user[$i]['Document_Name']);
                 if ($RequestAccess != null) {
                     ?>
-                        <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a>
+                        <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a></td>
                                 </tr>
-                <?php } else if ($Access != null) {
-                    ?>
-                        <td><a href="DeleteDocument.php?Document_ID=<?php echo $user[$i]['Document_ID'] ?>">Delete</a></td>
 
                     <?php } else { ?>
 

@@ -235,7 +235,7 @@ function AuditTrail($User_ID, $Document_Name)
 
     $stmt = $pdo->prepare('INSERT INTO Audit_Trail (User_ID, Document_Name, Audit_Date_Time, Audit_Action) VALUES (:User_ID, :Document_Name, :Audit_Date_Time, :Audit_Action)');
 
-    $Action = "REQUESTED_ACCESSED";
+    $Action = "REQUESTED_Deletion";
 
     $dateString = date('d/m/Y H:i');
     $date = DateTime::createFromFormat('d/m/Y H:i', $dateString);
@@ -259,20 +259,21 @@ if (isset($_POST['submit'])) {
 
     date_default_timezone_set('Europe/London');
 
-    $stmt = $pdo->prepare('INSERT INTO Access_Control_Request (User_ID, Document_Name, Department, Request_Date_Time) VALUES (?,?,?,?)');
+    $stmt = $pdo->prepare('INSERT INTO Documents_Deletion_Request (Document_Name, Document_Criticality, Owner_ID, Request_Date_Time) VALUES (?,?,?,?)');
 
-    $userID = GetUserID();
+    $ownerID = GetUserID();
     $documentName = $user[$i]["Document_Name"];
 
 
-    AuditTrail($userID, $documentName);
+    AuditTrail($ownerID, $documentName);
 
-    $department = GetDepartment();
+    $documentCriticality = $user[$i]["Document_Criticality"];;
     $datetime = date('d/m/Y H:i');
 
-    $stmt->bindParam(1, $userID, PDO::PARAM_STR);
-    $stmt->bindParam(2, $documentName, PDO::PARAM_STR);
-    $stmt->bindParam(3, $department, PDO::PARAM_STR);
+    
+    $stmt->bindParam(1, $documentName, PDO::PARAM_STR);
+    $stmt->bindParam(2, $documentCriticality, PDO::PARAM_STR);
+    $stmt->bindParam(3, $ownerID, PDO::PARAM_STR);
     $stmt->bindParam(4, $datetime, PDO::PARAM_STR);
 
     $stmt->execute();
@@ -297,7 +298,7 @@ if (isset($_POST['submit'])) {
 
 
                     <?php if ($i == "Requested") { ?>
-                                                                    <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested access for this document</h3> 
+                                                                    <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested deletion for this document</h3> 
                                                                     <div class="d-grid gap-2 mt-5 col-sm-4 mx-auto">
 
                                                                     <form action="ViewDocuments.php">
@@ -305,7 +306,7 @@ if (isset($_POST['submit'])) {
                                                                     </form>
 
                         <?php } else { ?>
-                                                                        <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to access: <?php echo $user[$i]["Document_Name"] ?></h3> 
+                                                                        <h3 class="h3 mb-4 light" style="text-align: center;">You do not have permission to delete: <?php echo $user[$i]["Document_Name"] ?></h3> 
 
 
                                 <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
@@ -313,7 +314,7 @@ if (isset($_POST['submit'])) {
 
                                                                         <form method="post">
 
-                                                                    <input type="submit" value="Request Access" name="submit" style="margin-bottom: 10%;" class="btn btn-lg btn-block">
+                                                                    <input type="submit" value="Request Deletion" name="submit" style="margin-bottom: 10%;" class="btn btn-lg btn-block">
                                                                     </form>
 
                         <?php } ?>
