@@ -2,7 +2,9 @@
 
 // Specify your database credentials here
 
-$host = 'DESKTOP-AVCNUEK';
+
+$host = 'EMILYSPC\MSSQLSERVER1';
+
 
 
 $dbname = 'BankAXY';
