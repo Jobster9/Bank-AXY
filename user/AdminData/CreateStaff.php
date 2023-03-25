@@ -172,7 +172,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -275,12 +275,12 @@ if (isset($_POST['submit'])) {
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
                                 <?php if ($staffCreation): ?>
-                                                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                                                                    The staff member has been successfully created.
-                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
+                                                                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                                The staff member has been successfully created.
+                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
 <?php endif; ?>
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
@@ -365,7 +365,7 @@ if (isset($_POST['submit'])) {
 
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
+                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Create</input>
 
                                     </div>
                                 </div>
