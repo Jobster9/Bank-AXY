@@ -236,7 +236,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             
 
             <div class="search-filter-container">
-                <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document"></div>
+                <div class="Search" id="Search"><input type="text" id="myInput" onkeyup="nameFilter()" placeholder="Search By Name" title="type in a document">
+
+
+
+                </div>
 
                 <div class="dropdown">
                     <button class="btn dropbtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
