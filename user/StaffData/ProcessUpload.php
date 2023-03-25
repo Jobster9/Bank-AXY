@@ -302,7 +302,7 @@ if (isset($_POST['submit'])) {
 </div>
 
 <div id="backButton" class="d-grid col-sm-3 mx-auto">
-    <button onclick="document.location='UploadDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block" value="Go Back"></button>
+    <button onclick="document.location='UploadDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block" value="Go Back">Back</button>
 
         </div>
     </div>
