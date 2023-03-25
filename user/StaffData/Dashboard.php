@@ -21,7 +21,6 @@ $rows_array[$i] = $rowDate->format('M-Y');
 }*/
 
 ?>
-
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
