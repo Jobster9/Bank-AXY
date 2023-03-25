@@ -109,56 +109,58 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-<style>
-    #ayo {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #000;
-}
 
-.container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-header {
-  background-color: #1e0063;
-  color: #fff;
-  padding: 10px 0;
-}
-
-header h1 {
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-  color: #FFCC00;  
-}
-</style>
 
 
     <div id="page-content-wrapper">
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1e0063;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #FFCC00;
+
+
+
+
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="ayo">
             <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
-        </div>            
         </div>
     </header>
 </body>
 </html>
+
 
 
 
@@ -185,7 +187,7 @@ header h1 {
 
 
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
+                            <h1 id="bankBrand" style="font-size: 24px; color:#010066" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
 
 
                             <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
@@ -261,3 +263,6 @@ header h1 {
                     </ul>
 
                 </nav>
+
+
+

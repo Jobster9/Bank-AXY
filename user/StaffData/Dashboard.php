@@ -21,6 +21,7 @@ $rows_array[$i] = $rowDate->format('M-Y');
 }*/
 
 ?>
+
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -71,6 +72,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
         .card {
             background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
@@ -284,44 +296,59 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Documents Created this Month According to Criticality</h5>
                                 <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+
+
+<style>
+    #chartContainer {
+        background-color: rgba(0,0,0,0);    
+        position: relative;
+    }
+    canvas {
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script>
+        var low = <?php echo $lowdocuments; ?>;
+        var medium = <?php echo $mediumdocuments; ?>;
+        var high = <?php echo $highdocuments; ?>;
+    window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        backgroundColor: "rgba(0,0,0,0)",
+        data: [{
+            type: "doughnut",
+            startAngle: 60,
+            indexLabelFontSize: 17,
+            indexLabel: "{label} - {y}",
+            toolTipContent: "<b>{label}:</b> {y}",
+    dataPoints: [
+      { y: low, label: "Low", color: "#010066" },
+      { y: medium, label: "Medium", color: "#FFCC00" },
+      { y: high, label: "High", color: "#CC0001" },
+    ]
+
+        }]
+    });
+    chart.render();
+    }
+    </script>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>                                
                                 <div class="mb-1">
                                     <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
 
 
 
-<style>
-#chartContainer {
-    background-color: rgba(0,0,0,0);
-}
-</style>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    var low = <?php echo $lowdocuments; ?>;
-    var medium = <?php echo $mediumdocuments; ?>;
-    var high = <?php echo $highdocuments; ?>;
-window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    backgroundColor: "rgba(0,0,0,0)",
-    data: [{
-        type: "doughnut",
-        startAngle: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}",
-        toolTipContent: "<b>{label}:</b> {y}",
-dataPoints: [
-  { y: low, label: "Low", color: "#010066" },
-  { y: medium, label: "Medium", color: "#806666" },
-  { y: high, label: "High", color: "#FFCC00" },
-]
 
-    }]
-});
-chart.render();
-}
-</script>
 
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+
 
 
                                 </div>
