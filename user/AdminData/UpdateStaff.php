@@ -35,10 +35,10 @@ if (isset($_POST['submit'])) {
     }
     if ($strongPassword == 0) {
         $User_Password_Error = "Password is not strong enough";
-        $allFields = false;
+        $allField = false;
     }
 
-    if ($allFields) {
+    if ($allField) {
         $Firstname = $_POST["First_Name"];
         $Lastname = $_POST["Last_Name"];
         $Email = $_POST["Email"];
