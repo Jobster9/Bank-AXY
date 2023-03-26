@@ -1,13 +1,15 @@
 <?php include "header.php";
 include "../StaffData/AccessControl.php";
+include "DeleteDocumentSQL.php";
 
 $Request = GetAllRequestDeletion();
 
-$access_ID = "";
 ?>
+
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -263,7 +265,7 @@ outline: 1px solid #010101;
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Document Deletion:</h1>
                 </div>
             </div>
 
@@ -307,14 +309,8 @@ outline: 1px solid #010101;
         $Document_ID = $Request[$j[0]]['Deletion_Request_ID'];
         $Document_Name = $Request[$j[0]]['Document_Name'];
 
-        include("../../DB config.php");
-         $stmt = $pdo->prepare("DELETE FROM Documents_Deletion_Request WHERE Deletion_Request_ID=?");
-         $result = $stmt->execute([$Document_ID]);
-     
-     /*
-         $stmt = $pdo->prepare("DELETE FROM Documents WHERE Document_Name = ?");
-         $result = $stmt->execute([$Document_Name]);
-       */  
+        grant($Document_ID, $Document_Name);
+
          }
      
      if (isset($_POST['deny'])) {
@@ -322,10 +318,10 @@ outline: 1px solid #010101;
         $count = $_POST['variable'];
         $j = explode(" ", $count);
 
-        include("../../DB config.php");
-         $stmt = $pdo->prepare("DELETE FROM Documents_Deletion_Request WHERE Document_ID=?");
-         $result = $stmt->execute([$Request[$j]['Document_ID']]);
-     
+        $Document_ID = $Request[$j[0]]['Deletion_Request_ID'];
+
+        deny($Document_ID);
+
      }
 
     
@@ -385,20 +381,6 @@ outline: 1px solid #010101;
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
-    <?php
-    if (isset($_POST['Deny']))
-    {
-        deleteRecord($access_ID);
-    }
-    function deleteRecord($access_ID) {
-        include("../../DB config.php");
-        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
-        $stmt->bindParam(':access_ID', $access_ID);
-        $stmt->execute();
-        return $stmt->rowCount();
-      }
-    ?>
-
 
     <script>
         $('#bar').click(function() {
@@ -407,7 +389,6 @@ outline: 1px solid #010101;
 
         });
     </script>
-
 </body>
 
 </html>
