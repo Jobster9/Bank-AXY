@@ -1,5 +1,7 @@
 <?php include("../../config.php");
+include("GetStaffNotifications.php");
 session_start();
+$Notifications = GetNotifications();
 
 function GetUserID()
 {
@@ -42,6 +44,7 @@ function destroySession() {
 
 
 ?>
+
 
 
 
@@ -110,58 +113,56 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
+<style>
+    #ayo {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+}
 
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #1e0063;
+  color: #fff;
+  padding: 10px 0;
+}
+
+header h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  color: #FFCC00;  
+}
+</style>
 
 
     <div id="page-content-wrapper">
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            color: #000;
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background-color: #1e0063;
-            color: #fff;
-            padding: 10px 0;
-        }
-
-        header h1 {
-            font-size: 20px;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
-            color: #FFCC00;
-
-
-
-
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
+            <div class="ayo">
             <h1>Bismillahir Rahmanir Raheem' الرَّحِيْمِ الرَّحْمٰنِ اللهِ بِسْمِ</h1>
+        </div>            
         </div>
     </header>
 </body>
 </html>
-
 
 
 
@@ -170,9 +171,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="container-fluid p-0 px-lg-0 px-md-0">
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light my-navbar">
-
-
-
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
@@ -183,9 +181,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
-
                             <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
-
                         </div>
                     </form>
 
@@ -254,6 +250,3 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </ul>
 
                 </nav>
-
-
-
