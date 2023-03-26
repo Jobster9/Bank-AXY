@@ -1,5 +1,7 @@
 <?php include("../../config.php");
+include "GetStaffNotifications.php";
 session_start();
+$Notifications = GetNotifications();
 
 function GetUserID()
 {
