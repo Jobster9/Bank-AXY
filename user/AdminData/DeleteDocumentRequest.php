@@ -1,13 +1,15 @@
 <?php include "header.php";
 include "../StaffData/AccessControl.php";
+include "DeleteDocumentSQL.php";
 
-$access = GetAllAccessRequests();
+$Request = GetAllRequestDeletion();
 
-$access_ID = "";
 ?>
+
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +18,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Access Control</title>
+    <title>Document Deletion Request</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -176,24 +178,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   color: #a3a3a3;
 }
 
-.btn {
-  text-decoration: none;
-  background-color: #cc0000;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  transition: 0.3s;
-}
-
-.btn:hover{
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #005af0;
-  padding: 10px 20px;
-  border: none;
-  outline: 1px solid #010101;
-}
 .form input {
   margin: 10px 0;
   width: 100%;
@@ -248,6 +232,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .styled-table {
     margin: 25px auto;
 }
+
+.btn {
+text-decoration: none;
+background-color: #0032A0;
+color: #ffffff;
+padding: 5px 10px;
+border: none;
+outline: none;
+transition: 0.3s;
+}
+
+.btn:hover{
+text-decoration: none;
+background-color: #ffffff;
+color: #005af0;
+padding: 10px 20px;
+border: none;
+outline: 1px solid #010101;
+}
     </style>
 
 
@@ -262,7 +265,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Document Deletion:</h1>
                 </div>
             </div>
 
@@ -283,20 +286,53 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <table class="styled-table">
     <thead>
         <tr>
-            <th>User ID</th>
+            <th>Deletion Request ID</th>
             <th>Document Name</th>
             <th>Grant Access</th>
             <th>Deny Access</th>        
         </tr>
     </thead>
     <tbody>
-<?php for ($i = 0; $i < count($access); $i++): ?>
+<?php for ($i = 0; $i < count($Request); $i++): 
+    $grant = $i . "grant";
+    $deny = $i . "deny";
+
+
+
+    if (isset($_POST['grant'])) {
+
+
+        $count = $_POST['variable'];
+        $j = explode(" ", $count);
+
+
+        $Document_ID = $Request[$j[0]]['Deletion_Request_ID'];
+        $Document_Name = $Request[$j[0]]['Document_Name'];
+
+        grant($Document_ID, $Document_Name);
+
+         }
+     
+     if (isset($_POST['deny'])) {
+     
+        $count = $_POST['variable'];
+        $j = explode(" ", $count);
+
+        $Document_ID = $Request[$j[0]]['Deletion_Request_ID'];
+
+        deny($Document_ID);
+
+     }
+
+    
+    ?>
                 <tr class="active-row">
-                    <td><?php echo $access[$i]['User_ID'] ?></td>
-                    <td><?php echo $access[$i]['Document_Name'] ?></td>
+                    <td><?php echo $Request[$i]['Deletion_Request_ID'] ?></td>
+                    <td><?php echo $Request[$i]['Document_Name'] ?></td>
                     <form method="post">
-                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Grant">Grant</button></td>
-                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td>
+                        <input type="hidden" id="custId" name="variable" value="<?php echo $i ?>">
+                        <td style="text-align:center"><input name="grant" class="btn btn-lg btn-block" type="submit" value="Grant"></td>
+                        <td style="text-align:center"><input name="deny" class="btn btn-lg btn-block" type="submit" value="Deny"></td>
                     </form>
                 </tr>
 <?php endfor; ?>
@@ -345,39 +381,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
-    <?php
-    if (isset($_POST['Deny']))
-    {
-        deleteRecord($access_ID);
-    }
-    function deleteRecord($access_ID) {
-        include("../../DB config.php");
-        $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
-        $stmt->bindParam(':access_ID', $access_ID);
-        $stmt->execute();
-        return $stmt->rowCount();
-      }
-
-    if (isset($_POST['Grant']))
-    {
-        grantAccess($access_ID);
-    } 
-
-    function grantAccess($access_ID) {
-        include("../../DB config.php");
-        $stmt1 = $pdo->prepare("INSERT INTO dbo.Access_Control (User_ID, Document_Name, Access_Date_Time) SELECT User_ID, Document_Name, GETDATE() FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
-        $stmt1->bindParam(':access_ID', $access_ID);
-        $stmt1->execute();
-
-        $stmt2 = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
-        $stmt2->bindParam(':access_ID', $access_ID);
-        $stmt2->execute();
-
-        return true;
-
-    }
-    ?>
-
 
     <script>
         $('#bar').click(function() {
@@ -386,7 +389,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
         });
     </script>
-
 </body>
 
 </html>
