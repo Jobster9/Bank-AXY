@@ -53,6 +53,10 @@ function CreateAdmin()
 
 }
 
+<<<<<<< HEAD
+function checkDuplicateEmail($email)
+{
+=======
 
 function checkDuplicateEmail($email)
 {
@@ -65,6 +69,7 @@ function passwordCheck($password)
     return $passwordCheck;
 }
 
+>>>>>>> main
 
     // Create a new PDO connection object
     include("../../DB config.php");
