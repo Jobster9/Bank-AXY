@@ -314,7 +314,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                                                 <td><?php echo $user[$i]['Owner_ID'] ?></td>
                                                                 <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
                                                                 <td><?php echo $user[$i]['Archive_Date'] ?></td>
-                                                                <td><a href="RestoreDocument.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?>">Restore</a></td>        
+                                                                <td><a href="RestoreDocument.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?> &Document_Name=<?php echo $user[$i]['Document_Name']; ?>">Restore</a></td>        
 
 
                                                             </tr>
