@@ -42,6 +42,14 @@ function CreateAdmin (){
 
 }
 
+function passwordCheck($password)
+{
+    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+    $passwordCheck = preg_match($password_regex, $password);
+
+    return $passwordCheck;
+}
+
 
 
 
