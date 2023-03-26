@@ -1,7 +1,7 @@
 <?php include "../../config.php";
 include "GetAdminNotifications.php";
 session_start();
-$Notifications = GetNotifications();
+//$Notifications = GetNotifications();
 
 
 
@@ -84,6 +84,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <i class="fas fa-fingerprint"></i> Access Control
                     </a>
                 </li>
+
+
+
+                <li class="menuHover">
+
+                    <a href="Archived_Documents.php" id="AuditTrail" class="nav-link text-left" role="button" style ="font-size: 23px">
+                        <i class="fas fa-archive"></i> Archived Documents
+                    </a>
+                </li>
+
+
 
                 <li class="menuHover">
                     <a class="nav-link text-left" role="button" href="<?php echo 'logout.php'; ?>" style ="font-size: 23px">
