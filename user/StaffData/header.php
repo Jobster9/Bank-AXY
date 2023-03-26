@@ -2,7 +2,6 @@
 include("GetStaffNotifications.php");
 session_start();
 $Notifications = GetNotifications();
-
 function GetUserID()
 {
     return $_SESSION['User_ID'];
@@ -44,8 +43,6 @@ function destroySession() {
 
 
 ?>
-
-
 
 
 

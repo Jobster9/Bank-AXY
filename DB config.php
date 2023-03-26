@@ -8,6 +8,7 @@ $host = 'ABDULNAZIR';
 
 
 
+
 $dbname = 'BankAXY';
 
 // Create a new PDO connection object
