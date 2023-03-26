@@ -24,7 +24,7 @@ function GetNotifications(){
     }
   
     // Find the Audit_IDs for the User_IDs in the same branch
-    $userIDsString = implode(",", array_map(function($id) use ($pdo) { return $pdo->quote($id); }, $userIDs));
+    $auditIDsString = implode(",", array_map(function($id) use ($pdo) { return $pdo->quote($id); }, $userIDs));
     $auditIDString = $pdo->prepare("SELECT Audit_ID FROM Audit_Trail WHERE User_ID IN ($userIDsString)");
     $auditIDString->execute();
   
