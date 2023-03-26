@@ -4,10 +4,7 @@
 
 
 
-$host = 'ABDULNAZIR';
-
-
-
+$host = 'DESKTOP-AVCNUEK';
 
 $dbname = 'BankAXY';
 

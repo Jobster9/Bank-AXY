@@ -1,7 +1,13 @@
-    <?php include "header.php";
-    include("DeleteUserDetails.php");
+<?php include "header.php";
+include("DeleteUserDetails.php");
+$User_ID = $_GET['User_ID'];
+$Branch = $rows_array[0]["Branch"];
+$Department = $rows_array[0]["Department"];
 
-    ?>
+$Documents = checkUsersDocuments($User_ID);
+$DepartmentMembers = GetDepartmentMembers($Branch, $Department);
+
+?>
     <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
@@ -216,14 +222,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Confirm Deletion of: <?php echo $User_ID ?></h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Transfer <?php echo $User_ID ?>'s Documents</h1>
                 </div>
             </div>
-
-
-
-
-
 
             <div class="col-md-12">
                 <div class="row">
@@ -232,21 +233,29 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-                    <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
-    <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
-
-                                        <form method="post">
-                   <small><h3 class="h3 mb-0 light" style="text-align: center;">First Name: <?php echo $rows_array[0]["First_Name"] ?></h3><small> 
-                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Name: <?php echo $rows_array[0]["Last_Name"] ?></h3><small> 
-                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Email: <?php echo $rows_array[0]["Email"] ?></h3><small> 
+                                <h3 class="h3 mb-4 light" style="text-align: center;">This user owns documents</h3>
+    <p style="text-align: center;"> Before you can delete this user, their document ownership must be transferred.<br> Please select another department member for each document listed</p>
+                                    <form method="post">
+                                        
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Name: <?php echo $rows_array[0]["First_Name"], " ", $rows_array[0]["Last_Name"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php print_r($DepartmentMembers[0]["User_ID"]); ?></h3><small> 
 
+                    <?php foreach ($Documents as $documentName) { ?>
+                                    <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
+                                    <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
+                                    <select class="form-control" name="transferredDoc">
+                                    <?php for ($i = 0; $i < count($DepartmentMembers); $i++) { ?>
+                                                                        <option value="<?php echo $DepartmentMembers[$i]["User_ID"] ?>"><?php echo $DepartmentMembers[$i]["User_ID"], ": ", $DepartmentMembers[$i]["First_Name"], " ", $DepartmentMembers[$i]["Last_Name"] ?></option>                                                              
+                                    <?php } ?>
+                                    </select>
+                                    </div>
+                     <?php } ?>
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
-                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Delete</button>
-</div>
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block"> Transfer</button>
+                                        </div>
                                     </div>
 
                                     </form>
@@ -299,14 +308,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <?php
 if (isset($_POST['submit'])) {
 
-    $Documents = checkUsersDocuments($User_ID);
-    if (count($Documents) > 0) {
-        echo ("<script>location.href = 'DocumentTransfer.php?User_ID=" . $User_ID . "';</script>");
-    } else {
-        $result = deleteStaffMember($User_ID);
-        if ($result) {
-            echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
-        }
+
+    $result = deleteStaffMember($User_ID);
+    if ($result) {
+        echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
     }
 }
 function checkUsersDocuments($User_ID)
@@ -325,14 +330,22 @@ function checkUsersDocuments($User_ID)
 
 }
 
-function deleteStaffMember($User_ID)
+function GetDepartmentMembers($branch, $department)
 {
+
     // Create a new PDO connection object
     include("../../DB config.php");
-    $stmt = $pdo->prepare("DELETE FROM dbo.Bank_Employees WHERE User_ID = ?");
-    $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
-    $result = $stmt->execute();
-    return $result;
+    $stmt = $pdo->prepare("SELECT User_ID,First_Name,Last_Name FROM dbo.Bank_Employees WHERE Branch = ? AND Department = ?");
+    $stmt->bindParam(1, $branch, PDO::PARAM_STR);
+    $stmt->bindParam(2, $department, PDO::PARAM_STR);
+    $stmt->execute();
+
+    //Select all Documents tied to user
+    while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $DepartmentMembers[] = $result;
+    }
+    return $DepartmentMembers;
+
 }
 
 ?>
