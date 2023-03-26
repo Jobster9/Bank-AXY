@@ -4,7 +4,8 @@
 
 
 
-$host = 'PLAYING-MINECRA';
+$host = 'ABDULNAZIR';
+
 
 
 

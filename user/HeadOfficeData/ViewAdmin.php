@@ -314,7 +314,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
             <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
 
-            <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+            <td><a href="DeleteAdmin.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
 
         </tr>
 
