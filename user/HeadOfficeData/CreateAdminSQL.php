@@ -53,8 +53,18 @@ function CreateAdmin()
 
 }
 
+
 function checkDuplicateEmail($email)
 {
+
+function passwordCheck($password)
+{
+    $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+    $passwordCheck = preg_match($password_regex, $password);
+
+    return $passwordCheck;
+}
+
 
     // Create a new PDO connection object
     include("../../DB config.php");
