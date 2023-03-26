@@ -295,7 +295,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     <td><?php echo $access[$i]['User_ID'] ?></td>
                     <td><?php echo $access[$i]['Document_Name'] ?></td>
                     <form method="post">
-                        <td style="text-align:center;"><a href="AccessControlPage.php?access_ID=<?php echo $access_ID; ?>"><button type="submit" name="Grant">Grant</button></a></td>
+                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Grant">Grant</button></td>
                         <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td>
                     </form>
                 </tr>
@@ -357,6 +357,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         $stmt->execute();
         return $stmt->rowCount();
       }
+
+    if (isset($_POST['Grant']))
+    {
+        grantAccess($access_ID);
+    } 
+
+    function grantAccess($access_ID) {
+        include("../../DB config.php");
+        $stmt1 = $pdo->prepare("INSERT INTO dbo.Access_Control (User_ID, Document_Name, Access_Date_Time) SELECT User_ID, Document_Name, GETDATE() FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
+        $stmt1->bindParam(':access_ID', $access_ID);
+        $stmt1->execute();
+
+        $stmt2 = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
+        $stmt2->bindParam(':access_ID', $access_ID);
+        $stmt2->execute();
+
+        return true;
+
+    }
     ?>
 
 
