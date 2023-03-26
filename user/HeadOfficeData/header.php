@@ -1,5 +1,5 @@
-<?php include "../../config.php"; 
-    session_start();
+<?php include "../../config.php";
+session_start();
 
 
 if (!isset($_SESSION['User_ID'])) {
@@ -27,7 +27,6 @@ function destroySession() {
     window.location.href = "/BankAXY/user/login.php";
 }
 </script>';
-
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -96,46 +95,45 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-    <!-- Page Content -->
     <div id="page-content-wrapper">
-<style>
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #000;
-
-}
-
-.container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-header {
-  background-color: #1e0063;
-  color: #fff;
-  padding: 10px 0;
-}
-
-header h1 {
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
-</style>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1e0063;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #FFCC00;
+
+
+
+
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -145,20 +143,88 @@ header h1 {
     </header>
 </body>
 </html>
-
         <div id="content">
 
             <div class="container-fluid p-0 px-lg-0 px-md-0">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light my-navbar">
+                             <!-- Topbar -->
+                             <nav class="navbar navbar-expand navbar-light my-navbar">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+<!-- Sidebar Toggle (Topbar) -->
+<div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<form class="d-none d-sm-inline-block form-inline navbar-search">
+    <div class="input-group">
+        <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
+    </div>
+</form>
+
+
+<!-- Topbar Navbar -->
+<ul class="navbar-nav ml-auto">
+
+    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+    <li class="nav-item dropdown  d-sm-none">
+
+        <!-- Dropdown - Messages -->
+        <div class="dropdown-menu dropdown-menu-right p-3">
+            <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
                     </div>
+                </div>
+            </form>
+        </div>
+    </li>
 
+    <!-- Nav Item - Alerts -->
+    <li class="nav-item dropdown">
+        <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
+            <div class="position-relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="indicator">4</span>
+            </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
+            <div class="dropdown-menu-header">
+                4 New Notifications
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle text-danger">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
+                        <div class="col-10">
+                            <div class="text-dark">Update completed</div>
+                            <div class="text-muted small mt-1">Restart server 12 to complete the
+                                update.</div>
+                            <div class="text-muted small mt-1">30m ago</div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="dropdown-menu-footer">
+                <a href="#" class="text-muted">Show all notifications</a>
+            </div>
+        </div>
+    </li> 
+</ul>
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
@@ -195,9 +261,7 @@ header h1 {
                                 </form>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <!-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -235,19 +299,8 @@ header h1 {
                                     <a href="#" class="text-muted">Show all notifications</a>
                                 </div>
                             </div>
-                        </li> -->
-                        <!-- Nav Item - Messages -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " href="#" role="button">
-                                <i class="fas fa-envelope"></i>
-                                
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                        </li> -->
-
-                        <!-- Nav Item - User Information -->
-
-
+                        </li> 
                     </ul>
 
                 </nav>
+

@@ -1,10 +1,14 @@
 <?php include("../../config.php");
+include("GetStaffNotifications.php");
 session_start();
+$Notifications = GetNotifications();
 
-function GetUserID(){
+function GetUserID()
+{
     return $_SESSION['User_ID'];
 }
-function GetDepartment(){
+function GetDepartment()
+{
     return $_SESSION['Department'];
 }
 
@@ -168,9 +172,6 @@ header h1 {
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light my-navbar">
 
-
-
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
                         <span></span>
@@ -178,24 +179,12 @@ header h1 {
                         <span></span>
                     </div>
 
-                    <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
-
-
-
-
                         <div class="input-group">
                             <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
-
-
-                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div> -->
                         </div>
                     </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

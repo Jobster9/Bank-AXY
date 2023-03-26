@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
 
     if ($filetype !== 'application/pdf') {
-        $TypeError = "This filetype is not supported, ensure you are uploading a PDF.";
+        $TypeError = "This filetype is not supported, ensure you are uploading a supported filetype.";
         $UploadSuccess = false;
     }
     if ($filesize >= 1000000) {
@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     }
     if (!$nameConvention) {
         $UploadMessage = "File not uploaded";
-        $NameError = "The Document name does not match the agreed convention. Please refer back to the guide";
+        $NameError = "The Document name does not match the agreed convention. Please refer back to the guide.";
         $UploadSuccess = false;
     }
     if ($Duplicate) {
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
 
     <style>
         .btn-pay {
-            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
+            background-image: linear-gradient(to right, #010066 0%, rgba(249,206,29,255) 100%);
             color: #fdfdfd;
             font-weight: bold;
             box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
@@ -215,6 +215,14 @@ if (isset($_POST['submit'])) {
   font-size: 18px;
   font-weight: 400;
   color: #2e2e2e;
+  text-align: center;
+}
+
+.drop_box h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #2e2e2e;
+  text-align: center;
 }
 
 .drop_box p {
@@ -226,7 +234,7 @@ if (isset($_POST['submit'])) {
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -283,20 +291,21 @@ if (isset($_POST['submit'])) {
 <div class="container">
   <div class="card">
     <div class="drop_box">
-    <header style="color: #E33900;"> 
-    <div style="text-align-center color: #E33900;"> 
+    <div> 
         <h2><?php echo $UploadMessage ?></h2>
-        <h4><br><?php echo $NameError ?></h4>
-        <h4><br><?php echo $DuplicateNameError ?></h4>
-        <h4><br><?php echo $FileError ?></h4>
-        <h4><br><?php echo $TypeError ?></h4>
-        <h4><br><?php echo $SizeError ?></h4>
-        <h4><br><?php echo $SQLError ?></h4>
-      </header>   
-</div>
+        <?php if ($NameError != "") { ?><h4><br><?php echo $NameError ?></h4><?php } ?>
+        <?php if ($DuplicateNameError != "") { ?><h4><br><?php echo $DuplicateNameError ?></h4><?php } ?>
+        <?php if ($FileError != "") { ?><h4><br><?php echo $FileError ?></h4><?php } ?>
+        <?php if ($TypeError != "") { ?><h4><br><?php echo $TypeError ?></h4><?php } ?>
+        <?php if ($SizeError != "") { ?><h4><br><?php echo $SizeError ?></h4><?php } ?>
+        <?php if ($SQLError != "") { ?><h4><br><?php echo $SQLError ?></h4><?php } ?>
 </div>
 
+<div id="backButton" class="d-grid col-sm-3 mx-auto">
+    <button onclick="document.location='UploadDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block" value="Go Back">Back</button>
 
+        </div>
+    </div>
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog loadingModal modal-lg">
                 <div class="modal-content" style="width: 50px; height:50px; background: transparent;">

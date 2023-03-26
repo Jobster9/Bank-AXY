@@ -172,7 +172,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -211,35 +211,35 @@ if (isset($_POST['submit'])) {
     $Duplicate = checkDuplicateEmail($email);
     $strongPassword = passwordCheck($_POST['password']);
     if ($_POST['fname'] == "") {
-        $errorfname = "First name is mandatory";
+        $errorfname = "*First name is mandatory";
         $allFields = "no";
     }
     if ($_POST['lname'] == "") {
-        $errorlname = "Last name is mandatory";
+        $errorlname = "*Last name is mandatory";
         $allFields = "no";
     }
     if ($_POST['email'] == "") {
-        $erroremail = "Email is mandatory";
+        $erroremail = "*Email is mandatory";
         $allFields = "no";
     }
     if ($Duplicate) {
-        $erroremail = "This email already exists";
+        $erroremail = "*This email already exists";
         $allFields = "no";
     }
     if ($_POST['password'] == "") {
-        $errorpwd = "Password is mandatory";
+        $errorpwd = "*Password is mandatory";
         $allFields = "no";
     }
     if ($_POST['branch'] == "") {
-        $errorbranch = "Branch is mandatory";
+        $errorbranch = "*Branch is mandatory";
         $allFields = "no";
     }
     if ($_POST['department'] == "") {
-        $errordep = "Department is mandatory";
+        $errordep = "*Department is mandatory";
         $allFields = "no";
     }
     if ($strongPassword == 0) {
-        $errorpwd = "Password is not strong enough";
+        $errorpwd = "*Password is not strong enough";
         $allFields = "no";
     }
 
@@ -275,12 +275,12 @@ if (isset($_POST['submit'])) {
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
                                 <?php if ($staffCreation): ?>
-                                                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                                                                    The staff member has been successfully created.
-                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
+                                                                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                                The staff member has been successfully created.
+                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
 <?php endif; ?>
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
@@ -294,39 +294,45 @@ if (isset($_POST['submit'])) {
                                                 <i class='bx bx-info-circle' style="color: #FFCC00;"></i>
                                             </span>
                                         </span>
-                                        <span class="text-danger"><?php echo $errorfname; ?></span>
-                                    </div>
-                                    <p id="errorpwd" style="color: #FFCC00; margin: top 10px;"></p>
 
+                                    </div>  
+                                    <p id="errorpwd" style="color: #FFCC00;"></p>
+                                        <span class="text-danger"><?php echo $errorfname; ?></span>
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
-                                        <span class="text-danger"><?php echo $errorlname; ?></span>
+
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
-
+                                        <span class="text-danger"><?php echo $errorlname; ?></span>
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
-                                        <span class="text-danger"><?php echo $erroremail; ?></span>
+
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
-
-
+                                        <span class="text-danger"><?php echo $erroremail; ?></span>                                    
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
                                         </div>
+                                         
                                         <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
-                                        <span class="text-danger"><?php echo $errorpwd; ?></span>
+
+
+                                          
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
+
+    <span class="text-danger"><?php echo $errorpwd; ?></span>
+
+
 
                                     <div class="input-group mb-1 mt-5">
                                     <div class="input-group-prepend">
@@ -337,10 +343,10 @@ if (isset($_POST['submit'])) {
                                         <option value="<?php echo HEAD_OFFICE ?>">Kuala Lumpur</option>
                                         <option value="<?php echo EAST_BRANCH ?>">Kuching</option>
                                     </select>
-                                    <span class="text-danger"><?php echo $errorbranch; ?></span>
+
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
-
+                                    <span class="text-danger"><?php echo $errorbranch; ?></span>
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
                                     <div class="input-group-prepend">
@@ -353,10 +359,10 @@ if (isset($_POST['submit'])) {
                                         <option value="<?php echo LOANS_DEP ?>">Loans</option>
                                         <option value="<?php echo MORTGAGES_DEP ?>">Mortgage Advice</option>
                                     </select>
-                                    <span class="text-danger"><?php echo $errordep; ?></span>
+
                                     </div>
                                     <p id="errorpwd" style="color: #FFCC00;"></p>
-
+                                    <span class="text-danger"><?php echo $errordep; ?></span>
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
@@ -365,7 +371,7 @@ if (isset($_POST['submit'])) {
 
 
                                     <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
-                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block" value="Create"></input>
+                                        <input name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Create</input>
 
                                     </div>
                                 </div>
