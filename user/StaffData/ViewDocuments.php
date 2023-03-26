@@ -451,7 +451,6 @@ $ownerID = $user[$i]['Owner_ID'];
                 if ($RequestAccess != null) {
                     ?>
                         <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a></td>
-                                </tr>
 
                     <?php } else { ?>
 
@@ -475,6 +474,7 @@ $ownerID = $user[$i]['Owner_ID'];
                     <?php } else { ?>
 
                             <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a></td>
+                            </tr>
 
                     <?php } ?>
                 
