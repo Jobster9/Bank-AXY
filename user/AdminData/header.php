@@ -1,5 +1,7 @@
 <?php include "../../config.php";
+include "GetNotifications.php";
 session_start();
+$Notifications = GetNotifications();
 
 
 
