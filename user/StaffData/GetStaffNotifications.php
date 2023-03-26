@@ -87,19 +87,44 @@ function SendNotifications($NotificationsArray)
       $adminEmails[] = $result['Email'];
     }
 
-    // If there is only one email address, assign it to a separate variable
-    if (count($adminEmails) == 1) {
-      $adminEmail = $adminEmails[0];
-    }
   }
 
   //send the notification message to relevant email addresses
 
-  $staffEmail;
   $adminEmail; //OR $adminEmails[]
 
   //notification to be sent
-  $latest_notification = end($NotificationsArray);
+
+  $count = count($NotificationsArray);
+
+  $latest_notification = $NotificationsArray[$count - 1]['Notification_Message'];
+
+  if (count($adminEmails) == 1) {
+    $adminEmail = $adminEmails[0];
+
+    $to_email = $adminEmail; //admin
+    $subject = "Email Notification";
+    $body = $latest_notification;
+    $headers = "From: Bank AXY";
+    mail($to_email, $subject, $body, $headers);
+  } else {
+    for ($i = 0; $i < count($adminEmails); $i++){
+      $adminEmail = $adminEmails[$i];
+
+      $to_email = $adminEmail; //admin
+      $subject = "Email Notification";
+      $body = $latest_notification;
+      $headers = "From: Bank AXY";
+      mail($to_email, $subject, $body, $headers);
+    }
+  }
+
+$to_email = $staffEmail; //staff
+$subject = "Email Notification";
+$body = $latest_notification;
+$headers = "From: Bank AXY";
+mail($to_email, $subject, $body, $headers);
+
 
 }
 
