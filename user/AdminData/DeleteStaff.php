@@ -300,7 +300,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 if (isset($_POST['submit'])) {
 
     $Documents = checkUsersDocuments($User_ID);
-    if (count($Documents) > 0) {
+
+    if (isset($Documents)) {
         echo ("<script>location.href = 'DocumentTransfer.php?User_ID=" . $User_ID . "';</script>");
     } else {
         $result = deleteStaffMember($User_ID);
