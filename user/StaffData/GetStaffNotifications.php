@@ -1,7 +1,7 @@
 <?php
 
-$NotificationsArray = GetNotifications();
-SendNotifications($NotificationsArray);
+//$NotificationsArray = GetNotifications();
+//SendNotifications($NotificationsArray);
 function GetNotifications()
 {
   $user_ID = $_SESSION['User_ID'];
