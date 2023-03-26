@@ -107,46 +107,49 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
     <!-- Page Content -->
+
+
+
+
     <div id="page-content-wrapper">
-
-<style>
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: #000;
-
-}
-
-.container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-header {
-  background-color: #1e0063;
-  color: #fff;
-  padding: 10px 0;
-}
-
-header h1 {
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
-</style>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1e0063;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #FFCC00;
+
+
+
+
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -156,11 +159,18 @@ header h1 {
     </header>
 </body>
 </html>
+
+
+
+
         <div id="content">
 
             <div class="container-fluid p-0 px-lg-0 px-md-0">
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light my-navbar">
+
+
+
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <div type="button" id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
@@ -170,14 +180,29 @@ header h1 {
                     </div>
 
 
-                    <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
+
+
+
+
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
+                            <h1 id="bankBrand" style="font-size: 24px; color:#010066" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
+
+
+                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div> -->
                         </div>
                     </form>
 
                     <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown  d-sm-none">
 
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3">
@@ -194,8 +219,8 @@ header h1 {
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown">
+                          <!-- Nav Item - Alerts -->
+                          <li class="nav-item dropdown">
                             <a class="nav-icon dropdown" href="#" id="alertsDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell align-middle" style="color: gray;">
@@ -218,8 +243,7 @@ header h1 {
                                                     <line x1="12" y1="8" x2="12" y2="12"></line>
                                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                                 </svg>
-                                            </div>
-                                            <div class="col-10">
+                                                <div class="col-10">
                                                 <div class="text-dark">Update completed</div>
                                                 <div class="text-muted small mt-1">Restart server 12 to complete the
                                                     update.</div>
@@ -235,4 +259,6 @@ header h1 {
                             </div>
                         </li> 
                     </ul>
+
                 </nav>
+

@@ -172,7 +172,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -223,27 +223,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-
 <div class="container">
   <div class="card">
     <div class="drop_box">
-        <header>
             <h4>Select File here</h4>
-        </header>
-      <p>Files Supported:PDF</p>
+      <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
   <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
       <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
   <div class="form-group mb-1 mt-5">
-  <!-- <button class="btn" onclick="document.getElementById('file-upload').click()">Choose File</button> -->
-<input type="file" class="form-control-file" accept=".pdf" id="file-upload" name="uploaded-file" onchange="showInputs()" required>
+<input type="file" class="form-control-file" accept=".doc,.docx,.pdf" id="file-upload" name="uploaded-file" onchange="showInputs()" required>
   </div>
   <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
   <p>Please ensure the filename follows the standardized convention: 
     <br>"CustomerName-Category-DocumentNumber.pdf".
     <br> If you are unsure about the convention, please refer to the <a>guide</a>.
-                                    <a href="temp.pdf#toolbar=0" target="_blank" rel="noopener noreferrer">Document Naming Convention</a>
+                                    <a href="guide.pdf#toolbar=0" target="_blank" rel="noopener noreferrer">Document Naming Convention</a>
   </p>
     <label for="doc-name">Document Name:</label>
     <div class="input-group-prepend">
@@ -273,7 +267,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
       <option value="<?php echo CRIT_LOW ?>">Low</option>
     </select>
 </div>
-<button type="submit" name="submit" class="btn mb-1 mt-5">Upload File</button>
+<div id="backButton" class="d-grid col-sm-4 mx-auto">
+    <button  name="submit" type="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Upload File</button>
+        </div>
   </div>
 </form>
 </div>

@@ -187,7 +187,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 .btn {
   text-decoration: none;
-  background-color: #cc0000;
+  background-color: #0032A0;
   color: #ffffff;
   padding: 10px 20px;
   border: none;
@@ -257,14 +257,13 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
 
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
-                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
-                                        
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Delete</button>
+</div>
                                     </div>
-                                    </div>
-                                    
+
                                     </form>
-                                    <div id="backButton" class="d-grid col-sm-4 mx-auto">
-                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+                                    <div id="backButton" class="d-grid col-sm-6 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Go Back</button>
 
                                     </div>
                                 </div>
@@ -312,7 +311,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <?php
 if (isset($_POST['submit'])) {
     $result = deleteStaffMember($User_ID);
-    deleteStaffMember($User_ID);
     if ($result) {
         echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
     }
