@@ -1,15 +1,26 @@
 <?php
-function restore($Document_ID)
-{
-    include("../../DB config.php");
-    $stmt1 = $pdo->prepare("INSERT INTO dbo.Documents SELECT * FROM dbo.Document_Archive WHERE Document_ID = :Document_ID");
-    $stmt1->bindParam(':Document_ID', $Document_ID);
-    $stmt1->execute();
 
-    $stmt2 = $pdo->prepare("DELETE FROM dbo.Document_Archive WHERE Document_ID = :Document_ID");
-    $stmt2->bindParam(':Document_ID', $Document_ID);
-    $stmt2->execute();
+$Document_ID = $_GET['Document_ID'];
+$Document_Name = $_GET['Document_Name'];
+$Document_Name = substr($Document_Name, 0, -10);
 
-    return true;
-}
+include("../../DB config.php");
+
+
+
+$stmt = $pdo->prepare("INSERT INTO Documents  SELECT Document_ID, ?, Document_Type, Document_Criticality, Owner_ID, Creation_Date_Time, File_Location FROM Document_Archive WHERE Document_ID=?");
+$stmt->bindParam(':Document_ID', $Document_ID);
+$stmt->execute([$Document_Name, $Document_ID]);
+
+
+    $stmt = $pdo->prepare("DELETE FROM Document_Archive WHERE Document_ID=?");
+    $stmt->execute([$Document_ID]);
+
+
+
+
 ?>
+  <script type="text/javascript">
+window.location.href = 'Archived_Documents.php';
+</script>
+
