@@ -4,7 +4,7 @@
 
 
 
-$host = 'DESKTOP-AVCNUEK';
+$host = 'ABDULNAZIR';
 
 
 

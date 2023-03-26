@@ -1,9 +1,9 @@
-<?php include "header.php";
-
+<?php 
+ob_start(); // start output buffering
+include("header.php");
 // Create a new PDO connection object
 include("DeleteUserDetails.php");
-
-
+include("deleteStaffMember.php");
 /*if (isset($_POST['delete'])) {
 include("../../DB config.php");
 $User_ID = $_GET['User_ID'];
@@ -11,6 +11,20 @@ $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
 $stmt->execute([$User_ID]);
 // redirect to viewstaff.php
 }*/
+
+
+
+// rest of your code here
+
+if (isset($_POST['submit'])) {
+    // call your delete function here
+    $result = deleteStaffMember($User_ID);
+    deleteStaffMember($User_ID);
+    header("Location: ViewAdmin.php"); // redirect to viewadmin.php
+    ob_end_flush(); // flush the output buffer and turn off output buffering
+    exit; // stop executing the script
+}
+
 
 
 ?>
@@ -46,7 +60,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
 <style>
     .btn-pay {
         background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -264,7 +277,7 @@ border-radius: 4px;
                                 
                                 </form>
                                 <div id="backButton" class="d-grid col-sm-4 mx-auto">
-                                    <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+                                    <button onclick="document.location='ViewAdmin.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
 
                                 </div>
                             </div>
@@ -309,25 +322,6 @@ border-radius: 4px;
 <script src="../UserData/js/profileInfo.js"></script>
 <script src="../UserData/js/transfer.js"></script>
 
-<?php
-if (isset($_POST['submit'])) {
-$result = deleteStaffMember($User_ID);
-deleteStaffMember($User_ID);
-if ($result) {
-    //header('Location: ViewStaff.php?deleted=true');
-}
-}
-function deleteStaffMember($User_ID)
-{
-// Create a new PDO connection object
-include("../../DB config.php");
-$stmt = $pdo->prepare("DELETE FROM dbo.Bank_Employees WHERE User_ID = ?");
-$stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
-$result = $stmt->execute();
-return $result;
-}
-
-?>
 <script>
     $('#bar').click(function() {
         $(this).toggleClass('open');
