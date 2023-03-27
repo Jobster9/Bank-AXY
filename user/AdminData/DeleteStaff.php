@@ -1,17 +1,5 @@
     <?php include "header.php";
-
-    // Create a new PDO connection object
     include("DeleteUserDetails.php");
-
-
-    /*if (isset($_POST['delete'])) {
-    include("../../DB config.php");
-    $User_ID = $_GET['User_ID'];
-    $stmt = $pdo->prepare("DELETE FROM Bank_Employees WHERE User_ID = '$User_ID'");
-    $stmt->execute([$User_ID]);
-    // redirect to viewstaff.php
-    }*/
-
 
     ?>
     <script>
@@ -310,11 +298,34 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <?php
 if (isset($_POST['submit'])) {
-    $result = deleteStaffMember($User_ID);
-    if ($result) {
-        echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
+
+    $Documents = checkUsersDocuments($User_ID);
+
+    if (isset($Documents)) {
+        echo ("<script>location.href = 'DocumentTransfer.php?User_ID=" . $User_ID . "';</script>");
+    } else {
+        $result = deleteStaffMember($User_ID);
+        if ($result) {
+            echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
+        }
     }
 }
+function checkUsersDocuments($User_ID)
+{
+    // Create a new PDO connection object
+    include("../../DB config.php");
+    $stmt = $pdo->prepare("SELECT Document_Name FROM dbo.Documents WHERE Owner_ID = ?");
+    $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
+    $stmt->execute();
+
+    //Select all Documents tied to user
+    while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $Documents[] = $result['Document_Name'];
+    }
+    return $Documents;
+
+}
+
 function deleteStaffMember($User_ID)
 {
     // Create a new PDO connection object

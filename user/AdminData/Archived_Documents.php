@@ -230,7 +230,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
@@ -306,18 +306,18 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 for ($i = 0; $i < count($user); $i++):
 
                                     ?>
-                                                            <tr class="active-row">
-                                                                <td><?php echo $user[$i]['Document_ID'] ?></td>
-                                                                <td><?php echo $user[$i]['Document_Name'] ?></td>
-                                                                <td><?php echo $user[$i]['Document_Type'] ?></td>
-                                                                <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-                                                                <td><?php echo $user[$i]['Owner_ID'] ?></td>
-                                                                <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-                                                                <td><?php echo $user[$i]['Archive_Date'] ?></td>
-                                                                <td><a href="RestoreDocument.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?> &Document_Name=<?php echo $user[$i]['Document_Name']; ?>">Restore</a></td>        
+                                                                    <tr class="active-row">
+                                                                        <td><?php echo $user[$i]['Document_ID'] ?></td>
+                                                                        <td><?php echo $user[$i]['Document_Name'] ?></td>
+                                                                        <td><?php echo $user[$i]['Document_Type'] ?></td>
+                                                                        <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+                                                                        <td><?php echo $user[$i]['Owner_ID'] ?></td>
+                                                                        <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+                                                                        <td><?php echo $user[$i]['Archive_Date'] ?></td>
+                                                                        <td><a href="RestoreDocument.php?Document_ID=<?php echo $user[$i]['Document_ID']; ?> &Document_Name=<?php echo $user[$i]['Document_Name']; ?>">Restore</a></td>        
 
 
-                                                            </tr>
+                                                                    </tr>
 
 
 
