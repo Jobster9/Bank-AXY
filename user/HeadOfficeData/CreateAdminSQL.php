@@ -56,6 +56,7 @@ function CreateAdmin()
 
 function checkDuplicateEmail($email)
 {
+
     // Create a new PDO connection object
     include("../../DB config.php");
 
@@ -75,6 +76,9 @@ function checkDuplicateEmail($email)
     }
 }
 
+
+
+
 function passwordCheck($password)
 {
     $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
@@ -82,6 +86,7 @@ function passwordCheck($password)
 
     return $passwordCheck;
 }
+
 
 ?>
 
