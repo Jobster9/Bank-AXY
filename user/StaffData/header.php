@@ -2,6 +2,7 @@
 include("GetStaffNotifications.php");
 session_start();
 $Notifications = GetNotifications();
+SendNotifications($Notifications);
 function GetUserID()
 {
     return $_SESSION['User_ID'];
