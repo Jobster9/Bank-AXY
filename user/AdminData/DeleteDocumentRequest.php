@@ -293,7 +293,7 @@ outline: 1px solid #010101;
         </tr>
     </thead>
     <tbody>
-<?php for ($i = 0; $i < count($Request); $i++): 
+<?php for ($i = 0; $i < count($Request); $i++):
     $grant = $i . "grant";
     $deny = $i . "deny";
 
@@ -311,10 +311,10 @@ outline: 1px solid #010101;
 
         grant($Document_ID, $Document_Name);
 
-         }
-     
-     if (isset($_POST['deny'])) {
-     
+    }
+
+    if (isset($_POST['deny'])) {
+
         $count = $_POST['variable'];
         $j = explode(" ", $count);
 
@@ -322,19 +322,19 @@ outline: 1px solid #010101;
 
         deny($Document_ID);
 
-     }
+    }
 
-    
+
     ?>
-                <tr class="active-row">
-                    <td><?php echo $Request[$i]['Deletion_Request_ID'] ?></td>
-                    <td><?php echo $Request[$i]['Document_Name'] ?></td>
-                    <form method="post">
-                        <input type="hidden" id="custId" name="variable" value="<?php echo $i ?>">
-                        <td style="text-align:center"><input name="grant" class="btn btn-lg btn-block" type="submit" value="Grant"></td>
-                        <td style="text-align:center"><input name="deny" class="btn btn-lg btn-block" type="submit" value="Deny"></td>
-                    </form>
-                </tr>
+                        <tr class="active-row">
+                            <td><?php echo $Request[$i]['Deletion_Request_ID'] ?></td>
+                            <td><?php echo $Request[$i]['Document_Name'] ?></td>
+                            <form method="post">
+                                <input type="hidden" id="custId" name="variable" value="<?php echo $i ?>">
+                                <td style="text-align:center"><input name="grant" class="btn btn-sm btn-block" type="submit" value="Grant"></td>
+                                <td style="text-align:center"><input name="deny" class="btn btn-sm btn-block" type="submit" value="Deny"></td>
+                            </form>
+                        </tr>
 <?php endfor; ?>
     </tbody>
 </table>
