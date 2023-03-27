@@ -1,11 +1,12 @@
 <?php include "header.php";
 include "GetDocuments.php";
 
+$uname = $_SESSION['User_ID'];
 $user = getDocuments();
 $errorMessage = "";
 $i = $_GET['File_Location'];
+$DuplicateNameError = "";
 
-$uname = $_SESSION['User_ID'];
 
 ?>
 <script>
@@ -245,33 +246,45 @@ width:800px;
     margin: 25px auto;
 }
 
+.error-message {
+    font-weight: bold;
+    color: #c7290a;
+    font-size:18px;
+}
+
 </style>
 
 <?php
 
-$allField = TRUE;
+$allField = true;
 
 
 if (isset($_POST['submit'])) {
+    $name = $_POST["DocumentName"];
+    //$Duplicate = checkDuplicate($name);
+
     if ($_POST["DocumentName"] == "") {
-        // $User_ID_Error = "User ID is required";
-        $allField = FALSE;
+
+        $allField = false;
     }
 
     if ($_POST["DocumentType"] == null) {
-        // $User_Password_Error = "Password is required";
-        $allField = FALSE;
+
+        $allField = false;
     }
 
     if ($_POST["DocumentCriticality"] == null) {
-        // $User_Password_Error = "Password is required";
-        $allField = FALSE;
+
+        $allField = false;
     }
+    /*if ($Duplicate) {
+    $UploadMessage = "File not updated";
+    $DuplicateNameError = "The Document name submitted was a duplicate name.";
+    $allField = false;
+    }*/
 
+    if ($allField == true) {
 
-    if ($allField == True) {
-
-        $name = $_POST["DocumentName"];
         $type = $_POST["DocumentType"];
         $criticality = $_POST["DocumentCriticality"];
         $Document_ID = $_GET['Document_ID'];
@@ -308,9 +321,7 @@ if (isset($_POST['submit'])) {
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-
-
+                                
 <table class="styled-table">
     <thead>
         <tr>
@@ -319,8 +330,6 @@ if (isset($_POST['submit'])) {
             <th>Document Criticality</th>
             <th>Owner ID</th>
             <th>Creation Date & Time</th>          
-
-
         </tr>
     </thead>
     <tbody>
@@ -341,7 +350,9 @@ if (isset($_POST['submit'])) {
 <div class="form-group">
     <label for="exampleInputEmail1">Document Name</label>
     <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
+    <?php if ($DuplicateNameError != "") { ?><p class="error-message"><br><?php echo $DuplicateNameError ?></p><?php } ?>
   </div>  
+  
   <div class="form-group">
     <label for="exampleInputEmail1">Document Type</label>
     <select class="form-control" name="DocumentType"    >
@@ -440,6 +451,28 @@ if (isset($_POST['submit'])) {
         }
         return $result;
 
+    }
+
+    function checkDuplicate($docName)
+    {
+
+        // Create a new PDO connection object
+        include("../../DB config.php");
+
+        $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $docName, PDO::PARAM_STR);
+        $result = $stmt->execute();
+        if ($result) {
+            $row = $stmt->fetch();
+            if ($row) {
+                $row['Document_Name'];
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     ?>
