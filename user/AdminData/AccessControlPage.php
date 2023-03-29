@@ -176,24 +176,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   color: #a3a3a3;
 }
 
-.btn {
-  text-decoration: none;
-  background-color: #cc0000;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  transition: 0.3s;
-}
-
-.btn:hover{
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #005af0;
-  padding: 10px 20px;
-  border: none;
-  outline: 1px solid #010101;
-}
 .form input {
   margin: 10px 0;
   width: 100%;
@@ -248,6 +230,25 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 .styled-table {
     margin: 25px auto;
 }
+
+.btn {
+text-decoration: none;
+background-color: #0032A0;
+color: #ffffff;
+padding: 5px 10px;
+border: none;
+outline: none;
+transition: 0.3s;
+}
+
+.btn:hover{
+text-decoration: none;
+background-color: #ffffff;
+color: #005af0;
+padding: 10px 20px;
+border: none;
+outline: 1px solid #010101;
+}
     </style>
 
 
@@ -262,7 +263,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Access Control Requests:</h1>
                 </div>
             </div>
 
@@ -291,14 +292,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
 <?php for ($i = 0; $i < count($access); $i++): ?>
-                <tr class="active-row">
-                    <td><?php echo $access[$i]['User_ID'] ?></td>
-                    <td><?php echo $access[$i]['Document_Name'] ?></td>
-                    <form method="post">
-                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Grant">Grant</button></td>
-                        <td style="text-align:center;"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td>
-                    </form>
-                </tr>
+                                        <tr class="active-row">
+                                            <td><?php echo $access[$i]['User_ID'] ?></td>
+                                            <td><?php echo $access[$i]['Document_Name'] ?></td>
+                                            <form method="post">
+                                                <!-- <td style="text-align:center;"><button onclick="<?php // $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Grant">Grant</button></td>
+                            <td style="text-align:center;"><button onclick="<?php // $access_ID = $access[$i]['Access_Request_ID']; ?>" type="submit" name="Deny">Deny</button></td> -->
+                                                <td style="text-align:center"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" name="Grant" class="btn btn-sm btn-block" type="submit">Grant</button></td>
+                                                <td style="text-align:center"><button onclick="<?php $access_ID = $access[$i]['Access_Request_ID']; ?>" name="Deny" class="btn btn-sm btn-block" type="submit">Deny</button></td>
+                                            </form>
+                                        </tr>
 <?php endfor; ?>
     </tbody>
 </table>
@@ -346,24 +349,24 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="../UserData/js/transfer.js"></script>
 
     <?php
-    if (isset($_POST['Deny']))
-    {
+    if (isset($_POST['Deny'])) {
         deleteRecord($access_ID);
     }
-    function deleteRecord($access_ID) {
+    function deleteRecord($access_ID)
+    {
         include("../../DB config.php");
         $stmt = $pdo->prepare("DELETE FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
         $stmt->bindParam(':access_ID', $access_ID);
         $stmt->execute();
         return $stmt->rowCount();
-      }
+    }
 
-    if (isset($_POST['Grant']))
-    {
+    if (isset($_POST['Grant'])) {
         grantAccess($access_ID);
-    } 
+    }
 
-    function grantAccess($access_ID) {
+    function grantAccess($access_ID)
+    {
         include("../../DB config.php");
         $stmt1 = $pdo->prepare("INSERT INTO dbo.Access_Control (User_ID, Document_Name, Access_Date_Time) SELECT User_ID, Document_Name, GETDATE() FROM dbo.Access_Control_Request WHERE Access_Request_ID = :access_ID");
         $stmt1->bindParam(':access_ID', $access_ID);

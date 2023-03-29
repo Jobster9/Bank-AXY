@@ -77,6 +77,7 @@ function getStaffMember($User_ID)
 
 function updateStaffMember($Firstname, $Lastname, $Email, $Password, $User_ID)
 {
+    $password = password_hash($Password, PASSWORD_DEFAULT);
 
     // Create a new PDO connection object
     include("../../DB config.php");
