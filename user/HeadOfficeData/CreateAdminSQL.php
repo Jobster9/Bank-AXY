@@ -57,7 +57,6 @@ function CreateAdmin()
 function checkDuplicateEmail($email)
 {
 
-
     // Create a new PDO connection object
     include("../../DB config.php");
 

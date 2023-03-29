@@ -1,15 +1,14 @@
 <?php include "header.php";
-include "GetDocuments.php";
+include("DeleteUserDetails.php");
+$User_ID = $_GET['User_ID'];
+$Branch = $rows_array[0]["Branch"];
+$Department = $rows_array[0]["Department"];
 
-$uname = $_SESSION['User_ID'];
-$user = getDocuments();
-$errorMessage = "";
-$i = $_GET['File_Location'];
-$DuplicateNameError = "";
-
+$Documents = checkUsersDocuments($User_ID);
+$DepartmentMembers = GetDepartmentMembers($Branch, $Department);
 
 ?>
-<script>
+    <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <!DOCTYPE html>
@@ -20,7 +19,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Update Documents</title>
+    <title>Delete Staff</title>
 
     <!-- Favicons -->
     <link href="../../assets/img/favicon-32x32.png" rel="icon">
@@ -208,97 +207,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
   border-radius: 4px;
 }
 
-form { 
-margin: 0 auto; 
-width:800px;
-}
+
+    </style>
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-
-.error-message {
-    font-weight: bold;
-    color: #c7290a;
-    font-size:18px;
-}
-
-</style>
-
-<?php
-
-$allField = true;
-
-
-if (isset($_POST['submit'])) {
-    $name = $_POST["DocumentName"];
-    //$Duplicate = checkDuplicate($name);
-
-    if ($_POST["DocumentName"] == "") {
-
-        $allField = false;
-    }
-
-    if ($_POST["DocumentType"] == null) {
-
-        $allField = false;
-    }
-
-    if ($_POST["DocumentCriticality"] == null) {
-
-        $allField = false;
-    }
-    /*if ($Duplicate) {
-    $UploadMessage = "File not updated";
-    $DuplicateNameError = "The Document name submitted was a duplicate name.";
-    $allField = false;
-    }*/
-
-    if ($allField == true) {
-
-        $type = $_POST["DocumentType"];
-        $criticality = $_POST["DocumentCriticality"];
-        $Document_ID = $_GET['Document_ID'];
-
-        $result = updateDocument($name, $type, $criticality, $Document_ID);
-        if ($result) {
-            echo ("<script>location.href = 'ViewDocuments.php?updated=true';</script>");
-        }
-    }
-
-}
-
-
-?>
 </head>
 
 <body>
@@ -310,7 +222,7 @@ if (isset($_POST['submit'])) {
             <div class="col-md-12 mt-lg-4 mt-4">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
-                    <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
+                    <h1 class="h3 mb-0 light" style="text-align: center;">Transfer <?php echo $User_ID ?>'s Documents</h1>
                 </div>
             </div>
 
@@ -321,70 +233,38 @@ if (isset($_POST['submit'])) {
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-                                
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Document Name</th>
-            <th>Document Type</th>
-            <th>Document Criticality</th>
-            <th>Owner ID</th>
-            <th>Creation Date & Time</th>          
-        </tr>
-    </thead>
-    <tbody>
+                                <h3 class="h3 mb-4 light" style="text-align: center;">This user owns documents</h3>
+    <p style="text-align: center;"> Before you can delete this user, their document ownership must be transferred.<br> Please select another department member for each document listed</p>
+                                    <form method="post">
+                                        
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Name: <?php echo $rows_array[0]["First_Name"], " ", $rows_array[0]["Last_Name"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php print_r($DepartmentMembers[0]["User_ID"]); ?></h3><small> 
 
-        <tr class="active-row">
-            <td><?php echo $user[$i]['Document_Name'] ?></td>
-            <td><?php echo $user[$i]['Document_Type'] ?></td>
-            <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-            <td><?php echo $user[$i]['Owner_ID'] ?></td>
-            <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-
-
-        </tr>
-    </tbody>
-</table>
-
-<form class="styled-table" Method="POST">
-<div class="form-group">
-    <label for="exampleInputEmail1">Document Name</label>
-    <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
-    <?php if ($DuplicateNameError != "") { ?><p class="error-message"><br><?php echo $DuplicateNameError ?></p><?php } ?>
-  </div>  
-  
-  <div class="form-group">
-    <label for="exampleInputEmail1">Document Type</label>
-    <select class="form-control" name="DocumentType"    >
-        <option selected="selected"><?php echo $user[$i]['Document_Type'] ?></option>
-        <option value="<?php echo LOANS_DEP ?>">Loans</option>
-      <option value="<?php echo MORTGAGES_DEP ?>">Mortgages</option>
-      <option value="<?php echo ADMIN_DEP ?>">Administration</option>
-      <option value="<?php echo ACCOUNTS_DEP ?>">Accounts</option>
-    </select>
-  </div>  
-  <div class="form-group">
-    <label for="exampleInputEmail1">Document Criticality</label>
-    <select class="form-control" name="DocumentCriticality">
-    <option selected="selected"><?php echo $user[$i]['Document_Criticality'] ?></option>
-      <option value="<?php echo CRIT_HIGH ?>">High</option>
-      <option value="<?php echo CRIT_MEDIUM ?>">Medium</option>
-      <option value="<?php echo CRIT_LOW ?>">Low</option>
-    </select>
-  </div>  
-  <div id="UpdateButton" class="d-grid col-sm-5 mx-auto">
-  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-lg btn-block"></input>
-</div>
-</form>
-<div id="backButton" class="d-grid col-sm-3 mx-auto">
-                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Back</button>
-
+                    <?php foreach ($Documents as $documentName) { ?>
+                                    <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
+                                    <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
+                                    <select class="form-control" name="transferredDoc">
+                                    <?php for ($i = 0; $i < count($DepartmentMembers); $i++) { ?>
+                                                                        <option value="<?php echo $DepartmentMembers[$i]["User_ID"] ?>"><?php echo $DepartmentMembers[$i]["User_ID"], ": ", $DepartmentMembers[$i]["First_Name"], " ", $DepartmentMembers[$i]["Last_Name"] ?></option>                                                              
+                                    <?php } ?>
+                                    </select>
+                                    </div>
+                     <?php } ?>
+                                    <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
+                                        <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block"> Transfer</button>
+                                        </div>
                                     </div>
 
+                                    </form>
+                                    <div id="backButton" class="d-grid col-sm-6 mx-auto">
+                                        <button onclick="document.location='ViewStaff.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Go Back</button>
 
+                                    </div>
                                 </div>
 
-                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
@@ -425,7 +305,50 @@ if (isset($_POST['submit'])) {
     <script src="../UserData/js/profileInfo.js"></script>
     <script src="../UserData/js/transfer.js"></script>
 
+<?php
+if (isset($_POST['submit'])) {
 
+
+    $result = deleteStaffMember($User_ID);
+    if ($result) {
+        echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
+    }
+}
+function checkUsersDocuments($User_ID)
+{
+    // Create a new PDO connection object
+    include("../../DB config.php");
+    $stmt = $pdo->prepare("SELECT Document_Name FROM dbo.Documents WHERE Owner_ID = ?");
+    $stmt->bindParam(1, $User_ID, PDO::PARAM_STR);
+    $stmt->execute();
+
+    //Select all Documents tied to user
+    while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $Documents[] = $result['Document_Name'];
+    }
+    return $Documents;
+
+}
+
+function GetDepartmentMembers($branch, $department)
+{
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+    $stmt = $pdo->prepare("SELECT User_ID,First_Name,Last_Name FROM dbo.Bank_Employees WHERE Branch = ? AND Department = ?");
+    $stmt->bindParam(1, $branch, PDO::PARAM_STR);
+    $stmt->bindParam(2, $department, PDO::PARAM_STR);
+    $stmt->execute();
+
+    //Select all Documents tied to user
+    while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $DepartmentMembers[] = $result;
+    }
+    return $DepartmentMembers;
+
+}
+
+?>
     <script>
         $('#bar').click(function() {
             $(this).toggleClass('open');
@@ -433,49 +356,6 @@ if (isset($_POST['submit'])) {
 
         });
     </script>
-    <?php
-    function updateDocument($name, $type, $criticality, $Document_ID)
-    {
-
-        // Create a new PDO connection object
-        include("../../DB config.php");
-
-        $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
-
-        $stmt = $pdo->prepare($sql);
-        $result = $stmt->execute([$name, $type, $criticality, $Document_ID]);
-
-        if (!$result) {
-            $error = $stmt->errorInfo();
-            $errorMessage = "SQL error: " . $error[2];
-        }
-        return $result;
-
-    }
-
-    function checkDuplicate($docName)
-    {
-
-        // Create a new PDO connection object
-        include("../../DB config.php");
-
-        $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(1, $docName, PDO::PARAM_STR);
-        $result = $stmt->execute();
-        if ($result) {
-            $row = $stmt->fetch();
-            if ($row) {
-                $row['Document_Name'];
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    ?>
 
 </body>
 

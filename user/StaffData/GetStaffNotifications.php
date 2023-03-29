@@ -1,7 +1,5 @@
 <?php
 
-//$NotificationsArray = GetNotifications();
-//SendNotifications($NotificationsArray);
 function GetNotifications()
 {
   $user_ID = $_SESSION['User_ID'];
@@ -91,10 +89,6 @@ function SendNotifications($NotificationsArray)
 
   //send the notification message to relevant email addresses
 
-  $adminEmail; //OR $adminEmails[]
-
-  //notification to be sent
-
   $count = count($NotificationsArray);
 
   $latest_notification = $NotificationsArray[$count - 1]['Notification_Message'];
@@ -108,7 +102,7 @@ function SendNotifications($NotificationsArray)
     $headers = "From: Bank AXY";
     mail($to_email, $subject, $body, $headers);
   } else {
-    for ($i = 0; $i < count($adminEmails); $i++){
+    for ($i = 0; $i < count($adminEmails); $i++) {
       $adminEmail = $adminEmails[$i];
 
       $to_email = $adminEmail; //admin
@@ -119,11 +113,11 @@ function SendNotifications($NotificationsArray)
     }
   }
 
-$to_email = $staffEmail; //staff
-$subject = "Email Notification";
-$body = $latest_notification;
-$headers = "From: Bank AXY";
-mail($to_email, $subject, $body, $headers);
+  $to_email = $staffEmail; //staff
+  $subject = "Email Notification";
+  $body = $latest_notification;
+  $headers = "From: Bank AXY";
+  mail($to_email, $subject, $body, $headers);
 
 
 }
