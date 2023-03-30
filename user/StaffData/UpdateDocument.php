@@ -40,6 +40,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!--Body & Dash sheets-->
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
     <link rel="stylesheet" href="../../assets/css/StaffStyle.css">
 

@@ -27,7 +27,7 @@ function CreateStaff()
     $active = date('d/m/Y H:i');
 
     $role = "Staff";
-    $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001" . $rand);
+    $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001_" . $rand);
 
 
     $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
