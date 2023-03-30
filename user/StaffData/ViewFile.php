@@ -23,9 +23,9 @@ function AudiTrail($User_ID, $Document_Name){
     $formattedDate = $date->format('M j Y g:iA');
 
     $stmt->bindParam(':User_ID' ,$User_ID, PDO::PARAM_STR);
-    $stmt->bindParam(':Document_Name' , $Document_Name, SQLITE3_TEXT);
-    $stmt->bindParam(':Audit_Date_Time', $formattedDate, SQLITE3_TEXT);
-    $stmt->bindParam(':Audit_Action', $Action, SQLITE3_TEXT);
+    $stmt->bindParam(':Document_Name' , $Document_Name, PDO::PARAM_STR);
+    $stmt->bindParam(':Audit_Date_Time', $formattedDate, PDO::PARAM_STR);
+    $stmt->bindParam(':Audit_Action', $Action, PDO::PARAM_STR);
 
 
     $stmt->execute();
