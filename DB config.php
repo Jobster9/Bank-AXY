@@ -4,6 +4,7 @@
 
 
 
+$host = 'LAPTOP-HPMFPH95';
 
 $host = 'EMILYSPC\MSSQLSERVER1';
 
