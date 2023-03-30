@@ -40,122 +40,113 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!--Body & Dash sheets-->
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+
     <style>
-        .btn-pay {
-            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
-            color: #fdfdfd;
-            font-weight: bold;
-            box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
-            border-radius: 30px;
-        }
 
-        .btn-pay:hover {
-            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
-
-        }
-
-        .card {
-            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
-        }
+.card {
+    background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
+}
 .card h3 {
   font-size: 22px;
   font-weight: 600;
   
 }
-        /* The Modal (background) */
-        .customodal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            padding-top: 100px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.9);
-            /* Black w/ opacity */
-        }
+/* The Modal (background) */
+.customodal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+}
 
-        /* Modal Content (Image) */
-        .customodal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-        }
+/* Modal Content (Image) */
+.customodal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
 
-        /* Caption of Modal Image (Image Text) - Same Width as the Image */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
-        }
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
 
-        /* Add Animation - Zoom in the Modal */
-        .customodal-content,
-        #caption {
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
+/* Add Animation - Zoom in the Modal */
+.customodal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
 
-        @keyframes zoom {
-            from {
-                transform: scale(0)
-            }
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
 
-            to {
-                transform: scale(1)
-            }
-        }
+    to {
+        transform: scale(1)
+    }
+}
 
-        /* The Close Button */
-        .closebtn {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+/* The Close Button */
+.closebtn {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-        .closebtn:hover,
-        .closebtn:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+.closebtn:hover,
+.closebtn:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-        /* 100% Image Width on Smaller Screens */
-        @media only screen and (max-width: 700px) {
-            .modal-content {
-                width: 100%;
-            }
-        }
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
 
-        .loadingModal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20%;
-        }
+.loadingModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+}
 
 .drop_box {
   margin: 10px 0;
