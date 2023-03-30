@@ -2,3 +2,12 @@
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+<?php
+
+include("GetStaffNotifications.php");
+$Notifications = GetNotifications();
+if (!empty($Notifications)) {
+    $notif = SendNotifications($Notifications);
+    print_r($notif);
+}
+?>
