@@ -44,6 +44,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
     <link rel="stylesheet" href="../../assets/css/StaffStyle.css">
 
+
+
 <?php
 
 $allField = true;
