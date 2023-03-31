@@ -6,6 +6,7 @@ $user = getDocuments();
 $errorMessage = "";
 $i = $_GET['File_Location'];
 $DuplicateNameError = "";
+$NameConventionError = "";
 
 
 ?>
@@ -40,219 +41,11 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
-
-    <style>
-        .btn-pay {
-            background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
-            color: #fdfdfd;
-            font-weight: bold;
-            box-shadow: 0 0 0.875rem 0 rgb(33 37 41 / 5%);
-            border-radius: 30px;
-        }
-
-        .btn-pay:hover {
-            background-image: linear-gradient(to right, #0b2b58 0%, #cc0000 100%);
-
-        }
-
-        .card {
-            background-image: radial-gradient(circle farthest-corner at 48.9% 4.2%, rgba(216,216,220,255) 0%, rgba(255,255,255,255) 100.2%);
-        }
-.card h3 {
-  font-size: 22px;
-  font-weight: 600;
-  
-}
-        /* The Modal (background) */
-        .customodal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            padding-top: 100px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.9);
-            /* Black w/ opacity */
-        }
-
-        /* Modal Content (Image) */
-        .customodal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-        }
-
-        /* Caption of Modal Image (Image Text) - Same Width as the Image */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
-        }
-
-        /* Add Animation - Zoom in the Modal */
-        .customodal-content,
-        #caption {
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-
-        @keyframes zoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        /* The Close Button */
-        .closebtn {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .closebtn:hover,
-        .closebtn:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* 100% Image Width on Smaller Screens */
-        @media only screen and (max-width: 700px) {
-            .modal-content {
-                width: 100%;
-            }
-        }
-
-        .loadingModal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20%;
-        }
-
-.drop_box {
-  margin: 10px 0;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 3px dotted #a3a3a3;
-  border-radius: 5px;
-}
-.drop_box h4 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #2e2e2e;
-}
-
-.drop_box p {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  color: #a3a3a3;
-}
-
-.btn {
-  text-decoration: none;
-  background-color: #0032A0;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  transition: 0.3s;
-}
-
-.btn:hover{
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #005af0;
-  padding: 10px 20px;
-  border: none;
-  outline: 1px solid #010101;
-}
-.form input {
-  margin: 10px 0;
-  width: 100%;
-  background-color: #e2e2e2;
-  border: none;
-  outline: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-}
-
-form { 
-margin: 0 auto; 
-width:800px;
-}
+    <link rel="stylesheet" href="../../assets/css/StaffStyle.css">
 
 
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
-
-.error-message {
-    font-weight: bold;
-    color: #c7290a;
-    font-size:18px;
-}
-
-</style>
 
 <?php
 
@@ -261,7 +54,9 @@ $allField = true;
 
 if (isset($_POST['submit'])) {
     $name = $_POST["DocumentName"];
-    //$Duplicate = checkDuplicate($name);
+    $Duplicate = checkDuplicate($name);
+    $nameConvention = checkNameConvention($name);
+
 
     if ($_POST["DocumentName"] == "") {
 
@@ -277,11 +72,18 @@ if (isset($_POST['submit'])) {
 
         $allField = false;
     }
-    /*if ($Duplicate) {
-    $UploadMessage = "File not updated";
-    $DuplicateNameError = "The Document name submitted was a duplicate name.";
-    $allField = false;
-    }*/
+
+    if (!$Duplicate) {
+        $UploadMessage = "File not updated";
+        $DuplicateNameError = "The Document name submitted was a duplicate name.";
+        $allField = false;
+    }
+
+    if (!$nameConvention) {
+        $UploadMessage = "File not updated";
+        $NameError = "The Document name does not match the agreed convention. Please refer back to the guide.";
+        $UploadSuccess = false;
+    }
 
     if ($allField == true) {
 
@@ -302,13 +104,10 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <!-- End of Topbar -->
 
-    <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
                     <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
                 </div>
@@ -351,6 +150,7 @@ if (isset($_POST['submit'])) {
     <label for="exampleInputEmail1">Document Name</label>
     <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
     <?php if ($DuplicateNameError != "") { ?><p class="error-message"><br><?php echo $DuplicateNameError ?></p><?php } ?>
+    <?php if ($NameConventionError != "") { ?><p class="error-message"><br><?php echo $NameConventionError ?></p><?php } ?>
   </div>  
   
   <div class="form-group">
@@ -373,11 +173,11 @@ if (isset($_POST['submit'])) {
     </select>
   </div>  
   <div id="UpdateButton" class="d-grid col-sm-5 mx-auto">
-  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-lg btn-block"></input>
+  <input name="submit" type="submit" value="Update" style="margin-top: 5%; margin-bottom: 5%;" class="btn1 btn-lg btn-block"></input>
 </div>
 </form>
 <div id="backButton" class="d-grid col-sm-3 mx-auto">
-                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Back</button>
+                                        <button onclick="document.location='ViewDocuments.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn1 btn-lg btn-block">Back</button>
 
                                     </div>
 
@@ -407,16 +207,9 @@ if (isset($_POST['submit'])) {
         </div>
 
     </div>
-    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
 
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -436,8 +229,6 @@ if (isset($_POST['submit'])) {
     <?php
     function updateDocument($name, $type, $criticality, $Document_ID)
     {
-
-        // Create a new PDO connection object
         include("../../DB config.php");
 
         $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
@@ -453,16 +244,14 @@ if (isset($_POST['submit'])) {
 
     }
 
-    function checkDuplicate($docName)
+    function checkDuplicate($name)
     {
-
-        // Create a new PDO connection object
         include("../../DB config.php");
 
         $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(1, $docName, PDO::PARAM_STR);
+        $stmt->bindParam(1, $name, PDO::PARAM_STR);
         $result = $stmt->execute();
         if ($result) {
             $row = $stmt->fetch();
@@ -473,6 +262,14 @@ if (isset($_POST['submit'])) {
                 return false;
             }
         }
+    }
+
+    function checkNameConvention($name)
+    {
+        $document_regex = "/^([A-Za-z])+-([A-Za-z])+-([0-9])+(['.pdf'])+$/";
+        $nameCheck = preg_match($document_regex, $name);
+
+        return $nameCheck;
     }
 
     ?>

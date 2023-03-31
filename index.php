@@ -39,12 +39,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </head>
 
 <body>
-
-  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
-
-      <!-- Uncomment below if you prefer to use an image logo -->
       <a href="index.php" class="logo"><img src="assets/img/Logo3.png" alt="" class="img-fluid"> &nbsp <?php echo BANKNAME ?></a>
       <!-- <h1 class="logo"><a href="index.html"><?php echo BANKNAME ?></a></h1> -->
 
@@ -53,19 +49,18 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
           <li><a class="getstarted scrollto" href="./user/login.php">&nbsp Login &nbsp</a></li>
         </ul>
-      </nav><!-- .navbar -->
+      </nav>
 
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container-fluid" data-aos="fade-up">
       <div class="row justify-content-center">
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Make your online banking experience wonderful.</h1>
-          <h2>Let’s Begin this beautiful journey </h2>
+          <h1>Making document management easy.</h1>
+          <h2>Project by Group 28</h2>
           <div class="heroBtn">
 
           </div>
@@ -77,21 +72,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
       </div>
     </div>
 
-  </section><!-- End Hero -->
+  </section>
 
   <main id="main">
 
 
-  </main><!-- End #main -->
+  </main>
 
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
-
-
-
-  <!-- My Coding End Here -->
 
 
   <!-- Vendor JS Files -->

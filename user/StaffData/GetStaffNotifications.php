@@ -1,5 +1,4 @@
 <?php
-
 function GetNotifications()
 {
   $user_ID = $_SESSION['User_ID'];
@@ -21,7 +20,7 @@ function GetNotifications()
   // Find the notifications for the correlated audit trails
   if (!empty($auditIDs)) {
     $auditIDString = implode(",", $auditIDs);
-    $notificationStmt = $pdo->prepare("SELECT Notification_Message FROM Notifications WHERE Audit_ID IN ($auditIDString)");
+    $notificationStmt = $pdo->prepare("SELECT Notification_Message,Notification_Status FROM Notifications WHERE Audit_ID IN ($auditIDString)");
     $notificationStmt->execute();
 
     $rows_array = [];
@@ -92,41 +91,49 @@ function SendNotifications($NotificationsArray)
   $count = count($NotificationsArray);
 
   $latest_notification = $NotificationsArray[$count - 1]['Notification_Message'];
+  $notification_status = $NotificationsArray[$count - 1]['Notification_Status'];
+  if ($notification_status == "Unseen") {
 
-  if (count($adminEmails) == 1) {
-    $adminEmail = $adminEmails[0];
-
-    $to_email = $adminEmail; //admin
-    $subject = "Email Notification";
-    $body = $latest_notification;
-    $headers = "From: Bank AXY";
-    mail($to_email, $subject, $body, $headers);
-  } else {
-    for ($i = 0; $i < count($adminEmails); $i++) {
-      $adminEmail = $adminEmails[$i];
+    if (count($adminEmails) == 1) {
+      $adminEmail = $adminEmails[0];
 
       $to_email = $adminEmail; //admin
       $subject = "Email Notification";
       $body = $latest_notification;
       $headers = "From: Bank AXY";
       mail($to_email, $subject, $body, $headers);
+    } else {
+      for ($i = 0; $i < count($adminEmails); $i++) {
+        $adminEmail = $adminEmails[$i];
+
+        $to_email = $adminEmail; //admin
+        $subject = "Email Notification";
+        $body = $latest_notification;
+        $headers = "From: Bank AXY";
+        mail($to_email, $subject, $body, $headers);
+      }
     }
+
+    $to_email = $staffEmail; //staff
+    $subject = "Email Notification";
+    $body = $latest_notification;
+    $headers = "From: Bank AXY";
+    mail($to_email, $subject, $body, $headers);
+
+    $sql = "UPDATE Notifications SET Notification_Status = ? WHERE Notification_Message = ?";
+
+    $notification_read = "Seen";
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute([$notification_read, $latest_notification]);
+    return $body;
   }
-
-  $to_email = $staffEmail; //staff
-  $subject = "Email Notification";
-  $body = $latest_notification;
-  $headers = "From: Bank AXY";
-  mail($to_email, $subject, $body, $headers);
-
-
 }
 
 
 
 
 
-//Implementing dynamic notification popups -----
+//Implementing dynamic notification popups 
 function CheckReadStatus($NotificationsArray)
 {
 

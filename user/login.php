@@ -9,8 +9,6 @@ $response_data = json_decode($response);
 
 function updateLastActive($Last_Active, $User_ID)
 {
-
-    // Create a new PDO connection object
     include("../DB config.php");
 
     $sql = "UPDATE Bank_employees SET Last_Active=? WHERE User_ID=?";

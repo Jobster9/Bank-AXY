@@ -34,12 +34,9 @@ include "config.php";
 </head>
 
 <body>
-
-  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <!-- Uncomment below if you prefer to use an image logo -->
       <a href="index.php" class="logo"><img src="assets/img/Logo3.png" alt="" class="img-fluid"> &nbsp <?php echo BANKNAME ?></a>
       <!-- <h1 class="logo"><a href="index.html"><?php echo BANKNAME ?></a></h1> -->
 
@@ -48,12 +45,11 @@ include "config.php";
 
           <li><a class="getstarted scrollto" href="\Software_Projects_Group28_V4\user\login.php">&nbsp Login &nbsp</a></li>
         </ul>
-      </nav><!-- .navbar -->
+      </nav>
 
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container-fluid" data-aos="fade-up">
@@ -72,21 +68,17 @@ include "config.php";
       </div>
     </div>
 
-  </section><!-- End Hero -->
+  </section>
 
   <main id="main">
 
 
-  </main><!-- End #main -->
+  </main>
 
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
-
-
-
-  <!-- My Coding End Here -->
 
 
   <!-- Vendor JS Files -->
