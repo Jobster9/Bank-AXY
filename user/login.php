@@ -10,25 +10,18 @@ $response_data = json_decode($response);
 function updateLastActive($Last_Active, $User_ID)
 {
     include("../DB config.php");
-
     $sql = "UPDATE Bank_employees SET Last_Active=? WHERE User_ID=?";
-
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute([$Last_Active, $User_ID]);
-
 }
 
 Function EmailAuthentication($Email){
-
     $AuthCode = rand(10000, 99999);
- 
     $to_email = $Email; //email that you want to send to
     $subject = "Bank AXY Authentication Code";
     $body = "Your Authentication code is " . $AuthCode;
-    $headers = "From: Bank AXY";
-         
+    $headers = "From: Bank AXY";    
     mail($to_email, $subject, $body, $headers);
-
  return $AuthCode;
 
 }
@@ -38,44 +31,31 @@ $allField = True;
 
     if (isset($_POST['submit'])) {
         if($response_data->success){        
-
             $array_User = verifyUsers();
             if (!empty($array_User)) {
-
             if(password_verify($_POST['Password'], $array_User[0]['Password'])) { //This one will verify
-
              
                 $User_ID = $array_User[0]["User_ID"];
                 $Role = $array_User[0]["User_Role"];
                 $Department = $array_User[0]["Department"];
-
-
                 date_default_timezone_set('Europe/London');
-
                 $Last_Active = date('d/m/Y H:i');
-
                 updateLastActive($Last_Active ,$User_ID);
-
                 $AuthCode = EmailAuthentication($array_User[0]["Email"]);
-
                 $_SESSION['Auth_Code'] = $AuthCode;
                 $_SESSION['User_Role'] = $Role;
                 $_SESSION['Department'] = $Department;
-
                 header("Location: LoginAuthentication.php");
-
             } else{
             $invalidMesg = "Invalid User ID or Password!";
             }} else{
                 $invalidMesg = "Invalid User ID or Password!";
-
             }
     }
 else{
             $invalidMesg = "Verification not completed!";    
 }    
 }
-
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -83,15 +63,8 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link href="../assets/img/favicon-32x32.png" rel="icon">
-    <link href="../assets/img/apple-icon-180x180.png" rel="apple-touch-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+  <!-- CSS Files for Login Page -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/login.css">
     <style>
@@ -110,22 +83,17 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
 var timeoutID;
-
 // Start the timer on page load
 function startTimer() {
   timeoutID = window.setTimeout(redirectToIndex, 300000); // 5 minutes = 300,000 milliseconds
 }
-
 // Redirect to the index page
 function redirectToIndex() {
   window.location.href = "http://localhost/BankAXY/index.php";
 }
-
 // Start the timer when the page has finished loading
 window.addEventListener("load", startTimer);
 </script>
-
-
 
 </head>
 <body>
@@ -164,7 +132,6 @@ window.addEventListener("load", startTimer);
                             </form>
                             <nav class="login-card-footer-nav">
                                 <p><h13>By logging in you agree to the Terms of use and Privacy  Policy.</h13></p>
-
                                 <a href="../pages/terms.php">Terms of use.</a>
                                 <a href="../pages/privacypolicy.php">Privacy policy</a>
                             </nav>
@@ -174,11 +141,7 @@ window.addEventListener("load", startTimer);
             </div>
         </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="../assets/js/sweetalert.min.js"></script>
-    <script src="../assets/js/showHidePass.js"></script>
+
     <script>
         <?php if (isset($_GET['error'])) { ?>
         swal({

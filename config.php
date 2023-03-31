@@ -3,7 +3,6 @@
 // Names
 define("BANKNAME", "AXY Bank");
 
-
 //SQL strings
 //roles
 define("ADMIN_ROLE", "Admin");

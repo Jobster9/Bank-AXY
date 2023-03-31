@@ -1,18 +1,13 @@
 <?php
 include_once("../config.php");
-
 session_start();
 $Authentication = $_SESSION['Auth_Code'];
 $User_ID = $_SESSION['User_ID'];
 $Role = $_SESSION['User_Role'];
-
-
 echo $Authentication . " This is authentication code (remove this for client just here so we can log in)";
 $AuthError = "";
 
-
 if (isset($_POST['submit'])) {
-
 if ($Authentication == $_POST["AuthCode"]){
 
             if ($Role == "Staff") {
@@ -28,11 +23,7 @@ if ($Authentication == $_POST["AuthCode"]){
 
             $AuthError = "Incorrect authentication code";
         }
-
     }    
-
-
-
 echo '<script>
 var timer = null;
 document.addEventListener("mousemove", function() {
@@ -119,7 +110,6 @@ window.addEventListener("load", startTimer);
                     <div class="col-md-7">
                         <div class="card-body">
                             <div class="brand-wrapper">
-                                <img src="../assets/img/Logo.svg" alt="logo" class="logo">
                                 <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Please enter the authentication code sent to your email</p>
@@ -142,11 +132,7 @@ window.addEventListener("load", startTimer);
             </div>
         </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="../assets/js/sweetalert.min.js"></script>
-    <script src="../assets/js/showHidePass.js"></script>
+
     <script>
         <?php if (isset($_GET['error'])) { ?>
         swal({
