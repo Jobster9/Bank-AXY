@@ -1,10 +1,6 @@
 <?php
 
-// Specify your database credentials here
-
-
-
-$host = 'LAPTOP-HPMFPH95';
+// Specify database credentials here
 
 $host = 'EMILYSPC\MSSQLSERVER1';
 
