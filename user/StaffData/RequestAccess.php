@@ -1,6 +1,5 @@
 <?php include "header.php";
 
-// Create a new PDO connection object
 include("GetDocuments.php");
 
 ?>
@@ -41,13 +40,11 @@ include("GetDocuments.php");
 </head>
 
 <body>
-<!-- End of Topbar -->
 
-<!-- Begin Page Content -->
 <div class="container-fluid px-lg-4 dark_bg light">
     <div class="row">
         <div class="col-md-12 mt-lg-4 mt-4">
-            <!-- Page Heading -->
+            
         </div>
 
 
@@ -61,8 +58,6 @@ $i = $_GET['File_Location'];
 
 function AuditTrail($User_ID, $Document_Name)
 {
-
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     date_default_timezone_set('Europe/London');
@@ -176,16 +171,9 @@ if (isset($_POST['submit'])) {
     </div>
 
 </div>
-<!-- End of Page Content -->
 
 <?php include "footer.php" ?>
 
-
-<!-- Wraper Ends Here -->
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

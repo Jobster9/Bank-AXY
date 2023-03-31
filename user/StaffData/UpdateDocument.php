@@ -94,13 +94,10 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <!-- End of Topbar -->
 
-    <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
                     <h1 class="h3 mb-0 light" style="text-align: center;">Update Document here:</h1>
                 </div>
@@ -199,16 +196,9 @@ if (isset($_POST['submit'])) {
         </div>
 
     </div>
-    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
 
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -228,8 +218,6 @@ if (isset($_POST['submit'])) {
     <?php
     function updateDocument($name, $type, $criticality, $Document_ID)
     {
-
-        // Create a new PDO connection object
         include("../../DB config.php");
 
         $sql = "UPDATE Documents SET Document_Name=?, Document_Type=?, Document_Criticality=? WHERE Document_ID=?";
@@ -247,8 +235,6 @@ if (isset($_POST['submit'])) {
 
     function checkDuplicate($docName)
     {
-
-        // Create a new PDO connection object
         include("../../DB config.php");
 
         $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
