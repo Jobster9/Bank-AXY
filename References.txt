@@ -6,5 +6,34 @@ Where pages are referenced, it is the relative file path provided.
 
 --Pagination JS method--
 > source: https://codepen.io/yasser-mas/pen/pyWPJd
-> pages: user\StaffData\ViewDocuments.php, 
+> pages: user\StaffData\ViewDocuments.php 
+
+--Hide Password JS method--
+> source: https://github.com/openix/show-hide-password
+> pages: assets\js\showHidePass.js, user\login.php,
+
+--Upload File CSS Layout--
+> source: https://codepen.io/AmanChourasia/pen/WNpOpXZ
+> pages: user\StaffData\UploadDocuments.php
+
+--Index,Login & Dashboard CSS layout--
+> source: https://github.com/projectswithdigambar/Netbanking-System-in-PHP
+> pages: index.php,footer.php,user\AdminData\Dashboard.php,user\AdminData\header.php,
+user\HeadOfficeData\header.php,user\StaffData\Dashboard.php,
+user\StaffData\Dashboard.php,user\StaffData\header.php
+
+--Nav Sidebar animation & layout--
+> source: https://github.com/projectswithdigambar/Netbanking-System-in-PHP
+> pages: all php pages excluding the following contain the sidebar
+config.php,DB config.php,footer.php,index.php,user\User-specific config.php,
+user\LoginAuthentication.php,user\login.php,user\checkLogin.php,
+user\AdminData\CreateStaffSQL.php,user\AdminData\Get_Archived_Documents.php,
+user\AdminData\DeleteDocumentSQL.php,user\AdminData\GetAdminNotifications.php,
+user\AdminData\GetAuditTrails.php,user\AdminData\GetChartDocs.php,
+user\AdminData\GetStaff.php,user\AdminData\logout.php,
+user\HeadOfficeData\CreateAdminSQL.php,user\HeadOfficeData\DeleteUserDetails.php,
+
+
+
+
 
