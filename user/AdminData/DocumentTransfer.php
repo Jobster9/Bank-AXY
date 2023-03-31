@@ -6,6 +6,10 @@ $Department = $rows_array[0]["Department"];
 
 $Documents = checkUsersDocuments($User_ID);
 $DepartmentMembers = GetDepartmentMembers($Branch, $Department);
+$UserPosition = array_search($User_ID, array_column($DepartmentMembers, 'User_ID'));
+unset($DepartmentMembers[$UserPosition]);
+$UpdatedMembers = array_values($DepartmentMembers);
+$indexValue = 0;
 
 ?>
     <script>
@@ -241,18 +245,18 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
-                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php print_r($DepartmentMembers[0]["User_ID"]); ?></h3><small> 
-
+                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Doc amount: <?php print_r(count($Documents)); ?></h3><small>
                     <?php foreach ($Documents as $documentName) { ?>
-                                    <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
-                                    <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
-                                    <select class="form-control" name="transferredDoc">
-                                    <?php for ($i = 0; $i < count($DepartmentMembers); $i++) { ?>
-                                                                        <option value="<?php echo $DepartmentMembers[$i]["User_ID"] ?>"><?php echo $DepartmentMembers[$i]["User_ID"], ": ", $DepartmentMembers[$i]["First_Name"], " ", $DepartmentMembers[$i]["Last_Name"] ?></option>                                                              
-                                    <?php } ?>
-                                    </select>
-                                    </div>
-                     <?php } ?>
+                                                                                    <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
+                                                                                    <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
+                                                                                    <select class="form-control" name="transferdocnumber[<?php echo $indexValue ?>]" placeholder="select new owner">
+                                                                                    <?php for ($i = 0; $i < count($UpdatedMembers); $i++) { ?>
+                                                                                                                                                                                                                <option value="<?php echo $UpdatedMembers[$i]["User_ID"] ?>"><?php echo $UpdatedMembers[$i]["User_ID"], ": ", $UpdatedMembers[$i]["First_Name"], " ", $UpdatedMembers[$i]["Last_Name"] ?></option>                                                              
+                                                                                    <?php } ?>
+                                                                                    </select>
+                                                                                    </div>
+                                                                             <?php $indexValue++;
+                    } ?>
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
                                         <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block"> Transfer</button>
                                         </div>
@@ -308,10 +312,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 <?php
 if (isset($_POST['submit'])) {
 
-
-    $result = deleteStaffMember($User_ID);
+    $result = TransferDocuments($Documents);
     if ($result) {
-        echo ("<script>location.href = 'ViewStaff.php?deleted=true';</script>");
+        echo ("<script>location.href = 'DeleteStaff.php?transfer=true&User_ID=" . $User_ID . "';</script>");
     }
 }
 function checkUsersDocuments($User_ID)
@@ -345,6 +348,28 @@ function GetDepartmentMembers($branch, $department)
         $DepartmentMembers[] = $result;
     }
     return $DepartmentMembers;
+
+}
+
+function TransferDocuments($Documents)
+{
+
+    // Create a new PDO connection object
+    include("../../DB config.php");
+
+    for ($i = 0; $i < count($Documents); $i++) {
+
+        $stmt = $pdo->prepare("UPDATE Documents SET Owner_ID = ? WHERE Document_Name = ?");
+        $stmt->bindParam(1, $_POST['transferdocnumber'][$i], PDO::PARAM_STR);
+        $stmt->bindParam(2, $Documents[$i], PDO::PARAM_STR);
+        $result = $stmt->execute();
+        if (!$result) {
+            $error = $stmt->errorInfo();
+            echo "Error transferring document {$Documents[$i]}: {$error[2]}";
+            return false;
+        }
+    }
+    return true;
 
 }
 
