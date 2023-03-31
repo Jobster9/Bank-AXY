@@ -1,7 +1,49 @@
 <?php
+function SetID()
+{
+    include("../../DB config.php");
+
+    $sql = $pdo->prepare('SELECT User_ID FROM Bank_Employees');
+
+    $result = $sql->execute();
+
+    $rows_array = [];
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+        $rows_array[] = $row;
+    }
+
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+
+    $SetUserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 2) . "_001");
+
+    $IDTag = 1;
+
+    for ($i=0; $i<count($rows_array); $i++){
+
+        $current_check = $rows_array[$i]['User_ID'];
+
+        if(str_contains($current_check, $SetUserID)){   
+            $IDTag++;
+
+            if($IDTag <= 9){ 
+                $SetUserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 2) . "_00" . $IDTag);           
+            }
+            elseif($IDTag > 9 && $IDTag <= 99){
+                $SetUserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 2) . "_0" . $IDTag);
+            }
+            elseif($IDTag > 99 && $IDTag <= 999){
+                $SetUserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 2) . "_" . $IDTag);
+            }
+        } 
+    }
+
+    return $SetUserID;  
+
+}
+
 function CreateStaff()
 {
-
 
     // Create a new PDO connection object
     include("../../DB config.php");
@@ -9,9 +51,6 @@ function CreateStaff()
     date_default_timezone_set('Europe/London');
 
     $stmt = $pdo->prepare('INSERT INTO Bank_Employees (User_ID, User_Role, First_Name, Last_Name, Email, Password, Last_Active, Branch, Department) VALUES (:User_ID, :role, :fname, :lname, :email, :password, :active, :branch, :department)');
-
-    $rand = rand(100, 999);
-
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -22,13 +61,11 @@ function CreateStaff()
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-
-
     $active = date('d/m/Y H:i');
 
     $role = "Staff";
-    $UserID = strtoupper(substr($fname, 0, 1) . substr($lname, 0, 1) . "001_" . $rand);
 
+    $UserID = SetID();
 
     $stmt->bindParam(':User_ID', $UserID, PDO::PARAM_STR);
 
