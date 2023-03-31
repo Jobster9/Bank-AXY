@@ -1,11 +1,8 @@
 <?php include "header.php";
 include "GetDocuments.php";
 include "AccessControl.php";
-
 $user = getDocuments();
-
 $document = "";
-
 
 ?>
 <script>
