@@ -3,19 +3,15 @@ include("header.php");
 include("GetChartDocs.php");
 $latest_creation_date_time = getLatestCreationDateTime();
 $monthlydocuments = monthlydocuments();
-
 $lowdocuments = lowdocuments();
-
 $mediumdocuments = mediumdocuments();
 $highdocuments = highdocuments();
-
 ?>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -154,8 +150,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             </div>
          
 
-
-    <?php include "footer.php" ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

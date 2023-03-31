@@ -13,8 +13,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 
     <title>Access Control</title>
 
@@ -328,7 +327,7 @@ outline: 1px solid #010101;
     </div>
     <!-- End of Page Content -->
 
-    <?php include "footer.php" ?>
+
 
 
     <!-- Wraper Ends Here -->

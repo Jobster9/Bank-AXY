@@ -164,9 +164,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 
-
-    <?php include "footer.php" ?>
-    <!-- Wraper Ends Here -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 
