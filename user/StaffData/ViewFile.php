@@ -9,7 +9,6 @@ $User_ID = $_SESSION['User_ID'];
 
 function AudiTrail($User_ID, $Document_Name){
 
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     date_default_timezone_set('Europe/London');

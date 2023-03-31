@@ -2,8 +2,6 @@
 
 function GetAccessControl($user_id, $document_name)
 {
-
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     $stmt = $pdo->prepare('SELECT * FROM Access_Control WHERE User_ID = :user_id AND Document_Name = :document_name');
@@ -23,7 +21,6 @@ function GetAccessControl($user_id, $document_name)
 
 function GetRequestAccessControl($user_id, $document_name)
 {
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     $stmt = $pdo->prepare('SELECT * FROM Access_Control_Request WHERE User_ID = :user_id AND Document_Name = :document_name');
@@ -60,7 +57,6 @@ function GetAllAccessRequests()
 
 function GetRequestDeletion($owner_id, $document_name)
 {
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     $stmt = $pdo->prepare('SELECT * FROM Documents_Deletion_Request WHERE Owner_ID = :user_id AND Document_Name = :document_name');
@@ -81,7 +77,6 @@ function GetRequestDeletion($owner_id, $document_name)
 
 function GetAllRequestDeletion()
 {
-    // Create a new PDO connection object
     include("../../DB config.php");
 
     $stmt = $pdo->prepare('SELECT * FROM Documents_Deletion_Request');

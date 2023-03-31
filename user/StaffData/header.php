@@ -208,8 +208,6 @@ header h1 {
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-
                     </ul>
 
                 </nav>

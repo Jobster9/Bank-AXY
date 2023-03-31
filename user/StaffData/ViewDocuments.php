@@ -53,13 +53,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </head>
 
 <body>
-    <!-- End of Topbar -->
 
-    <!-- Begin Page Content -->
     <div class="container-fluid px-lg-4 dark_bg light">
         <div class="row">
             <div class="col-md-12 mt-lg-4 mt-4">
-                <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center mb-4" style="justify-content:center;">
                     <h1 class="h3 mb-0 light" style="text-align: center;">View Document here:</h1>
                 </div>
@@ -215,20 +212,11 @@ $ownerID = $user[$i]['Owner_ID'];
 	</nav>
 </div>
 
-</div> <!-- 		End of Container -->
+</div> 
 
 <script>
-             getPagination('#table-id');
-					//getPagination('.table-class');
-					//getPagination('table');
-
-		  /*					PAGINATION 
-		  - on change max rows select options fade out all rows gt option value mx = 5
-		  - append pagination list as per numbers of rows / max rows option (20row/5= 4pages )
-		  - each pagination li on click -> fade out all tr gt max rows * li num and (5*pagenum 2 = 10 rows)
-		  - fade out all tr lt max rows * li num - max rows ((5*pagenum 2 = 10) - 5)
-		  - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
-		  */
+    // This pagination function is inspired by the the function used here: https://codepen.io/yasser-mas/pen/pyWPJd
+    getPagination('#table-id');
 		 
 
 function getPagination(table) {
@@ -236,15 +224,14 @@ function getPagination(table) {
 
   $('#maxRows')
     .on('change', function(evt) {
-      //$('.paginationprev').html('');						// reset pagination
 
      lastPage = 1;
       $('.pagination')
         .find('li')
         .slice(1, -1)
         .remove();
-      var trnum = 0; // reset tr counter
-      var maxRows = parseInt($(this).val()); // get Max Rows from select option
+      var trnum = 0; 
+      var maxRows = parseInt($(this).val()); 
 
       if (maxRows == 5000) {
         $('.pagination').hide();
@@ -252,25 +239,20 @@ function getPagination(table) {
         $('.pagination').show();
       }
 
-      var totalRows = $(table + ' tbody tr').length; // numbers of rows
+      var totalRows = $(table + ' tbody tr').length; 
       $(table + ' tr:gt(0)').each(function() {
-        // each TR in  table and not the header
-        trnum++; // Start Counter
+        trnum++;
         if (trnum > maxRows) {
-          // if tr number gt maxRows
 
-          $(this).hide(); // fade it out
+          $(this).hide(); 
         }
         if (trnum <= maxRows) {
           $(this).show();
-        } // else fade in Important in case if it ..
-      }); //  was fade out to fade it in
+        } 
+      }); 
       if (totalRows > maxRows) {
-        // if tr total rows gt max rows option
-        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
-        //	numbers of pages
+        var pagenum = Math.ceil(totalRows / maxRows); 
         for (var i = 1; i <= pagenum; ) {
-          // for each page append pagination li
           $('.pagination #prev')
             .before(
               '<li data-page="' +
@@ -282,16 +264,15 @@ function getPagination(table) {
 								</li>'
             )
             .show();
-        } // end for i
-      } // end if row count > max rows
-      $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+        }
+      }
+      $('.pagination [data-page="1"]').addClass('active');
       $('.pagination li').on('click', function(evt) {
-        // on click each page
         evt.stopImmediatePropagation();
         evt.preventDefault();
-        var pageNum = $(this).attr('data-page'); // get it's number
+        var pageNum = $(this).attr('data-page'); 
 
-        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+        var maxRows = parseInt($('#maxRows').val());
 
         if (pageNum == 'prev') {
           if (lastPage == 1) {
@@ -307,15 +288,12 @@ function getPagination(table) {
         }
 
         lastPage = pageNum;
-        var trIndex = 0; // reset tr counter
-        $('.pagination li').removeClass('active'); // remove active class from all li
-        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
-        // $(this).addClass('active');					// add active class to the clicked
+        var trIndex = 0; 
+        $('.pagination li').removeClass('active'); 
+        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); 
 	  	limitPagging();
         $(table + ' tr:gt(0)').each(function() {
-          // each tr in table not the header
-          trIndex++; // tr index counter
-          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          trIndex++;
           if (
             trIndex > maxRows * pageNum ||
             trIndex <= maxRows * pageNum - maxRows
@@ -323,21 +301,16 @@ function getPagination(table) {
             $(this).hide();
           } else {
             $(this).show();
-          } //else fade in
-        }); // end of for each tr in table
-      }); // end of on click pagination list
+          } 
+        }); 
+      });
 	  limitPagging();
     })
     .val(5)
     .change();
-
-  // end of on select change
-
-  // END OF PAGINATION
 }
 
 function limitPagging(){
-	// alert($('.pagination li').length)
 
 	if($('.pagination li').length > 7 ){
 			if( $('.pagination li.active').attr('data-page') <= 3 ){
@@ -368,8 +341,6 @@ $(function() {
   });
 });
 
-//  Developed By Yasser Mas
-// yasser.mas2@gmail.com
 
 </script>
                                 </div>
@@ -397,16 +368,9 @@ $(function() {
         </div>
 
     </div>
-    <!-- End of Page Content -->
 
     <?php include "footer.php" ?>
 
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

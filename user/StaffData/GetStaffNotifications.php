@@ -133,7 +133,7 @@ function SendNotifications($NotificationsArray)
 
 
 
-//Implementing dynamic notification popups -----
+//Implementing dynamic notification popups 
 function CheckReadStatus($NotificationsArray)
 {
 
