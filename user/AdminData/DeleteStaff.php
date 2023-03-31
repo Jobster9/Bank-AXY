@@ -232,7 +232,14 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
+                                <?php if (isset($_GET['transfer'])): ?>
+                                                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                Users documents have been successfully transferred.
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+<?php endif; ?>
                     <h3 class="h3 mb-4 light" style="text-align: center;">User ID: <?php echo $rows_array[0]["User_ID"] ?></h3> 
     <p style="text-align: center;"> Please confirm you want to delete & archive this user.</p>
 
