@@ -6,6 +6,7 @@ $user = getDocuments();
 $errorMessage = "";
 $i = $_GET['File_Location'];
 $DuplicateNameError = "";
+$NameConventionError = "";
 
 
 ?>
@@ -53,7 +54,9 @@ $allField = true;
 
 if (isset($_POST['submit'])) {
     $name = $_POST["DocumentName"];
-    //$Duplicate = checkDuplicate($name);
+    $Duplicate = checkDuplicate($name);
+    $nameConvention = checkNameConvention($name);
+
 
     if ($_POST["DocumentName"] == "") {
 
@@ -69,11 +72,18 @@ if (isset($_POST['submit'])) {
 
         $allField = false;
     }
-    /*if ($Duplicate) {
-    $UploadMessage = "File not updated";
-    $DuplicateNameError = "The Document name submitted was a duplicate name.";
-    $allField = false;
-    }*/
+
+    if (!$Duplicate) {
+        $UploadMessage = "File not updated";
+        $DuplicateNameError = "The Document name submitted was a duplicate name.";
+        $allField = false;
+    }
+
+    if (!$nameConvention) {
+        $UploadMessage = "File not updated";
+        $NameError = "The Document name does not match the agreed convention. Please refer back to the guide.";
+        $UploadSuccess = false;
+    }
 
     if ($allField == true) {
 
@@ -140,6 +150,7 @@ if (isset($_POST['submit'])) {
     <label for="exampleInputEmail1">Document Name</label>
     <input type="text" class="form-control" name="DocumentName" value="<?php echo $user[$i]['Document_Name'] ?>">
     <?php if ($DuplicateNameError != "") { ?><p class="error-message"><br><?php echo $DuplicateNameError ?></p><?php } ?>
+    <?php if ($NameConventionError != "") { ?><p class="error-message"><br><?php echo $NameConventionError ?></p><?php } ?>
   </div>  
   
   <div class="form-group">
@@ -233,14 +244,14 @@ if (isset($_POST['submit'])) {
 
     }
 
-    function checkDuplicate($docName)
+    function checkDuplicate($name)
     {
         include("../../DB config.php");
 
         $sql = "SELECT Document_Name FROM dbo.Documents WHERE Document_Name = ?";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(1, $docName, PDO::PARAM_STR);
+        $stmt->bindParam(1, $name, PDO::PARAM_STR);
         $result = $stmt->execute();
         if ($result) {
             $row = $stmt->fetch();
@@ -251,6 +262,14 @@ if (isset($_POST['submit'])) {
                 return false;
             }
         }
+    }
+
+    function checkNameConvention($name)
+    {
+        $document_regex = "/^([A-Za-z])+-([A-Za-z])+-([0-9])+(['.pdf'])+$/";
+        $nameCheck = preg_match($document_regex, $name);
+
+        return $nameCheck;
     }
 
     ?>
