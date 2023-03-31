@@ -1,9 +1,3 @@
-// Name      : Show Hide Password
-// Version   : 1.0.0
-// Developer : Ekrem KAYA
-// Website   : https://openix.io
-// GitHub    : https://github.com/openix/show-hide-password
-
 (function($) {
     'use strict';
     $.fn.showHidePassword = function(option) {

@@ -142,10 +142,5 @@ window.addEventListener("load", startTimer);
         });
         <?php } ?>
     </script>
-    <script>
-        $(document).ready(function() {
-            $('input[type=\'password\']').showHidePassword();
-        });
-    </script>
 </body>
 </html>

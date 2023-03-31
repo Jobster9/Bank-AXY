@@ -107,7 +107,6 @@ window.addEventListener("load", startTimer);
                     <div class="col-md-7">
                         <div class="card-body">
                             <div class="brand-wrapper">
-                                <img src="../assets/img/Logo.svg" alt="logo" class="logo">
                                 <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Sign into your account</p>
