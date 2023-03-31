@@ -4,9 +4,14 @@
 
 
 
-$host = 'LAPTOP-HPMFPH95';
 
-$host = 'EMILYSPC\MSSQLSERVER1';
+$host = 'LAPTOP-B9IKBMD8';
+
+
+
+
+
+
 
 $dbname = 'BankAXY';
 
