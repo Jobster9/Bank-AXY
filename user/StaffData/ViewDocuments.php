@@ -31,10 +31,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.min.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/animations.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
 
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">

@@ -74,10 +74,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/boxicons.min.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/animations.css">
-    <link rel="stylesheet" href="../../assets/vendor/boxicons/css/transformations.css">
+
 
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
