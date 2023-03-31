@@ -1,0 +1,10 @@
+-----------------------------------------R E F E R E N C E S------------------------------------
+________________________________________________________________________________________________
+
+This File outlines & lists all sources crediting any inspired sourcecode throughout the project.
+Where pages are referenced, it is the relative file path provided. 
+
+--Pagination JS method--
+> source: https://codepen.io/yasser-mas/pen/pyWPJd
+> pages: user\StaffData\ViewDocuments.php, 
+
