@@ -1,17 +1,9 @@
 <?php
 
-// Specify your database credentials here
 
-
-
+// Specify database credentials here
 
 $host = 'LAPTOP-B9IKBMD8';
-
-
-
-
-
-
 
 $dbname = 'BankAXY';
 
