@@ -362,7 +362,6 @@ outline: 1px solid #010101;
     </div>
     <!-- End of Page Content -->
 
-    <?php include "footer.php" ?>
 
 
     <!-- Wraper Ends Here -->

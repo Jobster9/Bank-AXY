@@ -127,7 +127,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </div>
     <!-- End of Page Content -->
 
-    <?php include "footer.php" ?>
 
 
     <!-- Wraper Ends Here -->
