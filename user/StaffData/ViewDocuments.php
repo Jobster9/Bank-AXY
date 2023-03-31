@@ -99,35 +99,35 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 
 <?php if (isset($_GET['updated'])): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                    The document has been successfully updated.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                        The document has been successfully updated.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 <?php endif; ?>
 
 <?php if (isset($_GET['deleted'])): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                    The document has been deleted.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                        The document has been deleted.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 <?php endif; ?> 
 <div class="container" style="width: 50%;">
-		        Select Number of Rows
-				<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-			 		<select class  ="form-control" name="state" id="maxRows">
-						 <option value="<?php echo count($user) ?>">Show All Rows</option>
-						 <option value="5">5</option>
-						 <option value="10">10</option>
-						 <option value="15">15</option>
-						 <option value="20">20</option>
-						 <option value="50">50</option>
-						 <option value="100">100</option>
-						</select>
-			 		
+                Select Number of Rows
+                <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+                     <select class  ="form-control" name="state" id="maxRows">
+                         <option value="<?php echo count($user) ?>">Show All Rows</option>
+                         <option value="5">5</option>
+                         <option value="10">10</option>
+                         <option value="15">15</option>
+                         <option value="20">20</option>
+                         <option value="50">50</option>
+                         <option value="100">100</option>
+                        </select>
+                     
 </div>
 </div>
 <table class="styled-table" id="table-id">
@@ -149,48 +149,48 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <tbody>
 <?php
 for ($i = 0; $i < count($user); $i++):
-$ownerID = $user[$i]['Owner_ID'];
+    $ownerID = $user[$i]['Owner_ID'];
     ?>
-                <tr class="active-row">
-                    <td><?php echo $user[$i]['Document_Name'] ?></td>
-                    <td><?php echo $user[$i]['Document_Type'] ?></td>
-                    <td><?php echo $user[$i]['Document_Criticality'] ?></td>
-                    <td><?php echo $user[$i]['Owner_ID'] ?></td>
-                    <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
-                    <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
+                    <tr class="active-row">
+                        <td><?php echo $user[$i]['Document_Name'] ?></td>
+                        <td><?php echo $user[$i]['Document_Type'] ?></td>
+                        <td><?php echo $user[$i]['Document_Criticality'] ?></td>
+                        <td><?php echo $user[$i]['Owner_ID'] ?></td>
+                        <td><?php echo $user[$i]['Creation_Date_Time'] ?></td>
+                        <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>&Document_ID=<?php echo $user[$i]['Document_ID'] ?>"> Update</a></td>
+
+                        <?php
+                        $userID = GetUserID();
+                        $RequestAccess = GetRequestDeletion($userID, $user[$i]['Document_Name']);
+                        if ($RequestAccess != null) {
+                            ?>
+                                <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a></td>
+
+                        <?php } else { ?>
+
+                                    <td><a href="RequestDeletion.php?File_Location=<?php echo $i ?>">Delete</a></td>
+
+                        <?php } ?>
+                    
 
                     <?php
                     $userID = GetUserID();
-                $RequestAccess = GetRequestDeletion($userID, $user[$i]['Document_Name']);
-                if ($RequestAccess != null) {
-                    ?>
-                        <td><a href="RequestDeletion.php?File_Location=Requested">Delete</a></td>
+                    $Access = GetAccessControl($userID, $user[$i]['Document_Name']);
+                    $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
+                    if ($RequestAccess != null) {
+                        ?>
+                                <td><a href="RequestAccess.php?File_Location=Requested">View</a>
+                                        </tr>
+                    <?php } else if ($Access != null) {
+                        ?>
+                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
 
-                    <?php } else { ?>
+                        <?php } else { ?>
 
-                            <td><a href="RequestDeletion.php?File_Location=<?php echo $i ?>">Delete</a></td>
+                                        <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a></td>
+                                        </tr>
 
-                    <?php } ?>
-                    
-
-                <?php
-                    $userID = GetUserID();
-                $Access = GetAccessControl($userID, $user[$i]['Document_Name']);
-                $RequestAccess = GetRequestAccessControl($userID, $user[$i]['Document_Name']);
-                if ($RequestAccess != null) {
-                    ?>
-                        <td><a href="RequestAccess.php?File_Location=Requested">View</a>
-                                </tr>
-                <?php } else if ($Access != null) {
-                    ?>
-                        <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-
-                    <?php } else { ?>
-
-                            <td><a href="RequestAccess.php?File_Location=<?php echo $i ?>">View</a></td>
-                            </tr>
-
-                    <?php } ?>
+                        <?php } ?>
                 
 
 <?php endfor; ?>
@@ -198,26 +198,26 @@ $ownerID = $user[$i]['Owner_ID'];
     </tbody>
 </table>
 <div class='pagination-container' style="margin: 0px 155px;">
-		<nav>
-			<ul class="pagination">
+        <nav>
+            <ul class="pagination">
             
             <li data-page="prev" >
-			<span> < <span class="sr-only">(current)</span></span>
-			 </li>
-				   <!--	Here the JS Function Will Add the Rows -->
+            <span> < <span class="sr-only">(current)</span></span>
+             </li>
+
             <li data-page="next" id="prev">
-				<span> > <span class="sr-only">(current)</span></span>
-			</li>
-		 </ul>
-	</nav>
+                <span> > <span class="sr-only">(current)</span></span>
+            </li>
+         </ul>
+    </nav>
 </div>
 
 </div> 
 
 <script>
-    // This pagination function is inspired by the the function used here: https://codepen.io/yasser-mas/pen/pyWPJd
+    
     getPagination('#table-id');
-		 
+         
 
 function getPagination(table) {
   var lastPage = 1;
@@ -258,10 +258,10 @@ function getPagination(table) {
               '<li data-page="' +
                 i +
                 '">\
-								  <span>' +
+                                  <span>' +
                 i++ +
                 '<span class="sr-only">(current)</span></span>\
-								</li>'
+                                </li>'
             )
             .show();
         }
@@ -291,7 +291,7 @@ function getPagination(table) {
         var trIndex = 0; 
         $('.pagination li').removeClass('active'); 
         $('.pagination [data-page="' + lastPage + '"]').addClass('active'); 
-	  	limitPagging();
+          limitPagging();
         $(table + ' tr:gt(0)').each(function() {
           trIndex++;
           if (
@@ -304,7 +304,7 @@ function getPagination(table) {
           } 
         }); 
       });
-	  limitPagging();
+      limitPagging();
     })
     .val(5)
     .change();
@@ -312,21 +312,21 @@ function getPagination(table) {
 
 function limitPagging(){
 
-	if($('.pagination li').length > 7 ){
-			if( $('.pagination li.active').attr('data-page') <= 3 ){
-			$('.pagination li:gt(5)').hide();
-			$('.pagination li:lt(5)').show();
-			$('.pagination [data-page="next"]').show();
-		}if ($('.pagination li.active').attr('data-page') > 3){
-			$('.pagination li:gt(0)').hide();
-			$('.pagination [data-page="next"]').show();
-			for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
-				$('.pagination [data-page="'+i+'"]').show();
+    if($('.pagination li').length > 7 ){
+            if( $('.pagination li.active').attr('data-page') <= 3 ){
+            $('.pagination li:gt(5)').hide();
+            $('.pagination li:lt(5)').show();
+            $('.pagination [data-page="next"]').show();
+        }if ($('.pagination li.active').attr('data-page') > 3){
+            $('.pagination li:gt(0)').hide();
+            $('.pagination [data-page="next"]').show();
+            for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                $('.pagination [data-page="'+i+'"]').show();
 
-			}
+            }
 
-		}
-	}
+        }
+    }
 }
 
 $(function() {
@@ -464,29 +464,29 @@ if (isset($_POST["submit"])) {
 
     if ($docs = $sth->fetch()) {
         ?>
-                                    <br><br><br>
-                                    <table class="styled-table">
-                                        <tr>
-                                            <th>Document Name</th>
-                                            <th>Document Type</th>
-                                            <th>Document Criticality</th>
-                                            <th>Owner ID</th>
-                                            <th>Creation Date & Time</th>
-                                            <th>Update</th>
-                                            <th>Delete</th>
-                                            <th>View</th>
-                                        </tr>
-                                        <tr>
-                                            <td><?php echo $docs->Document_Name; ?></td>
-                                            <td><?php echo $docs->Document_Type; ?></td>
-                                            <td><?php echo $docs->Document_Criticality; ?></td>
-                                            <td><?php echo $docs->Owner_ID; ?></td>
-                                            <td><?php echo $docs->Creation_Date_Time; ?></td>
-                                            <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
-                                            <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
-                                        </tr>
-                                    </table>
-                                <?php
+                                            <br><br><br>
+                                            <table class="styled-table">
+                                                <tr>
+                                                    <th>Document Name</th>
+                                                    <th>Document Type</th>
+                                                    <th>Document Criticality</th>
+                                                    <th>Owner ID</th>
+                                                    <th>Creation Date & Time</th>
+                                                    <th>Update</th>
+                                                    <th>Delete</th>
+                                                    <th>View</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo $docs->Document_Name; ?></td>
+                                                    <td><?php echo $docs->Document_Type; ?></td>
+                                                    <td><?php echo $docs->Document_Criticality; ?></td>
+                                                    <td><?php echo $docs->Owner_ID; ?></td>
+                                                    <td><?php echo $docs->Creation_Date_Time; ?></td>
+                                                    <td><a href="UpdateDocument.php?File_Location=<?php echo $i ?>"> Update</a></td>
+                                                    <td><a href="ViewFile.php?File_Location=<?php echo $i ?>" target="_blank" rel="noopener noreferrer"> View</a></td>
+                                                </tr>
+                                            </table>
+                                        <?php
     } else {
         echo "Document does not exist";
     }
