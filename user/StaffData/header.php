@@ -54,6 +54,9 @@ function destroySession() {
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+
     <!-- Sidebar -->
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
         <div class="simplebar-content" style="padding: 0px;">

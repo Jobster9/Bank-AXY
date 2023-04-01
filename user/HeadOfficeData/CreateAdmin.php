@@ -18,6 +18,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
     <link rel="stylesheet" href="../../assets/css/StaffStyle.css">
 
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+
 
 <?php
 $errorfname = $errorlname = $erroremail = $errorpwd = $errorbranch = $errordep = $duplicateEmail = "";
@@ -104,7 +107,7 @@ if (isset($_POST['submit'])) {
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
                                     <div class="input-group mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-id-card' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="fname" type="text" id="AccountNo" class="form-control gray_bg light" aria-label="Default" placeholder="First Name:" aria-describedby="inputGroup-sizing-default">
                                         <span id="info" hidden class="input-group-append bg-white border-left-0">
@@ -119,7 +122,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-id-card' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="lname" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Last Name:" aria-describedby="inputGroup-sizing-default">
 
@@ -129,7 +132,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-envelope-open' style='color:#FFCC00'></i></span>
                                         </div>
                                         <input name="email" type="tel" class="form-control gray_bg light" aria-label="Default" placeholder="Email:" aria-describedby="inputGroup-sizing-default">
 
@@ -138,7 +141,7 @@ if (isset($_POST['submit'])) {
                                         <span class="text-danger"><?php echo $erroremail; ?></span>                                    
                                     <div class="input-group mb-1 mt-5">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                            <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-lock' style='color:#FFCC00'></i></span>
                                         </div>
                                          
                                         <input name="password" type="password" class="form-control gray_bg light" aria-label="Default" placeholder="Password:" aria-describedby="inputGroup-sizing-default">
@@ -154,7 +157,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="input-group mb-1 mt-5">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-route' style='color:#FFCC00'></i></span>
                                     </div>
                                     <select name="branch" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select branch</option>
@@ -168,7 +171,7 @@ if (isset($_POST['submit'])) {
                                     <!-- Amount -->
                                     <div class="input-group mb-1 mt-5">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i></span>
+                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='fas fa-building' style='color:#FFCC00'></i></span>
                                     </div>
                                     <select name="department" class="form-control gray_bg light" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                         <option value="">Select department</option>
