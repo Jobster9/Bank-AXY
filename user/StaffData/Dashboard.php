@@ -47,9 +47,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Documents Created this Month</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <h1 id="Admin" class="display-5 mt-1 mb-3 text-danger"></h1>
                                 <div class="mb-1">
-                                    <span id="DebitLastM" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
+                                    <span id="Admin" class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> </span>
                                     <span class="text-muted"><?php echo $monthlydocuments ?></span>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Documents Created this Month According to Criticality</h5>
-                                <h1 id="DebitDisplay" class="display-5 mt-1 mb-3 text-danger"></h1>
+                                <h1 id="Admin" class="display-5 mt-1 mb-3 text-danger"></h1>
 
 
 <style>
