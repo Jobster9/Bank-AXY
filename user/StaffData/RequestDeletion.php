@@ -65,24 +65,24 @@ if (isset($_POST['submit'])) {
 
 
                     <?php if ($i == "Requested") { ?>
-                                                                                <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested deletion for this document</h3> 
-                                                                                <div class="d-grid gap-2 mt-5 col-sm-4 mx-auto">
+                                                                                    <h3 class="h3 mb-4 light" style="text-align: center;">You have already requested deletion for this document</h3> 
+                                                                                    <div class="d-grid gap-2 mt-5 col-sm-4 mx-auto">
 
-                                                                                <form action="ViewDocuments.php">
-                                                                                <input type="submit" value="Go Back" class="btn btn-lg btn-block" style="margin-bottom: 10%;"/>
-                                                                                </form>
+                                                                                    <form action="ViewDocuments.php">
+                                                                                    <input type="submit" value="Go Back" class="btn btn-lg btn-block" style="margin-bottom: 10%;"/>
+                                                                                    </form>
 
                         <?php } else { ?>
-                                                                                    <h3 class="h3 mb-4 light" style="text-align: center;">Any Documents deletion must be approved. You want to delete: <?php echo $user[$i]["Document_Name"] ?></h3> 
+                                                                                        <h3 class="h3 mb-4 light" style="text-align: center;">Any Documents deletion must be approved. You want to delete: <?php echo $user[$i]["Document_Name"] ?></h3> 
 
 
-                                            <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
+                                                <div id="Pay" class="d-grid gap-2 mt-5 col-sm-6 mx-auto">
 
 
-                                                                                    <form method="post">
+                                                                                        <form method="post">
 
-                                                                                <input type="submit" value="Request Deletion" name="submit" style="margin-bottom: 10%;" class="btn btn-lg btn-block">
-                                                                                </form>
+                                                                                    <input type="submit" value="Request Deletion" name="submit" style="margin-bottom: 10%;" class="btn btn-lg btn-block">
+                                                                                    </form>
 
                         <?php } ?>
 
@@ -137,7 +137,7 @@ function AuditTrail($User_ID, $Document_Name)
 
     $stmt = $pdo->prepare('INSERT INTO Audit_Trail (User_ID, Document_Name, Audit_Date_Time, Audit_Action) VALUES (:User_ID, :Document_Name, :Audit_Date_Time, :Audit_Action)');
 
-    $Action = "REQUESTED_Deletion";
+    $Action = "REQUESTED_DELETION";
 
     $dateString = date('d/m/Y H:i');
     $date = DateTime::createFromFormat('d/m/Y H:i', $dateString);

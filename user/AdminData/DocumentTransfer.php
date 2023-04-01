@@ -231,17 +231,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Last Active: <?php echo $rows_array[0]["Last_Active"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Branch: <?php echo $rows_array[0]["Branch"] ?></h3><small> 
                    <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
-                   <small><h3 class="h3 mb-0 light" style="text-align: center;">Doc amount: <?php print_r(count($Documents)); ?></h3><small>
                     <?php foreach ($Documents as $documentName) { ?>
-                                                                                    <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
-                                                                                    <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
-                                                                                    <select class="form-control" name="transferdocnumber[<?php echo $indexValue ?>]" placeholder="select new owner">
-                                                                                    <?php for ($i = 0; $i < count($UpdatedMembers); $i++) { ?>
-                                                                                                                                                                                                                <option value="<?php echo $UpdatedMembers[$i]["User_ID"] ?>"><?php echo $UpdatedMembers[$i]["User_ID"], ": ", $UpdatedMembers[$i]["First_Name"], " ", $UpdatedMembers[$i]["Last_Name"] ?></option>                                                              
-                                                                                    <?php } ?>
-                                                                                    </select>
-                                                                                    </div>
-                                                                             <?php $indexValue++;
+                                                                                        <div class="input-group-prepend mb-4 mt-2 col-md-8 mx-auto">
+                                                                                        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i class='bx bx-right-arrow-alt' style='color:#FFCC00'></i><?php echo $documentName ?></span>
+                                                                                        <select class="form-control" name="transferdocnumber[<?php echo $indexValue ?>]" placeholder="select new owner">
+                                                                                        <?php for ($i = 0; $i < count($UpdatedMembers); $i++) { ?>
+                                                                                                                                                                                                                        <option value="<?php echo $UpdatedMembers[$i]["User_ID"] ?>"><?php echo $UpdatedMembers[$i]["User_ID"], ": ", $UpdatedMembers[$i]["First_Name"], " ", $UpdatedMembers[$i]["Last_Name"] ?></option>                                                              
+                                                                                        <?php } ?>
+                                                                                        </select>
+                                                                                        </div>
+                                                                                 <?php $indexValue++;
                     } ?>
                                     <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
                                         <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block"> Transfer</button>
