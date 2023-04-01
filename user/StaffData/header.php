@@ -53,9 +53,6 @@ function destroySession() {
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
-<div id="wrapper ribbon ribbon-top-right">
-    <div class="overlay"></div>
-<link href="assets/img/favicon-32x32.png" rel="icon">
 
     <!-- Sidebar -->
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
