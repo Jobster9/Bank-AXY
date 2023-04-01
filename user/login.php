@@ -122,7 +122,6 @@ window.addEventListener("load", startTimer);
 </script>
 
 
-
 </head>
 <body>
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
@@ -138,7 +137,10 @@ window.addEventListener("load", startTimer);
                                 <p><?php echo BANKNAME ?></p>                             
                             </div>
                             <p class="login-card-description">Sign into your account</p>
-
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                <?php if (isset($_GET['error'])) { ?>
+                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
+                                <?php } ?>
                                 <div class="form-group">
                                     <label for="username" class="sr-only">Username</label>
                                     <input type="text" name="User_ID" id="Username" class="form-control" placeholder="Username" required>
@@ -156,6 +158,7 @@ window.addEventListener("load", startTimer);
                             </form>
                             <nav class="login-card-footer-nav">
                                 <p><h13>By logging in you agree to the Terms of use and Privacy  Policy.</h13></p>
+
                                 <a href="../pages/terms.php">Terms of use.</a>
                                 <a href="../pages/privacypolicy.php">Privacy policy</a>
                             </nav>
@@ -168,8 +171,17 @@ window.addEventListener("load", startTimer);
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="../assets/js/sweetalert.min.js"></script>
     <script src="../assets/js/showHidePass.js"></script>
-
+    <script>
+        <?php if (isset($_GET['error'])) { ?>
+        swal({
+            title: "Account Alert!",
+            text: "<?php echo $_GET['error'] ?>",
+            icon: "error",
+        });
+        <?php } ?>
+    </script>
     <script>
         $(document).ready(function() {
             $('input[type=\'password\']').showHidePassword();
