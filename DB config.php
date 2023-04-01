@@ -1,7 +1,7 @@
 <?php
 // Specify database credentials here
 
-$host = 'LAPTOP-B9IKBMD8';
+$host = 'ABDULNAZIR';
 
 $dbname = 'BankAXY';
 // Creating a new PDO connection object
