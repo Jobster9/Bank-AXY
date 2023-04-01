@@ -13,13 +13,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 <head>
 
-
     <title>View Documents</title>
 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
     <link rel="stylesheet" href="../../assets/css/StaffStyle.css">
@@ -27,8 +26,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
-    
-
 
 </head>
 
@@ -193,7 +190,53 @@ for ($i = 0; $i < count($user); $i++):
 </div>
 
 </div> 
+<style>
+    .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.pagination li {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.pagination li:hover {
+  background-color: #ddd;
+}
+
+.pagination li.active {
+  background-color: darkred;
+  color: white;
+}
+
+.pagination [data-page="prev"],
+.pagination [data-page="next"] {
+  font-weight: bold;
+}
+
+.pagination [data-page="prev"]:before {
+  content: "";
+}
+
+.pagination [data-page="next"]:after {
+  content: "";
+}
+
+.pagination .sr-only {
+  position: absolute;
+  left: -9999px;
+}
+
+
+
+</style>
 <script>
     
     getPagination('#table-id');
