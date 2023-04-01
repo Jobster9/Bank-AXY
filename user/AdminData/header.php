@@ -199,24 +199,35 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                     </div>
 
 
-                    <form class="d-none d-sm-inline-block form-inline navbar-search">
 
 
 
+<style>
+    /* Position the form using absolute positioning */
+    .navbar-search {
+        position: absolute;
+        top: 0;
+        left: 900px; /* Change this value to adjust the horizontal position */
+        transform: translate(-50%, 0);
+        width: 300px; /* Change this value to adjust the width of the form */
+    }
+
+    /* Adjust the spacing around the h1 element */
+    #bankBrand {
+        margin: 0 10px; /* Change this value to adjust the spacing */
+    }
+
+    /* Change the font size and color of the h1 element */
+    #bankBrand {
+        font-size: 24px;
+        color: blue;
+    }
+</style>
 
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:#010066" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
-
-
-                            <!--  <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div> -->
+                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-6"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
                         </div>
-                    </form>
-
+      
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
