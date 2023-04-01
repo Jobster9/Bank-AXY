@@ -10,36 +10,137 @@
   <!-- CSS Files for terms and privacypolicy -->
     <link href="..assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-
-
     <style>
-        .img-round {
-            height: 150px;
-            width: 150px;
-            border: 4px solid white;
-            border-radius: 100%;
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: #000;
+            margin: 0;
+        }
+        /* Header */
+        #header {
+            background-color: #00247d;
+            color: #fff;
+            padding: 20px 0;
+        }
+        #header .logo {
+            font-weight: 600;
+            font-size: 32px;
+            color: #fff;
+            margin: 0;
+        }
+        #header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        #header nav li {
+            margin-left: 30px;
+        }
+        #header nav li:first-child {
+            margin-left: 0;
+        }
+        #header nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        #header nav a:hover {
+            color: #ddd;
+        }
+        /* Breadcrumbs */
+/* Add this CSS to remove gap between navbar and breadcrumbs and set background color to white */
+.breadcrumbs {
+  background-color: #fff;
+  margin-top: 0;
+  padding: 10px 0;
+}
+
+/* Add this CSS to center the logo and navbar items in the header */
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header .logo {
+  margin-right: auto;
+}
+
+#header #navbar {
+  margin-left: auto;
+}
+
+/* Add this CSS to make the home and login buttons side by side on the right-hand side of the header */
+#header #navbar ul {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#header #navbar ul li {
+  margin-left: 20px;
+}
+
+#header #navbar ul li:first-child {
+  margin-left: 0;
+}
+
+        .breadcrumbs ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .breadcrumbs li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .breadcrumbs li:last-child {
+            margin-right: 0;
+        }
+        .breadcrumbs li a {
+            color: #000;
+            text-decoration: none;
+        }
+        .breadcrumbs li a:hover {
+            color: #999;
+        }
+        /* Privacy Policy */
+        .inner-page {
+            background-color: white;
+            padding: 30px;
+        }
+        .inner-page h1 {
+            color: #00247d;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .inner-page h2 {
+            color: #00247d;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .inner-page p {
+            margin-bottom: 20px;
+        }
+        .inner-page ul {
+            margin-bottom: 20px;
+        }
+        .inner-page li {
+            margin-bottom: 10px;
         }
     </style>
-
-    
-</head>
-<body>
-
-
     <!--  Header  -->
     <header id="header" class="fixed-top header-inner-pages">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo"><a href="../"><?php echo BANKNAME ?></a></h1>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto " href="../index.php">Home</a></li>
-                    <li><a class="nav-link scrollto" href="../user/login.php">Login</a></li>
-                </ul>
-            </nav>
+
         </div>
     </header>
 
 <main id="main">
+
 
   <!--  Breadcrumbs  -->
   <section class="breadcrumbs">
