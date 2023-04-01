@@ -53,6 +53,10 @@ function destroySession() {
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="wrapper ribbon ribbon-top-right">
+    <div class="overlay"></div>
 
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
@@ -164,7 +168,6 @@ header h1 {
     </header>
 </body>
 </html>
-
 
 
         <div id="content">
