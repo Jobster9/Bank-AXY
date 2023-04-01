@@ -114,9 +114,7 @@ window.addEventListener("load", startTimer);
                             </div>
                             <p class="login-card-description">Please enter the authentication code sent to your email</p>
                             <form method="POST">
-                                <?php if (isset($_GET['error'])) { ?>
-                                    <p style="color: red;"> *<?php echo $_GET['error'] ?> ! </p>
-                                <?php } ?>
+
                                 <div class="form-group">
                                     <input type="text" name="AuthCode" id="AuthCode" class="form-control" placeholder="Authentication Code" required>
                                     <p id="alert1" style="color: red;"></p>
@@ -132,15 +130,5 @@ window.addEventListener("load", startTimer);
             </div>
         </div>
     </main>
-
-    <script>
-        <?php if (isset($_GET['error'])) { ?>
-        swal({
-            title: "Account Alert!",
-            text: "<?php echo $_GET['error'] ?>",
-            icon: "error",
-        });
-        <?php } ?>
-    </script>
 </body>
 </html>
