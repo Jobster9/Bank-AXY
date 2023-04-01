@@ -11,7 +11,12 @@
   <!-- CSS Files for terms and privacypolicy -->
     <link href="..assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-
+  <style>
+    body {
+      margin: 0;
+      padding: 50;
+    }
+  </style>
 
     <style>
         .img-round {
@@ -34,7 +39,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto " href="../index.php">Home</a></li>
-                    <li><a class="nav-link scrollto" href="../user/login.php">Login</a></li>
+                    <a class="nav-link scrollto" href="../user/login.php">Login</a>
                 </ul>
             </nav>
         </div>
@@ -87,7 +92,19 @@
     </div>
   </section>
 </main>
-<?php
-include "footer.php";
-?>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+            <h3><?php echo BANKNAME ?></h3>
+          </div>
+    <div class="container">
+      <div class="copyright-wrap d-md-flex py-4">
+        <div class="me-md-auto text-center text-md-start">
+            &copy; Copyright <strong><span><?php echo BANKNAME ?></span></strong>. All Rights Reserved
+          </div>
+        </div>
+      </div>
+  </footer>
+  
 </html>
