@@ -234,8 +234,41 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-                       
-                                <div class="container" style="width: 50%;">
+  <style>
+    .styled-table thead tr {
+    background-color: #0032A0;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #0032A0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0032A0;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
+.styled-table {
+    margin: 25px auto;
+}
+  </style>                              
+
+<div class="container" style="width: 50%;">
                 Select Number of Rows
                 <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
                      <select class  ="form-control" name="state" id="maxRows">
@@ -249,7 +282,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         </select>
                      
 </div>
-</div>
+</div>                          
 
 
 <table class="styled-table" id="table-id">
