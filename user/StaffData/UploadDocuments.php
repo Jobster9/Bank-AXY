@@ -41,10 +41,16 @@ document.addEventListener('contextmenu', event => event.preventDefault());
             <h4>Select File here</h4>
       <p>Files Supported: PDF, TEXT, DOC , DOCX</p>
   <div style="margin-left: 15%; margin-right: 15%; margin-top: 10%;">
+
+
+
       <form method="post" enctype="multipart/form-data" action="ProcessUpload.php">
+
   <div class="form-group mb-1 mt-5">
 <input type="file" class="form-control-file" accept=".doc,.docx,.pdf" id="file-upload" name="uploaded-file" onchange="showInputs()" required>
   </div>
+
+
   <div class="form-group mb-1 mt-5" id="doc-name-group" style="display:none">
   <p>Please ensure the filename follows the standardized convention: 
     <br>"CustomerName-Category-DocumentNumber.pdf".
