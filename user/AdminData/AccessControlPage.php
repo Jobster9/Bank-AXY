@@ -23,6 +23,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
         .btn-pay {
             background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -265,6 +268,22 @@ outline: 1px solid #010101;
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
+
+<div class="container" style="width: 50%;">
+        Select Number of Rows
+        <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+            <select class  ="form-control" name="state" id="maxRows">
+                <option value="<?php echo count($access) ?>">Show All Rows</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                </select>
+                     
+</div>
+</div>   
 
 <table class="styled-table">
     <thead>
