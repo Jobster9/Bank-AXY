@@ -22,7 +22,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     <style>
         .btn-pay {
             background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -198,45 +197,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-
-
-
-
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
     </style>
 
 
 </head>
+
+
 
 <body>
     <!-- End of Topbar -->

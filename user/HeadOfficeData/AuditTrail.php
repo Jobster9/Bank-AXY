@@ -54,8 +54,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-
-                                <div class="container" style="width: 50%;">
+<div class="container" style="width: 50%;">
                 Select Number of Rows
                 <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
                      <select class  ="form-control" name="state" id="maxRows">
