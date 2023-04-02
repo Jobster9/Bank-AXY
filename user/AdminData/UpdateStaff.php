@@ -109,6 +109,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+
     <style>
         .btn-pay {
             background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -308,7 +311,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                                 <div class="form-group">
                                 <label for="first_name" class="">First Name</label>
                                 <div class="input-group-prepend">
-        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'fas fa-id-card' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="First_Name" id="First_Name" class="form-control" value=<?php echo $staff[0]['First_Name'] ?> required>
                                 </div>
                                     <span class="text-danger"><p><?php echo $User_FirstName_Error; ?></p></span>
@@ -319,7 +322,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                                 <label for="last_name" class="">Last Name</label>
                                 <div class="input-group-prepend">
-        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>                              
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'fas fa-id-card' style='color:#FFCC00'"; ?>></i></span>                              
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Last_Name" id="Last_Name" class="form-control" value=<?php echo $staff[0]['Last_Name'] ?> required>
                                 </div>
 
@@ -330,7 +333,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                                 <label for="email" class="">Email</label>
                                 <div class="input-group-prepend">
-        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'fas fa-envelope-open' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="text" <?php echo ($validated) ? "disabled" : ""; ?> name="Email" id="Email" class="form-control" value=<?php echo $staff[0]['Email'] ?> required>
                                 </div>
 
@@ -341,7 +344,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
                                 <label for="password" class="">Password</label>
                                 <div class="input-group-prepend">
-        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'bx bx-right-arrow-alt' style='color:#FFCC00'"; ?>></i></span>
+        <span class="input-group-text gray_bg light" id="inputGroup-sizing-default"><i <?php echo ($validated) ? "class= 'bx bx-check-shield' style='color:#50C878'" : "class= 'fas fa-lock' style='color:#FFCC00'"; ?>></i></span>
                                     <input type="password" <?php echo ($validated) ? "disabled" : ""; ?> name="Password" id="password" class="form-control" value=<?php echo $staff[0]['Password'] ?> required>
                                 </div>
                                     <span class="text-danger"><p><?php echo $User_Password_Error; ?></p></span>
