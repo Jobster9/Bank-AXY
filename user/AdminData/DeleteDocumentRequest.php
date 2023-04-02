@@ -271,25 +271,22 @@ outline: 1px solid #010101;
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
-
-<div class="container" style="width: 50%;">
-        Select Number of Rows
-        <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-            <select class  ="form-control" name="state" id="maxRows">
-                <option value="<?php echo count($Request) ?>">Show All Rows</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-                </select>
+                                <div class="container" style="width: 50%;">
+                Select Number of Rows
+                <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+                     <select class  ="form-control" name="state" id="maxRows">
+                         <option value="<?php echo count($Request) ?>">Show All Rows</option>
+                         <option value="5">5</option>
+                         <option value="10">10</option>
+                         <option value="15">15</option>
+                         <option value="20">20</option>
+                         <option value="50">50</option>
+                         <option value="100">100</option>
+                        </select>
                      
 </div>
-</div>   
-
-
-<table class="styled-table">
+</div>
+<table class="styled-table" id="table-id">
     <thead>
         <tr>
             <th>Deletion Request ID</th>
@@ -344,6 +341,8 @@ outline: 1px solid #010101;
 <?php endfor; ?>
     </tbody>
 </table>
+
+
 
 <div class='pagination-container' style="margin: 0px 155px;">
         <nav>

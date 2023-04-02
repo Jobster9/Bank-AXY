@@ -68,9 +68,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         </select>
                      
 </div>
-</div>   
+</div>
 
-<table class="styled-table">
+<table class="styled-table" id="table-id">
     <thead>
         <tr>
             <th>Audit ID</th>
