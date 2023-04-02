@@ -321,31 +321,31 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 </div>
     </thead>
     <tbody>
-                                <?php
-                                for ($i = 0; $i < count($user); $i++):
+    <?php
+    for ($i = 0; $i < count($user); $i++):
 
-                                    ?>
-                                                            <tr class="active-row">
-                                                                <td><?php echo $user[$i]['User_ID'] ?></td>
-                                                                <?php $Staff_ID = $user[$i]['User_ID']; ?>
-                                                                <td><?php echo $user[$i]['First_Name'] ?></td>
-                                                                <td><?php echo $user[$i]['Last_Name'] ?></td>
-                                                                <td><?php echo $user[$i]['Email'] ?></td>
-                                                                <td><?php echo $user[$i]['Last_Active'] ?></td>
-                                                                <td><?php echo $user[$i]['Branch'] ?></td>
-                                                                <td><?php echo $user[$i]['Department'] ?></td>
-
-
-                                                                <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
-
-                                                                <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
-
-                                                            </tr>
+        ?>
+              <tr class="active-row">
+                  <td><?php echo $user[$i]['User_ID'] ?></td>
+                  <?php $Staff_ID = $user[$i]['User_ID']; ?>
+                  <td><?php echo $user[$i]['First_Name'] ?></td>
+                  <td><?php echo $user[$i]['Last_Name'] ?></td>
+                  <td><?php echo $user[$i]['Email'] ?></td>
+                  <td><?php echo $user[$i]['Last_Active'] ?></td>
+                  <td><?php echo $user[$i]['Branch'] ?></td>
+                  <td><?php echo $user[$i]['Department'] ?></td>
 
 
+                  <td><a href="UpdateStaff.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
+
+                  <td><a href="DeleteStaff.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
+
+              </tr>
 
 
-                                    <?php endfor; ?>
+
+
+        <?php endfor; ?>
         <!-- and so on... -->
     </tbody>
 </table>

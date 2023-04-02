@@ -19,6 +19,9 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
     <link rel="stylesheet" href="../../assets/css/UserDash.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
         .btn-pay {
             background-image: linear-gradient(to right, #010066 0%, #CC0001 100%);
@@ -194,45 +197,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-
-
-
-
-.styled-table thead tr {
-    background-color: #0032A0;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #0032A0;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: white;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0032A0;
-}
-
-.styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: black;
-}
-.styled-table {
-    margin: 25px auto;
-}
     </style>
 
 
 </head>
+
+
 
 <body>
     <!-- End of Topbar -->
@@ -264,10 +234,58 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
 
-                                
+  <style>
+    .styled-table thead tr {
+    background-color: #0032A0;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
 
 
-<table class="styled-table">
+.styled-table tbody tr {
+    border-bottom: 1px solid #0032A0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0032A0;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: black;
+}
+.styled-table {
+    margin: 25px auto;
+}
+  </style>                              
+
+<div class="container" style="width: 50%;">
+                Select Number of Rows
+                <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+                     <select class  ="form-control" name="state" id="maxRows">
+                         <option value="<?php echo count($auditTrail) ?>">Show All Rows</option>
+                         <option value="5">5</option>
+                         <option value="10">10</option>
+                         <option value="15">15</option>
+                         <option value="20">20</option>
+                         <option value="50">50</option>
+                         <option value="100">100</option>
+                        </select>
+                     
+</div>
+</div>                          
+
+
+<table class="styled-table" id="table-id">
     <thead>
         <tr>
             <th>Audit ID</th>
