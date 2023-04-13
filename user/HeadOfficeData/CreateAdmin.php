@@ -96,12 +96,12 @@ if (isset($_POST['submit'])) {
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
                                 <?php if ($adminCreation): ?>
-                                                                            <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
-                                                                                The Admin member has been successfully created.
-                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
+                                                                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                                                    The Admin member has been successfully created.
+                                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
 <?php endif; ?>
                                 <form method="post">
                                 <div style="margin-left: 15%; margin-right: 15%; margin-top:10%;">
@@ -212,34 +212,12 @@ if (isset($_POST['submit'])) {
 
         </div>
 
-        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
-            <div class="modal-dialog loadingModal modal-lg">
-                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
-                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- End of Page Content -->
-
-
-
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/transfer.js"></script>
-
-
     <script>
         $('#bar').click(function() {
             $(this).toggleClass('open');

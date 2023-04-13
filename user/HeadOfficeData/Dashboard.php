@@ -167,8 +167,6 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
-    <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/dashboard.js"></script>
 
 
     <script>
