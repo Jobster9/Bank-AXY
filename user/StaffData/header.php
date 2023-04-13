@@ -53,6 +53,13 @@ function destroySession() {
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="wrapper ribbon ribbon-top-right">
+    <div class="overlay"></div>
+
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
 
     <!-- Sidebar -->
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
@@ -163,7 +170,6 @@ header h1 {
 </html>
 
 
-
         <div id="content">
 
             <div class="container-fluid p-0 px-lg-0 px-md-0">
@@ -176,12 +182,32 @@ header h1 {
                         <span></span>
                         <span></span>
                     </div>
+<style>
+    /* Position the form using absolute positioning */
+    .navbar-search {
+        position: absolute;
+        top: 0;
+        left: 900px; /* Change this value to adjust the horizontal position */
+        transform: translate(-50%, 0);
+        width: 300px; /* Change this value to adjust the width of the form */
+    }
 
-                    <form class="d-none d-sm-inline-block form-inline navbar-search">
+    /* Adjust the spacing around the h1 element */
+    #bankBrand {
+        margin: 0 10px; /* Change this value to adjust the spacing */
+    }
+
+    /* Change the font size and color of the h1 element */
+    #bankBrand {
+        font-size: 24px;
+        color: blue;
+    }
+</style>
+
                         <div class="input-group">
-                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-2"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
+                            <h1 id="bankBrand" style="font-size: 24px; color:blue" class="mt-6"><?php echo "As-salamu alaykum " . $_SESSION['User_ID'] ?></h1>
                         </div>
-                    </form>
+      
 
 
                     <!-- Topbar Navbar -->
