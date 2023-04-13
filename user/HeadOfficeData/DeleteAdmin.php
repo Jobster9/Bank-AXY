@@ -81,14 +81,14 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                <small><h3 class="h3 mb-0 light" style="text-align: center;">Department: <?php echo $rows_array[0]["Department"] ?></h3><small> 
 
                                 <div id="deleteButton" class="d-grid col-sm-6 mx-auto">
-                                    <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Delete</button>
+                                    <button type="submit" name="submit" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Delete</button>
                                     
                                 </div>
                                 </div>
                                 
                                 </form>
                                 <div id="backButton" class="d-grid col-sm-4 mx-auto">
-                                    <button onclick="document.location='ViewAdmin.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-pay btn-lg btn-block">Back</button>
+                                    <button onclick="document.location='ViewAdmin.php'" style="margin-top: 20%; margin-bottom: 25%;" class="btn btn-lg btn-block">Back</button>
 
                                 </div>
                             </div>
