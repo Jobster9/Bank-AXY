@@ -1,7 +1,7 @@
 -----------------------------------------R E F E R E N C E S------------------------------------
 ________________________________________________________________________________________________
 
-This File outlines & lists all sources crediting any inspired sourcecode throughout the project.
+This File outlines & lists all sources, crediting any inspired sourcecode throughout the project.
 Where pages are referenced, it is the relative file path provided. 
 
 --Pagination JS method--
@@ -22,7 +22,7 @@ Where pages are referenced, it is the relative file path provided.
 user\HeadOfficeData\header.php,user\StaffData\Dashboard.php,
 user\StaffData\Dashboard.php,user\StaffData\header.php
 
---Nav Sidebar animation & layout--
+--Nav Sidebar animation & CSS layout--
 > source: https://github.com/projectswithdigambar/Netbanking-System-in-PHP
 > pages: all php pages excluding the following contain the sidebar
 config.php,DB config.php,footer.php,index.php,user\User-specific config.php,
