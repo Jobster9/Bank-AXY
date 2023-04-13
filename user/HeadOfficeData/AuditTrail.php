@@ -1,4 +1,4 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetAuditTrails.php";
 $auditTrail = GetAuditTrails();
 ?>
@@ -84,21 +84,21 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
                                 <?php
-                                    for ($i=0; $i<count($auditTrail); $i++):
+                                for ($i = 0; $i < count($auditTrail); $i++):
 
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $auditTrail[$i]['Audit_ID']?></td>
-            <td><?php echo $auditTrail[$i]['User_ID']?></td>
-            <td><?php echo $auditTrail[$i]['Document_Name']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Date_Time']?></td>
-            <td><?php echo $auditTrail[$i]['Audit_Action']?></td>
-        </tr>
-
-
+                                  ?>
+          <tr class="active-row">
+              <td><?php echo $auditTrail[$i]['Audit_ID'] ?></td>
+              <td><?php echo $auditTrail[$i]['User_ID'] ?></td>
+              <td><?php echo $auditTrail[$i]['Document_Name'] ?></td>
+              <td><?php echo $auditTrail[$i]['Audit_Date_Time'] ?></td>
+              <td><?php echo $auditTrail[$i]['Audit_Action'] ?></td>
+          </tr>
 
 
-                                    <?php endfor;?>
+
+
+                                    <?php endfor; ?>
         <!-- and so on... -->
     </tbody>
 </table>
@@ -314,33 +314,12 @@ $(function() {
             </div>
 
         </div>
-
-        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
-            <div class="modal-dialog loadingModal modal-lg">
-                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
-                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- End of Page Content -->
-
-
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/transfer.js"></script>
-
 
     <script>
         $('#bar').click(function() {

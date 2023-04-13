@@ -1,6 +1,6 @@
-<?php include "header.php"; 
+<?php include "header.php";
 include "GetAdmin.php";
-$user = getUsers ();
+$user = getUsers();
 ?>
 
 <script>
@@ -53,9 +53,23 @@ document.addEventListener('contextmenu', event => event.preventDefault());
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title light mb-4 "></h5>
+                                <?php if (isset($_GET['updated'])): ?>
+                                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                            The user has been successfully updated.
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+<?php endif; ?>
 
-
-
+<?php if (isset($_GET['deleted'])): ?>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                                                    The user has been deleted.
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+<?php endif; ?>   
                                 <div class="container" style="width: 50%;">
                 Select Number of Rows
                 <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
@@ -87,31 +101,26 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     </thead>
     <tbody>
                                 <?php
-                                    for ($i=0; $i<count($user); $i++):
+                                for ($i = 0; $i < count($user); $i++):
 
-                                ?>
-        <tr class="active-row">
-            <td><?php echo $user[$i]['User_ID']?></td>
-            <?php $Staff_ID = $user[$i]['User_ID'];?>
-            <td><?php echo $user[$i]['First_Name']?></td>
-            <td><?php echo $user[$i]['Last_Name']?></td>
-            <td><?php echo $user[$i]['Email']?></td>
-            <td><?php echo $user[$i]['Last_Active']?></td>
-            <td><?php echo $user[$i]['Branch']?></td>
-            <td><?php echo $user[$i]['Department']?></td>
-
-
-            <td><a href="UpdateAdmin.php?User_ID=<?php echo $user[$i]['User_ID']?>" rel="noopener noreferrer">Update</a></td>          
-
-            <td><a href="DeleteAdmin.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
-
-        </tr>
+                                  ?>
+            <tr class="active-row">
+                <td><?php echo $user[$i]['User_ID'] ?></td>
+                <?php $Staff_ID = $user[$i]['User_ID']; ?>
+                <td><?php echo $user[$i]['First_Name'] ?></td>
+                <td><?php echo $user[$i]['Last_Name'] ?></td>
+                <td><?php echo $user[$i]['Email'] ?></td>
+                <td><?php echo $user[$i]['Last_Active'] ?></td>
+                <td><?php echo $user[$i]['Branch'] ?></td>
+                <td><?php echo $user[$i]['Department'] ?></td>
 
 
+                <td><a href="UpdateAdmin.php?User_ID=<?php echo $user[$i]['User_ID'] ?>" rel="noopener noreferrer">Update</a></td>          
 
+                <td><a href="DeleteAdmin.php?User_ID=<?php echo $user[$i]['User_ID']; ?>">Delete</a></td>        
 
-                                    <?php endfor;?>
-        <!-- and so on... -->
+            </tr>
+                                    <?php endfor; ?>
     </tbody>
 </table>
 
@@ -327,32 +336,12 @@ $(function() {
 
         </div>
 
-        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
-            <div class="modal-dialog loadingModal modal-lg">
-                <div class="modal-content" style="width: 50px; height:50px; background: transparent;">
-                    <span class="fas fa-spinner fa-pulse fa-3x" style="color:white"></span>
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- End of Page Content -->
-
-
-
-    <!-- Wraper Ends Here -->
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../UserData/js/profileInfo.js"></script>
-    <script src="../UserData/js/transfer.js"></script>
-
 
     <script>
         $('#bar').click(function() {
